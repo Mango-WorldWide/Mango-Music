@@ -11,6 +11,8 @@ class Album(db.Model):
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=True)
     cover = db.Column(db.String(255), nullable=True)
+    genre = db.Column(db.String(20), nullable=False)
+    year = db.Column(db.Integer, nullable=False)
     artist_id = db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=False)
 
 
