@@ -1,4 +1,4 @@
-from app.models import db, User, environment, SCHEMA, Album
+from app.models import db, environment, SCHEMA, Album
 from sqlalchemy.sql import text
 
 def seed_albums():
