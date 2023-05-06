@@ -1,201 +1,203 @@
+from app.models import db, Song, environment, SCHEMA
+from sqlalchemy.sql import text
 
 song_data = [
                                     # BAD BUNNY ALBUM
     {
         "title": "Moscow Mule",
-        "album_id": 1,  # Assuming Un Verano Sin Ti is the first album in the albums table
+        "album_id": 2,  # Assuming Un Verano Sin Ti is the first album in the albums table
         "genre": "Reggaeton",
         "duration": 4.05,  # Replace
-        "artist_id": 1,  # Assuming Bad Bunny is the first artist in the artists table
+        "artist_id": 2,  # Assuming Bad Bunny is the first artist in the artists table
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Después de la Playa",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 3.50,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/02. Después de la Playa.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Me Porto Bonito",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 2.58,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/03. Me Porto Bonito.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Tití Me Preguntó",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 4.03,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Un Ratito",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 2.56,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/05. Un Ratito.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Yo No Soy Celoso",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 3.50,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/06. Yo No Soy Celoso.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Tarot",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 3.57,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/07. Tarot.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Neverita",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 2.53,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "La Corriente",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 3.18,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/09. La Corriente.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Efecto",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 3.33,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/10. Efecto.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Party",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 3.47,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/11. Party.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Aguacero",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 3.31,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/12. Aguacero.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Enséñame a Bailar",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 2.56,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/13. Enséñame a Bailar.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Ojitos Lindos",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 4.18,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/14. Ojitos Lindos.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "El Apagón",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 3.21,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/16. El Apagón.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Otro Atardecer",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 4.04,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/17. Otro Atardecer.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Un Coco",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 3.16,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/18. Un Coco.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Andrea",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 5.39,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/19. Andrea.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Me Fui de Vacaciones",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 3.00,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/20. Me Fui de Vacaciones.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Un Verano Sin Ti",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 2.28,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/21. Un Verano Sin Ti.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Agosto",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 2.19,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/22. Agosto.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Callaita",
-        "album_id": 1,
+        "album_id": 2,
         "genre": "Reggaeton",
         "duration": 4.10,  # Replace with the actual duration of the song
-        "artist_id": 1,
+        "artist_id": 2,
         "mp3": "/static/Music/Bad Bunny - Un Verano Sin Ti/23. Callaita.mp3",
         "lyrics": "Lyrics",
     },
@@ -203,145 +205,145 @@ song_data = [
                                     # BACKSTREET BOYS ALBUM
     {
         "title": "I Want It That Way",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 3.35,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/01 Backstreet Boys - I Want It That Way.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Everybody (Backstreet's Back)",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 3.35,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/02 Backstreet Boys - Everybody (Backstreet's Back).mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "As Long As You Love Me",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 3.35,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/03 Backstreet Boys - As Long As You Love Me.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Show Me The Meaning Of Being Lonely",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 3.35,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/04 Backstreet Boys - Show Me The Meaning Of Being Lonely.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Quit Playing Games (With My Heart)",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 3.54,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/05 Backstreet Boys - Quit Playing Games (With My Heart).mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "All I Have To Give",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 4.38,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/06 Backstreet Boys - All I Have To Give.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Larger Than Life",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 3.54,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/07 Backstreet Boys - Larger Than Life.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "I'll Never Break Your Heart",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 4.50,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/08 Backstreet Boys - I'll Never Break Your Heart.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "The Call",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 3.25,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/09 Backstreet Boys - The Call.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Shape Of My Heart",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 3.52,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/10 Backstreet Boys - Shape Of My Heart.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Get Down (You're The One For Me)",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 3.52,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/11 Backstreet Boys - Get Down (You're The One For Me).mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Anywhere For You",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 4.42,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/12 Backstreet Boys - Anywhere For You.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "The One",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 3.48,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/13 Backstreet Boys - The One.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "More Than That",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 3.43,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/14 Backstreet Boys - More Than That.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "Drowning",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 4.28,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/15 Backstreet Boys - Drowning.mp3",
         "lyrics": "Lyrics",
     },
     {
         "title": "The Perfect Fan",
-        "album_id": 2,
+        "album_id": 1,
         "genre": "Pop",
         "duration": 4.13,  # Replace with the actual duration of the song
-        "artist_id": 2,
+        "artist_id": 1,
         "mp3": "/static/Music/Backstreet Boys- Greatest Hits/16 Backstreet Boys - The Perfect Fan.mp3",
         "lyrics": "Lyrics",
     },
@@ -1031,3 +1033,23 @@ song_data = [
     },
 
 ]
+
+
+def seed_songs():
+    for data in song_data:
+        song = Song(**data)
+        db.session.add(song)
+
+    db.session.commit()
+
+seed_songs()
+
+
+
+def undo_songs():
+    if environment == 'production':
+        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM songs"))
+
+    db.session.commit()
