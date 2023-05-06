@@ -5,4 +5,4 @@ __pycache__/
 .DS_Store
 .vscode/
 *.db
-.app/static/
+.app/static/test.py
