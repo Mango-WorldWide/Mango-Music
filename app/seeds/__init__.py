@@ -31,7 +31,7 @@ def create_seed_commands(app):
             seed_users()
             seed_albums()
             seed_songs(app)
-    seed_playlists()
+            seed_playlists()
     # Add other seed functions here
 
 
