@@ -1,9 +1,18 @@
 const LOAD_ALBUMS = 'albums/LOAD_ALBUMS'
+const LOAD_ONE_ALBUM = 'albums/LOAD_ONE_ALBUM'
+
 
 export const loadAlbums = (albums) => {
     return {
         type:LOAD_ALBUMS,
         albums
+    }
+}
+
+export const loadOneAlbum = (album) => {
+    return {
+        type:LOAD_ONE_ALBUM,
+        album
     }
 }
 
@@ -21,6 +30,16 @@ export const loadAlbumsThunk = () => async(dispatch) => {
     }
 }
 
+export const loadOneAlbumThunk = (albumId) => async(dispatch) => {
+    const response = await fetch (`/api/albums/${albumId}`)
+    if (response.ok){
+        const data = await response.json()
+        dispatch(loadOneAlbum(data))
+    } else {
+        return false
+    }
+}
+
 const albumsReducer = (state = {}, action) => {
     let newState;
     switch (action.type){
@@ -30,6 +49,9 @@ const albumsReducer = (state = {}, action) => {
                 newState[album.id] = album;
             })
             return newState
+        case LOAD_ONE_ALBUM:
+            newState = {}
+            console.log(action.album)
         default:
             return state
     }
