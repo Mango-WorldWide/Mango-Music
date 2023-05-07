@@ -13,7 +13,14 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    artist = db.Column(db.Boolean, nullable=False)
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
+    artist_id = db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=False)
 
+    users_likes_relationship = db.relationship('Like', back_populates='likes_users_relationship')
+    users_playlists_relationship = db.relationship('Playlist', back_populates='playlists_users_relationship')
+    users_artists_relationship = db. relationship('Artist', back_populates='artists_users_relationship')
     @property
     def password(self):
         return self.hashed_password
