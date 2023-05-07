@@ -39,7 +39,7 @@ def create_seed_commands(app):
     @seed_commands.command('undo')
     def undo():
     # with app.app_context():
-            undo_songs()
+            undo_songs(app)
             undo_playlists()
             undo_albums()
             undo_users()
