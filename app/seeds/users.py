@@ -97,7 +97,10 @@ def seed_users():
     )
 
     all_users = [demo_user, demo_artist, gryffin, backstreet_boys, blackpink1, blackpink2, brent_faiyaz, imagine_dragon, kanye_west, bad_bunny]
-    add_users = [db.session.add(user) for user in all_users]
+    for user in all_users:
+        existing_user = User.query.filter_by(username=user.username).first()
+        if not existing_user:
+            db.session.add(user)
     db.session.commit()
 
 
