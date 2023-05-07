@@ -9,7 +9,7 @@ class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     genre = db.Column(db.String(100), nullable=False)
-    duration = db.Column(db.Integer, nullable=False)
+    duration = db.Column(db.Float(5), nullable=False)
     mp3 = db.Column(db.String(255), nullable=False)
     lyrics = db.Column(db.String(255), nullable=False)
     artist_id = db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=False)
