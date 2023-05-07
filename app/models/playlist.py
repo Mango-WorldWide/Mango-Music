@@ -1,4 +1,4 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
 class Playlist(db.Model):
@@ -11,7 +11,7 @@ class Playlist(db.Model):
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=True)
     cover = db.Column(db.String(255), nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     playlists_playlistsongs_relationship = db.relationship('Playlist_Song', back_populates='playlistsongs_playlists_relationship')
     playlists_users_relationship = db.relationship('User', back_populates='users_playlists_relationship')
