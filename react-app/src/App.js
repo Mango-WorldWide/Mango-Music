@@ -5,7 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-
+import AlbumsIndex from "./components/AlbumsIndex"
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -24,6 +24,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route path='/albums' component={AlbumsIndex}/>
         </Switch>
       )}
     </>

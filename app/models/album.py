@@ -22,3 +22,14 @@ class Album(db.Model):
 
     albums_artists_relationship = db.relationship('Artist', back_populates='artists_albums_relationship')
     albums_songs_relationship = db.relationship('Song', back_populates='songs_albums_relationship')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'cover': self.cover,
+            'genre': self.genre,
+            'year': self.year,
+            'artist_id': self.artist_id
+        }
