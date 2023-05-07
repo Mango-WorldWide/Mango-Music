@@ -24,6 +24,8 @@ def create_seed_commands(app):
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
+                undo_playlist_songs(app)
+                undo_likes()
                 undo_songs()
                 undo_playlists()
                 undo_albums()
@@ -52,9 +54,9 @@ def create_seed_commands(app):
             undo_artists()
     # Add other undo functions here
     return seed_commands
+
 # pipenv run flask db init
 # pipenv run flask db migrate
 # pipenv run flask db upgrade
 # pipenv run flask seed all
-
 # pipenv run flask seed undo

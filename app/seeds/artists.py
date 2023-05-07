@@ -1,7 +1,5 @@
 from app.models import db, Artist, environment, SCHEMA
 from sqlalchemy.sql import text
-from sqlalchemy import insert
-
 
 def seed_artists():
     no_artist = Artist(
