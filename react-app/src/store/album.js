@@ -31,11 +31,13 @@ export const loadAlbumsThunk = () => async(dispatch) => {
 }
 
 export const loadOneAlbumThunk = (albumId) => async(dispatch) => {
-    const response = await fetch (`/api/albums/${albumId}`)
+    console.log('inside the thunk', albumId)
+    const response = await fetch(`/api/albums/${albumId}`)
     if (response.ok){
         const data = await response.json()
         dispatch(loadOneAlbum(data))
     } else {
+        console.log(response,'thunk fail')
         return false
     }
 }
@@ -51,7 +53,9 @@ const albumsReducer = (state = {}, action) => {
             return newState
         case LOAD_ONE_ALBUM:
             newState = {}
-            console.log(action.album)
+            newState = {...action.album}
+            console.log(action.album,'inside the reducer')
+            return newState
         default:
             return state
     }

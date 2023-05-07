@@ -9,10 +9,12 @@ const AlbumById = () =>  {
     const dispatch = useDispatch()
     const album = useSelector(state => state.albums)
     const { albumId } = useParams()
-    console.log('inside album by id', albumId)
+
     useEffect(()=>{
+        console.log('inside album by id', albumId)
         dispatch(loadOneAlbumThunk(albumId))
     },[dispatch])
+    console.log(album.id)
     if (!album) return null
     // return (
     //     <section className="albumIndexItems">
@@ -25,6 +27,7 @@ const AlbumById = () =>  {
     // )
     return(
         <div>
+
             <img src={album.cover} alt={album.title}/>
         </div>
     )
