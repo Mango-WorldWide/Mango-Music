@@ -65,6 +65,7 @@ def seed_albums():
         artist_id=Artist.query.filter(Artist.name == 'Kanye West').first().id
     )
 
+
     db.session.add(album1)
     db.session.add(album2)
     db.session.add(album3)

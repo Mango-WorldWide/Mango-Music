@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .artists import seed_artists, undo_artists
 from .albums import seed_albums, undo_albums
 from .songs import seed_songs, undo_songs
+from .playlists import seed_playlists, undo_playlists
 from app.models.db import db, environment, SCHEMA
 # from app import app
 
@@ -22,6 +23,7 @@ def create_seed_commands(app):
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
                 undo_songs()
+                undo_playlists()
                 undo_albums()
                 undo_users()
                 undo_artists()
@@ -29,6 +31,7 @@ def create_seed_commands(app):
             seed_users()
             seed_albums()
             seed_songs(app)
+    seed_playlists()
     # Add other seed functions here
 
 
@@ -37,6 +40,7 @@ def create_seed_commands(app):
     def undo():
     # with app.app_context():
             undo_songs()
+            undo_playlists()
             undo_albums()
             undo_users()
             undo_artists()
