@@ -27,8 +27,9 @@ def oneAlbums(albumId):
     print('inside one album flask route')
     album = Album.query.get(albumId)
     songs_albums = album.albums_songs_relationship
-    print(songs_albums)
-    return album.to_dict()
+    song=[songs.to_dict() for songs in songs_albums]
+    print({"Album": album.to_dict(), "Songs":song})
+    return {"Album": album.to_dict(), "Songs":song}
 
 @album_routes.route('', methods=['POST'])
 def create_album():

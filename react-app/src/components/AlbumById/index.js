@@ -10,13 +10,13 @@ const AlbumById = () =>  {
     const history = useHistory()
     const album = useSelector(state => state.albums)
     const { albumId } = useParams()
-
+    console.log(Object.values(album),'album state checking')
     useEffect(()=>{
         console.log('inside album by id', albumId)
         dispatch(loadOneAlbumThunk(albumId))
     },[dispatch])
     console.log(album.id)
-    if (!album) return null
+    if (!album["Songs"]) return null
     // return (
     //     <section className="albumIndexItems">
     //         {albums.map((album) => (
@@ -33,7 +33,10 @@ const AlbumById = () =>  {
     return(
         <div>
             <button onClick={handleClick}>DELETE ME</button>
-            <img src={album.cover} alt={album.title}/>
+            <img src={album["Album"].cover} alt={album["Album"].title}/>
+            {album["Songs"].map((song)=>(
+                <div>{song.title}</div>
+            ))}
         </div>
     )
 }
