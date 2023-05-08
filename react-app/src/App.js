@@ -28,7 +28,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/allSongs">
+          <Route path="/songs">
             < PlayingButton />
           </Route>
           <Route path='/albums/new' component={CreateAlbum}/>
