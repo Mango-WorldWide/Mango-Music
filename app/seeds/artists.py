@@ -40,7 +40,7 @@ def seed_artists():
 
 def undo_artists():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.artists RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM artists"))
 
