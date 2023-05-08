@@ -18,7 +18,6 @@ def validation_errors_to_error_messages(validation_errors):
 @album_routes.route('')
 def albums():
     """get all albums"""
-    print(current_user.to_dict(),'current user')
     print('inside albums flask route')
     albums = Album.query.all()
     return {'Albums': [album.to_dict() for album in albums]}
