@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { login } from "../../store/session";
+import { loadLikesThunk } from "../../store/like";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
@@ -14,6 +15,7 @@ function LoginFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+    await dispatch(loadLikesThunk());
     if (data) {
       setErrors(data);
     } else {
