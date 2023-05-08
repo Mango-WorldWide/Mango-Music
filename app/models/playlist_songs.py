@@ -12,3 +12,9 @@ class Playlist_Song(db.Model):
 
     playlistsongs_songs_relationship = db.relationship('Song', back_populates='songs_playlistsongs_relationship')
     playlistsongs_playlists_relationship = db.relationship('Playlist', back_populates='playlists_playlistsongs_relationship')
+
+
+    def to_dict(self):
+        return {
+            "playlist_song": self.playlistsongs_songs_relationship.to_dict()
+        }
