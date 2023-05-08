@@ -12,3 +12,10 @@ class Like(db.Model):
 
     likes_users_relationship = db.relationship('User', back_populates='users_likes_relationship')
     likes_songs_relationship = db.relationship('Song', back_populates='songs_likes_relationship')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "song_id": self.song_id
+        }
