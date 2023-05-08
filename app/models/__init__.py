@@ -1,4 +1,4 @@
-from .db import db
+from .db import db, UniqueConstraint
 from .user import User
 from .album import Album
 from .artist import Artist

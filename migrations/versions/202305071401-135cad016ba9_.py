@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 88b9d6e3e770
+Revision ID: 135cad016ba9
 Revises: 
-Create Date: 2023-05-05 19:55:26.922945
+Create Date: 2023-05-07 14:01:51.191396
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '88b9d6e3e770'
+revision = '135cad016ba9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,7 +21,8 @@ def upgrade():
     op.create_table('artists',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
     )
     op.create_table('albums',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -32,7 +33,8 @@ def upgrade():
     sa.Column('year', sa.Integer(), nullable=False),
     sa.Column('artist_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['artist_id'], ['artists.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('title', 'artist_id', name='_title_artist_uc')
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -61,7 +63,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('genre', sa.String(length=100), nullable=False),
-    sa.Column('duration', sa.Integer(), nullable=False),
+    sa.Column('duration', sa.Float(precision=5), nullable=False),
     sa.Column('mp3', sa.String(length=255), nullable=False),
     sa.Column('lyrics', sa.String(length=255), nullable=False),
     sa.Column('artist_id', sa.Integer(), nullable=False),
