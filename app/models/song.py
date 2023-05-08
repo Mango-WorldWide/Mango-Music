@@ -19,3 +19,16 @@ class Song(db.Model):
     songs_likes_relationship = db.relationship('Like', back_populates='likes_songs_relationship')
     songs_artists_relationship = db.relationship('Artist', back_populates='artists_songs_relationship')
     songs_albums_relationship = db.relationship('Album', back_populates='albums_songs_relationship')
+
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'genre': self.genre,
+            'duration': self.duration,
+            'mp3': self.mp3,
+            'lyrics': self.lyrics,
+            'artist_id': self.artist_id,
+            'album_id': self.album_id,
+        }
