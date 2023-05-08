@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     artist = db.Column(db.Boolean, nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
-    artist_id = db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=False)
+    artist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('artists.id')), nullable=False)
 
     users_likes_relationship = db.relationship('Like', back_populates='likes_users_relationship')
     users_playlists_relationship = db.relationship('Playlist', back_populates='playlists_users_relationship')

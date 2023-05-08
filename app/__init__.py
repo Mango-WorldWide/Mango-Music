@@ -8,7 +8,7 @@ from .models import db, User
 from .api import user_routes, auth_routes, album_routes
 # from .api.user_routes import user_routes
 # from .api.auth_routes import auth_routes
-from .seeds import seed_commands
+from .seeds import create_seed_commands
 from .config import Config
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
@@ -24,7 +24,7 @@ def load_user(id):
 
 
 # Tell flask about our seed commands
-app.cli.add_command(seed_commands)
+app.cli.add_command(create_seed_commands(app))
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')

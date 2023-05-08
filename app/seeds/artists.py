@@ -1,5 +1,7 @@
 from app.models import db, Artist, environment, SCHEMA
 from sqlalchemy.sql import text
+from sqlalchemy import insert
+
 
 def seed_artists():
     no_artist = Artist(
@@ -30,12 +32,15 @@ def seed_artists():
         name = 'Bad Bunny'
     )
     all_artists = [no_artist, artist, gryffin, backstreet_boys, blackpink, brent_faiyaz, imagine_dragons, kanye_west, bad_bunny]
-    add_artists = [db.session.add(artist) for artist in all_artists]
+    for artist in all_artists:
+        existing_artist = Artist.query.filter_by(name=artist.name).first()
+        if not existing_artist:
+            db.session.add(artist)
     db.session.commit()
 
 def undo_artists():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.artists RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM artists"))
 

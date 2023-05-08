@@ -15,7 +15,7 @@ def seed_albums():
         title = 'Un Verano Sin Ti',
         description = 'The fourth solo studio album, and fifth overall, by Puerto Rican rapper and singer Bad Bunny.',
         cover = 'https://media.pitchfork.com/photos/627425dbc85171592b8a6e6a/1:1/w_600/Bad-Bunny-Un-Verano-Sin-Ti.jpg',
-        genre ='Spanish',
+        genre ='Reggaeton',
         year = 2022,
         artist_id=Artist.query.filter(Artist.name == 'Bad Bunny').first().id
     )
@@ -59,7 +59,7 @@ def seed_albums():
     album7 = Album(
         title = 'Graduation',
         description = 'Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.',
-        cover = 'https://www.juxtapoz.com/media/k2/galleries/67696/k2.jpg',
+        cover = '/Music/Kanye West - Graduation (2007)/cover.jpg',
         genre ='Hip Hop',
         year = 2007,
         artist_id=Artist.query.filter(Artist.name == 'Kanye West').first().id
@@ -77,7 +77,7 @@ def seed_albums():
 
 def undo_albums():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.albums RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM albums"))
 
