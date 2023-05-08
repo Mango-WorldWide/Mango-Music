@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from app.models import Album, db
 from app.forms import AlbumForm
+from flask_login import current_user
 album_routes = Blueprint('albums', __name__)
 
 def validation_errors_to_error_messages(validation_errors):
@@ -17,9 +18,31 @@ def validation_errors_to_error_messages(validation_errors):
 @album_routes.route('')
 def albums():
     """get all albums"""
+    print(current_user.to_dict(),'current user')
     print('inside albums flask route')
     albums = Album.query.all()
     return {'Albums': [album.to_dict() for album in albums]}
+
+@album_routes.route("/<int:albumId>/edit", methods=['PUT'])
+def update_album(albumId):
+    """update album"""
+    print('inside album update route flask')
+    form = AlbumForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print('validations update flask works')
+
+        album = Album.query.get(albumId)
+        album.title = form.data['title']
+        album.description = form.data['description']
+        album.cover = form.data['cover']
+        album.genre = form.data['genre']
+        album.year = form.data['year']
+        print(album, 'new ALBUM UPDATE ROUTE')
+        db.session.add(album)
+        db.session.commit()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 @album_routes.route("/<int:albumId>")
 def oneAlbums(albumId):
@@ -50,6 +73,7 @@ def create_album():
         db.session.add(new_album)
         db.session.commit()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 @album_routes.route("/<int:albumId>", methods=['DELETE'])
 def delete_album(albumId):

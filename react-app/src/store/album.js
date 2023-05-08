@@ -67,6 +67,17 @@ export const createAlbumThunk = (album) => async(dispatch) => {
     })
 }
 
+export const updateAlbumThunk = (album, albumId) => async(dispatch) => {
+    console.log('inside update thunk', album)
+    const response = await fetch(`/api/albums/${albumId}/edit`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(album)
+    })
+}
+
 export const deleteAlbumThunk = (albumId) => async(dispatch) => {
     const response = await fetch(`/api/albums/${albumId}`,{
         method: 'DELETE'
