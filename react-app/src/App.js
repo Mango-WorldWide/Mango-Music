@@ -5,6 +5,9 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import AlbumsIndex from "./components/AlbumsIndex"
+import AlbumById from "./components/AlbumById";
+import CreateAlbum from "./components/CreateAlbum";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +27,9 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route path='/albums/new' component={CreateAlbum}/>
+          <Route path='/albums/:albumId' component={AlbumById}/>
+          <Route path='/albums' component={AlbumsIndex}/>
         </Switch>
       )}
     </>
