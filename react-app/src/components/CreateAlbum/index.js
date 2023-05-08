@@ -1,10 +1,15 @@
 import AlbumForm from "../AlbumForm"
 const CreateAlbum = () => {
     const input = {
-        title: 'hi'
+        title: '',
+        description: '',
+        cover: '',
+        genre:'',
+        year:''
+
     }
     return (
-        <AlbumForm input={input} formType="Create a new Album"/>
+        <AlbumForm input={input} formType="Create"/>
     )
 }
 export default CreateAlbum

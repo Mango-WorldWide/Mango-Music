@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
-import { loadAlbumsThunk } from "../../store/album"
+import { deleteAlbumThunk, loadAlbumsThunk } from "../../store/album"
 import { useEffect } from "react"
 import AlbumsIndexItem from "../AlbumsIndexItem"
-import { useParams } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import { loadOneAlbumThunk } from "../../store/album"
 
 const AlbumById = () =>  {
     const dispatch = useDispatch()
+    const history = useHistory()
     const album = useSelector(state => state.albums)
     const { albumId } = useParams()
 
@@ -25,9 +26,13 @@ const AlbumById = () =>  {
     //         ))}
     //     </section>
     // )
+    const handleClick = () => {
+        dispatch(deleteAlbumThunk(albumId))
+        history.push(`/albums`)
+    }
     return(
         <div>
-
+            <button onClick={handleClick}>DELETE ME</button>
             <img src={album.cover} alt={album.title}/>
         </div>
     )

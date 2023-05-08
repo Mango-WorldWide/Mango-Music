@@ -1,6 +1,7 @@
 const LOAD_ALBUMS = 'albums/LOAD_ALBUMS'
 const LOAD_ONE_ALBUM = 'albums/LOAD_ONE_ALBUM'
-
+const CREATE_ALBUM = 'albums/CREATE_ALBUM'
+const DELETE_ALBUM = 'albums/DELETE_ALBUM'
 
 export const loadAlbums = (albums) => {
     return {
@@ -16,6 +17,19 @@ export const loadOneAlbum = (album) => {
     }
 }
 
+export const createAlbum = (album) => {
+    return {
+        type:CREATE_ALBUM,
+        album
+    }
+}
+
+export const deleteAlbum = (album) => {
+    return {
+        type:DELETE_ALBUM,
+        album
+    }
+}
 export const loadAlbumsThunk = () => async(dispatch) => {
     console.log('inside load albums thunk')
     const response = await fetch('/api/albums')
@@ -42,6 +56,27 @@ export const loadOneAlbumThunk = (albumId) => async(dispatch) => {
     }
 }
 
+export const createAlbumThunk = (album) => async(dispatch) => {
+    console.log('inside the thunk', album)
+    const response = await fetch(`/api/albums`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(album)
+    })
+}
+
+export const deleteAlbumThunk = (albumId) => async(dispatch) => {
+    const response = await fetch(`/api/albums/${albumId}`,{
+        method: 'DELETE'
+    })
+    if(response.ok){
+        dispatch(loadAlbumsThunk())
+    } else {
+        return false
+    }
+}
 const albumsReducer = (state = {}, action) => {
     let newState;
     switch (action.type){
