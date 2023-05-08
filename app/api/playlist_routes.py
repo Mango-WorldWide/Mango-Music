@@ -10,6 +10,7 @@ playlist_routes = Blueprint("playlist", __name__)
 ## get all playlists
 @playlist_routes.route("")
 def get_all_playlists():
+    print(current_user.to_dict(),'current user')
     user_id = current_user.get_id()
     user_id = 2  ## test purposes only
     print(f"user_id 👉 {user_id}")
@@ -82,7 +83,7 @@ def edit_playlist(playlistId):
         error = make_response("Playlist does not exist")
         error.status_code = 404
         return error
-    
+
 ## delete a playlist
 @playlist_routes.route("/<int:playlistId>", methods=["DELETE"])
 def delete_playlist(playlistId):

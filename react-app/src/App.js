@@ -9,6 +9,7 @@ import Navigation from "./components/Navigation";
 import AlbumsIndex from "./components/AlbumsIndex"
 import AlbumById from "./components/AlbumById";
 import CreateAlbum from "./components/CreateAlbum";
+import UpdateAlbum from "./components/UpdateAlbum";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path='/albums/new' component={CreateAlbum}/>
+          <Route path='/albums/:albumId/edit' component={UpdateAlbum}/>
           <Route path='/albums/:albumId' component={AlbumById}/>
           <Route path='/albums' component={AlbumsIndex}/>
         </Switch>

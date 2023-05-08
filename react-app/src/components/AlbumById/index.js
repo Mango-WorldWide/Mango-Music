@@ -20,21 +20,27 @@ const AlbumById = () =>  {
     console.log(album.id)
     if (!album["Songs"]) return null
     // return (
-    //     <section className="albumIndexItems">
-    //         {albums.map((album) => (
-    //             <AlbumsIndexItem
-    //                 album={album}
-    //             />
-    //         ))}
-    //     </section>
-    // )
-    const handleClick = () => {
+        //     <section className="albumIndexItems">
+        //         {albums.map((album) => (
+            //             <AlbumsIndexItem
+            //                 album={album}
+            //             />
+            //         ))}
+            //     </section>
+            // )
+
+    const handleDelete = () => {
         dispatch(deleteAlbumThunk(albumId))
         history.push(`/albums`)
     }
+    const handleUpdate = () => {
+        history.push(`/albums/${albumId}/edit`)
+    }
+    console.log(album, 'myalbums')
     return(
         <div>
-            <button onClick={handleClick}>DELETE ME</button>
+            <button onClick={handleUpdate} >UPDATE ME</button>
+            <button onClick={handleDelete}>DELETE ME</button>
             <img src={album["Album"].cover} alt={album["Album"].title}/>
             {album["Songs"].map((song)=>(
                 <>
