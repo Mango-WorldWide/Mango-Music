@@ -6,3 +6,6 @@ __pycache__/
 .vscode/
 *.db
 app/static/
+
+music
+Music

@@ -4,10 +4,13 @@ import { useEffect } from "react"
 import AlbumsIndexItem from "../AlbumsIndexItem"
 import { useHistory, useParams } from "react-router-dom"
 import { loadOneAlbumThunk } from "../../store/album"
+import LikeButton from "../LikeButton"
+
 const AlbumById = () =>  {
     const dispatch = useDispatch()
     const history = useHistory()
     const album = useSelector(state => state.albums)
+    const likes = useSelector(state => Object.values(state.likes))
     const { albumId } = useParams()
     console.log(Object.values(album),'album state checking')
     useEffect(()=>{
@@ -40,7 +43,10 @@ const AlbumById = () =>  {
             <button onClick={handleDelete}>DELETE ME</button>
             <img src={album["Album"].cover} alt={album["Album"].title}/>
             {album["Songs"].map((song)=>(
+                <>
                 <div>{song.title}</div>
+                <LikeButton song={song} isLiked={likes.filter(like=>like["song_id"] == song.id).length > 0}/>
+                </>
             ))}
         </div>
     )

@@ -24,10 +24,10 @@ class Playlist(db.Model):
     def to_dict(self):
         
         return {
-            "playlist_id": self.id,
+            "id": self.id,
             "title": self.title,
             "description": self.description,
-            "cover": url_for("static", filename=self.cover),
+            "cover": self.cover,
             "playlist_songs": [song.to_dict() for song in self.playlists_playlistsongs_relationship],
             "num_songs": len(self.playlists_playlistsongs_relationship),
             "user_id": self.user_id,
@@ -35,9 +35,9 @@ class Playlist(db.Model):
 
     def to_dict_no_item(self):
         return {
-            "playlist_id": self.id,
+            "id": self.id,
             "title": self.title,
             "description": self.description,
-            "cover": url_for("static", filename=self.cover),
+            "cover": self.cover,
             "user_id": self.user_id,
         }

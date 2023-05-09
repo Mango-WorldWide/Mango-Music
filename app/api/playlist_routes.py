@@ -10,19 +10,18 @@ playlist_routes = Blueprint("playlist", __name__)
 ## get all playlists
 @playlist_routes.route("")
 def get_all_playlists():
-    print(current_user.to_dict(),'current user')
-    user_id = current_user.get_id()
-    user_id = 2  ## test purposes only
-    print(f"user_id 👉 {user_id}")
-    data = Playlist.query.filter(Playlist.user_id == user_id)
-    all_playlist = []
-    for playlist in data:
-        playlist_dict = playlist.to_dict()
-        del playlist_dict["playlist_songs"]
-        all_playlist.append(playlist_dict)
+    if current_user:
+        user_id = current_user.get_id()
+        data = Playlist.query.filter(Playlist.user_id == user_id)
+        all_playlist = []
+        for playlist in data:
+            playlist_dict = playlist.to_dict()
+            del playlist_dict["playlist_songs"]
+            all_playlist.append(playlist_dict)
 
-    return all_playlist
-
+        return all_playlist
+    else:
+        return {"playlists" : []}
 
 ## get specific playlist by playlist id
 @playlist_routes.route("/<int:playlistId>")
