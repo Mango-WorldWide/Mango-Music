@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { loadAlbumsThunk } from "../../store/album"
 import { useEffect } from "react"
 import AlbumsIndexItem from "../AlbumsIndexItem"
-
+import './AlbumIndex.css'
 
 const AlbumsIndex = () =>  {
     const dispatch = useDispatch()
