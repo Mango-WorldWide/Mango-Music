@@ -1,5 +1,16 @@
 .profile-dropdown {
   position: absolute;
+  right: 15px;
+  background-color: rgba(238, 238, 238, 1);
+  list-style: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 15px;
+}
+
+.profile-dropdown > li {
+  margin-left: -25px;
+  padding: 5px;
 }
 
 .hidden {
