@@ -1,7 +1,47 @@
 .profile-dropdown {
   position: absolute;
+  right: 15px;
+  background-color: rgba(238, 238, 238, 1);
+  list-style: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 15px;
+}
+
+.profile-dropdown > li {
+  margin-left: -25px;
+  padding: 5px;
 }
 
 .hidden {
   display: none;
+}
+
+.nav-list{
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+  list-style: none;
+  align-items: center;
+  margin-left: -40px;
+}
+.nav-list-top-wrapper, .nav-list-bottom-wrapper{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.nav-list-item{
+  width: fit-content;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+}
+
+.nav-list-item > a{
+  text-decoration: none;
+  color: rgba(238, 238, 238, 1);
+  width: fit-content;
+  align-self: center;
+  justify-self: center;
 }
