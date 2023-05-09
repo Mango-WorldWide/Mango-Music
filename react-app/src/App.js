@@ -55,10 +55,10 @@ function App() {
                 <Route path='/albums/:albumId' component={AlbumById} />
                 <Route path='/albums' component={AlbumsIndex} />
                 <Route path='/playlists' component={PlaylistIndex} />
+                <Route path='/audio' component={AudioPlayer}/>
                 <Route path='/'>
                   <h1>Welcome to Mango Music</h1>
                 </Route>
-                <Route path='/audio' component={AudioPlayer}/>
         </Switch>
             )}
           </div>

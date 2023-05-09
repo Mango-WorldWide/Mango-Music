@@ -17,6 +17,9 @@ function Navigation(){
 				<li className="nav-list-item">
 					<NavLink exact to="/playlists">Playlists</NavLink>
 				</li>
+				<li className="nav-list-item">
+					<NavLink exact to="/audio">Audio</NavLink>
+				</li>
 			</div>
 
 		</ul>
