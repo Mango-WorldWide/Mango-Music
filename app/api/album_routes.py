@@ -20,6 +20,8 @@ def albums():
     """get all albums"""
     print('inside albums flask route')
     albums = Album.query.all()
+    album_artist = [album.albums_artists_relationship for album in albums]
+    print(album_artist, 'this is the album artist')
     return {'Albums': [album.to_dict() for album in albums]}
 
 @album_routes.route("/<int:albumId>/edit", methods=['PUT'])
