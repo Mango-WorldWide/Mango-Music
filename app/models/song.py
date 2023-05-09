@@ -9,9 +9,9 @@ class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     genre = db.Column(db.String(100), nullable=False)
-    duration = db.Column(db.Float(5), nullable=False)
+    duration = db.Column(db.Float(5), nullable=True)
     mp3 = db.Column(db.String(255), nullable=False)
-    lyrics = db.Column(db.String(255), nullable=False)
+    lyrics = db.Column(db.Text, nullable=True)
     artist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('artists.id')), nullable=False)
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id')), nullable=False)
 
