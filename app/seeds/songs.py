@@ -412,7 +412,7 @@ def song_data():
     },
 
     {
-        "title": "07. Tally",
+        "title": "Tally",
         "album_id": Album.query.filter(Album.title == 'BORN PINK').first().id,
         "genre": "K-Pop",
         "duration": 3.04,  # Replace with the actual duration of the song
@@ -422,7 +422,7 @@ def song_data():
     },
 
     {
-        "title": "08. Ready For Love",
+        "title": "Ready For Love",
         "album_id": Album.query.filter(Album.title == 'BORN PINK').first().id,
         "genre": "K-Pop",
         "duration": 3.04,  # Replace with the actual duration of the song

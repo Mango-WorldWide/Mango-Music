@@ -11,6 +11,7 @@ import AlbumById from "./components/AlbumById";
 import CreateAlbum from "./components/CreateAlbum";
 import PlaylistIndex from "./components/PlaylistIndex"
 import UpdateAlbum from "./components/UpdateAlbum";
+import MusicPlayer from "./components/MusicPlayer";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
           <Route path='/albums/:albumId' component={AlbumById}/>
           <Route path='/albums' component={AlbumsIndex}/>
           <Route path='/playlists' component={PlaylistIndex}/>
+          <Route path='/musicplayer' component={MusicPlayer}/>
         </Switch>
       )}
     </>

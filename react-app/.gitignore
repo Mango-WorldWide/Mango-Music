@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+src/static
+react-app/react-music-player/
+react-app/src/static/
+Music/
+react-music-player/
+react-music-player/node_modules
+/react-music-player/
+./react-music-player/
+react-music-player/
