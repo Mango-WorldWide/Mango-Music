@@ -8,5 +8,5 @@ from ..api.aws_helpers import ALLOWED_EXTENSIONS
 class SongForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     genre = StringField('Genre', validators=[DataRequired()])
-    mp3 = FileField('MP3 File', validators=[FileAllowed(list(ALLOWED_EXTENSIONS)), FileRequired()])
+    mp3 = FileField('MP3 File', validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     submit = SubmitField("Add Song")

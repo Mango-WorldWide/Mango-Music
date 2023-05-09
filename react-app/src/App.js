@@ -12,6 +12,7 @@ import CreateAlbum from "./components/CreateAlbum";
 import PlaylistIndex from "./components/PlaylistIndex"
 import UpdateAlbum from "./components/UpdateAlbum";
 import AudioPlayer from "./components/AudioPlayer";
+import SongForm from "./components/SongForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function App() {
           <Route path='/albums' component={AlbumsIndex}/>
           <Route path='/playlists' component={PlaylistIndex}/>
           <Route path='/audio' component={AudioPlayer}/>
+          <Route path='/songs/new' component={SongForm}/>
         </Switch>
       )}
     </>

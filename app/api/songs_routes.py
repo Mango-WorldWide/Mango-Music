@@ -12,43 +12,40 @@ def get_songs():
     return {'Songs': [song.to_dict() for song in songs]}
 
 
-# @song_routes.route('/<int:song_id>')
-# def get_single_song(song_id):
-#     data = Song.query.get(song_id)
-#     if data:
-#         single_song = data.to_dict()
-#         return single_song
-#     else:
-#         error = make_response("Song does not exist")
-#         error.status_code = 404
-#         return error
-
-
 @song_routes.route('/new', methods=["POST"])
 def add_song():
+    print("^^^^^^^^^^^^ ADDING SONG ^^^^^^^^^^^")
     form = SongForm()
+    print("---->", form.data["mp3"])
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        print("----->", form.data)
-        data = request.get_json()
-        print(f"data 👉 {data}")
-        song = data["mp3"]
-        print(f"song 👉 {song}")
-        # song.filename = get_unique_filename(song.filename)
-        # song = form["song"].filename
+        print("song is valid")
+        song = form.data["mp3"]
+        print(f" song_route song 👉 {song}")
+        song.filename = get_unique_filename(song.filename)
+        print("song filename ===>", song.filename)
+        upload = upload_file_to_s3(song)
+        print(f"upload 👉 {upload}")
+        
+        if "url" not in upload:
+            print("----- NO URL --------")
+            return upload["errors"]
+
         new_song = Song(
-            title = data["title"],
-            genre = data["genre"],
-            mp3 = data["mp3"],
-            artist_id = 1,
-            album_id = 1
+            title = form.data["title"],
+            genre = form.data["genre"],
+            mp3 = upload["url"],
+            album_id = 1,
+            artist_id = 1
         )
-        # db.session.add(new_song)
-        # db.session.commit()
-        return "Successfully added new playlist!"
+        
+        print(f"new_song 👉 {new_song}")
+        db.session.add(new_song)
+        db.session.commit()
     else:
         form_errors = {key: val[0] for (key, val) in form.errors.items()}
         error = make_response(form_errors)
         error.status_code = 400
-        return error
+        print(form.errors)
+        return "banana"
 
