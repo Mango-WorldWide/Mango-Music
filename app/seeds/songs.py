@@ -12,7 +12,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 4.05,  # Replace
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,  # Assuming Bad Bunny is the first artist in the artists table
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -21,7 +21,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 3.50,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/02. Después de la Playa.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -30,7 +30,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 2.58,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/03. Me Porto Bonito.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -39,7 +39,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 4.03,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -48,7 +48,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 2.56,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/05. Un Ratito.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -57,7 +57,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 3.50,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/06. Yo No Soy Celoso.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -66,7 +66,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 3.57,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/07. Tarot.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -75,7 +75,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 2.53,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -84,7 +84,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 3.18,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/09. La Corriente.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -93,7 +93,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 3.33,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/10. Efecto.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -102,7 +102,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 3.47,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/11. Party.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -111,7 +111,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 3.31,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/12. Aguacero.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -120,7 +120,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 2.56,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/13. Enséñame a Bailar.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -129,7 +129,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 4.18,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/14. Ojitos Lindos.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -138,7 +138,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 3.21,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/16. El Apagón.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -147,7 +147,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 4.04,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/17. Otro Atardecer.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -156,7 +156,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 3.16,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/18. Un Coco.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -165,7 +165,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 5.39,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/19. Andrea.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -174,7 +174,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 3.00,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/20. Me Fui de Vacaciones.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -183,7 +183,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 2.28,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/21. Un Verano Sin Ti.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -192,7 +192,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 2.19,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/22. Agosto.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
     {
@@ -201,7 +201,7 @@ def song_data():
         "genre": "Reggaeton",
         "duration": 4.10,  # Replace with the actual duration of the song
         "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "/Music/Bad Bunny - Un Verano Sin Ti/23. Callaita.mp3",
+        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         "lyrics": "Lyrics",
     },
 
