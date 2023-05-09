@@ -29,8 +29,8 @@ function App() {
         <div className="nav-list-wrapper">
           <Navigation isLoaded={isLoaded} />
         </div>
-        <div className="site-wrapper-left">
-          <div className="site-wrapper-left-top">
+        <div className="site-wrapper-right">
+          <div className="site-wrapper-right-top">
             <div className="audio-player-wrapper">
               <button>TODO: Replace with audio player component</button>
             </div>

@@ -5,15 +5,19 @@ import './Navigation.css';
 function Navigation(){
 	return (
 		<ul className="nav-list">
-			<li className="nav-link">
-				<NavLink exact to="/">Home</NavLink>
-			</li>
-			<li className="nav-link">
-				<NavLink exact to="/albums">Albums</NavLink>
-			</li>
-			<li className="nav-link">
-				<NavLink exact to="/playlists">Playlists</NavLink>
-			</li>
+			<div className="nav-list-top-wrapper">
+				<li className="nav-list-item">
+					<NavLink exact to="/">Home</NavLink>
+				</li>
+			</div>
+			<div className="nav-list-bottom-wrapper">
+				<li className="nav-list-item">
+					<NavLink exact to="/albums">Albums</NavLink>
+				</li>
+				<li className="nav-list-item">
+					<NavLink exact to="/playlists">Playlists</NavLink>
+				</li>
+			</div>
 
 		</ul>
 	);
