@@ -10,6 +10,7 @@ const AlbumsIndexItem = ({album}) =>  {
             <Link to={`/albums/${album.id}`}>
                 <img src={album.cover} alt={album.title}/>
             </Link>
+            <p>{album.title}</p>
         </div>
     )
 

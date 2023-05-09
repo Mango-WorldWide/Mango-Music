@@ -1,5 +1,7 @@
 body{
     background-color: rgba(22, 22, 23, 1);
+    color:#fff;
+    
 }
 button{
     cursor: pointer;
