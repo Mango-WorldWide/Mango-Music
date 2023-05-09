@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
+from flask import url_for
 class Song(db.Model):
     __tablename__ = 'songs'
 
@@ -29,8 +29,10 @@ class Song(db.Model):
             'duration': self.duration,
             'mp3': self.mp3,
             'lyrics': self.lyrics,
-            'artist': self.songs_artists_relationship.to_dict(),  # Include artist data
-            'album': self.songs_albums_relationship.to_dict(),    # Include album data
+            'artist_id': self.artist_id,
+            'album_id': self.album_id,
+            'artist': self.songs_artists_relationship.to_dict(),
+            'album': self.songs_albums_relationship.to_dict(),
         }
 
     def to_dict_no_item(self):
