@@ -11,10 +11,13 @@ import AlbumById from "./components/AlbumById";
 import CreateAlbum from "./components/CreateAlbum";
 import PlaylistIndex from "./components/PlaylistIndex"
 import UpdateAlbum from "./components/UpdateAlbum";
+import ProfileButton from "./components/Navigation/ProfileButton.js";
+import "./index.css";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
     dispatch(loadLikesThunk())
@@ -22,22 +25,43 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route path='/albums/new' component={CreateAlbum}/>
-          <Route path='/albums/:albumId/edit' component={UpdateAlbum}/>
-          <Route path='/albums/:albumId' component={AlbumById}/>
-          <Route path='/albums' component={AlbumsIndex}/>
-          <Route path='/playlists' component={PlaylistIndex}/>
-        </Switch>
-      )}
+      <div className="site-wrapper">
+        <div className="nav-list-wrapper">
+          <Navigation isLoaded={isLoaded} />
+        </div>
+        <div className="site-wrapper-left">
+          <div className="site-wrapper-left-top">
+            <div className="audio-player-wrapper">
+              <button>TODO: Replace with audio player component</button>
+            </div>
+            <div className="profile-button-wrapper">
+              {isLoaded && (
+                <ProfileButton />
+              )}
+            </div>
+          </div>
+          <div className="main-component">
+            {isLoaded && (
+              <Switch>
+                <Route path="/login" >
+                  <LoginFormPage />
+                </Route>
+                <Route path="/signup">
+                  <SignupFormPage />
+                </Route>
+                <Route path='/albums/new' component={CreateAlbum} />
+                <Route path='/albums/:albumId/edit' component={UpdateAlbum} />
+                <Route path='/albums/:albumId' component={AlbumById} />
+                <Route path='/albums' component={AlbumsIndex} />
+                <Route path='/playlists' component={PlaylistIndex} />
+                <Route path='/'>
+                  <h1>Welcome to Mango Music</h1>
+                </Route>
+              </Switch>
+            )}
+          </div>
+        </div>
+      </div>
     </>
   );
 }

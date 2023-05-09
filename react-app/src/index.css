@@ -1,1 +1,36 @@
 /* TODO Add site wide styles */
+.site-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-list-wrapper{
+    width:30vw;
+}
+
+.site-wrapper-left{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    justify-content: center;
+}
+
+.site-wrapper-left-top, .main-component{
+    align-self: center;
+    width: fit-content;
+    height: fit-content;
+}
+
+.site-wrapper-left-top{
+    display: flex;
+    column-gap: 10px;
+    width: 100%
+}
+
+.audio-player-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
