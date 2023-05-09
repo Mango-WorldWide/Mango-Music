@@ -29,7 +29,9 @@ class Song(db.Model):
             'mp3': self.mp3,
             'lyrics': self.lyrics,
             'artist_id': self.artist_id,
-            'album_id': self.album_id
+            'album_id': self.album_id,
+            'artist': self.songs_artists_relationship.to_dict(),
+            'album': self.songs_albums_relationship.to_dict(), 
         }
 
     def to_dict_no_item(self):
