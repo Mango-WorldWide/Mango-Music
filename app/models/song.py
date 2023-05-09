@@ -27,7 +27,7 @@ class Song(db.Model):
             'title': self.title,
             'genre': self.genre,
             'duration': self.duration,
-            'mp3': url_for('static/music', filename = self.mp3),
+            'mp3': self.mp3,
             'lyrics': self.lyrics,
             'artist': self.songs_artists_relationship.to_dict(),  # Include artist data
             'album': self.songs_albums_relationship.to_dict(),    # Include album data

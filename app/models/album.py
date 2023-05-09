@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, UniqueConstraint, add_prefix_for_prod
+from flask import url_for
 
 
 class Album(db.Model):
