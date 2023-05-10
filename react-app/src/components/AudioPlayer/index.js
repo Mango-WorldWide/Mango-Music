@@ -7,21 +7,22 @@ import "./AudioPlayerIndex.css";
 import song1 from "../../Music/Kanye West - Graduation (2007)/01 Good Morning.mp3";
 import song2 from "../../Music/Kanye West - Graduation (2007)/02 Champion.mp3";
 import song3 from "../../Music/Kanye West - Graduation (2007)/03 Stronger.mp3";
-const song = [song1, song2, song3];
+const MP3s = [song1, song2, song3];
 /* */
 const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [IsLooping, setIsLooping] = useState(false);
+  const [isLooping, setIsLooping] = useState(false);
   const [unmuteVolume, setUnmuteVolume] = useState(false);
   const [volume, setVolume] = useState(50);
   const [prevVolume, setPrevVolume] = useState(50);
   const [queueIndex, setQueueIndex] = useState(0);
+  // const [currentSong, setCurrentSong] = useState(MP3s[0]);
   const dispatch = useDispatch();
   const getSongs = useSelector((state) => state.songs);
   const songs = Object.values(getSongs);
-  console.log("songs 👉", songs);
+  // console.log("songs 👉", songs);
   // console.log(songs[0]);
-  // const song = songs.map((x) => x["mp3"]);
+  // const MP3s = songs.map((x) => x["mp3"]);
 
   const audioPlayer = useRef();
 
@@ -39,6 +40,19 @@ const AudioPlayer = () => {
     }
   }, [isPlaying, audioPlayer, queueIndex]);
 
+  // useEffect(() => {
+  //   if (audioPlayer && audioPlayer.current) {
+  //     console.log(currentSong)
+  //     // if ( queueIndex > MP3s.length - 1){
+  //     //     setQueueIndex(prev => prev -1)
+  //     //   }
+  //     // if (queueIndex < 0 ){
+  //     //     setQueueIndex(prev => prev + 1)
+  //     //   }
+  //     setCurrentSong(MP3s[queueIndex])
+  //   }
+  // }, [queueIndex]);
+
   useEffect(() => {
     if (audioPlayer && audioPlayer.current) {
       audioPlayer.current.muted = unmuteVolume;
@@ -55,14 +69,18 @@ const AudioPlayer = () => {
   if (!getSongs) return null;
 
   const goForward = () => {
-    if (queueIndex < songs.length - 1) {
+    if (queueIndex < MP3s.length - 1) {
       setQueueIndex((prev) => prev + 1);
+    } else{
+      setQueueIndex(prev=>prev)
     }
   };
 
   const goBack = () => {
     if (queueIndex > 0) {
       setQueueIndex((prev) => prev - 1);
+    } else{
+      setQueueIndex(prev=>prev)
     }
   };
 
@@ -83,7 +101,7 @@ const AudioPlayer = () => {
     }
   }
 
-  const muteControl = (e) => {
+  const muteControl = () => {
     setUnmuteVolume((prev) => !prev);
     if (unmuteVolume){
       setVolume(prevVolume)
@@ -95,7 +113,7 @@ const AudioPlayer = () => {
   }
 
   if (!songs.length) return null
-  console.log("=====>", songs[queueIndex])
+  // console.log("=====>", songs[queueIndex])
   return (
     <div className="audio-player">
       <div className="audio-player-track-controls">
@@ -116,7 +134,7 @@ const AudioPlayer = () => {
         <span>Progress Bar</span>
       </div>
       <div className="audio-player-volume-controls">
-        <button onClick={muteControl}>{unmuteVolume?"Unmute":"Mute"}</button>
+        <button onClick={muteControl} className="audio-player-mute-button">{unmuteVolume?"Unmute":"Mute"}</button>
         <input
           type="range"
           min={0}
@@ -125,7 +143,7 @@ const AudioPlayer = () => {
           onChange={volumeControl}
         />
       </div>
-      <audio src={song[queueIndex]} ref={audioPlayer} loop={IsLooping} style={{ display: "hidden" }}></audio>
+      <audio src={MP3s[queueIndex]} ref={audioPlayer} loop={isLooping} onEnded={goForward} style={{ display: "hidden" }}></audio>
     </div>
   );
 };
