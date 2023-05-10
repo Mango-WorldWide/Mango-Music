@@ -14,6 +14,7 @@ const AudioPlayer = () => {
   const [IsLooping, setIsLooping] = useState(false);
   const [unmuteVolume, setUnmuteVolume] = useState(false);
   const [volume, setVolume] = useState(50);
+  const [prevVolume, setPrevVolume] = useState(50);
   const [queueIndex, setQueueIndex] = useState(0);
   const dispatch = useDispatch();
   const getSongs = useSelector((state) => state.songs);
@@ -40,8 +41,14 @@ const AudioPlayer = () => {
 
   useEffect(() => {
     if (audioPlayer && audioPlayer.current) {
-      audioPlayer.current.volume = volume / 100;
       audioPlayer.current.muted = unmuteVolume;
+      if (unmuteVolume){
+        setVolume(() => 0)
+        audioPlayer.current.volume = 0
+      } else{
+        setVolume((prev) => prev)
+        audioPlayer.current.volume = volume / 100;
+      }
     }
   }, [volume, audioPlayer, unmuteVolume]);
 
@@ -67,6 +74,26 @@ const AudioPlayer = () => {
     setIsLooping((prev) => !prev);
   };
 
+  const volumeControl = (e) => {
+    setVolume(e.target.value)
+    if (e.target.value > 0){
+      setUnmuteVolume(false)
+    } else{
+      setUnmuteVolume(true)
+    }
+  }
+
+  const muteControl = (e) => {
+    setUnmuteVolume((prev) => !prev);
+    if (unmuteVolume){
+      setVolume(prevVolume)
+      audioPlayer.current.volume = prevVolume / 100;
+    } else {
+      setPrevVolume(volume)
+      audioPlayer.current.volume = volume / 100;
+    }
+  }
+
   if (!songs.length) return null
   console.log("=====>", songs[queueIndex])
   return (
@@ -89,13 +116,13 @@ const AudioPlayer = () => {
         <span>Progress Bar</span>
       </div>
       <div className="audio-player-volume-controls">
-        <button onClick={() => setUnmuteVolume((prev) => !prev)}>{unmuteVolume?"Unmute":"Mute"}</button>
+        <button onClick={muteControl}>{unmuteVolume?"Unmute":"Mute"}</button>
         <input
           type="range"
           min={0}
           max={100}
           value={volume}
-          onChange={(e) => setVolume(e.target.value)}
+          onChange={volumeControl}
         />
       </div>
       <audio src={song[queueIndex]} ref={audioPlayer} loop={IsLooping} style={{ display: "hidden" }}></audio>
