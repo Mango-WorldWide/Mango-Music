@@ -27,7 +27,7 @@ export const loadSongsThunk = () => async(dispatch) => {
 }
 
 export const addSongThunk = (song) => async(dispatch) => {
-    console.log("song from thunk 👉", song)
+    // console.log("song from thunk 👉", song)
 
     const res = await fetch("/api/songs/new", {
         "method" : "POST",
@@ -37,7 +37,7 @@ export const addSongThunk = (song) => async(dispatch) => {
         const data = await res.json()
         return data
     }
-} 
+}
 
 const songsReducer = (state = {}, action) => {
     let newState;

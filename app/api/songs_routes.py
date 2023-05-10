@@ -13,15 +13,17 @@ def get_songs():
 
 
 @song_routes.route('/new', methods=["POST"])
+@login_required
 def add_song():
+    curr = current_user.get_id()
     form = SongForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        
+
         song = form.data["mp3"]
         song.filename = get_unique_filename(song.filename)
         upload = upload_file_to_s3(song)
-        
+
         if "url" not in upload:
             return upload["errors"]
 
@@ -30,9 +32,9 @@ def add_song():
             genre = form.data["genre"],
             mp3 = upload["url"],
             album_id = 1,
-            artist_id = 1
+            artist_id = curr
         )
-        
+
         db.session.add(new_song)
         db.session.commit()
     else:
@@ -41,4 +43,3 @@ def add_song():
         error.status_code = 400
         print(form.errors)
         return "banana"
-
