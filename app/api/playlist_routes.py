@@ -13,15 +13,16 @@ def get_users_playlists():
     """get user's playlist"""
     user_id = current_user.get_id()
     user = current_user.to_dict()
+    print(f"user 👉 {user}")
     data = Playlist.query.filter(Playlist.user_id == user_id).all()
+    print(f"data 👉 {data}")
     all_playlists = []
     for playlist in data:
         playlist_dict = playlist.to_dict()
-        del playlist_dict["songs"]
-        all_playlists.append(playlist_dict)
-        print(f"all_playlists 👉 {all_playlists}")
+        all
+    print(f"all_playlists 👉 {all_playlists}")
 
-    return all_playlists
+    return user["playlists"]
 
 
 
