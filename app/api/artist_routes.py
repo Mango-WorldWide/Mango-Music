@@ -18,7 +18,4 @@ def validation_errors_to_error_messages(validation_errors):
 @artist_routes.route('/<int:artistId>')
 def get_artist(artistId):
     artist = Artist.query.get(artistId)
-    print(artist.to_dict(),"ARTIST BACKEND ROUTE")
     return artist.to_dict()
-# artists_albums_relationship
-# artists_albums_relationship
