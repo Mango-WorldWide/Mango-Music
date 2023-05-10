@@ -5,13 +5,15 @@ import albumsReducer from './album';
 import playlistsReducer from './playlist';
 import likesReducer from './like';
 import songsReducer from './song';
+import artistReducer from './artist';
 
 const rootReducer = combineReducers({
   session,
   albums: albumsReducer,
   playlists: playlistsReducer,
   likes: likesReducer,
-  songs: songsReducer
+  songs: songsReducer,
+  artist: artistReducer
 });
 
 

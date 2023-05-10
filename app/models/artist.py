@@ -19,4 +19,11 @@ class Artist(db.Model):
         return {
         'id': self.id,
         'name': self.name,
+        'albums': [album.to_dict_relationship() for album in self.artists_albums_relationship],
+        'songs': [song.to_dict_no_item() for song in self.artists_songs_relationship]
+    }
+
+    def to_dict_relationship(self):
+        return {
+            'name': self.name
     }

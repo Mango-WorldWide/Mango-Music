@@ -14,6 +14,7 @@ import UpdateAlbum from "./components/UpdateAlbum";
 import AudioPlayer from "./components/AudioPlayer";
 import ProfileButton from "./components/Navigation/ProfileButton.js";
 import "./index.css";
+import ArtistById from "./components/ArtistById";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ function App() {
                 <Route path="/signup">
                   <SignupFormPage />
                 </Route>
+                <Route path='/artist/:artistId' component={ArtistById} />
                 <Route path='/albums/new' component={CreateAlbum} />
                 <Route path='/albums/:albumId/edit' component={UpdateAlbum} />
                 <Route path='/albums/:albumId' component={AlbumById} />
