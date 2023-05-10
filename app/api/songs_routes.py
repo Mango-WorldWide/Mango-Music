@@ -20,9 +20,7 @@ def add_song():
         
         song = form.data["mp3"]
         song.filename = get_unique_filename(song.filename)
-        print(f"song.filename 👉 {song.filename}")
         upload = upload_file_to_s3(song)
-        print(f"upload 👉 {upload}")
         
         if "url" not in upload:
             return upload["errors"]
