@@ -20,18 +20,18 @@ class Song(db.Model):
     songs_artists_relationship = db.relationship('Artist', back_populates='artists_songs_relationship')
     songs_albums_relationship = db.relationship('Album', back_populates='albums_songs_relationship')
 
-    def to_dict(self):
+    def to_dict(self, includeMP3=False):
         return {
             'id': self.id,
             'title': self.title,
             'genre': self.genre,
             'duration': self.duration,
-            'mp3': self.mp3,
+            'mp3': self.mp3 if includeMP3 else '',
             'lyrics': self.lyrics,
             'artist_id': self.artist_id,
             'album_id': self.album_id,
             'artist': self.songs_artists_relationship.to_dict(),
-            'album': self.songs_albums_relationship.to_dict(), 
+            'album': self.songs_albums_relationship.to_dict(),
         }
 
     def to_dict_no_item(self):
