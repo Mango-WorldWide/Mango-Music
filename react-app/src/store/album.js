@@ -100,7 +100,6 @@ const albumsReducer = (state = {}, action) => {
         case LOAD_ONE_ALBUM:
             newState = {}
             newState = {...action.album}
-            console.log(action.album,'inside the reducer')
             return newState
         default:
             return state

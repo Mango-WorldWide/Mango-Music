@@ -10,9 +10,12 @@ import AlbumsIndex from "./components/AlbumsIndex"
 import AlbumById from "./components/AlbumById";
 import CreateAlbum from "./components/CreateAlbum";
 import PlaylistIndex from "./components/PlaylistIndex"
+import PlaylistById from "./components/PlaylistById";
 import UpdateAlbum from "./components/UpdateAlbum";
 import AudioPlayer from "./components/AudioPlayer";
 import SongForm from "./components/SongForm";
+import NewPlaylistForm from "./components/CreatePlaylist";
+import UpdatePlaylistForm from "./components/UpdatePlaylist/UpdatePlaylistForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +40,9 @@ function App() {
           <Route path='/albums/:albumId/edit' component={UpdateAlbum}/>
           <Route path='/albums/:albumId' component={AlbumById}/>
           <Route path='/albums' component={AlbumsIndex}/>
+          <Route path='/playlists/new' component={NewPlaylistForm}/>
+          <Route path='/playlists/:playlistId/edit' component={UpdatePlaylistForm}/>
+          <Route path='/playlists/:playlistId' component={PlaylistById}/>
           <Route path='/playlists' component={PlaylistIndex}/>
           <Route path='/audio' component={AudioPlayer}/>
           <Route path='/songs/new' component={SongForm}/>

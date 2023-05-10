@@ -15,7 +15,7 @@ class Playlist(db.Model):
     cover = db.Column(db.String(255), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     playlists_playlistsongs_relationship = db.relationship(
-        "Playlist_Song", back_populates="playlistsongs_playlists_relationship"
+        "Playlist_Song", back_populates="playlistsongs_playlists_relationship", cascade="all, delete-orphan"
     )
     playlists_users_relationship = db.relationship(
         "User", back_populates="users_playlists_relationship"
@@ -28,7 +28,7 @@ class Playlist(db.Model):
             "title": self.title,
             "description": self.description,
             "cover": self.cover,
-            "playlist_songs": [song.to_dict() for song in self.playlists_playlistsongs_relationship],
+            "songs": [song.to_dict() for song in self.playlists_playlistsongs_relationship],
             "num_songs": len(self.playlists_playlistsongs_relationship),
             "user_id": self.user_id,
         }

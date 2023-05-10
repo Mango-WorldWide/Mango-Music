@@ -1,31 +1,34 @@
 from flask import Blueprint, request, jsonify, make_response
 from flask_login import login_required, current_user
 from app.models import db, Playlist
-from app.forms.playlist_form import PlaylistForm
+from app.forms import PlaylistForm
 
 
 playlist_routes = Blueprint("playlist", __name__)
 
 
-## get all playlists
 @playlist_routes.route("")
-def get_all_playlists():
-    if current_user:
-        user_id = current_user.get_id()
-        data = Playlist.query.filter(Playlist.user_id == user_id)
-        all_playlist = []
-        for playlist in data:
-            playlist_dict = playlist.to_dict()
-            del playlist_dict["playlist_songs"]
-            all_playlist.append(playlist_dict)
+# @login_required
+def get_users_playlists():
+    """get user's playlist"""
+    user_id = current_user.get_id()
+    user = current_user.to_dict()
+    print(f"user 👉 {user}")
+    data = Playlist.query.filter(Playlist.user_id == user_id).all()
+    print(f"data 👉 {data}")
+    all_playlist = []
+    for playlist in data:
+        playlist_dict = playlist.to_dict()
+        del playlist_dict["songs"]
+        all_playlist.append(playlist_dict)
 
-        return all_playlist
-    else:
-        return {"playlists" : []}
+    return all_playlist
 
-## get specific playlist by playlist id
+
+
 @playlist_routes.route("/<int:playlistId>")
 def get_single_playlist(playlistId):
+    """get specific playlist by playlist id"""
     data = Playlist.query.get(playlistId)
     if data:
         single_playlist = data.to_dict()
@@ -36,18 +39,21 @@ def get_single_playlist(playlistId):
         return error
 
 
-## create a playlist
 @playlist_routes.route("", methods=["POST"])
+# @login_required
 def create_playlist():
+    """create a playlist"""
+    print("IN CREATE A PLAYLIST")
+    user_id = current_user.get_id()
     form = PlaylistForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         data = request.get_json()
         new_playlist = Playlist(
-            title = data["title"],
-            description = data["description"],
-            cover = data["cover"],
-            user_id = 1
+            title=data["title"],
+            description=data["description"],
+            cover=data["cover"],
+            user_id=user_id,
         )
         db.session.add(new_playlist)
         db.session.commit()
@@ -59,9 +65,11 @@ def create_playlist():
         return error
 
 
-## edit a playlist
 @playlist_routes.route("/<int:playlistId>", methods=["PUT"])
+# @login_required
 def edit_playlist(playlistId):
+    """edit a playlist"""
+    user_id = current_user.get_id()
     playlist = Playlist.query.get(playlistId)
     if playlist:
         form = PlaylistForm()
@@ -85,7 +93,10 @@ def edit_playlist(playlistId):
 
 ## delete a playlist
 @playlist_routes.route("/<int:playlistId>", methods=["DELETE"])
+# @login_required
 def delete_playlist(playlistId):
+    print("ALSO DELETINGGG!!!!")
+    user_id = current_user.get_id()
     playlist = Playlist.query.get(playlistId)
     if playlist:
         db.session.delete(playlist)
