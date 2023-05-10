@@ -50,11 +50,10 @@ export const getPlaylistsThunk = () => async (dispatch) => {
 };
 
 // get user's playlists
-export const getUserPlaylistsThunk = (userId) => async (dispatch) => {
+export const getUserPlaylistsThunk = () => async (dispatch) => {
   const res = await fetch("/api/playlists/current");
   if (res.ok) {
     const data = await res.json();
-    console.log("getUsePlaylistsThunk data 👉", data)
     dispatch(getPlaylists(data));
     return data
   }
@@ -110,7 +109,7 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
   });
   if (res.ok) {
     console.log("👉 successful in deletePlaylistThunk")
-    dispatch(getPlaylists());
+    dispatch(getUserPlaylistsThunk());
   }
 };
 
@@ -118,7 +117,7 @@ const playlistsReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
     case GET_PLAYLISTS:
-      newState = { ...state };
+      newState = {};
       console.log(" action.playlists 👉👉👉👉",  action.playlists)
       action.playlists.forEach((playlist) => {
         newState[playlist.id] = playlist;

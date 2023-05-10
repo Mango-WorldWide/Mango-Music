@@ -13,8 +13,8 @@ function PlaylistById() {
     dispatch(getSinglePlaylistThunk(playlistId));
   }, [dispatch]);
 
-  const handleDelete = () => {
-    dispatch(deletePlaylistThunk(playlistId));
+  const handleDelete = async () => {
+    await dispatch(deletePlaylistThunk(playlistId));
     history.push("/playlists");
   };
 

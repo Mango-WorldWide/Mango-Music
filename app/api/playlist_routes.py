@@ -7,22 +7,19 @@ from app.forms import PlaylistForm
 playlist_routes = Blueprint("playlist", __name__)
 
 
-@playlist_routes.route("")
+@playlist_routes.route("/current")
 @login_required
 def get_users_playlists():
     """get user's playlist"""
     user_id = current_user.get_id()
     user = current_user.to_dict()
-    print(f"user 👉 {user}")
     data = Playlist.query.filter(Playlist.user_id == user_id).all()
-    print(f"data 👉 {data}")
     all_playlists = []
     for playlist in data:
         playlist_dict = playlist.to_dict()
-        all
-    print(f"all_playlists 👉 {all_playlists}")
+        all_playlists.append(playlist_dict)
 
-    return user["playlists"]
+    return all_playlists
 
 
 
@@ -97,12 +94,13 @@ def edit_playlist(playlistId):
 @playlist_routes.route("/<int:playlistId>", methods=["DELETE"])
 @login_required
 def delete_playlist(playlistId):
+    print("WE UP IN HERE!!!!")
     user_id = current_user.get_id()
     playlist = Playlist.query.get(playlistId)
     if playlist:
         db.session.delete(playlist)
         db.session.commit()
-        return playlist
+        return playlist.to_dict()
     else:
         error = make_response("Playlist does not exist")
         error.status_code = 404
