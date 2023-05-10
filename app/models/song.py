@@ -34,13 +34,13 @@ class Song(db.Model):
             'album': self.songs_albums_relationship.to_dict(),
         }
 
-    def to_dict_no_item(self):
+    def to_dict_no_item(self, includeMP3=False):
         return {
             "id": self.id,
             "title": self.title,
             "genre": self.genre,
             "duration": self.duration,
-            "mp3": self.mp3,
+            'mp3': self.mp3 if includeMP3 else '',
             "lyrics": self.lyrics,
             "artist_id": self.artist_id,
             "album_id": self.album_id
