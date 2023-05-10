@@ -24,7 +24,7 @@ const PlaylistIndex = () =>  {
         <section className="albumIndexItems">
             {playlists.map((playlist) => (
                 <PlaylistsIndexItem
-                    playlist={playlist}
+                   key={playlist.id} playlist={playlist}
                 />
             ))}
         </section>
