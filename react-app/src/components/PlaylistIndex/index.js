@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { loadPlaylistsThunk } from "../../store/playlist"
+import { getPlaylistsThunk } from "../../store/playlist"
 import { useEffect } from "react"
 import PlaylistsIndexItem from "../PlaylistIndexItem"
 
@@ -11,13 +11,12 @@ const PlaylistIndex = () =>  {
     console.log('these are all the playlists', playlists)
     useEffect(() => {
         console.log('inside useeffect')
-        dispatch(loadPlaylistsThunk())
+        dispatch(getPlaylistsThunk())
     },[dispatch])
 
     if (!getPlaylists) return null
     return (
         <>
-        <p>test</p>
         <section className="albumIndexItems">
             {playlists.map((playlist) => (
                 <PlaylistsIndexItem

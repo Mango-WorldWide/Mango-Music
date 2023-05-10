@@ -16,5 +16,5 @@ class Playlist_Song(db.Model):
 
     def to_dict(self):
         return {
-            "playlist_song": self.playlistsongs_songs_relationship.to_dict()
+            "songs": self.playlistsongs_songs_relationship.to_dict()
         }

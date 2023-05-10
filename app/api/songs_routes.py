@@ -58,7 +58,7 @@ def add_song():
         error = make_response(form_errors)
         error.status_code = 400
         print(form.errors)
-        return "banana"
+        return form.errors
 
 
 @song_routes.route('/<int:id>', methods=["PUT"])
