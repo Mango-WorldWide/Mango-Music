@@ -15,12 +15,18 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
+
+def add_artist(albums):
+    for album in albums:
+        album.artist = album.albums_artists_relationship.to_dict()["name"]
+    return albums
 @album_routes.route('')
 def albums():
     """get all albums"""
-    print(current_user.to_dict(),'current user')
     print('inside albums flask route')
     albums = Album.query.all()
+    # add_artist(albums)
+    # print([album.to_dict() for album in albums],'albums testing')
     return {'Albums': [album.to_dict() for album in albums]}
 
 @album_routes.route("/<int:albumId>/edit", methods=['PUT'])
