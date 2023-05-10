@@ -16,7 +16,6 @@ const AudioPlayer = () => {
   const [volume, setVolume] = useState(50);
   const [prevVolume, setPrevVolume] = useState(50);
   const [queueIndex, setQueueIndex] = useState(0);
-  // const [currentSong, setCurrentSong] = useState(MP3s[0]);
   const dispatch = useDispatch();
   const getSongs = useSelector((state) => state.songs);
   const songs = Object.values(getSongs);
@@ -39,19 +38,6 @@ const AudioPlayer = () => {
       }
     }
   }, [isPlaying, audioPlayer, queueIndex]);
-
-  // useEffect(() => {
-  //   if (audioPlayer && audioPlayer.current) {
-  //     console.log(currentSong)
-  //     // if ( queueIndex > MP3s.length - 1){
-  //     //     setQueueIndex(prev => prev -1)
-  //     //   }
-  //     // if (queueIndex < 0 ){
-  //     //     setQueueIndex(prev => prev + 1)
-  //     //   }
-  //     setCurrentSong(MP3s[queueIndex])
-  //   }
-  // }, [queueIndex]);
 
   useEffect(() => {
     if (audioPlayer && audioPlayer.current) {
