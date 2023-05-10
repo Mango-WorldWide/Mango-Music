@@ -107,7 +107,7 @@ const songsReducer = (state = initialState, action) => {
             })
             return newState
         case SINGLE_SONG:
-            newState = { ...state }
+            newState = {}
             newState[action.songId] = action.song
             return newState
 

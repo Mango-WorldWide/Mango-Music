@@ -11,11 +11,7 @@ def get_songs():
     songs = Song.query.all()
     return {'Songs': [song.to_dict() for song in songs]}
 
-
-@song_routes.route('/<int:id>')
-def get_song_by_id(id):
-
-    def filter_song_data(song):
+def filter_song_data(song):
         return {
         "id": song.id,
         "title": song.title,
@@ -27,10 +23,14 @@ def get_song_by_id(id):
         "mp3": song.mp3,
     }
 
+@song_routes.route('/<int:songId>')
+def get_song_by_id(songId):
+    print("SONGID ----------------", songId)
+
     # song = Song.query.get(id)
-    song = Song.query.get_or_404(id)
+    song = Song.query.get(songId)
     # return song.to_dict(includeMP3 = True)
-    return filter_song_data(song.to_dict(includeMP3 = True))
+    return song.to_dict_no_item(includeMP3 = True)
 
 
 @song_routes.route('/new', methods=["POST"])

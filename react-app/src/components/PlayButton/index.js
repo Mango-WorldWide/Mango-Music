@@ -9,15 +9,10 @@ const PlayButton = ({ songId }) => {
   const dispatch = useDispatch();
   const song = useSelector((state) => Object.values(state.songs));
 
-  useEffect(() => {
-    if (!song) {
-      dispatch(singleSongThunk(songId));
-    }
-  }, [song, songId, dispatch]);
-
-
-  const handleClick = () => {
+  const handleClick = async() => {
+    await dispatch(singleSongThunk(songId))
     setIsPlaying((prev) => !prev);
+
   };
 
 

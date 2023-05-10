@@ -10,7 +10,7 @@ import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Pre
 const all_songs = [new_song, new_song1, new_song2]
 
 const AudioPlayer = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const {isPlaying, setIsPlaying} = usePlayer();
   const [IsLooping, setIsLooping] = useState(false);
   const [queueIndex, setQueueIndex] = useState(0);
   const dispatch = useDispatch();
@@ -22,6 +22,7 @@ const AudioPlayer = () => {
 
   const audioPlayer = useRef();
 
+  //testing if not needed
   useEffect(() => {
     dispatch(loadSongsThunk());
   }, [dispatch]);
