@@ -4,9 +4,11 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { Link } from "react-router-dom";
 
 function ProfileButton() {
   const user = useSelector(state => state.session.user);
+  console.log(user)
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -48,6 +50,7 @@ function ProfileButton() {
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
+            <Link to={`/artist/${user.artist_id}`}>Manage Albums</Link>
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>
@@ -65,6 +68,8 @@ function ProfileButton() {
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
+
+
           </>
         )}
       </ul>
