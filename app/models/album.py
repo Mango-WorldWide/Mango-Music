@@ -30,5 +30,17 @@ class Album(db.Model):
             'cover': self.cover,
             'genre': self.genre,
             'year': self.year,
-            'artist_id': self.artist_id
+            'artist_id': self.artist_id,
+            'artist': self.albums_artists_relationship.to_dict_relationship()["name"]
+            # 'artist': self.artist
+        }
+
+    def to_dict_relationship(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'cover': self.cover,
+            'genre': self.genre,
+            'year': self.year
         }
