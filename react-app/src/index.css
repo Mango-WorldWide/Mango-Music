@@ -52,10 +52,10 @@ button {
 
 .site-wrapper-right-top {
     display: flex;
-    column-gap: 10px;
+    align-items: center;
     width: 100%;
     background-color: rgba(44, 44, 44, 1);
-    padding: 20px;
+    padding: 30px;
 }
 
 .audio-player-wrapper {

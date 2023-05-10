@@ -34,7 +34,7 @@ function App() {
         <div className="site-wrapper-right">
           <div className="site-wrapper-right-top">
             <div className="audio-player-wrapper">
-              <button>TODO: Replace with audio player component</button>
+              <AudioPlayer/>
             </div>
             <div className="profile-button-wrapper">
               {isLoaded && (
