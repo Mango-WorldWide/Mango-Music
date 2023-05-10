@@ -14,10 +14,23 @@ def get_songs():
 
 @song_routes.route('/<int:id>')
 def get_song_by_id(id):
-    song = Song.query.get(id)
-    curr_id = current_user.get_id()
-    print("CURR_ID.ARTIST_ID", curr_id)
-    return song.to_dict(includeMP3 = True)
+
+    def filter_song_data(song):
+        return {
+        "id": song.id,
+        "title": song.title,
+        "artist_id": song.artist_id,
+        "album_id": song.album_id,
+        "duration": song.duration,
+        "genre": song.genre,
+        "lyrics": song.lyrics,
+        "mp3": song.mp3,
+    }
+
+    # song = Song.query.get(id)
+    song = Song.query.get_or_404(id)
+    # return song.to_dict(includeMP3 = True)
+    return filter_song_data(song.to_dict(includeMP3 = True))
 
 
 @song_routes.route('/new', methods=["POST"])
@@ -93,7 +106,7 @@ def update_song(id):
     return jsonify(song.to_dict())
 
 
-@song_routes.route('<int:id>', methods=["DELETE"])
+@song_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_song(id):
     song = Song.query.get(id)

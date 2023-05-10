@@ -1,8 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadSongsThunk } from "../../store/song";
+import { usePlayer } from "../../context/PlayerContext";
 import "./AudioPlayerIndex.css"
-// import new_song from '../static/Music/Bad Bunny - Un Verano Sin Ti/03. Me Porto Bonito.mp3'
+import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/03. Me Porto Bonito.mp3'
+import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
+import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
+
+const all_songs = [new_song, new_song1, new_song2]
+
 const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [IsLooping, setIsLooping] = useState(false);
@@ -12,7 +18,7 @@ const AudioPlayer = () => {
   const songs = Object.values(getSongs);
   console.log("songs 👉", songs);
   console.log(songs[0]);
-  const song = songs.map((x) => x["mp3"]);
+  // const song = songs.map((x) => x["mp3"]);
 
   const audioPlayer = useRef();
 
@@ -60,6 +66,7 @@ const AudioPlayer = () => {
         <button onClick={(e) => alert("Feature Coming Soon!")}>Shuffle</button>
         <button onClick={goBack}>Back</button>
         <button onClick={playPause}>{isPlaying ? "Pause" : "Play"}</button>
+        {/* <PlayButton songId={all_songs[queueIndex]} /> */}
         <button onClick={goForward}>Forward</button>
         <button onClick={loopControl}>Loop</button>
       </div>
@@ -76,7 +83,7 @@ const AudioPlayer = () => {
       <div className="audio-player-volume-controls">
         <span>Volume Bar</span>
       </div>
-      <audio src={song[queueIndex]} ref={audioPlayer} loop={IsLooping} style={{ display: "hidden" }}></audio>
+      <audio src={all_songs[queueIndex]} ref={audioPlayer} loop={IsLooping} style={{ display: "hidden" }}></audio>
     </div>
   );
 };
