@@ -12,6 +12,7 @@ import CreateAlbum from "./components/CreateAlbum";
 import PlaylistIndex from "./components/PlaylistIndex"
 import UpdateAlbum from "./components/UpdateAlbum";
 import AudioPlayer from "./components/AudioPlayer";
+import SongForm from "./components/SongForm";
 import ProfileButton from "./components/Navigation/ProfileButton.js";
 import "./index.css";
 
@@ -56,6 +57,7 @@ function App() {
                 <Route path='/albums' component={AlbumsIndex} />
                 <Route path='/playlists' component={PlaylistIndex} />
                 <Route path='/audio' component={AudioPlayer}/>
+                <Route path='/songs/new' component={SongForm}/>
                 <Route path='/'>
                   <h1>Welcome to Mango Music</h1>
                 </Route>

@@ -1,4 +1,5 @@
 const LOAD_SONGS = 'albums/LOAD_SONGS'
+const ADD_SONG = 'song/ADD_SONG'
 
 export const loadSongs = (songs) => {
     return {
@@ -6,6 +7,13 @@ export const loadSongs = (songs) => {
         songs
     }
 }
+
+// export const addSong = () => {
+//     return {
+//         type:ADD_SONG,
+//         songs
+//     }
+// }
 
 export const loadSongsThunk = () => async(dispatch) => {
     console.log('inside songs thunk')
@@ -15,6 +23,19 @@ export const loadSongsThunk = () => async(dispatch) => {
         dispatch(loadSongs(data))
     } else {
         return false
+    }
+}
+
+export const addSongThunk = (song) => async(dispatch) => {
+    // console.log("song from thunk 👉", song)
+
+    const res = await fetch("/api/songs/new", {
+        "method" : "POST",
+        "body" : song
+    })
+    if(res.ok){
+        const data = await res.json()
+        return data
     }
 }
 
