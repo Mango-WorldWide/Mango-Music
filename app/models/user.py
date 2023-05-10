@@ -40,5 +40,6 @@ class User(db.Model, UserMixin):
             'artist': self.artist,
             'first_name': self.first_name,
             'last_name': self.last_name,
+            'playlists': [playlists.to_dict_no_item() for playlists in self.users_playlists_relationship],
             'artist_id': self.artist_id
         }

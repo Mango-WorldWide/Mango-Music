@@ -32,13 +32,14 @@ function UpdatePlaylistForm() {
     console.log("playlist 👉", playlistEdits)
     if (title === null || title === "") err.title = "Title is required";
     if (cover === null || cover === "") err.cover = "Cover is required";
-
     if (!!Object.values(err).length) {
+      console.log("👉 found errors while updating playlist 👈")
       setErrors(err);
     } else {
-      const newPlaylist = await dispatch(updatePlaylistThunk(playlist, playlistEdits));
-      console.log("newPlaylist 👉", newPlaylist)
-      history.push(`/playlists/${newPlaylist.id}`);
+      console.log("👉 no errors found while updating playlist 👈")
+      const updatedPlaylist = await dispatch(updatePlaylistThunk(playlist, playlistEdits));
+      console.log("updatedPlaylist 👉", updatedPlaylist)
+      history.push(`/playlists/${updatedPlaylist.id}`);
     }
   };
 
@@ -46,7 +47,7 @@ function UpdatePlaylistForm() {
     <div className="mainContainer newSpot">
       <form onSubmit={handleSubmit}>
         <div>
-          <h1>Create a new Playlist</h1>
+          <h1>Update your Playlist</h1>
         </div>
         <label className="titleLabel">
           Title

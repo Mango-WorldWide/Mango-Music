@@ -4,7 +4,6 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom"
 
 const PlaylistsIndexItem = ({playlist}) =>  {
-    console.log('playlist index item',playlist.cover)
     return (
         <div>
             <Link to={`/playlists/${playlist.id}`}>

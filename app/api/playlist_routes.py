@@ -7,22 +7,19 @@ from app.forms import PlaylistForm
 playlist_routes = Blueprint("playlist", __name__)
 
 
-@playlist_routes.route("")
-# @login_required
+@playlist_routes.route("/current")
+@login_required
 def get_users_playlists():
     """get user's playlist"""
     user_id = current_user.get_id()
     user = current_user.to_dict()
-    print(f"user 👉 {user}")
     data = Playlist.query.filter(Playlist.user_id == user_id).all()
-    print(f"data 👉 {data}")
-    all_playlist = []
+    all_playlists = []
     for playlist in data:
         playlist_dict = playlist.to_dict()
-        del playlist_dict["songs"]
-        all_playlist.append(playlist_dict)
+        all_playlists.append(playlist_dict)
 
-    return all_playlist
+    return all_playlists
 
 
 
@@ -40,7 +37,7 @@ def get_single_playlist(playlistId):
 
 
 @playlist_routes.route("", methods=["POST"])
-# @login_required
+@login_required
 def create_playlist():
     """create a playlist"""
     print("IN CREATE A PLAYLIST")
@@ -57,7 +54,8 @@ def create_playlist():
         )
         db.session.add(new_playlist)
         db.session.commit()
-        return "Successfully added new playlist!"
+        print("in backend =>", new_playlist.to_dict())
+        return new_playlist.to_dict()
     else:
         form_errors = {key: val[0] for (key, val) in form.errors.items()}
         error = make_response(form_errors)
@@ -66,7 +64,7 @@ def create_playlist():
 
 
 @playlist_routes.route("/<int:playlistId>", methods=["PUT"])
-# @login_required
+@login_required
 def edit_playlist(playlistId):
     """edit a playlist"""
     user_id = current_user.get_id()
@@ -76,11 +74,12 @@ def edit_playlist(playlistId):
         form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
             new_values = request.get_json()
+            playlist.id = int(playlistId)
             playlist.title = new_values["title"]
             playlist.description = new_values["description"]
             playlist.cover = new_values["cover"]
             db.session.commit()
-            return "Successfully updated playlist!"
+            return playlist.to_dict()
         else:
             form_errors = {key: val[0] for (key, val) in form.errors.items()}
             error = make_response(form_errors)
@@ -93,15 +92,15 @@ def edit_playlist(playlistId):
 
 ## delete a playlist
 @playlist_routes.route("/<int:playlistId>", methods=["DELETE"])
-# @login_required
+@login_required
 def delete_playlist(playlistId):
-    print("ALSO DELETINGGG!!!!")
+    print("WE UP IN HERE!!!!")
     user_id = current_user.get_id()
     playlist = Playlist.query.get(playlistId)
     if playlist:
         db.session.delete(playlist)
         db.session.commit()
-        return "Successfully deleted playlist!"
+        return playlist.to_dict()
     else:
         error = make_response("Playlist does not exist")
         error.status_code = 404

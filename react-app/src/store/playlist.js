@@ -1,8 +1,5 @@
 
 ////////////// Action Creators ///////////////
-
-import { loadAlbums } from "./album";
-
 export const GET_PLAYLISTS = "playlists/GET_PLAYLISTS";
 export const GET_SINGLE_PLAYLIST = "playlists/GET_SINGLE_PLAYLIST";
 export const UPDATE_PLAYLIST = "playlists/UPDATE_PLAYLIST";
@@ -46,30 +43,28 @@ export const getPlaylistsThunk = () => async (dispatch) => {
   const res = await fetch("/api/playlists");
   if (res.ok) {
     const data = await res.json();
-    console.log("data 👉", data)
-    const allPlaylists = data;
-    console.log("allPlaylists 👉", allPlaylists)
-    dispatch(getPlaylists(allPlaylists));
+    console.log("getPlaylistThunk data 👉", data)
+    dispatch(getPlaylists(data));
     return data;
   }
 };
 
 // get user's playlists
-export const getUserPlaylistsThunk = (userId) => async (dispatch) => {
+export const getUserPlaylistsThunk = () => async (dispatch) => {
   const res = await fetch("/api/playlists/current");
   if (res.ok) {
     const data = await res.json();
     dispatch(getPlaylists(data));
+    return data
   }
 };
 
 // get playlist details of single playlist
 export const getSinglePlaylistThunk = (playlistId) => async (dispatch) => {
-    console.log("--------- GETTING SINGLE PLAYLIST ------------------")
   const res = await fetch(`/api/playlists/${playlistId}`);
   if (res.ok) {
     const data = await res.json();
-    console.log("data 👉", data)
+    console.log("getSinglePlaylistThunk 👉", data)
     dispatch(getSinglePlaylist(data));
     return data;
   }
@@ -77,7 +72,6 @@ export const getSinglePlaylistThunk = (playlistId) => async (dispatch) => {
 
 // post a playlist
 export const createPlaylistThunk = (playlist) => async (dispatch) => {
-  console.log("CREATING A PLAYLIST!!!!!!")
   const res = await fetch("/api/playlists", {
     method: "POST",
     headers: {
@@ -87,13 +81,13 @@ export const createPlaylistThunk = (playlist) => async (dispatch) => {
   });
   if (res.ok) {
     const data = await res.json();
+    console.log("createPlaylistThunk 👉", data)
     return data;
   }
 };
 
 // update a playlist
 export const updatePlaylistThunk = (playlist, playlistEdits) => async (dispatch) => {
-  console.log("EDITING A PLAYLIST!!!!!!")
   const res = await fetch(`/api/playlists/${playlist.id}`, {
     method: "PUT",
     headers: {
@@ -101,21 +95,21 @@ export const updatePlaylistThunk = (playlist, playlistEdits) => async (dispatch)
     },
     body: JSON.stringify(playlistEdits),
   });
-
   if (res.ok) {
     const data = await res.json();
+    console.log("updatePlaylistThunk 👉", data)
     return data;
   }
 };
 
 // delete a playlist
 export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
-  console.log("DELETINGGGGG!!!!!!!")
   const res = await fetch(`/api/playlists/${playlistId}`, {
     method: "DELETE",
   });
   if (res.ok) {
-    dispatch(getPlaylists());
+    console.log("👉 successful in deletePlaylistThunk")
+    dispatch(getUserPlaylistsThunk());
   }
 };
 
@@ -123,8 +117,8 @@ const playlistsReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
     case GET_PLAYLISTS:
-      newState = { ...state };
-      console.log("words =>", action.playlists)
+      newState = {};
+      console.log(" action.playlists 👉👉👉👉",  action.playlists)
       action.playlists.forEach((playlist) => {
         newState[playlist.id] = playlist;
       });
