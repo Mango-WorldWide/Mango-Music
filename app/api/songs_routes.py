@@ -14,21 +14,17 @@ def get_songs():
 
 @song_routes.route('/new', methods=["POST"])
 def add_song():
-    print("^^^^^^^^^^^^ ADDING SONG ^^^^^^^^^^^")
     form = SongForm()
-    print("---->", form.data["mp3"])
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        print("song is valid")
+        
         song = form.data["mp3"]
-        print(f" song_route song 👉 {song}")
         song.filename = get_unique_filename(song.filename)
-        print("song filename ===>", song.filename)
+        print(f"song.filename 👉 {song.filename}")
         upload = upload_file_to_s3(song)
         print(f"upload 👉 {upload}")
         
         if "url" not in upload:
-            print("----- NO URL --------")
             return upload["errors"]
 
         new_song = Song(
@@ -39,7 +35,6 @@ def add_song():
             artist_id = 1
         )
         
-        print(f"new_song 👉 {new_song}")
         db.session.add(new_song)
         db.session.commit()
     else:
