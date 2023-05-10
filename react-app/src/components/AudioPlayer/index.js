@@ -23,9 +23,9 @@ const AudioPlayer = () => {
   const audioPlayer = useRef();
 
   //testing if not needed
-  useEffect(() => {
-    dispatch(loadSongsThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadSongsThunk());
+  // }, [dispatch]);
 
   useEffect(() => {
     if (audioPlayer && audioPlayer.current) {
@@ -73,10 +73,10 @@ const AudioPlayer = () => {
       </div>
       <div className="audio-player-track-center">
         <div className="audio-player-track-info">
-          <img className="musicCover audio-player-img" src={songs[queueIndex].album.cover} />
+          {/* <img className="musicCover audio-player-img" src={songs[queueIndex].album.cover} /> */}
           <div className="audio-player-text">
             <h3 className="title">{songs[queueIndex].title}</h3>
-            <p className="subTitle">{songs[queueIndex].artist.name}</p>
+            {/* <p className="subTitle">{songs[queueIndex].artist.name}</p> */}
           </div>
         </div>
         <span>Progress Bar</span>
