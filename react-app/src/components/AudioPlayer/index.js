@@ -1,7 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadSongsThunk } from "../../store/song";
 import "./AudioPlayerIndex.css";
+import ProgressBar from "../ProgressBar";
 
 /*FOR TESTING */
 import song1 from "../../Music/Kanye West - Graduation (2007)/01 Good Morning.mp3";
@@ -10,6 +11,8 @@ import song3 from "../../Music/Kanye West - Graduation (2007)/03 Stronger.mp3";
 const MP3s = [song1, song2, song3];
 /* */
 const AudioPlayer = () => {
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
   const [unmuteVolume, setUnmuteVolume] = useState(false);
@@ -24,17 +27,34 @@ const AudioPlayer = () => {
   // const MP3s = songs.map((x) => x["mp3"]);
 
   const audioPlayer = useRef();
+  const progressBarRef = useRef();
 
   useEffect(() => {
     dispatch(loadSongsThunk());
   }, [dispatch]);
 
+  const playAnimationRef = useRef();
+
+  const repeat = useCallback(() => {
+    const newCurrentTime = audioPlayer.current.currentTime;
+    setCurrentTime(newCurrentTime);
+    progressBarRef.current.value = newCurrentTime;
+    progressBarRef.current.style.setProperty(
+      '--range-progress',
+      `${(progressBarRef.current.value / duration) * 100}%`
+    );
+
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, []);
+
   useEffect(() => {
     if (audioPlayer && audioPlayer.current) {
       if (isPlaying) {
         audioPlayer.current.play();
+        playAnimationRef.current = requestAnimationFrame(repeat);
       } else {
         audioPlayer.current.pause();
+        cancelAnimationFrame(playAnimationRef.current);
       }
     }
   }, [isPlaying, audioPlayer, queueIndex]);
@@ -98,6 +118,12 @@ const AudioPlayer = () => {
     }
   }
 
+  const onLoadedMetadata = () => {
+    const seconds = audioPlayer.current.duration;
+    setDuration(seconds);
+    progressBarRef.current.max = seconds;
+  };
+
   if (!songs.length) return null
   // console.log("=====>", songs[queueIndex])
   return (
@@ -117,7 +143,7 @@ const AudioPlayer = () => {
             <p className="subTitle">{songs[queueIndex].artist.name}</p>
           </div>
         </div>
-        <span>Progress Bar</span>
+        <ProgressBar progressBarRef={progressBarRef} audioPlayerRef={audioPlayer} currentTime={currentTime} duration={duration}/>
       </div>
       <div className="audio-player-volume-controls">
         <button onClick={muteControl} className="audio-player-mute-button">{unmuteVolume?"Unmute":"Mute"}</button>
@@ -129,7 +155,7 @@ const AudioPlayer = () => {
           onChange={volumeControl}
         />
       </div>
-      <audio src={MP3s[queueIndex]} ref={audioPlayer} loop={isLooping} onEnded={goForward} style={{ display: "hidden" }}></audio>
+      <audio src={MP3s[queueIndex]} ref={audioPlayer} loop={isLooping} onEnded={goForward} style={{ display: "hidden" }} onLoadedMetadata={onLoadedMetadata}></audio>
     </div>
   );
 };
