@@ -8,7 +8,7 @@ const AlbumForm = ({input, formType}) => {
     const dispatch = useDispatch()
     const { albumId } = useParams()
     const user = useSelector(state => state.session.user)
-    console.log(user.artist_id)
+    // console.log(user.artist_id)
     const [title, setTitle] = useState(input.title)
     const [description, setDescription] = useState(input.description)
     const [cover, setCover] = useState(input.cover)
@@ -24,6 +24,8 @@ const AlbumForm = ({input, formType}) => {
     const updateGenre = (e) => setGenre(e.target.value)
     const updateYear = (e) => setYear(e.target.value)
 
+
+
     useEffect(()=>{
         albumObj.title = title
         albumObj.description = description
@@ -33,6 +35,7 @@ const AlbumForm = ({input, formType}) => {
         albumObj.artist_id = user.artist_id
 
         setAlbumPayload(albumObj)
+        console.log("ALBUMOBJ", albumObj)
     },[title, description, cover, genre, year])
 
 

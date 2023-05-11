@@ -1,28 +1,65 @@
-.audio-player{
+.audio-player {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #1f1f1f;
+  color: #ffffff;
+  width: 1500px;
+  position: relative;
+}
+
+.audio-player-track-center {
     display: flex;
-    column-gap: 10px;
-    align-items: center;
     justify-content: space-between;
-    width: 70vw;
-}
-
-.audio-player-img{
-    height: 50px;
-    width: 50px;
-}
-
-.audio-player-text{
-    width: 250px;
-}
-
-.audio-player-track-center{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-
-.audio-player-track-info{
-    display: flex;
     align-items: center;
+    width: 30%;
+  }
+
+
+.audio-player-track-controls,
+.audio-player-track-center,
+.audio-player-volume-controls {
+  display: flex;
+  align-items: center;
 }
+
+.audio-player-track-controls p,
+.audio-player-volume-controls button {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.audio-player-track-info {
+  display: flex;
+  align-items: center;
+}
+
+.audio-player-track-info img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.audio-player-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.audio-player-text h3,
+.audio-player-text p {
+  margin: 0;
+}
+
+.audio-player-volume-controls input {
+  margin-left: 10px;
+}
+
+.audio-player-mute-button {
+    cursor: pointer;
+}
+
+
+
+/* NEEDS MORE TO NOT BREAK OTHER NAV */
+/*  */

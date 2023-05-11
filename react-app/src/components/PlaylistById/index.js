@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getSinglePlaylistThunk, deletePlaylistThunk } from "../../store/playlist";
-import PlayButton from "../PlayButton"
 
 function PlaylistById() {
   const { playlistId } = useParams();
@@ -29,7 +28,7 @@ function PlaylistById() {
   console.log(playlistSongs,'whats my playlist')
   return (
     <div>
-      <div className="playlistContainer">
+      <div className="container playlist">
         <h1>{playlist.title}</h1>
         <p>{playlist.description}</p>
         {playlist.songs.map((s, i) => (
