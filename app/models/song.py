@@ -45,3 +45,5 @@ class Song(db.Model):
             "artist_id": self.artist_id,
             "album_id": self.album_id
         }
+
+   
