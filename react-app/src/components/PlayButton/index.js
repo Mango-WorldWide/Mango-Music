@@ -24,7 +24,7 @@ const PlayButton = ({ songId, songs }) => {
   return (
     <>
        <p onClick={handleClick} className="play-pause-btn">
-       {isPlaying && currentSong === songIndex ? (
+       {isPlaying && songId === songsArr[currentSong].id ? (
       <i className="fa fa-pause" aria-hidden="true"></i>
                         ) : (
       <i class="fa fa-play" aria-hidden="true"></i>

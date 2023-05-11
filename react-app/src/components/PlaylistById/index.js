@@ -32,7 +32,10 @@ function PlaylistById() {
         <h1>{playlist.title}</h1>
         <p>{playlist.description}</p>
         {playlist.songs.map((s, i) => (
-          <p key={i}>{s.songs.title}</p>
+        <>
+            <p key={i}>{s.songs.title}</p>
+          <PlayButton songId={s.songs.id} songs={playlistSongs} />
+        </>
         ))}
         <button onClick={handleEdit}>Edit Playlist</button>
         <button onClick={handleDelete}>Delete Playlist</button>
