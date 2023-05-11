@@ -19,7 +19,6 @@ const DummyAudioPlayer = () => {
             <p className="subTitle">{"By Dorian, Kevin, Alan N., Alan E."}</p>
           </div>
         </div>
-
       </div>
       <div className="audio-player-volume-controls">
         <p className="audio-player-mute-button"><i className="fa-solid fa-volume-high" style={{color:"rgba(238, 238, 238, 0.2)"}}></i></p>
@@ -28,6 +27,7 @@ const DummyAudioPlayer = () => {
           min={0}
           max={100}
           value={50}
+          className="dummy-volume-bar"
         />
       </div>
     </div>

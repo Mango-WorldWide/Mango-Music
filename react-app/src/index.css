@@ -40,7 +40,7 @@ button {
 .site-wrapper-right-top,
 .main-component {
     align-self: center;
-    min-width: fit-content;
+    /* min-width: fit-content; */
     min-height: fit-content;
     box-sizing: border-box;
     /* border: white solid 1px; */
@@ -70,8 +70,4 @@ button {
 
 /* p {
     text-decoration: none;
-} */
-
-/* i {
-    color:#fd552b
 } */
