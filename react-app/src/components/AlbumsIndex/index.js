@@ -16,7 +16,7 @@ const AlbumsIndex = () =>  {
 
     if (!getAlbums) return null
     return (
-        <section className="albumIndexItems">
+        <section className="albumIndex">
             {albums.map((album) => (
                 <AlbumsIndexItem
                     album={album}

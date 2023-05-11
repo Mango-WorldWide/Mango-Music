@@ -1,0 +1,40 @@
+.album-item {
+    width: 300px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+  }
+
+  .album-item:hover {
+    transform: scale(1.05);
+    /* border: 1px solid #ccc; */
+  }
+
+  .album-item:hover img{
+    box-shadow: 0px 0px 10px rgb(255, 255, 255);
+    /* border: 1px solid #ccc; */
+  }
+
+  img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+
+  /* img:hover {
+    transform: scale(1.05);
+  } */
+
+  .albumIndex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /* margin: auto; */
+    padding-top: 15px;
+    padding-left: 60px;
+    gap: 20px;
+    width: 90%;
+  }
