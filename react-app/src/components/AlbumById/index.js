@@ -11,10 +11,10 @@ import './AlbumById.css'
 
 const AlbumById = () =>  {
     const dispatch = useDispatch()
-    const {isPlaying, setIsPlaying} = usePlayer()
     const history = useHistory()
     const album = useSelector(state => state.albums)
     const likes = useSelector(state => Object.values(state.likes))
+    const albumSongs = album["Songs"]
     const { albumId } = useParams()
     console.log(Object.values(album),'album state checking')
     useEffect(()=>{
@@ -40,7 +40,7 @@ const AlbumById = () =>  {
     const handleUpdate = () => {
         history.push(`/albums/${albumId}/edit`)
     }
-    
+
     // console.log(album, 'myalbums')
     return (
       <div className="album-container">
@@ -51,7 +51,7 @@ const AlbumById = () =>  {
           {album["Songs"].map((song) => (
             <div className="song-item" key={song.id}>
               <div className="song-title">{song.title}</div>
-              <PlayButton className="play-button" songId={song.id} albumId={albumId} />
+              <PlayButton className="play-button" songId={song.id} songs={albumSongs} />
               <LikeButton
                 className="like-button"
                 song={song}

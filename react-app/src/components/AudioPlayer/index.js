@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadSongsThunk } from "../../store/song";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AudioPlayerIndex.css"
-import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
-import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
-import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
-
+// import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
+// import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
+// import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
+import new_song from '../static/Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
+import new_song1 from "../static/Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
+import new_song2 from "../static/Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
 const all_songs = [new_song, new_song1, new_song2]
 
 const AudioPlayer = () => {
@@ -14,7 +16,8 @@ const AudioPlayer = () => {
   const [IsLooping, setIsLooping] = useState(false);
   // const [currentSong, setCurrentSong] = useState(0);
   // const songs = useSelector((state) => state.player['Songs'])
-  console.log(songsArr)
+  console.log(songsArr, 'my song arr', currentSong,'my index for song')
+  console.log(songsArr[currentSong],' audio songs array current song')
   const dispatch = useDispatch();
   // const getSongs = useSelector((state) => state.songs);
   // const songs = Object.values(getSongs);
