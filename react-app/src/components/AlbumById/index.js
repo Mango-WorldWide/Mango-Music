@@ -48,7 +48,7 @@ const AlbumById = () =>  {
             {album["Songs"].map((song)=>(
                 <>
                 <div>{song.title}</div>
-                <PlayButton songId={song.id} />
+                <PlayButton songId={song.id} albumId={albumId} />
                 <LikeButton song={song} isLiked={likes.filter(like=>like["song_id"] == song.id).length > 0}/>
                 </>
             ))}

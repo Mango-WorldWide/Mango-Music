@@ -10,18 +10,17 @@ import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Pre
 const all_songs = [new_song, new_song1, new_song2]
 
 const AudioPlayer = () => {
-  const {isPlaying, setIsPlaying} = usePlayer();
+  const {isPlaying, setIsPlaying, currentSong, setCurrentSong} = usePlayer();
   const [IsLooping, setIsLooping] = useState(false);
-  const [queueIndex, setQueueIndex] = useState(0);
+  // const [currentSong, setCurrentSong] = useState(0);
+  const songs = useSelector((state) => state.player['Songs'])
   const dispatch = useDispatch();
-  const getSongs = useSelector((state) => state.songs);
-  const songs = Object.values(getSongs);
-  console.log("songs 👉", songs);
-  console.log(songs[0]);
+  // const getSongs = useSelector((state) => state.songs);
+  // const songs = Object.values(getSongs);
+  // console.log('SONGS', songs)
   // const song = songs.map((x) => x["mp3"]);
 
   const audioPlayer = useRef();
-
   //testing if not needed
   // useEffect(() => {
   //   dispatch(loadSongsThunk());
@@ -35,19 +34,19 @@ const AudioPlayer = () => {
         audioPlayer.current.pause();
       }
     }
-  }, [isPlaying, audioPlayer, queueIndex]);
+  }, [isPlaying, audioPlayer, currentSong]);
 
-  if (!getSongs) return null;
+  if (!songs) return null;
 
   const goForward = () => {
-    if (queueIndex < songs.length - 1) {
-      setQueueIndex((prev) => prev + 1);
+    if (currentSong < songs.length - 1) {
+      setCurrentSong((prev) => prev + 1);
     }
   };
 
   const goBack = () => {
-    if (queueIndex > 0) {
-      setQueueIndex((prev) => prev - 1);
+    if (currentSong > 0) {
+      setCurrentSong((prev) => prev - 1);
     }
   };
 
@@ -60,23 +59,23 @@ const AudioPlayer = () => {
   };
 
   if (!songs.length) return null
-  console.log("=====>", songs[queueIndex])
+  console.log("=====>", songs[currentSong])
   return (
     <div className="audio-player">
       <div className="audio-player-track-controls">
         <button onClick={(e) => alert("Feature Coming Soon!")}>Shuffle</button>
         <button onClick={goBack}>Back</button>
         <button onClick={playPause}>{isPlaying ? "Pause" : "Play"}</button>
-        {/* <PlayButton songId={all_songs[queueIndex]} /> */}
+        {/* <PlayButton songId={all_songs[currentSong]} /> */}
         <button onClick={goForward}>Forward</button>
         <button onClick={loopControl}>Loop</button>
       </div>
       <div className="audio-player-track-center">
         <div className="audio-player-track-info">
-          {/* <img className="musicCover audio-player-img" src={songs[queueIndex].album.cover} /> */}
+          <img className="musicCover audio-player-img" src={songs[currentSong].album.cover} />
           <div className="audio-player-text">
-            <h3 className="title">{songs[queueIndex].title}</h3>
-            {/* <p className="subTitle">{songs[queueIndex].artist.name}</p> */}
+            <h3 className="title">{songs[currentSong].title}</h3>
+            <p className="subTitle">{songs[currentSong].artist.name}</p>
           </div>
         </div>
         <span>Progress Bar</span>
@@ -84,7 +83,7 @@ const AudioPlayer = () => {
       <div className="audio-player-volume-controls">
         <span>Volume Bar</span>
       </div>
-      <audio src={all_songs[queueIndex]} ref={audioPlayer} loop={IsLooping} style={{ display: "hidden" }}></audio>
+      <audio src={all_songs[currentSong]} ref={audioPlayer} loop={IsLooping} style={{ display: "hidden" }}></audio>
     </div>
   );
 };
