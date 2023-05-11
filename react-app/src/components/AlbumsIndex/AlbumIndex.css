@@ -1,8 +1,22 @@
+
+.container.allAlbums{
+    width: 100%;
+    margin-top: -10px;
+    margin-right: -10px;  
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    justify-content: flex-start;
+    background-color: rgba(22, 22, 23, 1);
+    align-items: center;
+}
+
+
 .albumIndexItems{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin: auto;
     gap:20px;
-    width: 90%
+    width: 90%;
 }

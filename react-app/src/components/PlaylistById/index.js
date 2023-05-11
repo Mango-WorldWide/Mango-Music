@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getSinglePlaylistThunk, deletePlaylistThunk } from "../../store/playlist";
-
+import "./byId.css"
 function PlaylistById() {
   const { playlistId } = useParams();
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ function PlaylistById() {
   if (!playlist || !playlist.id) return null;
   return (
     <div>
-      <div className="playlistContainer">
+      <div className="container playlist">
         <h1>{playlist.title}</h1>
         <p>{playlist.description}</p>
         {playlist.songs.map((s, i) => (

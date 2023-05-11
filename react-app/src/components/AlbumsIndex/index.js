@@ -16,6 +16,7 @@ const AlbumsIndex = () =>  {
 
     if (!getAlbums) return null
     return (
+        <div className="container allAlbums">
         <section className="albumIndexItems">
             {albums.map((album) => (
                 <AlbumsIndexItem
@@ -23,6 +24,7 @@ const AlbumsIndex = () =>  {
                 />
             ))}
         </section>
+        </div>
     )
 }
 

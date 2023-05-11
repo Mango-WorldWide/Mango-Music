@@ -4,10 +4,10 @@ import { loadSongsThunk } from "../../store/song";
 import "./AudioPlayerIndex.css";
 
 /*FOR TESTING */
-import song1 from "../../Music/Kanye West - Graduation (2007)/01 Good Morning.mp3";
-import song2 from "../../Music/Kanye West - Graduation (2007)/02 Champion.mp3";
-import song3 from "../../Music/Kanye West - Graduation (2007)/03 Stronger.mp3";
-const MP3s = [song1, song2, song3];
+// import song1 from "../../Music/Kanye West - Graduation (2007)/01 Good Morning.mp3";
+// import song2 from "../../Music/Kanye West - Graduation (2007)/02 Champion.mp3";
+// import song3 from "../../Music/Kanye West - Graduation (2007)/03 Stronger.mp3";
+const MP3s = ["filler", "filler", "filler"];
 /* */
 const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);

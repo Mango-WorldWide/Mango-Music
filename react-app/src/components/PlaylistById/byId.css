@@ -1,0 +1,53 @@
+.outerAlbumContainer {
+  width: 95%;
+  margin: 0 auto;
+  border: 2px solid red;
+}
+
+.innerAlbumContainer.top {
+  display: flex;
+  gap: 3rem;
+}
+.albumMenu {
+  display: flex;
+  flex-direction: column;
+  align-content: end;
+  width:35%;
+}
+.albumTitle {
+  margin: 0 0 8px 0;
+}
+
+.albumArtist{
+    color:#fd552b;
+}
+
+.albumDesc {
+  text-align: start;
+  font-size: .8rem;
+}
+
+.albumGenreYear {
+  display: flex;
+  gap: 5px;
+}
+
+.albumButtons {
+  display: flex;
+  gap: 10px;
+  border: 2px solid red;
+  justify-self: flex-end;
+}
+.albumButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #fd552b;
+}
