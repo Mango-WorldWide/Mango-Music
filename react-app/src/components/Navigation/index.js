@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navigation.css';
+import Search from '../Search';
 
 function Navigation(){
 	return (
@@ -12,13 +13,13 @@ function Navigation(){
 			</div>
 			<div className="nav-list-bottom-wrapper">
 				<li className="nav-list-item">
+					<Search/>
+				</li>
+				<li className="nav-list-item">
 					<NavLink exact to="/albums">Albums</NavLink>
 				</li>
 				<li className="nav-list-item">
 					<NavLink exact to="/playlists">Playlists</NavLink>
-				</li>
-				<li className="nav-list-item">
-					<NavLink exact to="/audio">Audio</NavLink>
 				</li>
 			</div>
 
