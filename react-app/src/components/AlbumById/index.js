@@ -50,21 +50,27 @@ const AlbumById = () => {
       <div className="innerAlbumContainer top">
         <div className="coverDiv">
           <img
+            className="albumImage"
             src={album["Album"].cover}
             alt={album["Album"].title}
             style={{ borderRadius: "10px" }}
           />
         </div>
         <div className="albumMenu">
-          <h2 className="albumTitle">{album["Album"].title}</h2>
-          <h3 className="albumArtist">{album["Album"].artist}</h3>
+          <h1 className="albumTitle">{album["Album"].title}</h1>
+          <h2 className="albumArtist">{album["Album"].artist}</h2>
           <div className="albumGenreYear">
             <p className="albumGenre">{album["Album"].genre}</p>
-            <p>·</p>
+            <p id="dot">·</p>
             <p></p>
             <p className="albumYear">{album["Album"].year}</p>
           </div>
+          <div 
+          className="descContainer"
+          data-tooltip="MORE"
+          >
           <p className="albumDesc">{album["Album"].description}</p>
+          </div>
           <div class="albumButtons">
             <button className="albumButton" onClick={handlePlay}>
               <i class="fa-solid fa-play" />
