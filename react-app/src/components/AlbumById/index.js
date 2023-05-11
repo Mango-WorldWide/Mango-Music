@@ -6,6 +6,8 @@ import PlayButton from "../PlayButton"
 import { useHistory, useParams } from "react-router-dom"
 import { loadOneAlbumThunk } from "../../store/album"
 import LikeButton from "../LikeButton"
+import { usePlayer } from "../../context/PlayerContext"
+import './AlbumById.css'
 
 const AlbumById = () =>  {
     const dispatch = useDispatch()
@@ -38,21 +40,34 @@ const AlbumById = () =>  {
     const handleUpdate = () => {
         history.push(`/albums/${albumId}/edit`)
     }
+
     // console.log(album, 'myalbums')
-    return(
-        <div>
-            <button onClick={handleUpdate} >UPDATE ME</button>
-            <button onClick={handleDelete}>DELETE ME</button>
-            <img src={album["Album"].cover} alt={album["Album"].title}/>
-            {album["Songs"].map((song)=>(
-                <>
-                <div>{song.title}</div>
-                <PlayButton songId={song.id} songs={albumSongs} />
-                <LikeButton song={song} isLiked={likes.filter(like=>like["song_id"] == song.id).length > 0}/>
-                </>
-            ))}
+    return (
+      <div className="album-container">
+        <img className="album-cover" src={album["Album"].cover} alt={album["Album"].title} />
+        <h1 className="album-title">{album["Album"].title}</h1>
+        <h3 className="album-artist">{album["Album"].artist}</h3>
+        <div className="song-list">
+          {album["Songs"].map((song) => (
+            <div className="song-item" key={song.id}>
+              <div className="song-title">{song.title}</div>
+              <PlayButton className="play-button" songId={song.id} songs={albumSongs} />
+              <LikeButton
+                className="like-button"
+                song={song}
+                isLiked={likes.filter((like) => like["song_id"] == song.id).length > 0}
+              />
+            </div>
+          ))}
         </div>
-    )
-}
+        <button className="update-button" onClick={handleUpdate}>
+          UPDATE ME
+        </button>
+        <button className="delete-button" onClick={handleDelete}>
+          DELETE ME
+        </button>
+      </div>
+    );
+  };
 
 export default AlbumById
