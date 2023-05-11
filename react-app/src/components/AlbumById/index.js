@@ -95,7 +95,7 @@ const AlbumById = () => {
               <p>{i === hoveredSong ? <i class="fa-solid fa-play orange" /> : i + 1}</p>
               <p>{song.title}</p>
             </div>
-            <PlayButton className="play-button" songId={song.id} albumId={albumId} />
+            <PlayButton className="play-button" songId={song.id} songs={albumSongs} />
             <LikeButton
               className="like-button"
               song={song}
