@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadSongsThunk } from "../../store/song";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AudioPlayerIndex.css"
-// import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
-// import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
-// import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
-import new_song from '../static/Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
-import new_song1 from "../static/Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
-import new_song2 from "../static/Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
+import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
+import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
+import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
+// import new_song from '../static/Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
+// import new_song1 from "../static/Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
+// import new_song2 from "../static/Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
 const all_songs = [new_song, new_song1, new_song2]
 
 const AudioPlayer = () => {
@@ -56,21 +56,21 @@ const AudioPlayer = () => {
     }
   }, [volume, audioPlayer, unmuteVolume]);
 
-  if (!getSongs) return null;
+  // if (!getSongs) return null;
 
   const goForward = () => {
-    if (queueIndex < MP3s.length - 1) {
-      setQueueIndex((prev) => prev + 1);
+    if (currentSong < all_songs.length - 1) {
+      setCurrentSong((prev) => prev + 1);
     } else{
-      setQueueIndex(prev=>prev)
+      setCurrentSong(prev=>prev)
     }
   };
 
   const goBack = () => {
-    if (queueIndex > 0) {
-      setQueueIndex((prev) => prev - 1);
+    if (currentSong > 0) {
+      setCurrentSong((prev) => prev - 1);
     } else{
-      setQueueIndex(prev=>prev)
+      setCurrentSong(prev=>prev)
     }
   };
 
@@ -102,7 +102,7 @@ const AudioPlayer = () => {
     }
   }
 
-  if (!songs.length) return null
+  if (!songsArr.length) return null
   // console.log("=====>", songs[queueIndex])
   return (
     <div className="audio-player">
@@ -134,7 +134,7 @@ const AudioPlayer = () => {
           onChange={volumeControl}
         />
       </div>
-      <audio src={all_songs[currentSong]} ref={audioPlayer} loop={IsLooping} style={{ display: "hidden" }}></audio>
+      <audio src={all_songs[currentSong]} ref={audioPlayer} loop={isLooping} style={{ display: "hidden" }}></audio>
     </div>
   );
 };
