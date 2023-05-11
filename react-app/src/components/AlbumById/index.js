@@ -6,14 +6,13 @@ import PlayButton from "../PlayButton"
 import { useHistory, useParams } from "react-router-dom"
 import { loadOneAlbumThunk } from "../../store/album"
 import LikeButton from "../LikeButton"
-import { usePlayer } from "../../context/PlayerContext"
 
 const AlbumById = () =>  {
     const dispatch = useDispatch()
-    const {isPlaying, setIsPlaying} = usePlayer()
     const history = useHistory()
     const album = useSelector(state => state.albums)
     const likes = useSelector(state => Object.values(state.likes))
+    const albumSongs = album["Songs"]
     const { albumId } = useParams()
     console.log(Object.values(album),'album state checking')
     useEffect(()=>{
@@ -48,7 +47,7 @@ const AlbumById = () =>  {
             {album["Songs"].map((song)=>(
                 <>
                 <div>{song.title}</div>
-                <PlayButton songId={song.id} albumId={albumId} />
+                <PlayButton songId={song.id} songs={albumSongs} />
                 <LikeButton song={song} isLiked={likes.filter(like=>like["song_id"] == song.id).length > 0}/>
                 </>
             ))}

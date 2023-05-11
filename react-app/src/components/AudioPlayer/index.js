@@ -14,7 +14,8 @@ const AudioPlayer = () => {
   const [IsLooping, setIsLooping] = useState(false);
   // const [currentSong, setCurrentSong] = useState(0);
   // const songs = useSelector((state) => state.player['Songs'])
-  console.log(songsArr)
+  console.log(songsArr, 'my song arr', currentSong,'my index for song')
+  console.log(songsArr[currentSong],' audio songs array current song')
   const dispatch = useDispatch();
   // const getSongs = useSelector((state) => state.songs);
   // const songs = Object.values(getSongs);
