@@ -13,16 +13,19 @@ import PlaylistIndex from "./components/PlaylistIndex"
 import PlaylistById from "./components/PlaylistById";
 import UpdateAlbum from "./components/UpdateAlbum";
 import AudioPlayer from "./components/AudioPlayer";
+import DummyAudioPlayer from "./components/DummyAudioPlayer";
 import SongForm from "./components/SongForm";
 import NewPlaylistForm from "./components/CreatePlaylist";
 import UpdatePlaylistForm from "./components/UpdatePlaylist/UpdatePlaylistForm";
 import ProfileButton from "./components/Navigation/ProfileButton.js";
 import "./index.css";
 import ArtistById from "./components/ArtistById";
+import {usePlayer} from "./context/PlayerContext";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const {isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr} = usePlayer();
 
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
@@ -38,7 +41,7 @@ function App() {
         <div className="site-wrapper-right">
           <div className="site-wrapper-right-top">
             <div className="audio-player-wrapper">
-              <AudioPlayer/>
+              {songsArr.length > 0 ? <AudioPlayer/> : <DummyAudioPlayer/>}
             </div>
             <div className="profile-button-wrapper">
               {isLoaded && (

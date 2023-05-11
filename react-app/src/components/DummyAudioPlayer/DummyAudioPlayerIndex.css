@@ -28,7 +28,7 @@
 .audio-player-track-controls p,
 .audio-player-volume-controls button {
   margin-right: 10px;
-  cursor: pointer;
+  cursor: default;
 }
 
 .audio-player-track-info {
@@ -56,11 +56,9 @@
   margin-left: 10px;
 }
 
-.audio-player-mute-button {
-    cursor: pointer;
+.audio-player-mute-button{
+    cursor: default;
 }
-
-
 
 /* NEEDS MORE TO NOT BREAK OTHER NAV */
 /*  */
