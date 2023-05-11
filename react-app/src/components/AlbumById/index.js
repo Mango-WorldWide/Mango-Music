@@ -9,6 +9,7 @@ import { singleSongThunk } from "../../store/song";
 import { deleteLikeThunk, createLikeThunk} from "../../store/like"
 import LikeButton from "../LikeButton";
 import { usePlayer } from "../../context/PlayerContext";
+import './AlbumById.css'
 
 const AlbumById = () => {
   const [hoveredSong, setHoveredSong] = useState("")
@@ -20,6 +21,7 @@ const AlbumById = () => {
   const album = useSelector((state) => state.albums);
   const likes = useSelector((state) => Object.values(state.likes));
   const { albumId } = useParams();
+  const albumSongs = album["Songs"]
   console.log(Object.values(album), "album state checking");
   console.log(hoveredSong)
   useEffect(() => {

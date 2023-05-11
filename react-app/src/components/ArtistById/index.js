@@ -1,28 +1,52 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
-import { loadArtistThunk } from "../../store/artist"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
+import { loadArtistThunk } from "../../store/artist";
+import "./ArtistById.css";
 
 const ArtistById = () => {
-    const dispatch = useDispatch()
-    const { artistId } = useParams()
-    const artist = useSelector(state => state.artist)
-    useEffect(()=>{
-        dispatch(loadArtistThunk(artistId))
-    },[dispatch])
-    if(!artist.albums) return null
-    console.log(artist.albums[0].cover)
-    return(
-        <div>
-            <div>{artist.name}</div>
-            {artist.albums.map((album)=>(
-                <img src={album.cover}/>
-            ))}
-            {artist.songs.map((song)=>(
-                <p>{song.title}</p>
-            ))}
-        </div>
-    )
-}
+  const dispatch = useDispatch();
+  const { artistId } = useParams();
+  const artist = useSelector((state) => state.artist);
 
-export default ArtistById
+  useEffect(() => {
+    dispatch(loadArtistThunk(artistId));
+  }, [dispatch]);
+
+  if (!artist.albums) return null;
+
+  return (
+    <div className="artist-page">
+      <h1 className="artist-name">{artist.name}</h1>
+
+      <div className="album-section">
+        <h2 className="section-title">Albums</h2>
+        <div className="album-list">
+          {artist.albums.map((album) => (
+            <Link to={`/albums/${album.id}`}>
+            <img
+              key={album.id}
+              className="album-cover"
+              src={album.cover}
+              alt={album.title}
+            />
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <div className="song-section">
+        <h2 className="section-title">Songs</h2>
+        <div className="song-list">
+          {artist.songs.map((song) => (
+            <p key={song.id} className="song-title">
+              {song.title}
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ArtistById;

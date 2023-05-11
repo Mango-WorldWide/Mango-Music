@@ -3,6 +3,7 @@ const SINGLE_SONG = 'songs/SINGLE_SONG'
 // const ADD_SONG = 'song/ADD_SONG'
 const DELETE_SONG = 'songs/DELETE_SONG'
 
+
 export const loadSongs = (songs) => {
     return {
         type:LOAD_SONGS,
@@ -24,6 +25,8 @@ export const deleteSong = (songId) => {
         songId
     }
 }
+
+
 // export const addSong = () => {
 //     return {
 //         type:ADD_SONG,

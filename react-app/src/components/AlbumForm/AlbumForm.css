@@ -37,6 +37,18 @@
 
   .textarea-input {
     width: 100%;
+    height: 100px; /* Set the desired height */
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    resize: vertical; 
+  }
+
+  .textarea-input {
+    width: 100%;
     height: 100px; 
     padding: 8px 16px;
     margin-bottom: 10px;

@@ -1,8 +1,10 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadSongsThunk } from "../../store/song";
 import { usePlayer } from "../../context/PlayerContext";
+import ProgressBar from "../ProgressBar";
 import "./AudioPlayerIndex.css"
+
 
 const new_song = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
 const new_song1 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
@@ -12,33 +14,55 @@ const new_song2 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3
 const MP3s = [new_song, new_song1, new_song2]
 
 const AudioPlayer = () => {
-  const {isPlaying, setIsPlaying} = usePlayer();
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const {isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr} = usePlayer();
   const [isLooping, setIsLooping] = useState(false);
-  const [queueIndex, setQueueIndex] = useState(0);
   const [unmuteVolume, setUnmuteVolume] = useState(false);
   const [volume, setVolume] = useState(50);
   const [prevVolume, setPrevVolume] = useState(50);
+  const [queueIndex, setQueueIndex] = useState(0);
 
   const dispatch = useDispatch();
   const getSongs = useSelector((state) => state.songs);
   
   const songs = Object.values(getSongs);
-  const audioPlayer = useRef();
+  // console.log("songs 👉", songs);
+  // console.log(songs[0]);
+  // const MP3s = songs.map((x) => x["mp3"]);
 
-  //testing if not needed
-  // useEffect(() => {
-  //   dispatch(loadSongsThunk());
-  // }, [dispatch]);
+  const audioPlayer = useRef();
+  const progressBarRef = useRef();
+
+  useEffect(() => {
+    dispatch(loadSongsThunk());
+  }, [dispatch]);
+
+  const playAnimationRef = useRef();
+
+  const repeat = useCallback(() => {
+    const newCurrentTime = audioPlayer.current.currentTime;
+    setCurrentTime(newCurrentTime);
+    progressBarRef.current.value = newCurrentTime;
+    progressBarRef.current.style.setProperty(
+      '--range-progress',
+      `${(progressBarRef.current.value / duration) * 100}%`
+    );
+
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, []);
 
   useEffect(() => {
     if (audioPlayer && audioPlayer.current) {
       if (isPlaying) {
         audioPlayer.current.play();
+        playAnimationRef.current = requestAnimationFrame(repeat);
       } else {
         audioPlayer.current.pause();
+        cancelAnimationFrame(playAnimationRef.current);
       }
     }
-  }, [isPlaying, audioPlayer, queueIndex]);
+  }, [isPlaying, audioPlayer, currentSong]);
 
   useEffect(() => {
     if (audioPlayer && audioPlayer.current) {
@@ -56,15 +80,15 @@ const AudioPlayer = () => {
   if (!getSongs) return null;
 
   const goForward = () => {
-    if (queueIndex < MP3s.length - 1) {
-      setQueueIndex((prev) => prev + 1);
+    if (currentSong < songsArr.length - 1) {
+      setCurrentSong((prev) => prev + 1);
     } else{
-      setQueueIndex(prev=>prev)
+      setCurrentSong(prev=>prev)
     }
   };
 
   const goBack = () => {
-    if (queueIndex > 0) {
+    if (currentSong > 0) {
       setQueueIndex((prev) => prev - 1);
     } else{
       setQueueIndex(prev=>prev)
@@ -99,27 +123,34 @@ const AudioPlayer = () => {
     }
   }
 
+  const onLoadedMetadata = () => {
+    const seconds = audioPlayer.current.duration;
+    setDuration(seconds);
+    progressBarRef.current.max = seconds;
+  };
+
   if (!songs.length) return null
   // console.log("=====>", songs[queueIndex])
   return (
     <div className="audio-player">
       <div className="audio-player-track-controls">
-        <button onClick={(e) => alert("Feature Coming Soon!")}>Shuffle</button>
-        <button onClick={goBack}>Back</button>
-        <button onClick={playPause}>{isPlaying ? "Pause" : "Play"}</button>
-        {/* <PlayButton songId={all_songs[queueIndex]} /> */}
-        <button onClick={goForward}>Forward</button>
-        <button onClick={loopControl}>Loop</button>
+        <button className="audio-player-shuffle" onClick={(e) => alert("Feature Coming Soon!")}>Shuffle</button>
+        <button className="audio-playeer-back" onClick={goBack}>Back</button>
+        <button className="audio-player-play-pause" onClick={playPause}>{isPlaying ? "Pause" : "Play"}</button>
+        {/* <PlayButton songId={all_songs[currentSong]} /> */}
+        <button className="audio-player-forward" onClick={goForward}>Forward</button>
+        <button className="audio-player-loop" onClick={loopControl}>Loop</button>
       </div>
       <div className="audio-player-track-center">
         <div className="audio-player-track-info">
-          {/* <img className="musicCover audio-player-img" src={songs[queueIndex].album.cover} /> */}
+          <img className="musicCover audio-player-img" src={songs[currentSong].album.cover} />
+          {/* {console.log("AUDIOPLAYER", songs[currentSong].album.cover)} */}
           <div className="audio-player-text">
-            <h3 className="title">{songs[queueIndex].title}</h3>
-            {/* <p className="subTitle">{songs[queueIndex].artist.name}</p> */}
+            <h3 className="title">{songs[currentSong].title}</h3>
+            <p className="subTitle">{songs[currentSong].artist.name}</p>
           </div>
         </div>
-        <span>Progress Bar</span>
+        <ProgressBar progressBarRef={progressBarRef} audioPlayerRef={audioPlayer} currentTime={currentTime} duration={duration}/>
       </div>
       <div className="audio-player-volume-controls">
         <button onClick={muteControl} className="audio-player-mute-button">{unmuteVolume?"Unmute":"Mute"}</button>
