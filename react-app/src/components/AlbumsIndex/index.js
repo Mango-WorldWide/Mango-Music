@@ -19,7 +19,7 @@ const AlbumsIndex = () =>  {
         <section className="albumIndex">
             {albums.map((album) => (
                 <AlbumsIndexItem
-                    album={album}
+                    key={album.id} album={album}
                 />
             ))}
         </section>
