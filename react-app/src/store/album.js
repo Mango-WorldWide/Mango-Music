@@ -45,7 +45,7 @@ export const loadAlbumsThunk = () => async(dispatch) => {
 }
 
 export const loadOneAlbumThunk = (albumId) => async(dispatch) => {
-    console.log('inside the thunk', albumId)
+    console.log('inside the albulm thunk', albumId)
     const response = await fetch(`/api/albums/${albumId}`)
     if (response.ok){
         const data = await response.json()

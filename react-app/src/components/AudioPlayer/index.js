@@ -3,17 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadSongsThunk } from "../../store/song";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AudioPlayerIndex.css"
-import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/03. Me Porto Bonito.mp3'
-import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
-import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
+import new_song from '../static/Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
+import new_song1 from "../static/Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
+import new_song2 from "../static/Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
 
 const all_songs = [new_song, new_song1, new_song2]
 
 const AudioPlayer = () => {
-  const {isPlaying, setIsPlaying, currentSong, setCurrentSong} = usePlayer();
+  const {isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr} = usePlayer();
   const [IsLooping, setIsLooping] = useState(false);
   // const [currentSong, setCurrentSong] = useState(0);
-  const songs = useSelector((state) => state.player['Songs'])
+  // const songs = useSelector((state) => state.player['Songs'])
+  console.log(songsArr)
   const dispatch = useDispatch();
   // const getSongs = useSelector((state) => state.songs);
   // const songs = Object.values(getSongs);
@@ -36,10 +37,10 @@ const AudioPlayer = () => {
     }
   }, [isPlaying, audioPlayer, currentSong]);
 
-  if (!songs) return null;
+  // if (!songs) return null;
 
   const goForward = () => {
-    if (currentSong < songs.length - 1) {
+    if (currentSong < songsArr.length - 1) {
       setCurrentSong((prev) => prev + 1);
     }
   };
@@ -58,8 +59,8 @@ const AudioPlayer = () => {
     setIsLooping((prev) => !prev);
   };
 
-  if (!songs.length) return null
-  console.log("=====>", songs[currentSong])
+  if (!songsArr.length) return null
+  console.log("=====>", songsArr[currentSong])
   return (
     <div className="audio-player">
       <div className="audio-player-track-controls">
@@ -72,10 +73,10 @@ const AudioPlayer = () => {
       </div>
       <div className="audio-player-track-center">
         <div className="audio-player-track-info">
-          <img className="musicCover audio-player-img" src={songs[currentSong].album.cover} />
+          <img className="musicCover audio-player-img" src={songsArr[currentSong].album.cover} />
           <div className="audio-player-text">
-            <h3 className="title">{songs[currentSong].title}</h3>
-            <p className="subTitle">{songs[currentSong].artist.name}</p>
+            <h3 className="title">{songsArr[currentSong].title}</h3>
+            <p className="subTitle">{songsArr[currentSong].artist.name}</p>
           </div>
         </div>
         <span>Progress Bar</span>
