@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { updatePlaylistThunk, getSinglePlaylistThunk } from "../../store/playlist";
+import "./UpdatePlaylistForm.css"
 
 function UpdatePlaylistForm() {
   const [title, setTitle] = useState("");
@@ -44,9 +45,9 @@ function UpdatePlaylistForm() {
   };
 
   return (
-    <div className="mainContainer newSpot">
+    <div className="mainContainer updatePlaylist">
       <form onSubmit={handleSubmit}>
-        <div>
+        <div style={{marginBottom: "1.5rem"}}>
           <h1>Update your Playlist</h1>
         </div>
         <label className="titleLabel">
@@ -54,7 +55,7 @@ function UpdatePlaylistForm() {
           <input
             name="title"
             value={title}
-            className="oneLiner"
+            className="form-input"
             id="title"
             placeholder="title"
             onChange={(e) => setTitle(e.target.value)}
@@ -66,7 +67,7 @@ function UpdatePlaylistForm() {
           <input
             name="cover"
             value={cover}
-            className="oneLiner"
+            className="form-input"
             id="cover"
             placeholder="Cover"
             onChange={(e) => setCover(e.target.value)}
@@ -75,15 +76,15 @@ function UpdatePlaylistForm() {
         </label>
         <textarea
           name="description"
-          className="textArea newPlaylist"
+          className="textarea-input"
           value={description}
           placeholder="Please write at least 30 characters"
           onChange={(e) => setDescription(e.target.value)}
         />
         <p className="errors">{errors.description}</p>
-        <hr className="lines form" />
+        <hr style={{}}/>
         <div className="buttonContainer">
-          <button>Update Playlist</button>
+          <button className="form-submit-button">Update Playlist</button>
         </div>
       </form>
     </div>

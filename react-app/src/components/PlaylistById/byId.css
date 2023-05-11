@@ -1,8 +1,9 @@
 .outerAlbumContainer {
-  width: 90%;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
   max-width: 1680px;
   margin: 1.5rem auto;
-  border: 2px dashed blue;
 }
 
 .innerAlbumContainer.top {
@@ -45,7 +46,7 @@
 .descContainer:after {
   content: attr(data-tooltip);
   position: absolute;
-  font-size: .7rem;
+  font-size: 0.7rem;
   bottom: 1px;
   right: 1px;
   box-shadow: 0px -5px 10px rgba(22, 22, 23, 1);
@@ -89,4 +90,82 @@
   border: none;
   border-radius: 5px;
   background-color: #fd552b;
+}
+
+.fa-play.orange{
+  color: #fd552b
+}
+
+/*===========================*/
+
+.song-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1680px;
+}
+.song-title {
+  display: flex;
+  font-size: .9rem;
+  gap: 2rem;
+  color: white;
+}
+.song-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+.song-item.grey {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#pink{
+  color: pink;
+}
+
+#blue{
+  color: blue;
+}
+
+.song-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.play-button,
+.like-button {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.play-button {
+  border: red solid 15px;
+}
+
+.play-pause-btn {
+  cursor: pointer;
+}
+
+.update-button,
+.delete-button {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: red;
+}
+
+.update-button:hover {
+  background-color: green;
 }

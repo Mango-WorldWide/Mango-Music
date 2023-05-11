@@ -1,0 +1,68 @@
+.updatePlaylistH1{
+    margin-bottom: 10rem;
+    color:red;
+}
+
+.create-update-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+
+  .form-input:focus {
+    border-color: #0070f3;
+  }
+
+  .form-submit-button {
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .form-submit-button:hover {
+    background-color: green;
+  }
+
+  .textarea-input {
+    width: 100%;
+    height: 100px; 
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    resize: none;
+  }
+
+  .mainContainer.updatePlaylist {
+    width: 50%;
+    margin: 0 auto;
+  }
+  
+  .errors {
+    color: red;
+    font-weight: bold;
+  }
+
+  .buttonContainer{
+    display: flex;
+    justify-content: center;
+  }

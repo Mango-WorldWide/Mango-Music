@@ -3,23 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadSongsThunk } from "../../store/song";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AudioPlayerIndex.css"
-import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/03. Me Porto Bonito.mp3'
-import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
-import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
 
-const all_songs = [new_song, new_song1, new_song2]
+const new_song = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+const new_song1 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+const new_song2 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+
+
+const MP3s = [new_song, new_song1, new_song2]
 
 const AudioPlayer = () => {
   const {isPlaying, setIsPlaying} = usePlayer();
-  const [IsLooping, setIsLooping] = useState(false);
+  const [isLooping, setIsLooping] = useState(false);
   const [queueIndex, setQueueIndex] = useState(0);
+  const [unmuteVolume, setUnmuteVolume] = useState(false);
+  const [volume, setVolume] = useState(50);
+  const [prevVolume, setPrevVolume] = useState(50);
+
   const dispatch = useDispatch();
   const getSongs = useSelector((state) => state.songs);
+  
   const songs = Object.values(getSongs);
-  console.log("songs 👉", songs);
-  console.log(songs[0]);
-  // const song = songs.map((x) => x["mp3"]);
-
   const audioPlayer = useRef();
 
   //testing if not needed
