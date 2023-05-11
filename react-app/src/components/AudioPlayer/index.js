@@ -1,33 +1,31 @@
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadSongsThunk } from "../../store/song";
-import "./AudioPlayerIndex.css";
+import { usePlayer } from "../../context/PlayerContext";
+import "./AudioPlayerIndex.css"
+import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/03. Me Porto Bonito.mp3'
+import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
+import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
 
-/*FOR TESTING */
-// import song1 from "../../Music/Kanye West - Graduation (2007)/01 Good Morning.mp3";
-// import song2 from "../../Music/Kanye West - Graduation (2007)/02 Champion.mp3";
-// import song3 from "../../Music/Kanye West - Graduation (2007)/03 Stronger.mp3";
-const MP3s = ["filler", "filler", "filler"];
-/* */
+const all_songs = [new_song, new_song1, new_song2]
+
 const AudioPlayer = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isLooping, setIsLooping] = useState(false);
-  const [unmuteVolume, setUnmuteVolume] = useState(false);
-  const [volume, setVolume] = useState(50);
-  const [prevVolume, setPrevVolume] = useState(50);
+  const {isPlaying, setIsPlaying} = usePlayer();
+  const [IsLooping, setIsLooping] = useState(false);
   const [queueIndex, setQueueIndex] = useState(0);
   const dispatch = useDispatch();
   const getSongs = useSelector((state) => state.songs);
   const songs = Object.values(getSongs);
-  // console.log("songs 👉", songs);
-  // console.log(songs[0]);
-  // const MP3s = songs.map((x) => x["mp3"]);
+  console.log("songs 👉", songs);
+  console.log(songs[0]);
+  // const song = songs.map((x) => x["mp3"]);
 
   const audioPlayer = useRef();
 
-  useEffect(() => {
-    dispatch(loadSongsThunk());
-  }, [dispatch]);
+  //testing if not needed
+  // useEffect(() => {
+  //   dispatch(loadSongsThunk());
+  // }, [dispatch]);
 
   useEffect(() => {
     if (audioPlayer && audioPlayer.current) {
@@ -106,15 +104,16 @@ const AudioPlayer = () => {
         <button onClick={(e) => alert("Feature Coming Soon!")}>Shuffle</button>
         <button onClick={goBack}>Back</button>
         <button onClick={playPause}>{isPlaying ? "Pause" : "Play"}</button>
+        {/* <PlayButton songId={all_songs[queueIndex]} /> */}
         <button onClick={goForward}>Forward</button>
         <button onClick={loopControl}>Loop</button>
       </div>
       <div className="audio-player-track-center">
         <div className="audio-player-track-info">
-          <img className="musicCover audio-player-img" src={songs[queueIndex].album.cover} />
+          {/* <img className="musicCover audio-player-img" src={songs[queueIndex].album.cover} /> */}
           <div className="audio-player-text">
             <h3 className="title">{songs[queueIndex].title}</h3>
-            <p className="subTitle">{songs[queueIndex].artist.name}</p>
+            {/* <p className="subTitle">{songs[queueIndex].artist.name}</p> */}
           </div>
         </div>
         <span>Progress Bar</span>

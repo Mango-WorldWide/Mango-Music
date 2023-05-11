@@ -1,35 +1,36 @@
-import { useDispatch, useSelector } from "react-redux";
-import { deleteAlbumThunk, loadAlbumsThunk } from "../../store/album";
-import { useEffect } from "react";
-import AlbumsIndexItem from "../AlbumsIndexItem";
-import { useHistory, useParams } from "react-router-dom";
-import { loadOneAlbumThunk } from "../../store/album";
-import LikeButton from "../LikeButton";
+import { useDispatch, useSelector } from "react-redux"
+import { deleteAlbumThunk, loadAlbumsThunk } from "../../store/album"
+import { useEffect } from "react"
+import AlbumsIndexItem from "../AlbumsIndexItem"
+import PlayButton from "../PlayButton"
+import { useHistory, useParams } from "react-router-dom"
+import { loadOneAlbumThunk } from "../../store/album"
+import LikeButton from "../LikeButton"
+import { usePlayer } from "../../context/PlayerContext"
 
-const AlbumById = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const album = useSelector((state) => state.albums);
-  console.log("album  👉", album);
-  const likes = useSelector((state) => Object.values(state.likes));
-  const { albumId } = useParams();
-  console.log(Object.values(album), "album state checking");
-
-  useEffect(() => {
-    console.log("inside album by id", albumId);
-    dispatch(loadOneAlbumThunk(albumId));
-  }, [dispatch]);
-  console.log(album.id);
-  if (!album["Songs"]) return null;
-  // return (
-  //     <section className="albumIndexItems">
-  //         {albums.map((album) => (
-  //             <AlbumsIndexItem
-  //                 album={album}
-  //             />
-  //         ))}
-  //     </section>
-  // )
+const AlbumById = () =>  {
+    const dispatch = useDispatch()
+    const {isPlaying, setIsPlaying} = usePlayer()
+    const history = useHistory()
+    const album = useSelector(state => state.albums)
+    const likes = useSelector(state => Object.values(state.likes))
+    const { albumId } = useParams()
+    console.log(Object.values(album),'album state checking')
+    useEffect(()=>{
+        console.log('inside album by id', albumId)
+        dispatch(loadOneAlbumThunk(albumId))
+    },[dispatch])
+    // console.log(album.id)
+    if (!album["Songs"]) return null
+    // return (
+        //     <section className="albumIndexItems">
+        //         {albums.map((album) => (
+            //             <AlbumsIndexItem
+            //                 album={album}
+            //             />
+            //         ))}
+            //     </section>
+            // )
 
   const handleDelete = () => {
     dispatch(deleteAlbumThunk(albumId));

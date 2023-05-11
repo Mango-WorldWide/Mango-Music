@@ -10,10 +10,11 @@ export const loadSongs = (songs) => {
     }
 }
 
-export const singleSong = (songId) => {
+export const singleSong = (songId, song) => {
     return {
         type: SINGLE_SONG,
-        songId
+        songId,
+        song
     }
 }
 
@@ -45,9 +46,9 @@ export const singleSongThunk = (songId) => async(dispatch) => {
     const res = await fetch(`/api/songs/${songId}`)
     if (res.ok){
         const data = await res.json()
-        dispatch(singleSong(data))
+        dispatch(singleSong(songId, data))
     } else {
-        console.log("singleSongThunk Failed", res)
+        console.log("singleSongThunk Failed", songId)
         return false
     }
 }
@@ -106,9 +107,10 @@ const songsReducer = (state = initialState, action) => {
             })
             return newState
         case SINGLE_SONG:
-            newState = { ...state };
+            newState = {}
             newState[action.songId] = action.song
-            return newState;
+            return newState
+
         case DELETE_SONG:
             newState = { ...state };
             delete newState[action.songId];
