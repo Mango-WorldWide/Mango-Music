@@ -16,6 +16,7 @@ const AudioPlayer = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const {isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr} = usePlayer();
+  const [loop, setLoop] = useState(false)
   const [isLooping, setIsLooping] = useState(false);
   const [unmuteVolume, setUnmuteVolume] = useState(false);
   const [volume, setVolume] = useState(50);
@@ -86,9 +87,11 @@ const AudioPlayer = () => {
 
   const goBack = () => {
     if (currentSong > 0) {
+      setCurrentSong((prev) => prev - 1);
       setQueueIndex((prev) => prev - 1);
-    } else{
-      setQueueIndex(prev=>prev)
+    } else {
+      setCurrentSong(songsArr.length - 1);
+      setQueueIndex(songsArr.length - 1);
     }
   };
 
@@ -131,16 +134,25 @@ const AudioPlayer = () => {
   return (
     <div className="audio-player">
       <div className="audio-player-track-controls">
-        <button className="audio-player-shuffle" onClick={(e) => alert("Feature Coming Soon!")}>Shuffle</button>
-        <button className="audio-playeer-back" onClick={goBack}>Back</button>
-        <button className="audio-player-play-pause" onClick={playPause}>{isPlaying ? "Pause" : "Play"}</button>
+        <p className="audio-player-shuffle" onClick={(e) => alert("Feature Coming Soon!")}><i class="fa-solid fa-shuffle"></i></p>
+        <p className="audio-playeer-back" onClick={goBack}><i class="fa-solid fa-backward"></i></p>
+        <p className="audio-player-play-pause" onClick={playPause}>{isPlaying ? <i className="fa fa-pause" aria-hidden="true"></i> : <i class="fa fa-play" aria-hidden="true"></i>}</p>
         {/* <PlayButton songId={all_songs[currentSong]} /> */}
-        <button className="audio-player-forward" onClick={goForward}>Forward</button>
-        <button className="audio-player-loop" onClick={loopControl}>Loop</button>
+        <p className="audio-player-forward" onClick={goForward}><i class="fa-solid fa-forward"></i></p>
+        <p
+      className={`audio-player-loop ${isLooping ? "active" : ""}`}
+      onClick={loopControl}
+    >
+      {isLooping ? (
+        <i className="fa-solid fa-repeat fa-fade"></i>
+      ) : (
+        <i className="fa-solid fa-repeat"></i>
+      )}
+    </p>
       </div>
       <div className="audio-player-track-center">
         <div className="audio-player-track-info">
-          <img className="musicCover audio-player-img" src={songs[currentSong].album.cover} />
+          <img className="musicCover audio-player-img" src={songs[currentSong].album.cover} alt={songs[currentSong].title} />
           {/* {console.log("AUDIOPLAYER", songs[currentSong].album.cover)} */}
           <div className="audio-player-text">
             <h3 className="title">{songs[currentSong].title}</h3>
@@ -150,7 +162,7 @@ const AudioPlayer = () => {
         <ProgressBar progressBarRef={progressBarRef} audioPlayerRef={audioPlayer} currentTime={currentTime} duration={duration}/>
       </div>
       <div className="audio-player-volume-controls">
-        <button onClick={muteControl} className="audio-player-mute-button">{unmuteVolume?"Unmute":"Mute"}</button>
+        <p onClick={muteControl} className="audio-player-mute-button">{unmuteVolume?<i class="fa-solid fa-volume-xmark fa-fade"></i>:<i class="fa-solid fa-volume-high"></i>}</p>
         <input
           type="range"
           min={0}
