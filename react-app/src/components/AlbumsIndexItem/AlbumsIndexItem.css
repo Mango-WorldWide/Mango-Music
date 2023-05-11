@@ -1,0 +1,29 @@
+
+
+  .album-item:hover {
+    transform: scale(1.05);
+  }
+
+  .album-item img {
+    /* width: 150px; */
+    /* height: 150px; */
+    /* object-fit: cover; */
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  .album-item p {
+    font-size: 14px;
+    color: #888888;
+    margin-bottom: 5px;
+  }
+
+  .album-item a {
+    font-size: 14px;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .album-item a:hover {
+    text-decoration: underline;
+  }

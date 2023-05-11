@@ -64,12 +64,12 @@ const AudioPlayer = () => {
   return (
     <div className="audio-player">
       <div className="audio-player-track-controls">
-        <button onClick={(e) => alert("Feature Coming Soon!")}>Shuffle</button>
-        <button onClick={goBack}>Back</button>
-        <button onClick={playPause}>{isPlaying ? "Pause" : "Play"}</button>
+        <button className="audio-player-shuffle" onClick={(e) => alert("Feature Coming Soon!")}>Shuffle</button>
+        <button className="audio-playeer-back" onClick={goBack}>Back</button>
+        <button className="audio-player-play-pause" onClick={playPause}>{isPlaying ? "Pause" : "Play"}</button>
         {/* <PlayButton songId={all_songs[currentSong]} /> */}
-        <button onClick={goForward}>Forward</button>
-        <button onClick={loopControl}>Loop</button>
+        <button className="audio-player-forward" onClick={goForward}>Forward</button>
+        <button className="audio-player-loop" onClick={loopControl}>Loop</button>
       </div>
       <div className="audio-player-track-center">
         <div className="audio-player-track-info">
