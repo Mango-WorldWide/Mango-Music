@@ -2,9 +2,9 @@ import ProgressBar from "../ProgressBar";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AudioPlayerIndex.css"
-import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
-import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
-import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
+const new_song = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
+const new_song1 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+const new_song2 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
 // import new_song from '../static/Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
 // import new_song1 from "../static/Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
 // import new_song2 from "../static/Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
