@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addSongThunk } from "../../store/song";
+import "./SongForm.css"
 
 const SongForm = ({ albumId }) => {
   const dispatch = useDispatch(); // so that we can redirect after the image upload is successful
@@ -20,22 +21,25 @@ const SongForm = ({ albumId }) => {
     await dispatch(addSongThunk(formData));
     setMp3("");
     setTitle("");
-    setGenre("");
+    
   };
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
+    <>
+    <form onSubmit={handleSubmit} className="songForm" encType="multipart/form-data">
       <label>
         title
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input className="titleInput" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
       </label>
       <label>
         genre
-        <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
+        <input className="genreInput"  type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
       </label>
-      <input type="file" accept="audio/*" onChange={(e) => setMp3(e.target.files[0])} />
-      <button type="submit">Submit</button>
+      <input className="fileInput" type="file" accept="audio/*" onChange={(e) => setMp3(e.target.files[0])} />
+      <button className="orangeButton songSubmit"type="submit">Submit</button>
     </form>
+    <hr/>
+    </>
   );
 };
 

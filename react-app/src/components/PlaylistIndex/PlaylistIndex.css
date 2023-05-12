@@ -1,0 +1,63 @@
+.allPlaylistsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.8rem;
+    width: 90%;
+    margin: 3rem auto 0 auto;
+  }
+  .playlistItem {
+    position: relative;
+    width: 300px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+    z-index: 0;
+  }
+  
+  .playlistItem:hover,
+  .createMoreButton:hover {
+    transform: scale(1.05);
+  }
+  
+  .playlistItem:hover > img,
+  .createMoreButton:hover {
+    box-shadow: 0px 0px 10px rgb(255, 255, 255);
+  }
+  
+  .playlistTitle {
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .createMoreButton {
+    height: 300px;
+    width: 300px;
+    font-size: 10rem;
+    font-weight: 100;
+    color: white;
+    border: none;
+    background-color: rgba(44, 44, 44, 0.5);
+  }
+  
+  /* .playlistItem:hover::after {
+    position: absolute;
+    bottom: 4.8rem;
+    right: 0.8rem;
+    height: 2rem;
+    width: 2rem;
+    text-align: center;
+    border-radius: 100px;
+    background-color: rgba(44, 44, 44, 0.9);
+    content: attr(data-tooltip);
+    z-index: 1;
+  } */
+  

@@ -31,17 +31,17 @@ function NewPlaylistForm() {
   };
 
     return (
-      <div className="mainContainer newSpot">
+      <div className="mainContainer playlist">
+          <img className="musicCover audio-player-img"
+      src={cover ? cover : process.env.PUBLIC_URL + '/mango-holder.gif' }
+      alt={cover} />
         <form onSubmit={handleSubmit}>
           <div>
             <h1>Create a new Playlist</h1>
           </div>
           {console.log(cover)}
-          <img className="musicCover audio-player-img"
-      src={cover ? cover : process.env.PUBLIC_URL + '/mango-holder.gif' }
-      alt={cover} />
           <label className="titleLabel">
-            Title
+            {/* Title */}
             <input
               name="title"
               value={title}
@@ -53,7 +53,7 @@ function NewPlaylistForm() {
             <p className="errors">{errors.title}</p>
           </label>
           <label className="coverLabel">
-            Cover
+            {/* Cover */}
             <input
               name="cover"
               value={cover}
@@ -64,7 +64,7 @@ function NewPlaylistForm() {
             />
             <p className="errors">{errors.cover}</p>
           </label>
-          Description
+          {/* Description */}
           <textarea
             name="description"
             className="textArea newPlaylist"
@@ -75,7 +75,7 @@ function NewPlaylistForm() {
           <p className="errors">{errors.description}</p>
           <hr className="lines form" />
           <div className="buttonContainer">
-            <button>Create Playlist</button>
+            <button className="orangeButton">Create Playlist</button>
           </div>
         </form>
       </div>

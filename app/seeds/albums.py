@@ -59,7 +59,7 @@ def seed_albums():
     album7 = Album(
         title = 'Graduation',
         description = 'Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.',
-        cover = '/Music/Kanye West - Graduation (2007)/cover.jpg',
+        cover = 'https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg',
         genre ='Hip Hop',
         year = 2007,
         artist_id=Artist.query.filter(Artist.name == 'Kanye West').first().id

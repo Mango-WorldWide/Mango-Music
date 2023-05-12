@@ -45,7 +45,7 @@ function UpdatePlaylistForm() {
   };
 
   return (
-    <div className="mainContainer newSpot">
+    <div className="mainContainer playlist">
       <form onSubmit={handleSubmit}>
         <div>
           <h1>Update your Playlist</h1>
@@ -55,7 +55,7 @@ function UpdatePlaylistForm() {
       src={playlist['cover'] ? playlist['cover'] : process.env.PUBLIC_URL + '/mango-holder.gif' }
       alt={playlist['cover']} />
         <label className="titleLabel">
-          Title
+          {/* Title */}
           <input
             name="title"
             value={title}
