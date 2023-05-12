@@ -8,6 +8,8 @@ import PlayButton from "../PlayButton";
 import LikeButton from "../LikeButton";
 import { usePlayer } from "../../context/PlayerContext";
 import "./PlaylistById.css";
+import OpenModalDeleteButton from "../DeleteSong/OpenModalDeleteButton";
+import DeleteSongModal from "../DeleteSong";
 
 function PlaylistById() {
   const { playlistId } = useParams();
@@ -20,6 +22,7 @@ function PlaylistById() {
 
   const playlist = useSelector((state) => state.playlists);
   const likes = useSelector((state) => Object.values(state.likes));
+  const user = useSelector((state)=> state.session.user)
 
   useEffect(() => {
     console.log("dispatching get single playlist");
@@ -54,9 +57,11 @@ function PlaylistById() {
   };
   if (!playlist || !playlist.id) return null;
   const playlistSongs = playlist.songs.map((x) => x.songs);
+  const playlistOwner = playlist.user_id
+  const playlistFull = playlist
   console.log("playlistSongs [0] from PlaylistById 👉", playlistSongs[0]);
   console.log("id from PlaylistById 👉", playlistSongs[0].id);
-
+  console.log(playlist.user_id,'which user?', user.id, 'is it the same?', playlistSongs)
   console.log(playlistSongs, "whats my playlist");
 
   return (
@@ -123,6 +128,11 @@ function PlaylistById() {
                   ""
                 )}
               </td>
+              {user.id === playlistOwner && (
+                <td>
+                    <OpenModalDeleteButton itemText="Delete" modalComponent={<DeleteSongModal song={playlist.id} categoryId={playlistId} category={'playlist'} />} />
+                </td>
+              )}
             </tr>
           ))}
           <button onClick={handleEdit}>Edit Playlist</button>

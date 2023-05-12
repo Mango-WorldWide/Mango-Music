@@ -1,16 +1,22 @@
 import { useDispatch } from "react-redux"
 import { useModal } from "../../context/Modal"
-import { deleteSongThunk } from "../../store/song"
+import { deletePlaylistSongThunk, deleteSongThunk } from "../../store/song"
 
-const DeleteSongModal = ({song, albumId}) => {
+const DeleteSongModal = ({song, categoryId, category}) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal()
 
-    console.log(albumId, 'what is my song in my modal to delete')
+    console.log(song, 'what is my song in my modal to delete')
     const deleteOnClick = (e) => {
         e.preventDefault()
-        console.log('delete on click modal for songs')
-        dispatch(deleteSongThunk(song.id, albumId)).then(closeModal)
+        if (category==='playlist'){
+            console.log('delete on click modal for songs playlist song', song)
+            dispatch(deletePlaylistSongThunk(song, categoryId)).then(closeModal)
+        }
+        if (category ==='album') {
+            console.log('delete song for album')
+            dispatch(deleteSongThunk(song.id, categoryId)).then(closeModal)
+        }
     }
 
     const cancelOnClick = (e) => {
