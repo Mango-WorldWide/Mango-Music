@@ -65,8 +65,8 @@ const AlbumById = () => {
   const handleUpdate = () => {
     history.push(`/albums/${albumId}/edit`);
   };
-  const handleDelete = () => {
-    dispatch(deleteAlbumThunk(albumId));
+  const handleDelete = async () => {
+    await dispatch(deleteAlbumThunk(albumId));
     history.push(`/albums`);
   };
 
