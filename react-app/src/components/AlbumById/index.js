@@ -21,25 +21,12 @@ const AlbumById = () => {
     console.log("inside album by id", albumId);
     dispatch(loadOneAlbumThunk(albumId));
   }, [dispatch]);
-  // console.log(album.id)
+
   if (!album["Songs"]) return null;
-  // return (
-  //     <section className="albumIndexItems">
-  //         {albums.map((album) => (
-  //             <AlbumsIndexItem
-  //                 album={album}
-  //             />
-  //         ))}
-  //     </section>
-  // )
 
-  const handlePlay = async (songId) => {
-    // await dispatch(singleSongThunk(songId));
-    // setIsPlaying((prev) => !prev);
-  };
-
-  const handleShuffle = () => {
-    // history.push(`/albums/${albumId}/edit`);
+  const handleShuffle = (e) => {
+    e.preventDefault();
+    alert("Feature Coming Soon");
   };
   const handleDelete = () => {
     dispatch(deleteAlbumThunk(albumId));
@@ -77,10 +64,7 @@ const AlbumById = () => {
             <p className="albumDesc">{album["Album"].description}</p>
           </div>
           <div class="albumButtons">
-            <button className="albumButton" onClick={handlePlay}>
-              <i class="fa-solid fa-play" />
-              Play
-            </button>
+            <PlayButton className="play-button" songId={album["Songs"][0].id} songs={albumSongs} />
             <button className="albumButton" onClick={handleShuffle}>
               <i class="fa-sharp fa-solid fa-shuffle" />
               Shuffle
