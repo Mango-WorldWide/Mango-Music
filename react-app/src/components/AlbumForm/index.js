@@ -32,7 +32,7 @@ const AlbumForm = ({input, formType}) => {
         albumObj.cover = cover
         albumObj.genre = genre
         albumObj.year = year
-        albumObj.artist_id = user.artist_id
+        // albumObj.artist_id = user.artist_id
 
         setAlbumPayload(albumObj)
         console.log("ALBUMOBJ", albumObj)

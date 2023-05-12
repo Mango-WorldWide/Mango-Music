@@ -6,10 +6,13 @@
   padding-top: 10px;
   padding-bottom: 10px;
   padding-right: 15px;
+  z-index: 1;
+  border-radius: 5px;
+
 }
 
 .profile-dropdown > li {
-  margin-left: -25px;
+  margin-left: 25px;
   padding: 5px;
 }
 
