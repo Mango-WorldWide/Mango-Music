@@ -66,6 +66,7 @@ def create_album():
     print('inside album create route flask')
     form = AlbumForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('WHAT IS THE DATA', form.data)
     if form.validate_on_submit():
         print('validations create flask works')
         new_album = Album(
@@ -78,6 +79,9 @@ def create_album():
         )
         db.session.add(new_album)
         db.session.commit()
+        return new_album.to_dict(), 201
+
+    print('WORK PLEASE', form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

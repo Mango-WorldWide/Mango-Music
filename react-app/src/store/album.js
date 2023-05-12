@@ -65,6 +65,14 @@ export const createAlbumThunk = (album) => async(dispatch) => {
         },
         body: JSON.stringify(album)
     })
+    if (response.ok){
+        const data = await response.json()
+        dispatch(createAlbum(data))
+        return data
+    } else {
+        console.log(response,'thunk fail')
+        return false
+    }
 }
 
 export const updateAlbumThunk = (album, albumId) => async(dispatch) => {

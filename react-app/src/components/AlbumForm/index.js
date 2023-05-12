@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createAlbumThunk, updateAlbumThunk } from "../../store/album"
+import {loadArtistThunk} from "../../store/artist"
 import { usePlayer } from "../../context/PlayerContext";
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import './AlbumForm.css'
 
 const AlbumForm = ({input, formType}) => {
     const dispatch = useDispatch()
     const { albumId } = useParams()
     const [errors, setErrors] = useState({});
+    const history = useHistory()
     const {isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr} = usePlayer();
     const user = useSelector(state => state.session.user)
+    const artist = useSelector(state => state.artist)
     // console.log(user.artist_id)
     const [title, setTitle] = useState(input.title)
     const [description, setDescription] = useState(input.description)
@@ -27,7 +30,11 @@ const AlbumForm = ({input, formType}) => {
     const updateGenre = (e) => setGenre(e.target.value)
     const updateYear = (e) => setYear(e.target.value)
 
-
+    useEffect(() => {
+      if (user && user.artist_id) {
+        dispatch(loadArtistThunk(user.artist_id));
+      }
+    }, [dispatch, user]);
 
     useEffect(()=>{
         albumObj.title = title
@@ -39,26 +46,33 @@ const AlbumForm = ({input, formType}) => {
 
         setAlbumPayload(albumObj)
         console.log("ALBUMOBJ", albumObj)
-    },[title, description, cover, genre, year])
+    },[title, description, cover, genre, year, user.artist_id])
 
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
       const err = {};
-      const playlistEdits = { title, description, cover };
-      console.log("playlist 👉", playlistEdits)
+      // const playlistEdits = { title, description, cover };
+      // console.log("playlist 👉", playlistEdits)
       if (title === null || title === "") err.title = "Title is required";
       if (cover === null || cover === "") err.cover = "Cover is required";
       if (genre === null || genre === "") err.genre = "Genre is required";
       if (year === null || year === "") err.year = "Year is required";
+      const albumExists = artist && artist.albums && artist.albums.find(album => album.title === title);
+      if (albumExists) {
+        err.title = "An album with this title already exists";
+      }
       if (!!Object.values(err).length) {
         console.log("👉 found errors while updating playlist 👈")
         setErrors(err);
         return
       }
         if(formType === 'Create'){
-            dispatch(createAlbumThunk(albumPayload))
+            const newAlbum = await dispatch(createAlbumThunk(albumPayload))
+            if (newAlbum) {
+              history.push(`/albums/${newAlbum.id}`)
+            }
         }
         if(formType === 'Update'){
             dispatch(updateAlbumThunk(albumPayload, albumId))
