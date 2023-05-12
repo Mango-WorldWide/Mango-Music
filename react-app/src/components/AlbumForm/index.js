@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createAlbumThunk, updateAlbumThunk } from "../../store/album"
+import { usePlayer } from "../../context/PlayerContext";
 import { useParams } from "react-router-dom"
 import './AlbumForm.css'
 
 const AlbumForm = ({input, formType}) => {
     const dispatch = useDispatch()
     const { albumId } = useParams()
+    const {isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr} = usePlayer();
     const user = useSelector(state => state.session.user)
     // console.log(user.artist_id)
     const [title, setTitle] = useState(input.title)
@@ -49,6 +51,9 @@ const AlbumForm = ({input, formType}) => {
         }
     }
     return (
+      <>
+      {console.log('TEST--------', albumPayload['cover'])}
+      <img className="musicCover audio-player-img" src={albumPayload['cover']} alt={albumPayload['cover']} />
         <form className="create-update-form" onSubmit={handleSubmit}>
           <input
             className="form-input"
@@ -102,6 +107,7 @@ const AlbumForm = ({input, formType}) => {
             {formType} Album
           </button>
         </form>
+        </>
       );
     };
 
