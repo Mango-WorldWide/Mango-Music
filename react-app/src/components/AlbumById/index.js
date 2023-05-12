@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAlbumThunk, loadAlbumsThunk } from "../../store/album";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AlbumsIndexItem from "../AlbumsIndexItem";
 import PlayButton from "../PlayButton";
 import { useHistory, useParams } from "react-router-dom";
@@ -10,6 +10,7 @@ import { usePlayer } from "../../context/PlayerContext";
 import "./AlbumById.css";
 
 const AlbumById = () => {
+  const [hoveredSong, setHoveredSong] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
   const album = useSelector((state) => state.albums);
@@ -34,6 +35,17 @@ const AlbumById = () => {
   };
   const handleUpdate = () => {
     history.push(`/albums/${albumId}/edit`);
+  };
+
+  const handleLikeButton = async (e) => {
+    // e.preventDefault();
+    // if (isLiked) {
+    //   let like = likes.filter((like) => like["song_id"] == song.id);
+    //   like = like[0];
+    //   await dispatch(deleteLikeThunk(like.id));
+    // } else {
+    //   await dispatch(createLikeThunk({ song_id: song.id }));
+    // }
   };
 
   // console.log(album, 'myalbums')
@@ -72,16 +84,24 @@ const AlbumById = () => {
           </div>
         </div>
       </div>
-      <div className="song-list">
-        {album["Songs"].map((song) => (
+      <div className="song-list" onMouseLeave={() => setHoveredSong("")}>
+      {album["Songs"].map((song, i) => (
+                  <div className={`song-data ${i % 2 === 0 ? "grey" : ""}`}
+                  onMouseEnter={() => setHoveredSong(i)}>
+                    <div className="pepper">
           <div className="song-item" key={song.id}>
             <div className="song-title">{song.title}</div>
             <PlayButton className="play-button" songId={song.id} songs={albumSongs} />
+            </div>
+            <div className="thumbButtonContainer" onClick={() => handleLikeButton()}>
+              <i class="fa-solid fa-thumbs-up" />
+            </div>
             <LikeButton
               className="like-button"
               song={song}
               isLiked={likes.filter((like) => like["song_id"] == song.id).length > 0}
             />
+          </div>
           </div>
         ))}
       </div>
