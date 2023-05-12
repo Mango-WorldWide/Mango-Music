@@ -18,6 +18,7 @@ import SongForm from "./components/SongForm";
 import NewPlaylistForm from "./components/CreatePlaylist";
 import UpdatePlaylistForm from "./components/UpdatePlaylist/UpdatePlaylistForm";
 import ProfileButton from "./components/Navigation/ProfileButton.js";
+import SplashPage from "./components/SplashPage";
 import "./index.css";
 import ArtistById from "./components/ArtistById";
 import SearchIndex from "./components/SearchIndex";
@@ -79,8 +80,8 @@ function App() {
                 <Route path='/audio' component={AudioPlayer} />
                 <Route path='/songs/new' component={SongForm} />
                 <Route path='/search' component={SearchIndex} />
-                <Route path='/'>
-                  <h1>Welcome to Mango Music</h1>
+                <Route path='/' component={SplashPage}>
+                  {/* <h1>Welcome to Mango Music</h1> */}
                 </Route>
               </Switch>
             )}
