@@ -19,14 +19,30 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal();
+    }
+  };
+
+  const loginDemo = async (isArtist) => {
+    if (isArtist) {
+      setEmail("artist@aa.io");
+    } else {
+      setEmail("demo@aa.io");
+    }
+    setPassword("password");
+    const data = await dispatch(login(email, password))
+    await dispatch(loadLikesThunk());
+    if (data) {
+      setErrors(data);
+    } else {
+      closeModal();
     }
   };
 
   return (
     <div className="login-form">
       <h1 className="login-form-header">Welcome Back To 🥭 Music</h1>
-      <form className='login-form-form' onSubmit={handleSubmit}>
+      <form className="login-form-form" onSubmit={handleSubmit}>
         <ul className="login-form-errors">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
@@ -52,7 +68,15 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button className='login-form-button' type="submit">Log In</button>
+        <button className="login-form-button" type="submit">
+          Log In
+        </button>
+      <button className="login-form-button" type="submit" onClick={() => loginDemo(false)}>
+        Login as demoUser
+      </button>
+      <button className="login-form-button" type="submit" onClick={() => loginDemo(true)}>
+        Login as demoArtist
+      </button>
       </form>
     </div>
   );
