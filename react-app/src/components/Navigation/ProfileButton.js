@@ -46,9 +46,9 @@ function ProfileButton() {
     <>
       <button onClick={openMenu} className="user-icon-button">
       <i
-      className="fa-sharp fa-regular fa-circle-user"
+      className="fas fa-user"
       onClick={openMenu}
-      />
+      /> <span style={{color:"rgba(238, 238, 238, 1)"}}>Sign In</span>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (

@@ -1,7 +1,7 @@
 .profile-dropdown {
   position: absolute;
   right: 15px;
-  background-color: rgba(238, 238, 238, 1);
+  background-color: rgb(187, 125, 11);
   list-style: none;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -15,6 +15,7 @@
 .profile-dropdown > li {
   margin-left: 25px;
   padding: 5px;
+  color: rgba(238, 238, 238, 1);
 }
 
 .hidden {
@@ -73,8 +74,11 @@
 }
 
 .user-icon-button{
-  background-color: transparent;
-  border: none;
+  background-color: #06660bfd;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 5px;
+  width: 80px;
 }
 
 .user-icon-button > i {
