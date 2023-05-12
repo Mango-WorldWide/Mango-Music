@@ -32,12 +32,14 @@ function Navigation(){
 				<li className="nav-list-item">
 					<NavLink exact to="/playlists">Playlists</NavLink>
 				</li>
-			</div>
+			</div >
+			<div className='nav-list-playlist-wrapper'>
 				{playlists && playlists.map(playlist => (
 					<li key={playlist.id} className="nav-list-item">
 					<NavLink exact to={`/playlists/${playlist.id}`}>{playlist.title}</NavLink>
 				</li>
 				))}
+			</div>
 		</ul>
 	);
 }

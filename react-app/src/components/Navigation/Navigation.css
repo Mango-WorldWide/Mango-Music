@@ -29,7 +29,7 @@
   align-items: center;
   margin-left: -40px;
 }
-.nav-list-top-wrapper, .nav-list-bottom-wrapper{
+.nav-list-top-wrapper, .nav-list-bottom-wrapper, .nav-list-middle-wrapper, .nav-list-playlist-wrapper{
   display: flex;
   flex-direction: column;
   row-gap: 10px;
