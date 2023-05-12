@@ -5,7 +5,6 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import { loadLikesThunk } from "./store/like";
-import {getUserPlaylistsThunk} from "./store/playlist";
 import Navigation from "./components/Navigation";
 import AlbumsIndex from "./components/AlbumsIndex"
 import AlbumById from "./components/AlbumById";
@@ -39,7 +38,6 @@ function App() {
     console.log(user)
     if (user){
       dispatch(loadLikesThunk())
-      dispatch(getUserPlaylistsThunk())
     }
   }, [isLoaded])
 

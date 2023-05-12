@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { login } from "../../store/session";
 import { loadLikesThunk } from "../../store/like";
-import {getUserPlaylistsThunk} from "../../store/playlist";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import './LoginForm.css';
@@ -19,7 +18,6 @@ function LoginFormPage() {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     await dispatch(loadLikesThunk());
-    await dispatch(getUserPlaylistsThunk());
     if (data) {
       setErrors(data);
     }
