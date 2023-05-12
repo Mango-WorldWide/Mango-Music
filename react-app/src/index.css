@@ -27,13 +27,13 @@ button {
 }
 
 .nav-list-wrapper {
-    width: 15%;
+    width: 20%;
     height: auto;
     background-color: rgba(37, 37, 38, 1);
 }
 
 .site-wrapper-right {
-    width: 90%;
+    width: 85%;
     margin-top: -10px;
     row-gap: 25px;
     justify-content: flex-start;
@@ -45,7 +45,7 @@ button {
 .site-wrapper-right-top,
 .main-component {
     align-self: center;
-    min-width: fit-content;
+    /* min-width: fit-content; */
     min-height: fit-content;
     box-sizing: border-box;
     /* border: white solid 1px; */
@@ -67,6 +67,10 @@ button {
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    background-color: rgba(31, 31,31, 1);
+    padding-right: 10px;
 }
 
 ::-webkit-scrollbar {
