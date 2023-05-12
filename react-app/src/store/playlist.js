@@ -113,6 +113,20 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
   }
 };
 
+export const addSongPlaylist = (playlist) => async(dispatch) => {
+  console.log(playlist.playlist_id,' we in the add song playlist')
+  const playlistId = playlist.playlist_id
+  const response = await fetch(`/api/playlists/${playlistId}/song`,{
+      method:"POST",
+      headers: {
+        "Content-Type": 'application/json'
+      },
+    body: JSON.stringify(playlist)
+  })
+  if (response.ok){
+    console.log('add song playlist worked!!!!!!')
+  }
+}
 const playlistsReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {

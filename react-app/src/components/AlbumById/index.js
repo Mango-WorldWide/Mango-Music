@@ -15,6 +15,8 @@ import DeleteSongModal from "../DeleteSong";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AlbumById.css";
 import AuthModal from "../AuthModal"
+import OpenModalAddButton from "../AddPlaylistSong/OpenModalAddButton";
+import AddSongModal from "../AddPlaylistSong";
 
 const AlbumById = () => {
   const [hoveredSong, setHoveredSong] = useState("");
@@ -28,10 +30,10 @@ const AlbumById = () => {
   const albumSongs = album["Songs"];
   const user = useSelector((state) => state.session.user);
   const { albumId } = useParams();
-  console.log(Object.values(album), "album state checking");
+  // console.log(Object.values(album), "album state checking");
 
   useEffect(() => {
-    console.log("inside album by id", albumId);
+    // console.log("inside album by id", albumId);
     dispatch(loadOneAlbumThunk(albumId));
   }, [dispatch]);
 
@@ -142,6 +144,11 @@ const AlbumById = () => {
                   ""
                 )}
               </td>
+              {user.playlists.length >0 && (
+                <td>
+                    <OpenModalAddButton itemText="Add Song to Playlist" modalComponent={<AddSongModal song={song}/>} />
+                </td>
+              )}
               {user.artist_id === album.Album.artist_id && (
                 <td>
                     <OpenModalDeleteButton itemText="Delete" modalComponent={<DeleteSongModal  song={song} categoryId={albumId} category={'album'}/>} />
