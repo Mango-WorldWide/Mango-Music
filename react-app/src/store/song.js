@@ -67,6 +67,8 @@ export const addSongThunk = (song) => async(dispatch) => {
     })
     if(res.ok){
         const data = await res.json()
+        console.log("data 👉", data)
+        dispatch(loadOneAlbumThunk(data["album_id"]))
         return data
     }
     else{
