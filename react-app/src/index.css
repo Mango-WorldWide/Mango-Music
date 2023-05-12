@@ -27,15 +27,16 @@ button {
     width: 85%;
     margin-top: -10px;
     /* margin-right: -10px;  */
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     row-gap: 25px;
-    justify-content: flex-start;
+    justify-content: flex-start; */
     background-color: rgba(22, 22, 23, 1);
     align-items: center;
 
     /* border: red solid 1px; */
 }
+
 
 .site-wrapper-right-top,
 .main-component {
