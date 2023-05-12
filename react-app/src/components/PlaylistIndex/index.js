@@ -3,6 +3,8 @@ import { getUserPlaylistsThunk } from "../../store/playlist"
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
 import PlaylistsIndexItem from "../PlaylistIndexItem"
+import "./PlaylistIndex.css";
+
 
 const PlaylistIndex = () =>  {
     const dispatch = useDispatch()
@@ -15,21 +17,16 @@ const PlaylistIndex = () =>  {
 
     if (!getPlaylists) return null
     return (
-        <>
-        <Link to={"/playlists/new"}>
-            <button>
-                Create Playlist
-            </button>
-        </Link>
-        <section className="albumIndexItems">
-            {playlists.map((playlist) => (
-                <PlaylistsIndexItem
-                   key={playlist.id} playlist={playlist}
-                />
-            ))}
-        </section>
-        </>
-    )
+        <div className="allPlaylistsContainer">
+          {playlists.map((playlist) => (
+            <PlaylistsIndexItem key={playlist.id} playlist={playlist}/>
+          ))}
+          <Link to={"/playlists/new"}>
+            <button className="createMoreButton">+</button>
+          </Link>
+        </div>
+        
+      );
 }
 
 

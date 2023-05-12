@@ -71,7 +71,7 @@ function PlaylistById() {
           />
         </div>
         <div className="albumMenu">
-          <h1 className="playlistTitle">{playlist.title}</h1>
+          <h1 className="singlePlaylistTitle">{playlist.title}</h1>
           {/* <h2 className="playListOwner">{album["Album"].artist}</h2> */}
           <div
             className="descContainer playlist"
@@ -100,7 +100,7 @@ function PlaylistById() {
               onMouseEnter={() => setHoveredSong(i)}
             >
               <td className="songTitle">
-                <p>
+                {/* <p>
                   {playlist.songs.id === selectedSong ? (
                     <i class="fa-sharp fa-solid fa-pause orange" />
                   ) : i === hoveredSong ? (
@@ -108,16 +108,12 @@ function PlaylistById() {
                   ) : (
                     i + 1
                   )}
-                </p>
+                </p> */}
+                <PlayButton songId={playlist.songs.id} songs={playlistSongs} isButton={false} />
                 <p>{playlist.songs.title}</p>
               </td>
-              <PlayButton songId={playlist.songs.id} songs={playlistSongs} isButton={false} />
-              <td className="songArtist">
-                {playlist.songs.artist.name}
-              </td>
-              <td className="songAlbum">
-                {playlist.songs.album.title}
-              </td>
+              <td className="songArtist">{playlist.songs.artist.name}</td>
+              <td className="songAlbum">{playlist.songs.album.title}</td>
               <td onClick={(e) => handleLikeButton(e, playlist.songs.id)}>
                 {likes.filter((like) => like["song_id"] == playlist.songs.id).length > 0 ? (
                   <i class="fa-solid fa-thumbs-up" />

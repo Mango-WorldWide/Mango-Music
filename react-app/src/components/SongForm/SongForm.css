@@ -1,0 +1,20 @@
+.songForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+
+.titleInput, .genreInput, .fileInput{
+    margin-left: .8rem;
+    background-color: #2e2e2f;
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    color: #fd552b;
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 3px;
+}

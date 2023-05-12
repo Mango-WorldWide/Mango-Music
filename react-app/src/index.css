@@ -146,6 +146,10 @@ button {
     padding-right: 10px;
 }
 
+.audio-player-image{
+    margin: auto;
+}
+
 ::-webkit-scrollbar {
     display: none
 }

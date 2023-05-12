@@ -73,12 +73,12 @@
   margin-right: 0.3rem;
 }
 
-.albumButtons {
+.orangeButtons {
   display: flex;
   gap: 10px;
   justify-self: flex-end;
 }
-.albumButton {
+.orangeButton {
   display: flex;
   align-items: center;
   gap: 5px;

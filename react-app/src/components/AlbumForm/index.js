@@ -65,7 +65,7 @@ const AlbumForm = ({input, formType}) => {
         }
     }
     return (
-      <>
+      <div className="album-form">
       {console.log('TEST--------', albumPayload['cover'])}
       <img className="musicCover audio-player-img"
       src={albumPayload['cover'] ? albumPayload['cover'] : process.env.PUBLIC_URL + '/mango-holder.gif' }
@@ -125,7 +125,7 @@ const AlbumForm = ({input, formType}) => {
             {formType} Album
           </button>
         </form>
-        </>
+        </div>
       );
     };
 

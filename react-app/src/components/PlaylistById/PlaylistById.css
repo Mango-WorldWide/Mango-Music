@@ -23,9 +23,9 @@
     height: 270px;
     width: 270px;
   }
-  .playlistTitle {
+  .singlePlaylistTitle {
     margin: 0 0 0.01rem 0;
-    font-size: 3rem;
+    font-size: 1.8rem;
     font-weight: 500;
     text-align: left;
   }

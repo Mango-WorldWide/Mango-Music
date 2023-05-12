@@ -1,5 +1,8 @@
-.mainContainer.newSpot {
+.mainContainer.playlist {
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 0 auto;
   }
   
