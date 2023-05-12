@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addSongThunk } from "../../store/song";
 
-const SongForm = () => {
+const SongForm = ({albumId}) => {
   const dispatch = useDispatch(); // so that we can redirect after the image upload is successful
   const [mp3, setMp3] = useState(null);
   const [genre, setGenre] = useState("");
@@ -14,6 +14,7 @@ const SongForm = () => {
     formData.append("mp3", mp3);
     formData.append("title", title);
     formData.append("genre", genre);
+    formData.append("album_id", albumId);
     console.log("formData 👉", formData)
     await dispatch(addSongThunk(formData));
   }

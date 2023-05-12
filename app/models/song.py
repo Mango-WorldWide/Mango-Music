@@ -46,4 +46,16 @@ class Song(db.Model):
             "album_id": self.album_id
         }
 
-   
+    def to_like(self, includeMP3=False):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'genre': self.genre,
+            'duration': self.duration,
+            'mp3': self.mp3 if includeMP3 else '',
+            'lyrics': self.lyrics,
+            'artist_id': self.artist_id,
+            'album_id': self.album_id,
+            'like': [like.to_dict() for like in self.songs_likes_relationship]
+
+        }

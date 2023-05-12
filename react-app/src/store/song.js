@@ -1,3 +1,5 @@
+import { loadOneAlbumThunk } from "./album"
+
 const LOAD_SONGS = 'songs/LOAD_SONGS'
 const SINGLE_SONG = 'songs/SINGLE_SONG'
 // const ADD_SONG = 'song/ADD_SONG'
@@ -86,15 +88,16 @@ export const updateSongThunk = (song, songId) => async(dispatch) => {
     }
 }
 
-export const deleteSongThunk = (songId) => async (dispatch) => {
+export const deleteSongThunk = (songId, albumId) => async (dispatch) => {
+    console.log('inside delete song thunk',songId)
     const res = await fetch(`/api/songs/${songId}`, {
         method: 'DELETE'
     })
     if (res.ok) {
-        dispatch(deleteSong(songId))
+        console.log('delete song thunk work?')
+        // dispatch(loadOneAlbumThunk(albumId))
     } else {
-        const errors = await res.json();
-        return errors;
+        return false
     }
 }
 

@@ -8,12 +8,17 @@ import { loadOneAlbumThunk } from "../../store/album"
 import LikeButton from "../LikeButton"
 import { usePlayer } from "../../context/PlayerContext"
 import './AlbumById.css'
+import SongForm from "../SongForm"
+import { deleteSongThunk } from "../../store/song"
+import OpenModalDeleteButton from "../DeleteSong/OpenModalDeleteButton"
+import DeleteSongModal from "../DeleteSong"
 
 const AlbumById = () =>  {
     const dispatch = useDispatch()
     const history = useHistory()
     const album = useSelector(state => state.albums)
     const likes = useSelector(state => Object.values(state.likes))
+    const user = useSelector(state =>  state.session.user)
     const albumSongs = album["Songs"]
     const { albumId } = useParams()
     console.log(Object.values(album),'album state checking')
@@ -47,6 +52,9 @@ const AlbumById = () =>  {
         <img className="album-cover" src={album["Album"].cover} alt={album["Album"].title} />
         <h1 className="album-title">{album["Album"].title}</h1>
         <h3 className="album-artist">{album["Album"].artist}</h3>
+        {user.artist_id === album.Album.artist_id && (
+            <div><SongForm albumId={albumId}/></div>
+          )}
         <div className="song-list">
           {album["Songs"].map((song) => (
             <div className="song-item" key={song.id}>
@@ -57,8 +65,10 @@ const AlbumById = () =>  {
                 song={song}
                 isLiked={likes.filter((like) => like["song_id"] == song.id).length > 0}
               />
+              <OpenModalDeleteButton itemText="Delete" modalComponent={<DeleteSongModal  song={song} albumId={albumId}/>} />
             </div>
           ))}
+
         </div>
         <button className="update-button" onClick={handleUpdate}>
           UPDATE ME
