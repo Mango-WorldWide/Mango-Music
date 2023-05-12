@@ -55,97 +55,97 @@ function SignupFormModal() {
 
   return (
     <div className="signup-form">
-      <h1 className="signup-form__header">Sign Up With Mango 🥭</h1>
+      <h1 className="signup-form-header">Sign Up With Mango 🥭</h1>
       <form onSubmit={handleSubmit}>
-        <ul className="signup-form__errors">
+        <ul className="signup-form-errors">
           {errors.map((error, idx) => (
-            <li key={idx} className="signup-form__error">{error}</li>
+            <li key={idx} className="signup-form-error">{error}</li>
           ))}
         </ul>
-        <label className="signup-form__label">
+        <label className="signup-form-label">
           Email
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="signup-form__input"
+            className="signup-form-input"
             required
           />
         </label>
-        <label className="signup-form__label">
+        <label className="signup-form-label">
           UserName
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="signup-form__input"
+            className="signup-form-input"
             required
           />
         </label>
-		<label className="signup-form__label">
+		<label className="signup-form-label">
           Whats Your First Name?
           <input
             type="text"
             value={fName}
             onChange={(e) => setfName(e.target.value)}
-            className="signup-form__input"
+            className="signup-form-input"
             required
           />
         </label>
-		<label className="signup-form__label">
+		<label className="signup-form-label">
           And Your Last Name?
           <input
             type="text"
             value={lName}
             onChange={(e) => setlName(e.target.value)}
-            className="signup-form__input"
+            className="signup-form-input"
             required
           />
         </label>
-		<label className="signup-form__label">
+		<label className="signup-form-label">
           Are you an Artist {fName}?
           <input
             type="checkbox"
             value={artist}
             onChange={handleArtistCheck}
-            className="signup-form__input"
+            className="signup-form-input"
             // required
           />
         </label>
 		{artist && (
-        <label className="signup-form__label">
+        <label className="signup-form-label">
           Artist Name
           <input
             type="text"
             value={newArtistName}
             onChange={(e) => setNewArtistName(e.target.value)}
-            className="signup-form__input"
+            className="signup-form-input"
             required
           />
         </label>
       )}
-        <label className="signup-form__label">
+        <label className="signup-form-label">
           Password
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="signup-form__input"
+            className="signup-form-input"
             required
           />
         </label>
-        <label className="signup-form__label">
+        <label className="signup-form-label">
           Confirm Password
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="signup-form__input"
+            className="signup-form-input"
             required
           />
         </label>
 
-        <button type="submit" className="signup-form__button">Sign Up</button>
+        <button type="submit" className="signup-form-button">Sign Up</button>
       </form>
     </div>
   );
