@@ -1,14 +1,18 @@
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import "./Search.css"
 
 const Search = () => {
     const history = useHistory();
     const [query, setQuery] = useState("");
 
     const handleclick = (e) => {
-        setQuery("")
         e.preventDefault()
-        history.push(`/search?${query}`)
+        if (query.length){
+            setQuery("")
+            history.push(`/search?${query}`)
+        }
+        return
     }
 
     return (
@@ -19,7 +23,7 @@ const Search = () => {
                 value={query}
                 onChange={(e)=>setQuery(e.target.value)}
             />
-            <button onClick={handleclick}>Search</button>
+            <button className="search-button" onClick={handleclick}><i className="fa-solid fa-search"/></button>
         </div>
     )
 }

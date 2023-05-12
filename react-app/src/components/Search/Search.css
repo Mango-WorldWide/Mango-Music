@@ -1,3 +1,12 @@
 .search{
     display: flex;
 }
+
+.search-button{
+    background-color: transparent;
+    border: none;
+}
+
+.search > button > i {
+    color: rgba(238, 238, 238, 1);;
+}
