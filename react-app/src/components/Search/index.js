@@ -17,13 +17,14 @@ const Search = () => {
 
     return (
         <div className="search">
+            <button className="search-button" onClick={handleclick}><i className="fa-solid fa-search"/></button>
             <input
                 type="text"
-                placeholder="Songs, albums, or artists..."
+                placeholder="Search"
                 value={query}
                 onChange={(e)=>setQuery(e.target.value)}
+                style={{backgroundColor:"transparent", border:"none"}}
             />
-            <button className="search-button" onClick={handleclick}><i className="fa-solid fa-search"/></button>
         </div>
     )
 }
