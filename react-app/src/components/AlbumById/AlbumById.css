@@ -40,7 +40,6 @@
   max-height: 75px;
   margin-bottom: 2rem;
   overflow: hidden;
-  position: relative;
 }
 
 .descContainer:after {

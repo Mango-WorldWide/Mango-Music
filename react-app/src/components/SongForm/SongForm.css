@@ -19,3 +19,40 @@ input::file-selector-button {
     border: thin solid grey;
     border-radius: 3px;
 }
+
+/*----- Modal CSS -------*/
+
+.btn-modal {
+    padding: 10px 20px;
+    display: block;
+    margin: 100px;
+    font-size: 18px;
+}
+
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    border-radius: 10px;
+    width: 500px;
+    height: 400px;
+    left: 50%;
+    right: 50%;
+    bottom:50%;
+    transform: translate(-50%, 50%);
+    background-color: #252526;
+    position: fixed;
+}
+
+
+.overlay{
+    width: 100vw;
+    height: 100vw;
+    left: 50%;
+    bottom:50%;
+    transform: translate(-50%, 50%);
+    background-color: rgba(49,49,49,0.8);
+    position: fixed;
+
+}
