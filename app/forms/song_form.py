@@ -9,4 +9,5 @@ class SongForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     genre = StringField('Genre', validators=[DataRequired()])
     mp3 = FileField('MP3 File', validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
+    album_id = IntegerField('album_id', validators=[DataRequired()])
     submit = SubmitField("Add Song")

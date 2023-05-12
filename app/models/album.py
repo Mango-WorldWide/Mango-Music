@@ -20,7 +20,7 @@ class Album(db.Model):
     artist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('artists.id')), nullable=False)
 
     albums_artists_relationship = db.relationship('Artist', back_populates='artists_albums_relationship')
-    albums_songs_relationship = db.relationship('Song', back_populates='songs_albums_relationship')
+    albums_songs_relationship = db.relationship('Song', back_populates='songs_albums_relationship', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

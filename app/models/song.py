@@ -15,8 +15,8 @@ class Song(db.Model):
     artist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('artists.id')), nullable=False)
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id')), nullable=False)
 
-    songs_playlistsongs_relationship = db.relationship('Playlist_Song', back_populates='playlistsongs_songs_relationship')
-    songs_likes_relationship = db.relationship('Like', back_populates='likes_songs_relationship')
+    songs_playlistsongs_relationship = db.relationship('Playlist_Song', back_populates='playlistsongs_songs_relationship', cascade="all, delete-orphan")
+    songs_likes_relationship = db.relationship('Like', back_populates='likes_songs_relationship', cascade="all, delete-orphan")
     songs_artists_relationship = db.relationship('Artist', back_populates='artists_songs_relationship')
     songs_albums_relationship = db.relationship('Album', back_populates='albums_songs_relationship')
 
@@ -46,4 +46,16 @@ class Song(db.Model):
             "album_id": self.album_id
         }
 
-   
+    def to_like(self, includeMP3=False):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'genre': self.genre,
+            'duration': self.duration,
+            'mp3': self.mp3 if includeMP3 else '',
+            'lyrics': self.lyrics,
+            'artist_id': self.artist_id,
+            'album_id': self.album_id,
+            'like': [like.to_dict() for like in self.songs_likes_relationship]
+
+        }

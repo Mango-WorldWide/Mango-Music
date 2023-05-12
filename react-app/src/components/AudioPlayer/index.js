@@ -2,12 +2,12 @@ import ProgressBar from "../ProgressBar";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AudioPlayerIndex.css"
-// import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
-// import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
-// import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
 import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
 import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
 import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
+// import new_song from '../static/Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
+// import new_song1 from "../static/Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
+// import new_song2 from "../static/Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
 const all_songs = [new_song, new_song1, new_song2]
 
 const AudioPlayer = () => {
