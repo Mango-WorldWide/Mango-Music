@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, make_response
 from flask_login import login_required, current_user
-from app.models import db, Playlist
+from app.models import db, Playlist, Playlist_Song
 from app.forms import PlaylistForm
 
 
@@ -105,3 +105,15 @@ def delete_playlist(playlistId):
         error = make_response("Playlist does not exist")
         error.status_code = 404
         return error
+
+@playlist_routes.route('/<int:playlistId>/song', methods=['POST'])
+@login_required
+def add_song_playlist(playlistId):
+    print("WE ARE IN ADD SONG PLAYLIST")
+    new_playlist_song = Playlist_Song(
+        playlist_id = playlistId,
+        song_id = request.json.get('song_id')
+    )
+    db.session.add(new_playlist_song)
+    db.session.commit()
+    return {'message': 'suceess'}

@@ -27,7 +27,7 @@ const DeleteSongModal = ({song, categoryId, category}) => {
     return (
         <div className="modal">
             <h1>Comfirm Delete</h1>
-            <p>Are you sure you want to remove this spot from the listings?</p>
+            <p>Are you sure you want to remove this song from the listings?</p>
             <button onClick={deleteOnClick}>Yes (Delete Song)</button>
             <button className="no-button" onClick={cancelOnClick}>No (Keep Song)</button>
         </div>
