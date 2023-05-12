@@ -6,6 +6,7 @@ import playlistsReducer from './playlist';
 import likesReducer from './like';
 import songsReducer from './song';
 import artistReducer from './artist';
+import playerReducer from './player';
 
 const rootReducer = combineReducers({
   session,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   playlists: playlistsReducer,
   likes: likesReducer,
   songs: songsReducer,
-  artist: artistReducer
+  artist: artistReducer,
+  player: playerReducer
 });
 
 

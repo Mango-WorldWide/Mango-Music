@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createAlbumThunk, updateAlbumThunk } from "../../store/album"
+import { usePlayer } from "../../context/PlayerContext";
 import { useParams } from "react-router-dom"
+import './AlbumForm.css'
 
 const AlbumForm = ({input, formType}) => {
     const dispatch = useDispatch()
     const { albumId } = useParams()
+    const [errors, setErrors] = useState({});
+    const {isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr} = usePlayer();
     const user = useSelector(state => state.session.user)
-    console.log(user.artist_id)
+    // console.log(user.artist_id)
     const [title, setTitle] = useState(input.title)
     const [description, setDescription] = useState(input.description)
     const [cover, setCover] = useState(input.cover)
@@ -23,6 +27,8 @@ const AlbumForm = ({input, formType}) => {
     const updateGenre = (e) => setGenre(e.target.value)
     const updateYear = (e) => setYear(e.target.value)
 
+
+
     useEffect(()=>{
         albumObj.title = title
         albumObj.description = description
@@ -32,11 +38,25 @@ const AlbumForm = ({input, formType}) => {
         albumObj.artist_id = user.artist_id
 
         setAlbumPayload(albumObj)
+        console.log("ALBUMOBJ", albumObj)
     },[title, description, cover, genre, year])
 
 
 
     const handleSubmit = (e) => {
+      e.preventDefault();
+      const err = {};
+      const playlistEdits = { title, description, cover };
+      console.log("playlist 👉", playlistEdits)
+      if (title === null || title === "") err.title = "Title is required";
+      if (cover === null || cover === "") err.cover = "Cover is required";
+      if (genre === null || genre === "") err.genre = "Genre is required";
+      if (year === null || year === "") err.year = "Year is required";
+      if (!!Object.values(err).length) {
+        console.log("👉 found errors while updating playlist 👈")
+        setErrors(err);
+        return
+      }
         if(formType === 'Create'){
             dispatch(createAlbumThunk(albumPayload))
         }
@@ -44,55 +64,69 @@ const AlbumForm = ({input, formType}) => {
             dispatch(updateAlbumThunk(albumPayload, albumId))
         }
     }
-    return(
+    return (
+      <>
+      {console.log('TEST--------', albumPayload['cover'])}
+      <img className="musicCover audio-player-img"
+      src={albumPayload['cover'] ? albumPayload['cover'] : process.env.PUBLIC_URL + '/mango-holder.gif' }
+      alt={albumPayload['cover']} />
         <form className="create-update-form" onSubmit={handleSubmit}>
-            <input
-                name = "title"
-                id = "title"
-                type = "text"
-                placeholder="Title"
-                value={title}
-                onChange={updateTitle}
-            />
+        {errors.title && <p className="errors">{errors.title}</p>}
+          <input
+            className="form-input"
+            name="title"
+            id="title"
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={updateTitle}
+          />
+          <textarea
+            className="textarea-input"
+            name="description"
+            id="description"
+            type="text"
+            placeholder="description"
+            value={description}
+            onChange={updateDescription}
+          />
+        {errors.cover && <p className="errors">{errors.cover}</p>}
+          <input
+            className="form-input"
+            name="cover"
+            id="cover"
+            type="text"
+            placeholder="cover"
+            value={cover}
+            onChange={updateCover}
+          />
+        {errors.genre && <p className="errors">{errors.genre}</p>}
+          <input
+            className="form-input"
+            name="genre"
+            id="genre"
+            type="text"
+            placeholder="genre"
+            value={genre}
+            onChange={updateGenre}
+          />
+        {errors.year && <p className="errors">{errors.year}</p>}
+          <input
+            className="form-input"
+            name="year"
+            id="year"
+            type="text"
+            placeholder="year"
+            value={year}
+            onChange={updateYear}
+          />
 
-            <textarea
-                name = "description"
-                id = "description"
-                type = "text"
-                placeholder="description"
-                value={description}
-                onChange={updateDescription}
-            />
-
-            <input
-                name = "cover"
-                id = "cover"
-                type = "text"
-                placeholder="cover"
-                value={cover}
-                onChange={updateCover}
-            />
-            <input
-                name = "genre"
-                id = "genre"
-                type = "text"
-                placeholder="genre"
-                value={genre}
-                onChange={updateGenre}
-            />
-            <input
-                name = "year"
-                id = "year"
-                type = "text"
-                placeholder="year"
-                value={year}
-                onChange={updateYear}
-            />
-
-            <button type="submit">Create Album</button>
-
+          <button className="form-submit-button" type="submit">
+            {formType} Album
+          </button>
         </form>
-    )
-}
+        </>
+      );
+    };
 
-export default AlbumForm
+    export default AlbumForm;

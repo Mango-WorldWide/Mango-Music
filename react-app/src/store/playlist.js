@@ -1,95 +1,137 @@
-const LOAD_PLAYLISTS = 'playlists/LOAD_PLAYLISTS'
-const LOAD_ONE_PLAYLIST = 'playlists/LOAD_ONE_PLAYLIST'
-const CREATE_PLAYLIST = 'playlists/CREATE_PLAYLIST'
-const DELETE_PLAYLIST = 'playlists/DELETE_PLAYLIST'
 
-export const loadPlaylists = (playlists) => {
-    return {
-        type:LOAD_PLAYLISTS,
-        playlists
-    }
-}
+////////////// Action Creators ///////////////
+export const GET_PLAYLISTS = "playlists/GET_PLAYLISTS";
+export const GET_SINGLE_PLAYLIST = "playlists/GET_SINGLE_PLAYLIST";
+export const UPDATE_PLAYLIST = "playlists/UPDATE_PLAYLIST";
+export const DELETE_PLAYLIST = "playlists/DELETE_PLAYLIST";
+export const CLEAR_PLAYLISTS = "playlists/CLEAR_PLAYLISTS";
 
-export const loadOnePlaylist = (playlist) => {
-    return {
-        type:LOAD_ONE_PLAYLIST,
-        playlist
-    }
-}
+///////////// Action Creators ///////////////
 
-export const createPlaylist = (playlist) => {
-    return {
-        type:CREATE_PLAYLIST,
-        playlist
-    }
-}
+// get all playlists
+export const getPlaylists = (playlists) => ({
+  type: GET_PLAYLISTS,
+  playlists,
+});
+// get single playlist
+export const getSinglePlaylist = (playlist) => ({
+  type: GET_SINGLE_PLAYLIST,
+  playlist,
+});
 
-export const deletePlaylist = (playlist) => {
-    return {
-        type:DELETE_PLAYLIST,
-        playlist
-    }
-}
-export const loadPlaylistsThunk = () => async(dispatch) => {
-    const response = await fetch('/api/playlists')
-    if (response.ok){
-        const data = await response.json()
-        dispatch(loadPlaylists(data))
-    } else {
-        return false
-    }
-}
+// update single playlist
+export const updatePlaylist = (playlist) => ({
+  type: UPDATE_PLAYLIST,
+  playlist,
+});
 
-export const loadOnePlaylistThunk = (playlistId) => async(dispatch) => {
-    console.log('inside the thunk', playlistId)
-    const response = await fetch(`/api/playlists/${playlistId}`)
-    if (response.ok){
-        const data = await response.json()
-        dispatch(loadOnePlaylist(data))
-    } else {
-        console.log(response,'thunk fail')
-        return false
-    }
-}
+//// delete single playlist
+export const deletePlaylist = (playlistId) => ({
+  type: DELETE_PLAYLIST,
+  playlistId,
+});
 
-export const createPlaylistThunk = (playlist) => async(dispatch) => {
-    console.log('inside the thunk', playlist)
-    const response = await fetch(`/api/playlists`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": 'application/json'
-        },
-        body: JSON.stringify(playlist)
-    })
-}
+// clear playlists state
+export const clearPlaylists = () => ({
+  type: CLEAR_PLAYLISTS,
+});
 
-export const deletePlaylistThunk = (playlistId) => async(dispatch) => {
-    const response = await fetch(`/api/playlists/${playlistId}`,{
-        method: 'DELETE'
-    })
-    if(response.ok){
-        dispatch(loadPlaylistsThunk())
-    } else {
-        return false
-    }
-}
+/////////////////// Thunks ///////////////////
+
+// get all playlists
+export const getPlaylistsThunk = () => async (dispatch) => {
+  const res = await fetch("/api/playlists");
+  if (res.ok) {
+    const data = await res.json();
+    console.log("getPlaylistThunk data 👉", data)
+    dispatch(getPlaylists(data));
+    return data;
+  }
+};
+
+// get user's playlists
+export const getUserPlaylistsThunk = () => async (dispatch) => {
+  const res = await fetch("/api/playlists/current");
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(getPlaylists(data));
+    return data
+  }
+};
+
+// get playlist details of single playlist
+export const getSinglePlaylistThunk = (playlistId) => async (dispatch) => {
+  const res = await fetch(`/api/playlists/${playlistId}`);
+  if (res.ok) {
+    const data = await res.json();
+    console.log("getSinglePlaylistThunk 👉", data)
+    dispatch(getSinglePlaylist(data));
+    return data;
+  }
+};
+
+// post a playlist
+export const createPlaylistThunk = (playlist) => async (dispatch) => {
+  const res = await fetch("/api/playlists", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(playlist),
+  });
+  if (res.ok) {
+    const data = await res.json();
+    console.log("createPlaylistThunk 👉", data)
+    return data;
+  }
+};
+
+// update a playlist
+export const updatePlaylistThunk = (playlist, playlistEdits) => async (dispatch) => {
+  const res = await fetch(`/api/playlists/${playlist.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(playlistEdits),
+  });
+  if (res.ok) {
+    const data = await res.json();
+    console.log("updatePlaylistThunk 👉", data)
+    return data;
+  }
+};
+
+// delete a playlist
+export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
+  const res = await fetch(`/api/playlists/${playlistId}`, {
+    method: "DELETE",
+  });
+  if (res.ok) {
+    console.log("👉 successful in deletePlaylistThunk")
+    dispatch(getUserPlaylistsThunk());
+  }
+};
+
 const playlistsReducer = (state = {}, action) => {
-    let newState;
-    switch (action.type){
-        case LOAD_PLAYLISTS:
-            newState = {}
-            action.playlists.forEach((playlist)=> {
-                newState[playlist.id] = playlist;
-            })
-            return newState
-        case LOAD_ONE_PLAYLIST:
-            newState = {}
-            newState = {...action.playlist}
-            console.log(action.playlist,'inside the reducer')
-            return newState
-        default:
-            return state
-    }
-}
+  let newState;
+  switch (action.type) {
+    case GET_PLAYLISTS:
+      newState = {};
+      console.log(" action.playlists 👉👉👉👉",  action.playlists)
+      action.playlists.forEach((playlist) => {
+        newState[playlist.id] = playlist;
+      });
+      return newState;
+    case GET_SINGLE_PLAYLIST:
+      newState = {}
+      newState = {...action.playlist}
+      return newState
+    case CLEAR_PLAYLISTS:
+      return {};
+    default:
+      return state;
+  }
+};
 
-export default playlistsReducer
+export default playlistsReducer;

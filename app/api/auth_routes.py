@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Artist
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -61,16 +61,32 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('FORM.DATA111--------', form.data)  # Debug line
     if form.validate_on_submit():
+        artist_id = None
+        if not form.data['artist']:
+            no_artist = Artist.query.filter_by(name='No Artist').first()
+            artist_id = no_artist.id
+        if form.data['artist']:
+            new_artist = Artist(name=form.data['artist_name'])
+            db.session.add(new_artist)
+            db.session.commit()
+            artist_id = new_artist.id
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
+            artist=form.data['artist'],
+            artist_id=artist_id
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
         return user.to_dict()
+    else:
+        print('FORM.ERRORS',form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
