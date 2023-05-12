@@ -142,6 +142,11 @@ const AlbumById = () => {
                   ""
                 )}
               </td>
+              {user.artist_id === album.Album.artist_id && (
+                <td>
+                    <OpenModalDeleteButton itemText="Delete" modalComponent={<DeleteSongModal  song={song} categoryId={albumId} category={'album'}/>} />
+                </td>
+              )}
             </tr>
           ))}
         </table>

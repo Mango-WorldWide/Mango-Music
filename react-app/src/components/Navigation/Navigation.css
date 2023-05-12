@@ -1,7 +1,7 @@
 .profile-dropdown {
   position: absolute;
   right: 15px;
-  background-color: rgba(238, 238, 238, 1);
+  background-color: rgb(187, 125, 11);
   list-style: none;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -15,6 +15,7 @@
 .profile-dropdown > li {
   margin-left: 25px;
   padding: 5px;
+  color: rgba(238, 238, 238, 1);
 }
 
 .hidden {
@@ -27,12 +28,20 @@
   row-gap: 25px;
   list-style: none;
   align-items: center;
-  margin-left: -40px;
+  /* margin-left: -40px; */
+  width: 80%;
+  align-items: center;
 }
-.nav-list-top-wrapper, .nav-list-bottom-wrapper{
+.nav-list-top-wrapper, .nav-list-bottom-wrapper, .nav-list-middle-wrapper, .nav-list-playlist-wrapper{
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+  /* width: fit-content; */
+  align-self: flex-start;
+}
+
+.nav-list-top-wrapper{
+  align-self: center;
 }
 
 .nav-list-item{
@@ -40,6 +49,7 @@
   display: flex;
   align-self: center;
   justify-self: center;
+  column-gap: 5px;
 }
 
 .nav-list-item > a{
@@ -48,6 +58,40 @@
   width: fit-content;
   align-self: center;
   justify-self: center;
+}
+
+.nav-list-bottom-wrapper, .nav-list-playlist-wrapper{
+  align-self: flex-start;
+  margin-left: 5px;
+}
+
+.nav-list-bottom-wrapper > .nav-list-item{
+  align-self: flex-start;
+}
+
+.nav-list-playlist-wrapper > .nav-list-item{
+  align-self: flex-start;
+}
+
+.user-icon-button{
+  background-color: #06660bfd;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 5px;
+  width: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.user-icon-button.small{
+  width: 30px;
+  column-gap: 0px;
+  display: block;
+}
+
+.user-icon-button > i {
+  color: rgba(238, 238, 238, 1);
 }
 
 .dropdown-item {
