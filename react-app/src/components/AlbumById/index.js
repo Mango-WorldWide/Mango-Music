@@ -95,7 +95,10 @@ const AlbumById = () => {
             <p className="albumDesc">{album["Album"].description}</p>
           </div>
           <div class="orangeButtons">
+            {
+            albumSongs && albumSongs.length > 0 &&
             <PlayButton songId={albumSongs[0].id} songs={albumSongs} isButton={true} />
+            }
             <button className="orangeButton" onClick={handleShuffle}>
               <i class="fa-sharp fa-solid fa-shuffle" />
               Shuffle

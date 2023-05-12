@@ -6,9 +6,9 @@ const Search = () => {
     const history = useHistory();
     const [query, setQuery] = useState("");
 
-    const handleclick = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        if (query.length){
+        if (query.length) {
             setQuery("")
             history.push(`/search?${query}`)
         }
@@ -17,13 +17,17 @@ const Search = () => {
 
     return (
         <div className="search">
-            <input
-                type="text"
-                placeholder="Songs, albums, or artists..."
-                value={query}
-                onChange={(e)=>setQuery(e.target.value)}
-            />
-            <button className="search-button" onClick={handleclick}><i className="fa-solid fa-search"/></button>
+            <form method="post" onSubmit={handleSubmit}>
+                <button className="search-button" type="submit"><i className="fa-solid fa-search" /></button>
+                <input
+                    type="text"
+                    placeholder="Search"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    style={{ backgroundColor: "transparent", border: "none", color: "rgba(238, 238, 238, 1)" }}
+                />
+
+            </form>
         </div>
     )
 }
