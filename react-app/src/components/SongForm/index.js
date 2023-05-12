@@ -7,7 +7,7 @@ const SongForm = ({albumId}) => {
   const [mp3, setMp3] = useState(null);
   const [genre, setGenre] = useState("");
   const [title, setTitle] = useState("");
-
+  console.log(albumId,'song submitting')
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -15,7 +15,7 @@ const SongForm = ({albumId}) => {
     formData.append("title", title);
     formData.append("genre", genre);
     formData.append("album_id", albumId);
-    console.log("formData 👉", formData)
+    console.log("formData 👉", mp3, title, genre, albumId,formData)
     await dispatch(addSongThunk(formData));
   }
 
