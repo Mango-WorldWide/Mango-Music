@@ -11,7 +11,7 @@ function Navigation(){
 		<ul className="nav-list">
 			<div className="nav-list-top-wrapper">
 				<li className="nav-list-item">
-					<NavLink exact to="/">Home</NavLink>
+					<NavLink exact to="/" className="nav-list-item-nav-link"><img src={process.env.PUBLIC_URL + '/download.png'}/> <div>Music</div> </NavLink>
 				</li>
 			</div>
 			<div className="nav-list-bottom-wrapper">
