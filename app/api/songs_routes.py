@@ -16,6 +16,9 @@ def get_songs():
 @login_required
 def add_song():
     curr = current_user.get_id()
+    user = current_user.to_dict()
+    print(f"user 👉 {user['artist_id']}")
+
     form = SongForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
@@ -32,11 +35,12 @@ def add_song():
             genre = form.data["genre"],
             mp3 = upload["url"],
             album_id = 1,
-            artist_id = curr
+            artist_id = user["artist_id"]
         )
 
         db.session.add(new_song)
         db.session.commit()
+        return new_song.to_dict()
     else:
         form_errors = {key: val[0] for (key, val) in form.errors.items()}
         error = make_response(form_errors)
