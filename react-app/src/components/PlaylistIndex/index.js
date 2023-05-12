@@ -4,16 +4,22 @@ import { Link } from "react-router-dom"
 import { useEffect } from "react"
 import PlaylistsIndexItem from "../PlaylistIndexItem"
 import "./PlaylistIndex.css";
+import AuthModal from "../AuthModal"
 
 
 const PlaylistIndex = () =>  {
     const dispatch = useDispatch()
     const getPlaylists = useSelector(state => state.playlists)
     const playlists = Object.values(getPlaylists)
+    const user = useSelector((state) => state.session.user);
 
     useEffect(() => {
         dispatch(getUserPlaylistsThunk())
     },[dispatch])
+
+    if (!user) {
+      return <AuthModal />;
+    }
 
     if (!getPlaylists) return null
     return (
@@ -25,7 +31,7 @@ const PlaylistIndex = () =>  {
             <button className="createMoreButton">+</button>
           </Link>
         </div>
-        
+
       );
 }
 
