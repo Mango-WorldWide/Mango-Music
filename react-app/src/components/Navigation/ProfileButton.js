@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useHistory } from 'react-router-dom';
+import "./Navigation.css"
 
 function ProfileButton() {
   const user = useSelector(state => state.session.user);
@@ -43,8 +44,8 @@ function ProfileButton() {
 
   return (
     <>
-      <button onClick={openMenu}>
-      <i 
+      <button onClick={openMenu} className="user-icon-button">
+      <i
       class="fa-sharp fa-regular fa-circle-user"
       onClick={openMenu}
       />

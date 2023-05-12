@@ -50,6 +50,15 @@
   justify-self: center;
 }
 
+.user-icon-button{
+  background-color: transparent;
+  border: none;
+}
+
+.user-icon-button > i {
+  color: rgba(238, 238, 238, 1);
+}
+
 .dropdown-item {
   color: black;
   margin-top: 5px;

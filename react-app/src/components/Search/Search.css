@@ -7,6 +7,6 @@
     border: none;
 }
 
-.search > button > i {
-    color: rgba(238, 238, 238, 1);;
+.search-button > i {
+    color: rgba(238, 238, 238, 1);
 }
