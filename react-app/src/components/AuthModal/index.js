@@ -44,7 +44,7 @@ const AuthModal = () => {
 
   return (
     <div className="auth-modal">
-      <h2>Please login or signup to view the album</h2>
+      <h2>Please Login or Signup to Continue</h2>
       <OpenModalButton
               className='dropdown-login'
               buttonText="Log In"
