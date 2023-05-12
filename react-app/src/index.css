@@ -26,11 +26,11 @@ button {
 .site-wrapper-right {
     width: 85%;
     margin-top: -10px;
-    /* margin-right: -10px;  */
-    /* display: flex;
+    margin-right: -10px;
+    display: flex;
     flex-direction: column;
     row-gap: 25px;
-    justify-content: flex-start; */
+    justify-content: flex-start;
     background-color: rgba(22, 22, 23, 1);
     align-items: center;
 

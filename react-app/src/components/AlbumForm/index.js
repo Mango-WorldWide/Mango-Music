@@ -53,7 +53,9 @@ const AlbumForm = ({input, formType}) => {
     return (
       <>
       {console.log('TEST--------', albumPayload['cover'])}
-      <img className="musicCover audio-player-img" src={albumPayload['cover']} alt={albumPayload['cover']} />
+      <img className="musicCover audio-player-img"
+      src={albumPayload['cover'] ? albumPayload['cover'] : process.env.PUBLIC_URL + '/mango-holder.gif' }
+      alt={albumPayload['cover']} />
         <form className="create-update-form" onSubmit={handleSubmit}>
           <input
             className="form-input"

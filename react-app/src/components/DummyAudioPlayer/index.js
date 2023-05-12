@@ -13,7 +13,7 @@ const DummyAudioPlayer = () => {
       </div>
       <div className="audio-player-track-center">
         <div className="audio-player-track-info">
-          <img className="musicCover audio-player-img" src={"https://cdn.imgbin.com/25/10/25/imgbin-computer-icons-mango-mango-6U7r1pgqB9e6UqCM7mtQXhsnW.jpg"} alt={"mango icon"} />
+          <img className="musicCover audio-player-img" src={process.env.PUBLIC_URL + '/mango-holder.gif'} alt={"mango icon"} />
           <div className="audio-player-text">
             <h3 className="title">{"Mango Music"}</h3>
             <p className="subTitle">{"By Dorian, Kevin, Alan N., Alan E."}</p>
