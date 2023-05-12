@@ -38,7 +38,6 @@ def get_song_by_id(songId):
 def add_song():
     # only artist can add music
     artist = current_user.to_dict()
-    curr = User.query.get(artist)
 
     if not artist['artist']:
         res =  make_response({"error": "Only artists can add songs"})
@@ -46,6 +45,7 @@ def add_song():
         return res
 
     form = SongForm()
+    print(form.data)
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
 
@@ -66,6 +66,7 @@ def add_song():
 
         db.session.add(new_song)
         db.session.commit()
+        return {"message":"Successfully Created Song!"}
     else:
         form_errors = {key: val[0] for (key, val) in form.errors.items()}
         error = make_response(form_errors)

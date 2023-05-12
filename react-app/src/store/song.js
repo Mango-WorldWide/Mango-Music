@@ -59,17 +59,19 @@ export const singleSongThunk = (songId) => async(dispatch) => {
 }
 
 export const addSongThunk = (song) => async(dispatch) => {
-    // console.log("song from thunk 👉", song)
+    console.log("song from thunk 👉", song)
 
     const res = await fetch("/api/songs/new", {
         method : "POST",
-        headers: {
-            "Content-Type": 'application/json'
-        },
         body : song
     })
     if(res.ok){
         const data = await res.json()
+        return data
+    }
+    else{
+        const data = await res.json()
+        console.log(data)
         return data
     }
 }
