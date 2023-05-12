@@ -91,13 +91,13 @@ export const updateSongThunk = (song, songId) => async(dispatch) => {
 }
 
 export const deleteSongThunk = (songId, albumId) => async (dispatch) => {
-    console.log('inside delete song thunk',songId)
+    console.log('inside delete song thunk',songId, albumId)
     const res = await fetch(`/api/songs/${songId}`, {
         method: 'DELETE'
     })
     if (res.ok) {
-        console.log('delete song thunk work?')
-        // dispatch(loadOneAlbumThunk(albumId))
+        console.log('delete song thunk work?', albumId)
+        await dispatch(loadOneAlbumThunk(albumId))
     } else {
         return false
     }

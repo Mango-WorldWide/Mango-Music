@@ -38,17 +38,19 @@ def get_song_by_id(songId):
 def add_song():
     # only artist can add music
     artist = current_user.to_dict()
+    # curr = User.query.get(artist)
+
 
     if not artist['artist']:
         res =  make_response({"error": "Only artists can add songs"})
         res.status_code = 403
         return res
-
+    print('WHEREERERE ADD SONG BACKEND')
     form = SongForm()
-    print(form.data)
+    print('this is after form')
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-
+        print('form validated?')
         song = form.data["mp3"]
         song.filename = get_unique_filename(song.filename)
         upload = upload_file_to_s3(song)
@@ -114,14 +116,15 @@ def delete_song(songId):
     print('inside song delete backend route')
     song = Song.query.get(songId)
     artist = current_user.to_dict()
+    deleted_song = song.to_dict()
     print(artist["artist_id"], 'this is my artist user ')
     print(song.to_dict_no_item(includeMP3 = True)["mp3"], 'this is my song from delete backend ROUTE')
     if artist["artist_id"] == song.to_dict_no_item(includeMP3 = True)["artist_id"]:
         # print(song.to_like(), 'inside the if statement for delete song route')
-
+        remove_file_from_s3(song.to_dict_no_item(includeMP3 = True)["mp3"])
         db.session.delete(song)
         db.session.commit()
-        return song.to_dict()
+        return deleted_song
 
 
     # if not song:
