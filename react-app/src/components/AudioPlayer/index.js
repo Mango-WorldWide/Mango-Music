@@ -4,13 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadSongsThunk } from "../../store/song";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AudioPlayerIndex.css"
-// import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
-// import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
-// import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
 import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
 import new_song1 from "../../Music/Bad Bunny - Un Verano Sin Ti/08. Neverita.mp3"
 import new_song2 from "../../Music/Bad Bunny - Un Verano Sin Ti/04. Tití Me Preguntó.mp3"
+
 const all_songs = [new_song, new_song1, new_song2]
+console.log("all_songs 👉", all_songs)
 
 const AudioPlayer = () => {
   const [currentTime, setCurrentTime] = useState(0);

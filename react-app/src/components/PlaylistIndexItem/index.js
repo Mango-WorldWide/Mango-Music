@@ -1,17 +1,23 @@
 import { useDispatch, useSelector } from "react-redux"
 // import { loadPlaylistsThunk } from "../../store/playlist"
 import { useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 
-const PlaylistsIndexItem = ({playlist}) =>  {
-    return (
-        <div>
-            <Link to={`/playlists/${playlist.id}`}>
-                <img src={playlist.cover} alt={playlist.title}/>
-            </Link>
-        </div>
-    )
+const PlaylistsIndexItem = ({ playlist }) => {
+    const history = useHistory()
+  const handleClick = () => {
+    history.push(`/playlists/${playlist.id}`)
+  };
 
-}
+  return (
+    <div 
+    className="playlistItem"
+    // data-tooltip="..."
+    onClick={() => handleClick(playlist.id)}>
+      <img src={playlist.cover} alt={playlist.title} />
+      <p className="playlistTitle">{playlist.title}</p>
+    </div>
+  );
+};
 
 export default PlaylistsIndexItem

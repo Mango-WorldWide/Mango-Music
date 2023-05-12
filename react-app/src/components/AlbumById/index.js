@@ -79,7 +79,7 @@ const AlbumById = () => {
             <p></p>
             <p className="albumYear">{album["Album"].year}</p>
           </div>
-          <div className="descContainer" data-tooltip="MORE">
+          <div className="descContainer" data-tooltip={(album["Album"].description).length > 217 ? "MORE" : ""}>
             <p className="albumDesc">{album["Album"].description}</p>
           </div>
           <div class="albumButtons">

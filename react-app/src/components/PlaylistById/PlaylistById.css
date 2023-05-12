@@ -1,192 +1,186 @@
-.outerAlbumContainer {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    max-width: 1680px;
-    margin: 1.5rem auto;
-  }
-  
-  .innerAlbumContainer.top {
-    display: flex;
-    align-items: end;
-    gap: 2.5rem;
-    margin-bottom: 2rem;
-  }
-  .albumMenu {
-    display: flex;
-    flex-direction: column;
-    align-content: end;
-    width: 30%;
-  }
-  .albumImage {
-    vertical-align: bottom;
-    height: 270px;
-    width: 270px;
-  }
-  .albumTitle {
-    margin: 0 0 0.01rem 0;
-    font-size: 1.75rem;
-    font-weight: 600;
-  }
-  
-  .albumArtist {
-    color: #fd552b;
-    font-size: 1.5rem;
-    font-weight: 400;
-  }
-  
-  .descContainer {
-    display: flex;
-    max-height: 75px;
-    margin-bottom: 2rem;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .descContainer:after {
-    content: attr(data-tooltip);
-    position: absolute;
-    font-size: 0.7rem;
-    bottom: 1px;
-    right: 1px;
-    box-shadow: 0px -5px 10px rgba(22, 22, 23, 1);
-    background-color: rgba(22, 22, 23, 1);
-  }
-  
-  .albumDesc {
-    text-align: start;
-    font-size: 0.9rem;
-  }
-  
-  .albumGenreYear {
-    display: flex;
-    padding: 0px;
-  }
-  
-  .albumGenreYear > p {
-    margin-top: 0.2rem;
-    font-size: 0.8rem;
-  }
-  
-  #dot {
-    margin-left: 0.3rem;
-    margin-right: 0.3rem;
-  }
-  
-  .albumButtons {
-    display: flex;
-    gap: 10px;
-    justify-self: flex-end;
-  }
-  .albumButton {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #fd552b;
-  }
-  
-  .fa-play.orange{
-    color: #fd552b
-  }
-  
-  /*===========================*/
-  
-  .song-list {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1680px;
-  }
-  .song-title {
-    display: flex;
-    font-size: .9rem;
-    gap: 2rem;
-    color: white;
-  }
-  .song-data{
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .pepper{
-    flex-shrink: 0;
-    flex-grow: 1;
-  }
-  
-  .song-item {
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: space-between; */
-    width: 100%;
-    /* flex-grow: 1; */
-    /* flex-shrink: 0; */
-    /* flex-basis: 100%; */
-    padding-left: 1rem;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-  }
-  
-  .song-data.grey {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  #pink{
-    color: pink;
-  }
-  
-  #blue{
-    color: blue;
-  }
-  
-  .song-item:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  .play-button,
-  .like-button {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-  
-  .play-button {
-    border: red solid 15px;
-  }
-  
-  .play-pause-btn {
-    cursor: pointer;
-  }
-  
-  .thumbButtonContainer{
-    flex-grow: 0;
-    margin:.8rem;
-    height:100%;
-    box-sizing: border-box;
-    /* background-color: red; */
-  }
-  
-  .update-button,
-  .delete-button {
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 4px;
-    margin: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .delete-button:hover {
-    background-color: red;
-  }
-  
-  .update-button:hover {
-    background-color: green;
-  }
+.outerPlaylistContainer {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  max-width: 1680px;
+  margin: 1.5rem auto;
+}
+
+.innerPlaylistContainer.top {
+  display: flex;
+  align-items: end;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+}
+.playlistMenu {
+  display: flex;
+  flex-direction: column;
+  align-content: end;
+  width: 30%;
+}
+.playlistImage {
+  vertical-align: bottom;
+  height: 270px;
+  width: 270px;
+}
+.playlistTitle {
+  margin: 0 0 0.01rem 0;
+  font-size: 3rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.playlistDesc {
+  margin-top: 0.2rem;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+#songColumn,
+#artistColumn,
+#albumColumn {
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+#artistColumn,
+#albumColumn {
+  font-size: 1.1rem;
+  padding-left: 0.5rem;
+  text-align: left;
+}
+
+#artistColumn {
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+}
+
+#likesColumn {
+  width: 4%;
+}
+
+td {
+  font-size: 1rem;
+  padding: 0.1rem;
+  padding-left: 1rem;
+  border-style: hidden !important;
+}
+
+.songTitle {
+  display: flex;
+  gap: 2rem;
+}
+
+.playlistButtons {
+  display: flex;
+  gap: 10px;
+  justify-self: flex-end;
+}
+.playlistButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #fd552b;
+}
+
+.fa-play.orange,
+.fa-pause.orange {
+  color: #fd552b;
+}
+
+/*===========================*/
+
+.song-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1680px;
+}
+
+.pepper {
+  flex-shrink: 0;
+  flex-grow: 1;
+}
+.categories {
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: column; */
+}
+
+.song-item {
+  display: flex;
+  gap: 10px;
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  width: 100%;
+  padding-left: 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.songData.grey {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#pink {
+  color: pink;
+}
+
+#blue {
+  color: blue;
+}
+
+.songData:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.play-button,
+.like-button {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.play-button {
+  border: red solid 15px;
+}
+
+.play-pause-btn {
+  cursor: pointer;
+}
+
+.thumbButtonContainer {
+  flex-grow: 0;
+  margin: 0.8rem;
+  height: 100%;
+  box-sizing: border-box;
+  /* background-color: red; */
+}
+
+.update-button,
+.delete-button {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: red;
+}
+
+.update-button:hover {
+  background-color: green;
+}

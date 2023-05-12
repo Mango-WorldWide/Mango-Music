@@ -44,7 +44,7 @@ function UpdatePlaylistForm() {
   };
 
   return (
-    <div className="mainContainer newSpot">
+    <div className="mainContainer updatePlaylist">
       <form onSubmit={handleSubmit}>
         <div>
           <h1>Update your Playlist</h1>
