@@ -14,6 +14,7 @@ import OpenModalDeleteButton from "../DeleteSong/OpenModalDeleteButton";
 import DeleteSongModal from "../DeleteSong";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AlbumById.css";
+import AuthModal from "../AuthModal"
 
 const AlbumById = () => {
   const [hoveredSong, setHoveredSong] = useState("");
@@ -36,10 +37,10 @@ const AlbumById = () => {
 
   if (!album["Songs"]) return null;
 
-  const handlePlay = async (songId) => {
-    await dispatch(singleSongThunk(songId));
-    setIsPlaying((prev) => !prev);
-  };
+  if (!user) {
+    return <AuthModal />;
+  }
+
   const handleShuffle = (e) => {
     e.preventDefault();
     alert("Feature Coming Soon");
