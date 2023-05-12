@@ -58,11 +58,11 @@ function PlaylistById() {
   if (!playlist || !playlist.id) return null;
   const playlistSongs = playlist.songs.map((x) => x.songs);
   const playlistOwner = playlist.user_id
-  const playlistFull = playlist
-  console.log("playlistSongs [0] from PlaylistById 👉", playlistSongs[0]);
-  console.log("id from PlaylistById 👉", playlistSongs[0].id);
-  console.log(playlist.user_id,'which user?', user.id, 'is it the same?', playlistSongs)
-  console.log(playlistSongs, "whats my playlist");
+
+  // console.log("playlistSongs [0] from PlaylistById 👉", playlistSongs[0]);
+  // console.log("id from PlaylistById 👉", playlistSongs[0].id);
+  // console.log(playlist.user_id,'which user?', user.id, 'is it the same?', playlistSongs)
+  // console.log(playlistSongs, "whats my playlist");
 
   return (
     <div className="outerPlaylistContainer">
@@ -85,7 +85,9 @@ function PlaylistById() {
             <p className="playlistDesc">{playlist.description}</p>
           </div>
           <div class="playlistButtons">
+            {playlistSongs.length > 0 ? (
             <PlayButton songId={playlistSongs[0].id} songs={playlistSongs} isButton={true} />
+            ): <button disabled={true}>Play</button>}
             <button className="playlistButton" onClick={handleShuffle}>
               <i class="fa-sharp fa-solid fa-shuffle" />
               Shuffle
