@@ -111,7 +111,6 @@ function PlaylistById() {
                 </p>
                 <p>{playlist.songs.title}</p>
               </td>
-              <p key={i}>{playlist.songs.title}</p>
               <PlayButton songId={playlist.songs.id} songs={playlistSongs} isButton={false} />
               <td className="songArtist">
                 {playlist.songs.artist.name}
