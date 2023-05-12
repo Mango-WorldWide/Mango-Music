@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
@@ -29,10 +29,18 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const { isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr } = usePlayer();
 
+  const user = useSelector((state) => state.session.user);
+
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
-    dispatch(loadLikesThunk())
   }, [dispatch]);
+
+  useEffect(()=> {
+    console.log(user)
+    if (user){
+      dispatch(loadLikesThunk())
+    }
+  }, [isLoaded])
 
   return (
     <>

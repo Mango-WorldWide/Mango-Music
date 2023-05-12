@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, make_response
 from flask_login import login_required, current_user
-from app.models import Song, User, db
+from app.models import Song, User, db, Playlist_Song
 from app.forms.song_form import SongForm
 from ..api.aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 
@@ -127,8 +127,19 @@ def delete_song(songId):
         return deleted_song
 
 
+
     # if not song:
     #     return jsonify({"error": "Song not found"}), 404
 
     # if song.artist_id != artist['artist_id']:
     #     return jsonify({"error": "You don't own this song and cannot delete it"}), 403
+
+@song_routes.route('/<int:songId>/playlist', methods=["DELETE"])
+@login_required
+def delete_song_playlist(songId):
+    print('inside delete playlist backend song', songId)
+    song = Playlist_Song.query.get(songId)
+    delete_song = song.to_dict()
+    db.session.delete(song)
+    db.session.commit()
+    return delete_song
