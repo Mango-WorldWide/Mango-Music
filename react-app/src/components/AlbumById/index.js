@@ -38,13 +38,17 @@ const AlbumById = () =>  {
             //     </section>
             // )
 
-    const handleDelete = () => {
-        dispatch(deleteAlbumThunk(albumId))
-        history.push(`/albums`)
-    }
-    const handleUpdate = () => {
-        history.push(`/albums/${albumId}/edit`)
-    }
+  const handleShuffle = (e) => {
+    e.preventDefault();
+    alert("Feature Coming Soon");
+  };
+  const handleDelete = () => {
+    dispatch(deleteAlbumThunk(albumId));
+    history.push(`/albums`);
+  };
+  const handleUpdate = () => {
+    history.push(`/albums/${albumId}/edit`);
+  };
 
     // console.log(album, 'myalbums')
     return (
@@ -80,4 +84,4 @@ const AlbumById = () =>  {
     );
   };
 
-export default AlbumById
+export default AlbumById;

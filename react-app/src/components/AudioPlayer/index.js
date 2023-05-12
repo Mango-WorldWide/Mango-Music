@@ -1,7 +1,5 @@
 import ProgressBar from "../ProgressBar";
 import { useEffect, useState, useRef, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loadSongsThunk } from "../../store/song";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AudioPlayerIndex.css"
 import new_song from '../../Music/Bad Bunny - Un Verano Sin Ti/01. Moscow Mule.mp3'
@@ -20,23 +18,9 @@ const AudioPlayer = () => {
   const [unmuteVolume, setUnmuteVolume] = useState(false);
   const [volume, setVolume] = useState(50);
   const [prevVolume, setPrevVolume] = useState(50);
-  // const [currentSong, setCurrentSong] = useState(0);
-  // const songs = useSelector((state) => state.player['Songs'])
-  console.log(songsArr, 'my song arr', currentSong,'my index for song')
-  console.log(songsArr[currentSong],' audio songs array current song')
-  const dispatch = useDispatch();
-  // const getSongs = useSelector((state) => state.songs);
-  // const songs = Object.values(getSongs);
-  // console.log('SONGS', songs)
-  // const song = songs.map((x) => x["mp3"]);
 
   const audioPlayer = useRef();
   const progressBarRef = useRef();
-  //testing if not needed
-  // useEffect(() => {
-  //   dispatch(loadSongsThunk());
-  // }, [dispatch]);
-
   const playAnimationRef = useRef();
 
   const repeat = useCallback(() => {
@@ -76,24 +60,21 @@ const AudioPlayer = () => {
     }
   }, [volume, audioPlayer, unmuteVolume]);
 
-  // if (!getSongs) return null;
+  if (!songsArr.length) return null
 
   const goForward = () => {
     if (currentSong < songsArr.length - 1) {
       setCurrentSong((prev) => prev + 1);
     } else{
       setCurrentSong(prev=>prev)
-
     }
   };
 
   const goBack = () => {
     if (currentSong > 0) {
       setCurrentSong((prev) => prev - 1);
-      // setQueueIndex((prev) => prev - 1);
     } else {
       setCurrentSong(songsArr.length - 1);
-      // setQueueIndex(songsArr.length - 1);
     }
   };
 
@@ -131,15 +112,13 @@ const AudioPlayer = () => {
     progressBarRef.current.max = seconds;
   };
 
-  if (!songsArr.length) return null
-  // console.log("=====>", songs[queueIndex])
+
   return (
     <div className="audio-player">
       <div className="audio-player-track-controls">
         <p className="audio-player-shuffle" onClick={(e) => alert("Feature Coming Soon!")}><i class="fa-solid fa-shuffle"></i></p>
         <p className="audio-playeer-back" onClick={goBack}><i class="fa-solid fa-backward"></i></p>
         <p className="audio-player-play-pause" onClick={playPause}>{isPlaying ? <i className="fa fa-pause" aria-hidden="true"></i> : <i class="fa fa-play" aria-hidden="true"></i>}</p>
-        {/* <PlayButton songId={all_songs[currentSong]} /> */}
         <p className="audio-player-forward" onClick={goForward}><i class="fa-solid fa-forward"></i></p>
         <p
       className={`audio-player-loop ${isLooping ? "active" : ""}`}
@@ -155,7 +134,6 @@ const AudioPlayer = () => {
       <div className="audio-player-track-center">
         <div className="audio-player-track-info">
           <img className="musicCover audio-player-img" src={songsArr[currentSong].album.cover} alt={songsArr[currentSong].title} />
-          {/* {console.log("AUDIOPLAYER", songs[currentSong].album.cover)} */}
           <div className="audio-player-text">
             <h3 className="title">{songsArr[currentSong].title}</h3>
             <p className="subTitle">{songsArr[currentSong].artist.name}</p>

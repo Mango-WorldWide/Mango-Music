@@ -68,7 +68,7 @@ def add_song():
 
         db.session.add(new_song)
         db.session.commit()
-        return {"message":"Successfully Created Song!"}
+        return new_song.to_dict()
     else:
         form_errors = {key: val[0] for (key, val) in form.errors.items()}
         error = make_response(form_errors)
@@ -121,7 +121,7 @@ def delete_song(songId):
     print(song.to_dict_no_item(includeMP3 = True)["mp3"], 'this is my song from delete backend ROUTE')
     if artist["artist_id"] == song.to_dict_no_item(includeMP3 = True)["artist_id"]:
         # print(song.to_like(), 'inside the if statement for delete song route')
-        remove_file_from_s3(song.to_dict_no_item(includeMP3 = True)["mp3"])
+        test = remove_file_from_s3(song.to_dict_no_item(includeMP3 = True)["mp3"])
         db.session.delete(song)
         db.session.commit()
         return deleted_song
