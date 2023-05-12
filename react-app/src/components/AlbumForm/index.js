@@ -8,6 +8,7 @@ import './AlbumForm.css'
 const AlbumForm = ({input, formType}) => {
     const dispatch = useDispatch()
     const { albumId } = useParams()
+    const [errors, setErrors] = useState({});
     const {isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr} = usePlayer();
     const user = useSelector(state => state.session.user)
     // console.log(user.artist_id)
@@ -34,7 +35,7 @@ const AlbumForm = ({input, formType}) => {
         albumObj.cover = cover
         albumObj.genre = genre
         albumObj.year = year
-        // albumObj.artist_id = user.artist_id
+        albumObj.artist_id = user.artist_id
 
         setAlbumPayload(albumObj)
         console.log("ALBUMOBJ", albumObj)
@@ -43,6 +44,19 @@ const AlbumForm = ({input, formType}) => {
 
 
     const handleSubmit = (e) => {
+      e.preventDefault();
+      const err = {};
+      const playlistEdits = { title, description, cover };
+      console.log("playlist 👉", playlistEdits)
+      if (title === null || title === "") err.title = "Title is required";
+      if (cover === null || cover === "") err.cover = "Cover is required";
+      if (genre === null || genre === "") err.genre = "Genre is required";
+      if (year === null || year === "") err.year = "Year is required";
+      if (!!Object.values(err).length) {
+        console.log("👉 found errors while updating playlist 👈")
+        setErrors(err);
+        return
+      }
         if(formType === 'Create'){
             dispatch(createAlbumThunk(albumPayload))
         }
@@ -57,6 +71,7 @@ const AlbumForm = ({input, formType}) => {
       src={albumPayload['cover'] ? albumPayload['cover'] : process.env.PUBLIC_URL + '/mango-holder.gif' }
       alt={albumPayload['cover']} />
         <form className="create-update-form" onSubmit={handleSubmit}>
+        {errors.title && <p className="errors">{errors.title}</p>}
           <input
             className="form-input"
             name="title"
@@ -66,7 +81,6 @@ const AlbumForm = ({input, formType}) => {
             value={title}
             onChange={updateTitle}
           />
-
           <textarea
             className="textarea-input"
             name="description"
@@ -76,7 +90,7 @@ const AlbumForm = ({input, formType}) => {
             value={description}
             onChange={updateDescription}
           />
-
+        {errors.cover && <p className="errors">{errors.cover}</p>}
           <input
             className="form-input"
             name="cover"
@@ -86,6 +100,7 @@ const AlbumForm = ({input, formType}) => {
             value={cover}
             onChange={updateCover}
           />
+        {errors.genre && <p className="errors">{errors.genre}</p>}
           <input
             className="form-input"
             name="genre"
@@ -95,6 +110,7 @@ const AlbumForm = ({input, formType}) => {
             value={genre}
             onChange={updateGenre}
           />
+        {errors.year && <p className="errors">{errors.year}</p>}
           <input
             className="form-input"
             name="year"

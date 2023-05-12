@@ -8,6 +8,7 @@ function UpdatePlaylistForm() {
   const [description, setDescription] = useState("");
   const [cover, setCover] = useState("");
   const [errors, setErrors] = useState({});
+  // const [albumPayload, setAlbumPayload] = useState({})
 
   const { playlistId } = useParams();
   const history = useHistory();
@@ -49,6 +50,10 @@ function UpdatePlaylistForm() {
         <div>
           <h1>Update your Playlist</h1>
         </div>
+        {console.log('TEST PLAYLIST-----------',playlist)}
+        <img className="musicCover audio-player-img"
+      src={playlist['cover'] ? playlist['cover'] : process.env.PUBLIC_URL + '/mango-holder.gif' }
+      alt={playlist['cover']} />
         <label className="titleLabel">
           Title
           <input
@@ -59,7 +64,7 @@ function UpdatePlaylistForm() {
             placeholder="title"
             onChange={(e) => setTitle(e.target.value)}
           />
-          <p className="errors">{errors.country}</p>
+          <p className="errors">{errors.title}</p>
         </label>
         <label className="coverLabel">
           Cover
@@ -91,4 +96,3 @@ function UpdatePlaylistForm() {
 }
 
 export default UpdatePlaylistForm;
-

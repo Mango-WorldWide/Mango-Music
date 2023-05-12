@@ -36,6 +36,10 @@ function NewPlaylistForm() {
           <div>
             <h1>Create a new Playlist</h1>
           </div>
+          {console.log(cover)}
+          <img className="musicCover audio-player-img"
+      src={cover ? cover : process.env.PUBLIC_URL + '/mango-holder.gif' }
+      alt={cover} />
           <label className="titleLabel">
             Title
             <input
@@ -43,10 +47,10 @@ function NewPlaylistForm() {
               value={title}
               className="oneLiner"
               id="title"
-              placeholder="title"
+              placeholder="Title"
               onChange={(e) => setTitle(e.target.value)}
             />
-            <p className="errors">{errors.country}</p>
+            <p className="errors">{errors.title}</p>
           </label>
           <label className="coverLabel">
             Cover
@@ -60,11 +64,12 @@ function NewPlaylistForm() {
             />
             <p className="errors">{errors.cover}</p>
           </label>
+          Description
           <textarea
             name="description"
             className="textArea newPlaylist"
             value={description}
-            placeholder="Please write at least 30 characters"
+            placeholder="Description"
             onChange={(e) => setDescription(e.target.value)}
           />
           <p className="errors">{errors.description}</p>
@@ -78,4 +83,3 @@ function NewPlaylistForm() {
 }
 
 export default NewPlaylistForm;
-

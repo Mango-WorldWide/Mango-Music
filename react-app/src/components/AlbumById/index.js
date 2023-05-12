@@ -15,6 +15,7 @@ const AlbumById = () => {
   const album = useSelector((state) => state.albums);
   const likes = useSelector((state) => Object.values(state.likes));
   const albumSongs = album["Songs"];
+  const user = useSelector((state) => state.session.user);
   const { albumId } = useParams();
   console.log(Object.values(album), "album state checking");
   useEffect(() => {
@@ -85,12 +86,17 @@ const AlbumById = () => {
           </div>
         ))}
       </div>
-      <button className="update-button" onClick={handleUpdate}>
-        UPDATE ME
-      </button>
-      <button className="delete-button" onClick={handleDelete}>
-        DELETE ME
-      </button>
+      {console.log('USER -----',user)}
+      {user.artist_id === album['Album'].artist_id && (
+  <>
+    <button className="update-button" onClick={handleUpdate}>
+      UPDATE ME
+    </button>
+    <button className="delete-button" onClick={handleDelete}>
+      DELETE ME
+    </button>
+  </>
+)}
     </div>
   );
 };
