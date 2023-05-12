@@ -44,11 +44,22 @@ function ProfileButton() {
 
   return (
     <>
-      <button onClick={openMenu} className="user-icon-button">
-      <i
-      className="fas fa-user"
-      onClick={openMenu}
-      /> <span style={{color:"rgba(238, 238, 238, 1)"}}>Sign In</span>
+      <button onClick={openMenu} className={!user ? "user-icon-button ": "user-icon-button small"}>
+        {user ? (
+          <i
+            className="fas fa-user-circle"
+            onClick={openMenu}
+          />
+        )
+          : (
+            <>
+              <i
+                className="fas fa-user"
+                onClick={openMenu}
+              />
+              <span style={{ color: "rgba(238, 238, 238, 1)" }}>Sign In</span>
+            </>
+          )}
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (

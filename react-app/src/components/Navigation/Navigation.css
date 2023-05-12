@@ -79,6 +79,15 @@
   border-radius: 5px;
   padding: 5px;
   width: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.user-icon-button.small{
+  width: 30px;
+  column-gap: 0px;
+  display: block;
 }
 
 .user-icon-button > i {
