@@ -21,12 +21,12 @@ import ProfileButton from "./components/Navigation/ProfileButton.js";
 import "./index.css";
 import ArtistById from "./components/ArtistById";
 import SearchIndex from "./components/SearchIndex";
-import {usePlayer} from "./context/PlayerContext";
+import { usePlayer } from "./context/PlayerContext";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const {isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr} = usePlayer();
+  const { isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr } = usePlayer();
 
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
@@ -42,12 +42,12 @@ function App() {
         <div className="site-wrapper-right">
           <div className="site-wrapper-right-top">
             <div className="audio-player-wrapper">
-              {songsArr.length > 0 ? <AudioPlayer/> : <DummyAudioPlayer/>}
-            </div>
-            <div className="profile-button-wrapper">
-              {isLoaded && (
-                <ProfileButton />
-              )}
+              {songsArr.length > 0 ? <AudioPlayer /> : <DummyAudioPlayer />}
+              <div className="profile-button-wrapper">
+                {isLoaded && (
+                  <ProfileButton />
+                )}
+              </div>
             </div>
           </div>
           <div className="main-component">
@@ -62,19 +62,19 @@ function App() {
                 <Route path='/artist/:artistId' component={ArtistById} />
                 <Route path='/albums/new' component={CreateAlbum} />
                 <Route path='/albums/:albumId/edit' component={UpdateAlbum} />
-                <Route path='/albums/:albumId' component={AlbumById}/>
-                <Route path='/albums' component={AlbumsIndex}/>
-                <Route path='/playlists/new' component={NewPlaylistForm}/>
-                <Route path='/playlists/:playlistId/edit' component={UpdatePlaylistForm}/>
-                <Route path='/playlists/:playlistId' component={PlaylistById}/>
-                <Route path='/playlists' component={PlaylistIndex}/>
-                <Route path='/audio' component={AudioPlayer}/>
-                <Route path='/songs/new' component={SongForm}/>
-                <Route path='/search' component={SearchIndex}/>
+                <Route path='/albums/:albumId' component={AlbumById} />
+                <Route path='/albums' component={AlbumsIndex} />
+                <Route path='/playlists/new' component={NewPlaylistForm} />
+                <Route path='/playlists/:playlistId/edit' component={UpdatePlaylistForm} />
+                <Route path='/playlists/:playlistId' component={PlaylistById} />
+                <Route path='/playlists' component={PlaylistIndex} />
+                <Route path='/audio' component={AudioPlayer} />
+                <Route path='/songs/new' component={SongForm} />
+                <Route path='/search' component={SearchIndex} />
                 <Route path='/'>
                   <h1>Welcome to Mango Music</h1>
                 </Route>
-        </Switch>
+              </Switch>
             )}
           </div>
         </div>
