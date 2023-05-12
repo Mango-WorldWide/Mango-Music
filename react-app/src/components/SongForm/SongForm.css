@@ -8,6 +8,7 @@
 
 .titleInput, .genreInput, .fileInput{
     margin-left: .8rem;
+    color: white;
     background-color: #2e2e2f;
 }
 
