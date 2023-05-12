@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 function Navigation(){
 	const user = useSelector((state) => state.session.user);
+	const playlists = useSelector((state) => Object.values(state.playlists));
 
 	return (
 		<ul className="nav-list">
@@ -32,7 +33,11 @@ function Navigation(){
 					<NavLink exact to="/playlists">Playlists</NavLink>
 				</li>
 			</div>
-
+				{playlists.map(playlist => (
+					<li key={playlist.id} className="nav-list-item">
+					<NavLink exact to={`/playlists/${playlist.id}`}>{playlist.title}</NavLink>
+				</li>
+				))}
 		</ul>
 	);
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../../store/session";
 import { loadLikesThunk } from "../../store/like";
+import {getUserPlaylistsThunk} from "../../store/playlist";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
@@ -16,6 +17,7 @@ function LoginFormModal() {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     await dispatch(loadLikesThunk());
+    await dispatch(getUserPlaylistsThunk());
     if (data) {
       setErrors(data);
     } else {
@@ -32,6 +34,7 @@ function LoginFormModal() {
     setPassword("password");
     const data = await dispatch(login(email, password))
     await dispatch(loadLikesThunk());
+    await dispatch(getUserPlaylistsThunk());
     if (data) {
       setErrors(data);
     } else {

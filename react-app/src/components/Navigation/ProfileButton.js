@@ -46,7 +46,7 @@ function ProfileButton() {
     <>
       <button onClick={openMenu} className="user-icon-button">
       <i
-      class="fa-sharp fa-regular fa-circle-user"
+      className="fa-sharp fa-regular fa-circle-user"
       onClick={openMenu}
       />
       </button>
