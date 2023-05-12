@@ -30,7 +30,7 @@
 }
 
 .albumArtist {
-  color: #fd552b;
+  color: rgb(187, 125, 11);
   font-size: 1.5rem;
   font-weight: 400;
 }
@@ -40,7 +40,6 @@
   max-height: 75px;
   margin-bottom: 2rem;
   overflow: hidden;
-  position: relative;
 }
 
 .descContainer:after {
@@ -89,11 +88,11 @@
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
-  background-color: #fd552b;
+  background-color: rgb(187, 125, 11);
 }
 
 .fa-play.orange{
-  color: #fd552b
+  color: rgb(187, 125, 11);
 }
 
 /*===========================*/

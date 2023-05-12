@@ -1,3 +1,15 @@
 .search{
     display: flex;
+    border: 1px solid rgba(64, 64,64, 1);
+    border-radius: 1px;
+    padding: 10px 5px;
+}
+
+.search-button{
+    background-color: transparent;
+    border: none;
+}
+
+.search-button > i {
+    color: rgba(238, 238, 238, 1);
 }

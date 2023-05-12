@@ -1,14 +1,18 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createPlaylistThunk } from "../../store/playlist";
 import "./createPlaylist.css";
+import AuthModal from "../AuthModal"
+
 
 function NewPlaylistForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [cover, setCover] = useState("");
   const [errors, setErrors] = useState({});
+  const user = useSelector((state) => state.session.user);
+
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -29,6 +33,10 @@ function NewPlaylistForm() {
       history.push(`/playlists/${newPlaylist.id}`);
     }
   };
+
+  if (!user) {
+    return <AuthModal />;
+  }
 
     return (
       <div className="mainContainer playlist">

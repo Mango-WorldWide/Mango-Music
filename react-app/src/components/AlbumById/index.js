@@ -63,8 +63,8 @@ const AlbumById = () => {
   const handleUpdate = () => {
     history.push(`/albums/${albumId}/edit`);
   };
-  const handleDelete = () => {
-    dispatch(deleteAlbumThunk(albumId));
+  const handleDelete = async () => {
+    await dispatch(deleteAlbumThunk(albumId));
     history.push(`/albums`);
   };
 
@@ -95,7 +95,10 @@ const AlbumById = () => {
             <p className="albumDesc">{album["Album"].description}</p>
           </div>
           <div class="orangeButtons">
+            {
+            albumSongs && albumSongs.length > 0 &&
             <PlayButton songId={albumSongs[0].id} songs={albumSongs} isButton={true} />
+            }
             <button className="orangeButton" onClick={handleShuffle}>
               <i class="fa-sharp fa-solid fa-shuffle" />
               Shuffle
@@ -139,6 +142,11 @@ const AlbumById = () => {
                   ""
                 )}
               </td>
+              {user.artist_id === album.Album.artist_id && (
+                <td>
+                    <OpenModalDeleteButton itemText="Delete" modalComponent={<DeleteSongModal  song={song} categoryId={albumId} category={'album'}/>} />
+                </td>
+              )}
             </tr>
           ))}
         </table>

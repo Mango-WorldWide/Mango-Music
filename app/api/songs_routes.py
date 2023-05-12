@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, make_response
 from flask_login import login_required, current_user
-from app.models import Song, User, db
+from app.models import Song, User, db, Playlist_Song
 from app.forms.song_form import SongForm
 from ..api.aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 
@@ -113,22 +113,17 @@ def update_song(id):
 @song_routes.route('/<int:songId>', methods=["DELETE"])
 @login_required
 def delete_song(songId):
-    print('inside song delete backend route')
     song = Song.query.get(songId)
     artist = current_user.to_dict()
     deleted_song = song.to_dict()
-    print(artist["artist_id"], 'this is my artist user ')
-    print(song.to_dict_no_item(includeMP3 = True)["mp3"], 'this is my song from delete backend ROUTE')
-    if artist["artist_id"] == song.to_dict_no_item(includeMP3 = True)["artist_id"]:
-        # print(song.to_like(), 'inside the if statement for delete song route')
-        test = remove_file_from_s3(song.to_dict_no_item(includeMP3 = True)["mp3"])
+    print("current user artists id 👉👉👉", artist["artist_id"])
+    print("current songs artists id 👉👉👉", song.to_dict_no_item(includeMP3 = True)["artist_id"])
+    print(" is this the owner? 👉👉👉", artist["artist_id"] == song.to_dict_no_item(includeMP3 = True)["artist_id"])
+    poke = True
+    if poke:
+        # print(" song url 👉👉👉", song.to_dict_no_item(includeMP3 = True)["mp3"])
+        test = remove_file_from_s3('http://mango-music.s3.amazonaws.com/04b6550c621641c8bd3f1a14418e90bd.mp3')
+        print(f"test 👉👉👉 {test}")
         db.session.delete(song)
         db.session.commit()
-        return deleted_song
-
-
-    # if not song:
-    #     return jsonify({"error": "Song not found"}), 404
-
-    # if song.artist_id != artist['artist_id']:
-    #     return jsonify({"error": "You don't own this song and cannot delete it"}), 403
+        return (f"Successfully deleted song #: {deleted_song['id']}")
