@@ -118,7 +118,7 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
 export const addSongPlaylist = (playlist) => async(dispatch) => {
   console.log(playlist.playlist_id,' we in the add song playlist')
   const playlistId = playlist.playlist_id
-  const history = useHistory()
+  // const history = useHistory()
   const response = await fetch(`/api/playlists/${playlistId}/song`,{
       method:"POST",
       headers: {

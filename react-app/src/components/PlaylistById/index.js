@@ -8,6 +8,7 @@ import PlayButton from "../PlayButton";
 import LikeButton from "../LikeButton";
 import { usePlayer } from "../../context/PlayerContext";
 import "./PlaylistById.css";
+import { authenticate } from "../../store/session";
 import OpenModalDeleteButton from "../DeleteSong/OpenModalDeleteButton";
 import DeleteSongModal from "../DeleteSong";
 
@@ -49,6 +50,7 @@ function PlaylistById() {
 
   const handleDelete = async () => {
     await dispatch(deletePlaylistThunk(playlistId));
+    dispatch(authenticate())
     history.push("/playlists");
   };
 
