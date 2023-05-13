@@ -36,6 +36,13 @@
   text-decoration: none;
 }
 
+.albumArtistById  {
+  color: rgb(187, 125, 11);
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-decoration: none;
+}
+
 .descContainer {
   display: flex;
   max-height: 75px;
