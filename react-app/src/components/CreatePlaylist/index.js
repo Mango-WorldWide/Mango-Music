@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { createPlaylistThunk } from "../../store/playlist";
 import "./createPlaylist.css";
 import AuthModal from "../AuthModal"
+import { authenticate } from "../../store/session";
 
 
 function NewPlaylistForm() {
@@ -30,6 +31,7 @@ function NewPlaylistForm() {
     } else {
       const newPlaylist = await dispatch(createPlaylistThunk(playlist));
       console.log("newPlaylist 👉", newPlaylist)
+      dispatch(authenticate())
       history.push(`/playlists/${newPlaylist.id}`);
     }
   };

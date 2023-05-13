@@ -127,3 +127,14 @@ def delete_song(songId):
         db.session.delete(song)
         db.session.commit()
         return (f"Successfully deleted song #: {deleted_song['id']}")
+
+
+@song_routes.route('/<int:songId>/playlist', methods=["DELETE"])
+@login_required
+def delete_song_playlist(songId):
+    print('inside delete playlist backend song', songId)
+    song = Playlist_Song.query.get(songId)
+    delete_song = song.to_dict()
+    db.session.delete(song)
+    db.session.commit()
+    return delete_song
