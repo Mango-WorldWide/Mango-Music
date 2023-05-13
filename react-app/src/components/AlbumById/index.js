@@ -83,7 +83,7 @@ const AlbumById = () => {
         </div>
         <div className="albumMenu">
           <h1 className="albumTitle">{album["Album"].title}</h1>
-          <h2 className="albumArtist">{album["Album"].artist}</h2>
+          <h2 className="albumArtist"><a href={`/artist/${album["Album"].artist_id}`}>{album["Album"].artist}</a></h2>
           <div className="albumGenreYear">
             <p className="albumGenre">{album["Album"].genre}</p>
             <p id="dot">·</p>
