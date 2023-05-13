@@ -10,6 +10,16 @@ const SongForm = ({ albumId }) => {
   const [genre, setGenre] = useState("");
   const [title, setTitle] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const errorMessages = {};
+    // console.log('MP3',  mp3.name.endsWith('.mp3'))
+    if (!title) errorMessages.title = "Title is required.";
+    if (!genre) errorMessages.genre = "Genre is required.";
+    if (!mp3 || !mp3.name.endsWith('.mp3')) errorMessages.mp3 = "Mp3 file is required.";
+    return errorMessages;
+  };
 
   useEffect(() => {
     setIsSending(false);
@@ -17,7 +27,13 @@ const SongForm = ({ albumId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const errorMessages = validate()
+    if (Object.keys(errorMessages).length > 0){
+      setErrors(errorMessages)
+      return
+    }
     setIsSending(true);
+    setErrors(validate())
     console.log("HANDLING SUBMIT OF SONG");
     const formData = new FormData();
     formData.append("mp3", mp3);
@@ -44,6 +60,7 @@ const SongForm = ({ albumId }) => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </label>
+        {errors.title && <p className="errors">{errors.title}</p>}
         <label>
           genre
           <input
@@ -53,12 +70,14 @@ const SongForm = ({ albumId }) => {
             onChange={(e) => setGenre(e.target.value)}
           />
         </label>
+        {errors.genre && <p className="errors">{errors.genre}</p>}
         <input
           className="fileInput"
           type="file"
           accept="audio/*"
           onChange={(e) => setMp3(e.target.files[0])}
         />
+        {errors.mp3 && <p className="errors">{errors.mp3}</p>}
         <button className="orangeButton songSubmit" disabled={isSending} type="submit">
           Submit
         </button>
