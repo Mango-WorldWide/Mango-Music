@@ -79,7 +79,7 @@ const AlbumForm = ({ input, formType }) => {
     if (formType === "Update") {
       console.log("!!!!! UPDATING ALBUM !!!!!!!!");
       const updatedAlbum = await dispatch(updateAlbumThunk(albumPayload, albumId));
-      console.log("updatedAlbum👿👿👿👿👿👿👿👿", updatedAlbum)
+      console.log("updatedAlbum ==>", updatedAlbum)
       if(updatedAlbum) history.push(`/albums/${updatedAlbum.id}`);
     }
   };
