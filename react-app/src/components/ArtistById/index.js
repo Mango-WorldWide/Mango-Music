@@ -8,6 +8,7 @@ const ArtistById = () => {
   const dispatch = useDispatch();
   const { artistId } = useParams();
   const artist = useSelector((state) => state.artist);
+  const album = useSelector((state) => state.albums);
 
   useEffect(() => {
     dispatch(loadArtistThunk(artistId));
@@ -23,26 +24,17 @@ const ArtistById = () => {
         <h2 className="section-title">Albums</h2>
         <div className="album-list">
           {artist.albums.map((album) => (
-            <Link to={`/albums/${album.id}`}>
+            <Link className="albumArtistById" to={`/albums/${album.id}`}>
             <img
               key={album.id}
               className="album-cover"
               src={album.cover}
               alt={album.title}
             />
+            <h2 className="albumArtistById">{album.title}</h2>
             </Link>
           ))}
-        </div>
-      </div>
-
-      <div className="song-section">
-        <h2 className="section-title">Songs</h2>
-        <div className="song-list">
-          {artist.songs.map((song) => (
-            <p key={song.id} className="song-title">
-              {song.title}
-            </p>
-          ))}
+          {console.log('ARTIST', album)}
         </div>
       </div>
     </div>
