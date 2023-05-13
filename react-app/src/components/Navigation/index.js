@@ -21,18 +21,24 @@ function Navigation() {
 				</li>
 			</div>
 			<div className="nav-list-bottom-wrapper">
-				<li className="nav-list-item">
-					<i className='fas fa-record-vinyl' style={{ color: "rgba(238, 238, 238, 1)" }}></i>
-					<NavLink exact to="/albums">Albums</NavLink>
-				</li>
 				{user && user.artist_id > 1 && (
+					<>
 					<li className='nav-list-item'>
 						<i className='fas fa-plus-square' style={{ color: "rgba(238, 238, 238, 1)" }}></i>
 						<NavLink exact to='/albums/new'>Create Album</NavLink>
 					</li>
+					<li className='nav-list-item'>
+						<i className='fas fa-plus-square' style={{ color: "rgba(238, 238, 238, 1)" }}></i>
+						<NavLink exact to='/albums/artist'>My Albums</NavLink>
+					</li>
+					</>
 				)}
 			</div >
 			<div className='nav-list-playlist-wrapper'>
+				<li className="nav-list-item">
+					<i className='fas fa-record-vinyl' style={{ color: "rgba(238, 238, 238, 1)" }}></i>
+					<NavLink exact to="/albums">Albums</NavLink>
+				</li>
 				<li className="nav-list-item">
 					<i className='fas fa-th' style={{ color: "rgba(238, 238, 238, 1)" }}></i>
 					<NavLink exact to="/playlists">Playlists</NavLink>
