@@ -4,6 +4,5 @@ from wtforms.validators import InputRequired
 
 class PlaylistForm(FlaskForm):
     title = StringField("Title", validators = [InputRequired()])
-    description = StringField("Description", validators = [InputRequired()]) 
-    cover = StringField("Cover", validators = [InputRequired()]) 
-     
+    description = StringField("Description")
+    cover = StringField("Cover", validators = [InputRequired()])
