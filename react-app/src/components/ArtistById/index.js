@@ -34,17 +34,6 @@ const ArtistById = () => {
           ))}
         </div>
       </div>
-
-      <div className="song-section">
-        <h2 className="section-title">Songs</h2>
-        <div className="song-list">
-          {artist.songs.map((song) => (
-            <p key={song.id} className="song-title">
-              {song.title}
-            </p>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
