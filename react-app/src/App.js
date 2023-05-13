@@ -71,6 +71,7 @@ function App() {
                 <Route path='/artist/:artistId' component={ArtistById} />
                 <Route path='/albums/new' component={CreateAlbum} />
                 <Route path='/albums/:albumId/edit' component={UpdateAlbum} />
+                <Route path='/albums/artist' component={AlbumsIndex} />
                 <Route path='/albums/:albumId' component={AlbumById} />
                 <Route path='/albums' component={AlbumsIndex} />
                 <Route path='/playlists/new' component={NewPlaylistForm} />

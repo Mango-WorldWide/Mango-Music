@@ -1,5 +1,3 @@
-import { useHistory } from "react-router-dom";
-import { authenticate } from "./session";
 
 ////////////// Action Creators ///////////////
 export const GET_PLAYLISTS = "playlists/GET_PLAYLISTS";

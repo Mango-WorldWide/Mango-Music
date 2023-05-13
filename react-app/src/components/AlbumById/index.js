@@ -14,7 +14,7 @@ import OpenModalDeleteButton from "../DeleteSong/OpenModalDeleteButton";
 import DeleteSongModal from "../DeleteSong";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AlbumById.css";
-import AuthModal from "../AuthModal"
+import AuthModal from "../AuthModal";
 import OpenModalAddButton from "../AddPlaylistSong/OpenModalAddButton";
 import AddSongModal from "../AddPlaylistSong";
 
@@ -83,7 +83,7 @@ const AlbumById = () => {
         </div>
         <div className="albumMenu">
           <h1 className="albumTitle">{album["Album"].title}</h1>
-          <h2 className="albumArtist">{album["Album"].artist}</h2>
+          <h2 className="albumArtist"><a href={`/artist/${album["Album"].artist_id}`}>{album["Album"].artist}</a></h2>
           <div className="albumGenreYear">
             <p className="albumGenre">{album["Album"].genre}</p>
             <p id="dot">·</p>
@@ -97,10 +97,9 @@ const AlbumById = () => {
             <p className="albumDesc">{album["Album"].description}</p>
           </div>
           <div class="orangeButtons">
-            {
-            albumSongs && albumSongs.length > 0 &&
-            <PlayButton songId={albumSongs[0].id} songs={albumSongs} isButton={true} />
-            }
+            {albumSongs && albumSongs.length > 0 && (
+              <PlayButton songId={albumSongs[0].id} songs={albumSongs} isButton={true} />
+            )}
             <button className="orangeButton" onClick={handleShuffle}>
               <i class="fa-sharp fa-solid fa-shuffle" />
               Shuffle
@@ -116,14 +115,17 @@ const AlbumById = () => {
       <div className="song-list" onMouseLeave={() => setHoveredSong("")}>
         <table className="songTable">
           <th id="songColumn">Song</th>
-          <th id="likesColumn"></th>
+          <th id="likesColumn" />
+          <th id="likesColumn" />
+          <th id="likesColumn" />
           {album["Songs"].map((song, i) => (
-            <tr
-              className={`songData ${i % 2 === 0 ? "grey" : ""}`}
-              onMouseEnter={() => setHoveredSong(i)}
-            >
-              <td className="songTitle">
-                {/* <p>
+            <>
+              <tr
+                className={`songData ${i % 2 === 0 ? "grey" : ""}`}
+                onMouseEnter={() => setHoveredSong(i)}
+              >
+                <td className="songTitle">
+                  {/* <p>
                 {playlist.songs.id === selectedSong ? (
                   <i class="fa-sharp fa-solid fa-pause orange" />
                 ) : i === hoveredSong ? (
@@ -132,29 +134,58 @@ const AlbumById = () => {
                   i + 1
                 )}
               </p> */}
-                <PlayButton songId={song.id} songs={albumSongs} isButton={false} />
-                <p>{song.title}</p>
-              </td>
-              <td onClick={(e) => handleLikeButton(e, song.id)}>
-                {likes.filter((like) => like["song_id"] == song.id).length > 0 ? (
-                  <i class="fa-solid fa-thumbs-up" />
-                ) : i === hoveredSong ? (
-                  <i class="fa-regular fa-thumbs-up" />
-                ) : (
-                  ""
+                  <PlayButton songId={song.id} songs={albumSongs} isButton={false} />
+                  <p>{song.title}</p>
+                </td>
+                <td onClick={(e) => handleLikeButton(e, song.id)}>
+                  {likes.filter((like) => like["song_id"] == song.id).length > 0 ? (
+                    <i class="fa-solid fa-thumbs-up" />
+                  ) : i === hoveredSong ? (
+                    <i class="fa-regular fa-thumbs-up" />
+                  ) : (
+                    ""
+                  )}
+                </td>
+                {user.playlists.length > 0 && (
+                  <td>
+                    <OpenModalAddButton
+                      itemText="Add Song to Playlist"
+                      modalComponent={<AddSongModal song={song} />}
+                    />
+                  </td>
                 )}
-              </td>
-              {user.playlists.length >0 && (
-                <td>
-                    <OpenModalAddButton itemText="Add Song to Playlist" modalComponent={<AddSongModal song={song}/>} />
-                </td>
-              )}
-              {user.artist_id === album.Album.artist_id && (
-                <td>
-                    <OpenModalDeleteButton itemText="Delete" modalComponent={<DeleteSongModal  song={song} categoryId={albumId} category={'album'}/>} />
-                </td>
-              )}
-            </tr>
+                {user.artist_id === album.Album.artist_id && (
+                  <>
+                    <td>
+                      <OpenModalDeleteButton
+                        itemText="Edit"
+                        modalComponent={
+                          <DeleteSongModal
+                            song={song}
+                            categoryId={albumId}
+                            category={"album"}
+                            method={"Edit"}
+                          />
+                        }
+                      />
+                    </td>
+                    <td>
+                      <OpenModalDeleteButton
+                        itemText="Delete"
+                        modalComponent={
+                          <DeleteSongModal
+                            song={song}
+                            categoryId={albumId}
+                            category={"album"}
+                            method={"Delete"}
+                          />
+                        }
+                      />
+                    </td>
+                  </>
+                )}
+              </tr>
+            </>
           ))}
         </table>
       </div>

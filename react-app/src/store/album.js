@@ -44,8 +44,19 @@ export const loadAlbumsThunk = () => async (dispatch) => {
   }
 };
 
+// get artist's albums
+export const loadArtistAlbumsThunk = () => async (dispatch) => {
+  const res = await fetch("/api/artist/albums");
+  if (res.ok) {
+    const data = await res.json();
+    console.log("data 👉👉👉", data)
+    dispatch(loadAlbums({Albums: data}));
+    return data
+  }
+};
+
 export const loadOneAlbumThunk = (albumId) => async (dispatch) => {
-  console.log("inside the albulm thunk", albumId);
+  console.log("LOADING SINGLE ALBUM", albumId);
   const response = await fetch(`/api/albums/${albumId}`);
   if (response.ok) {
     const data = await response.json();
@@ -110,9 +121,11 @@ const albumsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_ALBUMS:
       newState = {};
+      console.log("action.albums 👾👾👾👉", action.albums)
       action.albums.Albums.forEach((album) => {
         newState[album.id] = album;
       });
+      console.log("newState 👉👾👾👾", newState)
       return newState;
     case LOAD_ONE_ALBUM:
       newState = {};

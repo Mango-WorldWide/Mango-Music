@@ -1,7 +1,7 @@
-from flask import Blueprint, request
-from app.models import Album, db
+from flask import Blueprint, request, make_response
+from app.models import Album, Artist, db
 from app.forms import AlbumForm
-from flask_login import current_user
+from flask_login import current_user, login_required
 album_routes = Blueprint('albums', __name__)
 
 def validation_errors_to_error_messages(validation_errors):
@@ -20,6 +20,8 @@ def add_artist(albums):
     for album in albums:
         album.artist = album.albums_artists_relationship.to_dict()["name"]
     return albums
+
+
 @album_routes.route('')
 def albums():
     """get all albums"""
@@ -28,6 +30,22 @@ def albums():
     # add_artist(albums)
     # print([album.to_dict() for album in albums],'albums testing')
     return {'Albums': [album.to_dict() for album in albums]}
+
+@album_routes.route("/artist")
+@login_required
+def get_artists_albums():
+    """get artist's albums"""
+    user = current_user.to_dict()
+    artist_id = user["artist_id"]
+
+    if artist_id:
+        artist = Artist.query.get(artist_id)
+        albums = [album for album in (artist.to_dict())["albums"]]
+        return albums
+    else:
+        error = make_response("Must be an artist to access this page")
+        error.status_code = 404
+        return error
 
 @album_routes.route("/<int:albumId>/edit", methods=['PUT'])
 def update_album(albumId):

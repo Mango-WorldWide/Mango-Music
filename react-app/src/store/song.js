@@ -80,6 +80,8 @@ export const addSongThunk = (song) => async(dispatch) => {
 }
 
 export const updateSongThunk = (song, songId) => async(dispatch) => {
+    console.log("songId 👉", songId)
+    console.log("song 👉", song)
     const res = await fetch(`/api/songs/${songId}`, {
         method : "PUT",
         headers : {
@@ -88,8 +90,9 @@ export const updateSongThunk = (song, songId) => async(dispatch) => {
         body: JSON.stringify(song)
     })
     if (res.ok) {
-        // const data = res.json()
-        return song
+        const data = res.json()
+        console.log("data 👉", data)
+        return data
     }
 }
 
