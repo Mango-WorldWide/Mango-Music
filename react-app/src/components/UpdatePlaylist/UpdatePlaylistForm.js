@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { updatePlaylistThunk, getSinglePlaylistThunk } from "../../store/playlist";
+import { authenticate } from "../../store/session";
 
 function UpdatePlaylistForm() {
   const [title, setTitle] = useState("");
@@ -39,6 +40,7 @@ function UpdatePlaylistForm() {
     } else {
       console.log("👉 no errors found while updating playlist 👈")
       const updatedPlaylist = await dispatch(updatePlaylistThunk(playlist, playlistEdits));
+      dispatch(authenticate())
       console.log("updatedPlaylist 👉", updatedPlaylist)
       history.push(`/playlists/${updatedPlaylist.id}`);
     }
