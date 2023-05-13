@@ -134,7 +134,7 @@ function PlaylistById() {
               </td>
               {user.id === playlistOwner && (
                 <td>
-                    <OpenModalDeleteButton itemText="Delete" modalComponent={<DeleteSongModal song={playlist.id} categoryId={playlistId} category={'playlist'} />} />
+                    <OpenModalDeleteButton itemText="Delete" modalComponent={<DeleteSongModal song={playlist.id} categoryId={playlistId} category={'playlist'} method={"Delete"} />} />
                 </td>
               )}
             </tr>
