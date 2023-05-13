@@ -73,6 +73,14 @@
   align-self: flex-start;
 }
 
+.nav-list-playlist-wrapper{
+  margin-top: 25px;
+}
+
+.nav-list-playlist-wrapper.without-user{
+  margin-top: -10px;
+}
+
 .user-icon-button{
   background-color: #06660bfd;
   border: 1px solid transparent;

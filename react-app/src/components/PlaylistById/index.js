@@ -28,7 +28,7 @@ function PlaylistById() {
   useEffect(() => {
     console.log("dispatching get single playlist");
     dispatch(getSinglePlaylistThunk(playlistId));
-  }, [dispatch]);
+  }, [dispatch, playlistId]);
 
   const handleLikeButton = async (e, songId) => {
     e.preventDefault();
