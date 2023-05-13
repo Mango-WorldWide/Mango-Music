@@ -36,18 +36,22 @@ def update_album(albumId):
     form = AlbumForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print('validations update flask works')
+        # print('👉👉👉👉 validations update flask works')
 
         album = Album.query.get(albumId)
+        # print(f"album 👉👺👺 {album.to_dict()}")
         album.title = form.data['title']
         album.description = form.data['description']
         album.cover = form.data['cover']
         album.genre = form.data['genre']
         album.year = form.data['year']
-        print(album, 'new ALBUM UPDATE ROUTE')
+        # print(album, ' 👺👺👺👺👺 new ALBUM UPDATE ROUTE')
         db.session.add(album)
         db.session.commit()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        # print(album.to_dict(), ' 👺👺👺👺👺 new ALBUM UPDATE ROUTE')
+        return album.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @album_routes.route("/<int:albumId>")
