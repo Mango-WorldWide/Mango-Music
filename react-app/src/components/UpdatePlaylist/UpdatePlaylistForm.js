@@ -24,24 +24,24 @@ function UpdatePlaylistForm() {
   }, [dispatch, playlistId]);
 
   const playlist = useSelector((state) => state.playlists);
-  console.log("playlist 👉", playlist)
+  // console.log("playlist 👉", playlist)
   if (!playlist || !playlist.id) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const err = {};
     const playlistEdits = { title, description, cover };
-    console.log("playlist 👉", playlistEdits)
+    // console.log("playlist 👉", playlistEdits)
     if (title === null || title === "") err.title = "Title is required";
     if (cover === null || cover === "") err.cover = "Cover is required";
     if (!!Object.values(err).length) {
-      console.log("👉 found errors while updating playlist 👈")
+      // console.log("👉 found errors while updating playlist 👈")
       setErrors(err);
     } else {
-      console.log("👉 no errors found while updating playlist 👈")
+      // console.log("👉 no errors found while updating playlist 👈")
       const updatedPlaylist = await dispatch(updatePlaylistThunk(playlist, playlistEdits));
       dispatch(authenticate())
-      console.log("updatedPlaylist 👉", updatedPlaylist)
+      // console.log("updatedPlaylist 👉", updatedPlaylist)
       history.push(`/playlists/${updatedPlaylist.id}`);
     }
   };
@@ -52,7 +52,7 @@ function UpdatePlaylistForm() {
         <div>
           <h1>Update your Playlist</h1>
         </div>
-        {console.log('TEST PLAYLIST-----------',playlist)}
+        {/* {console.log('TEST PLAYLIST-----------',playlist)} */}
         <img className="musicCover audio-player-img"
       src={playlist['cover'] ? playlist['cover'] : process.env.PUBLIC_URL + '/mango-holder.gif' }
       alt={playlist['cover']} />

@@ -43,7 +43,7 @@ export const getPlaylistsThunk = () => async (dispatch) => {
   const res = await fetch("/api/playlists");
   if (res.ok) {
     const data = await res.json();
-    console.log("getPlaylistThunk data 👉", data)
+    // console.log("getPlaylistThunk data 👉", data)
     dispatch(getPlaylists(data));
     return data;
   }
@@ -64,7 +64,7 @@ export const getSinglePlaylistThunk = (playlistId) => async (dispatch) => {
   const res = await fetch(`/api/playlists/${playlistId}`);
   if (res.ok) {
     const data = await res.json();
-    console.log("getSinglePlaylistThunk 👉", data)
+    // console.log("getSinglePlaylistThunk 👉", data)
     dispatch(getSinglePlaylist(data));
     return data;
   }
@@ -81,7 +81,7 @@ export const createPlaylistThunk = (playlist) => async (dispatch) => {
   });
   if (res.ok) {
     const data = await res.json();
-    console.log("createPlaylistThunk 👉", data)
+    // console.log("createPlaylistThunk 👉", data)
     return data;
   }
 };
@@ -97,7 +97,7 @@ export const updatePlaylistThunk = (playlist, playlistEdits) => async (dispatch)
   });
   if (res.ok) {
     const data = await res.json();
-    console.log("updatePlaylistThunk 👉", data)
+    // console.log("updatePlaylistThunk 👉", data)
     return data;
   }
 };
@@ -108,7 +108,7 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
     method: "DELETE",
   });
   if (res.ok) {
-    console.log("👉 successful in deletePlaylistThunk")
+    // console.log("👉 successful in deletePlaylistThunk")
     dispatch(getUserPlaylistsThunk());
   }
 };
@@ -125,7 +125,7 @@ export const addSongPlaylist = (playlist) => async(dispatch) => {
     body: JSON.stringify(playlist)
   })
   if (response.ok){
-    console.log('add song playlist worked!!!!!!')
+    // console.log('add song playlist worked!!!!!!')
   }
 }
 const playlistsReducer = (state = {}, action) => {
@@ -133,7 +133,7 @@ const playlistsReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_PLAYLISTS:
       newState = {};
-      console.log(" action.playlists 👉👉👉👉",  action.playlists)
+      // console.log(" action.playlists 👉👉👉👉",  action.playlists)
       action.playlists.forEach((playlist) => {
         newState[playlist.id] = playlist;
       });

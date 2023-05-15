@@ -1,1041 +1,931 @@
 from app.models import db, Song, Album, Artist, environment, SCHEMA
 from sqlalchemy.sql import text
+
 # from app import app
 # from flask.cli import with_appcontext
 
+
 def song_data():
     return [
-                                    # BAD BUNNY ALBUM
-    {
-        "title": "Moscow Mule",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,  # Assuming Un Verano Sin Ti is the first album in the albums table
-        "genre": "Reggaeton",
-        "duration": 4.05,  # Replace
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,  # Assuming Bad Bunny is the first artist in the artists table
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Después de la Playa",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 3.50,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Me Porto Bonito",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 2.58,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Tití Me Preguntó",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 4.03,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Un Ratito",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 2.56,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Yo No Soy Celoso",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 3.50,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Tarot",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 3.57,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Neverita",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 2.53,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "La Corriente",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 3.18,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Efecto",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 3.33,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Party",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 3.47,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Aguacero",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 3.31,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Enséñame a Bailar",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 2.56,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Ojitos Lindos",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 4.18,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "El Apagón",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 3.21,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Otro Atardecer",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 4.04,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Un Coco",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 3.16,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Andrea",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 5.39,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Me Fui de Vacaciones",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 3.00,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Un Verano Sin Ti",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 2.28,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Agosto",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 2.19,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Callaita",
-        "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-        "genre": "Reggaeton",
-        "duration": 4.10,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-        "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "lyrics": "Lyrics",
-    },
-
-                                    # BACKSTREET BOYS ALBUM
-    {
-        "title": "I Want It That Way",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 3.35,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/01 Backstreet Boys - I Want It That Way.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Everybody (Backstreet's Back)",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 3.35,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/02 Backstreet Boys - Everybody (Backstreet's Back).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "As Long As You Love Me",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 3.35,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/03 Backstreet Boys - As Long As You Love Me.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Show Me The Meaning Of Being Lonely",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 3.35,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/04 Backstreet Boys - Show Me The Meaning Of Being Lonely.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Quit Playing Games (With My Heart)",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 3.54,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/05 Backstreet Boys - Quit Playing Games (With My Heart).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "All I Have To Give",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 4.38,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/06 Backstreet Boys - All I Have To Give.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Larger Than Life",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 3.54,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/07 Backstreet Boys - Larger Than Life.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "I'll Never Break Your Heart",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 4.50,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/08 Backstreet Boys - I'll Never Break Your Heart.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "The Call",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 3.25,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/09 Backstreet Boys - The Call.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Shape Of My Heart",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 3.52,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/10 Backstreet Boys - Shape Of My Heart.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Get Down (You're The One For Me)",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 3.52,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/11 Backstreet Boys - Get Down (You're The One For Me).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Anywhere For You",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 4.42,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/12 Backstreet Boys - Anywhere For You.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "The One",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 3.48,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/13 Backstreet Boys - The One.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "More Than That",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 3.43,  # Replace with the actual duration of the song
-                "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/14 Backstreet Boys - More Than That.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Drowning",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 4.28,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/15 Backstreet Boys - Drowning.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "The Perfect Fan",
-        "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-        "genre": "Pop",
-        "duration": 4.13,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-        "mp3": "/Music/Backstreet Boys- Greatest Hits/16 Backstreet Boys - The Perfect Fan.mp3",
-        "lyrics": "Lyrics",
-    },
-
-
-                                    # BLACKPINK ALBUM
-
-    {
-        "title": "Pink Venom",
-        "album_id": Album.query.filter(Album.title == 'BORN PINK').first().id,
-        "genre": "K-Pop",
-        "duration": 3.07,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'BLACKPINK').first().id,
-        "mp3": "/Music/BLACKPINK - BORN PINK/01. Pink Venom.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Shut Down",
-        "album_id": Album.query.filter(Album.title == 'BORN PINK').first().id,
-        "genre": "K-Pop",
-        "duration": 2.55,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'BLACKPINK').first().id,
-        "mp3": "/Music/BLACKPINK - BORN PINK/02. Shut Down.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Typa Girl",
-        "album_id": Album.query.filter(Album.title == 'BORN PINK').first().id,
-        "genre": "K-Pop",
-        "duration": 2.59,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'BLACKPINK').first().id,
-        "mp3": "/Music/BLACKPINK - BORN PINK/03. Typa Girl.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Yeah Yeah Yeah",
-        "album_id": Album.query.filter(Album.title == 'BORN PINK').first().id,
-        "genre": "K-Pop",
-        "duration": 2.58,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'BLACKPINK').first().id,
-        "mp3": "/Music/BLACKPINK - BORN PINK/04. Yeah Yeah Yeah.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Hard to Love",
-        "album_id": Album.query.filter(Album.title == 'BORN PINK').first().id,
-        "genre": "K-Pop",
-        "duration": 2.42,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'BLACKPINK').first().id,
-        "mp3": "/Music/BLACKPINK - BORN PINK/05. Hard to Love.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "The Happiest Girl",
-        "album_id": Album.query.filter(Album.title == 'BORN PINK').first().id,
-        "genre": "K-Pop",
-        "duration": 3.42,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'BLACKPINK').first().id,
-        "mp3": "/Music/BLACKPINK - BORN PINK/06. The Happiest Girl",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "07. Tally",
-        "album_id": Album.query.filter(Album.title == 'BORN PINK').first().id,
-        "genre": "K-Pop",
-        "duration": 3.04,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'BLACKPINK').first().id,
-        "mp3": "/Music/BLACKPINK - BORN PINK/07. Tally.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "08. Ready For Love",
-        "album_id": Album.query.filter(Album.title == 'BORN PINK').first().id,
-        "genre": "K-Pop",
-        "duration": 3.04,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'BLACKPINK').first().id,
-        "mp3": "/Music/BLACKPINK - BORN PINK/08. Ready For Love.mp3",
-        "lyrics": "Lyrics",
-    },
-
-
-
-                                    # BRENT FAIYAZ ALBUM
-    {
-        "title": "VILLAIN'S THEME",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 2.21,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/01. VILLAIN'S THEME.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "LOOSE CHANGE",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 3.46,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/02. LOOSE CHANGE.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "GRAVITY (FEAT. TYLER, THE CREATOR)",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 3.34,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/03. GRAVITY (FEAT. TYLER, THE CREATOR).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "HEAL YOUR HEART (INTERLUDE)",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 1.15,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/04. HEAL YOUR HEART (INTERLUDE).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "SKIT EGOMANIAC",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 1.26,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/05. SKIT_ EGOMANIAC.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "ALL MINE",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 3.36,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/06. ALL MINE.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "PRICE OF FAME",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 6.19,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/07. PRICE OF FAME.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "GHETTO GATSBY (FEAT. ALICIA KEYS)",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 3.18,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/08. GHETTO GATSBY (FEAT. ALICIA KEYS).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "WASTING TIME (FEAT. DRAKE & THE NEPTUNES)",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 5.01,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/09. WASTING TIME (FEAT. DRAKE & THE NEPTUNES).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "ROLLING STONE",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 2.42,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/10. ROLLING STONE.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "FYTB (FEAT. JOONY)",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 3.18,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/11. FYTB (FEAT. JOONY).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "SKIT OBLIVION",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 2.46,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/12. SKIT_ OBLIVION.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "DEAD MAN WALKING",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 4.07,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/13. DEAD MAN WALKING.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "ADDICTIONS",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 3.12,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/14. ADDICTIONS.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "ROLE MODEL",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 3.14,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/15. ROLE MODEL.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "JACKIE BROWN",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 2.49,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/16. JACKIE BROWN.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "BAD LUCK",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 2.42,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/17. BAD LUCK.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "SKIT WAKE UP CALL",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 5.05,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/18. SKIT_ WAKE UP CALL.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "ANGEL",
-        "album_id": Album.query.filter(Album.title == 'WASTELAND').first().id,
-        "genre": "R&B",
-        "duration": 3.39,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id,
-        "mp3": "/Music/Brent Faiyaz - WASTELAND/19. ANGEL.mp3",
-        "lyrics": "Lyrics",
-    },
-
-                                    # GRYFFIN ALBUM
-
-    {
-        "title": "Intro",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 1.35,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/01. Intro.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Alive",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 3.42,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/02. Alive.mp3",
-        "lyrics": "Lyrics",
-    },
         {
-        "title": "Forever",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 3.07,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/03. Forever.mp3",
-        "lyrics": "Lyrics",
-    },
+            "title": "Moscow Mule",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/9ad8739075d147a5ae44d948fc46cbf6.mp3",
+        },
+        {
+            "title": "Después de la Playa",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/4b9e4b057eb949e6acb9756eaacaf07a.mp3",
+        },
+        {
+            "title": "Me Porto Bonito",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/471109078d124bc2bb9361eb1ecc4ced.mp3",
+        },
+        {
+            "title": "Tití Me Preguntó",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/fc0bde41c429483f97fa8e152ac1b6cc.mp3",
+        },
+        {
+            "title": "Un Ratito",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/4ae4ca78b9dc46a9af3c31180d3fe427.mp3",
+        },
+        {
+            "title": "Yo No Soy Celoso",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/64a48e81e1bb4dbaadae19d1e06cf101.mp3",
+        },
+        {
+            "title": "Tarot",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/742fce2edd9649f8a08bacad6de65457.mp3",
+        },
+        {
+            "title": "Neverita",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/99e621e48e874e1f909077eabd4d3578.mp3",
+        },
+        {
+            "title": "La Corriente",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/a9580cc7a62d45feba507d5fa1f54d6f.mp3",
+        },
+        {
+            "title": "Efecto",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/9b84fa5c36b94444bbb7a17622450f77.mp3",
+        },
+        {
+            "title": "Party",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/dcee6c1f5d084b4d85f5ee1163fb2b0d.mp3",
+        },
+        {
+            "title": "Aguacero",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/a353464658f14b5e9526f76c58d586af.mp3",
+        },
+        {
+            "title": "Enséñame a Bailar",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/6c5c20256cf74ad4a815f6d88473f6a0.mp3",
+        },
+        {
+            "title": "Ojitos Lindos",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/9ce5a881496b4764a3abac6798d2d3a8.mp3",
+        },
+        {
+            "title": "Dos Mil 16",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/62900e6caf844c0fbbb93ce4be6a89c4.mp3",
+        },
+        {
+            "title": "El Apagón",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/211879fa968747e588c74528ca9c0fe0.mp3",
+        },
+        {
+            "title": "Otro Atardecer",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/7bfd2241ddb841eca2b8e8161371d55e.mp3",
+        },
+        {
+            "title": "Un Coco",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/1d5fd5b7bc5d4e75940650c2219cb37c.mp3",
+        },
+        {
+            "title": "Andrea",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/f1716dfaac0e4f4ab5d079b24127ca2c.mp3",
+        },
+        {
+            "title": "Me Fui de Vacaciones",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/156630d36d90420184eb6e0a0e6edf55.mp3",
+        },
+        {
+            "title": "Un Verano Sin Ti",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/4f6fbe43b26e41b1b4e3358e816d71dd.mp3",
+        },
+        {
+            "title": "Agosto",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/7baafa73652f47d2a1f0b2a89a08b251.mp3",
+        },
+        {
+            "title": "Callaita",
+            "album_id": 2,
+            "genre": "Reggaeton",
+            "artist_id": 9,
+            "mp3": "http://mango-music.s3.amazonaws.com/4b03360eb36845599a8cb23dee787f29.mp3",
+        },
+        {
+            "title": "I Want It That Way",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/e804c3379fc845199eaf564dd4cdbd2d.mp3",
+        },
+        {
+            "title": "Everybody (Backstreet's Back)",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/a5f42d20074f42efbcdfb40b73ecda80.mp3",
+        },
+        {
+            "title": "As Long As You Love Me",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/221a928ec02d439682edcebab675d0e9.mp3",
+        },
+        {
+            "title": "Show Me The Meaning Of Being Lonely",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/3b7a97cfeadf462aa7a518ee88fd44e1.mp3",
+        },
+        {
+            "title": "Quit Playing Games (With My Heart)",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/ca43a7e85206445ca83c45a21097e848.mp3",
+        },
+        {
+            "title": "All I Have To Give",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/68c187bc1d3e41a28dd49f9d262b94be.mp3",
+        },
+        {
+            "title": "Larger Than Life",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/c54f593a436a4ec2aa37a4582a3dceeb.mp3",
+        },
+        {
+            "title": "I'll Never Break Your Heart",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/da18f867edae4ecaafe8ce5eb48fe09f.mp3",
+        },
+        {
+            "title": "The Call",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/4790e0f2f2994a5da36d3707e023da57.mp3",
+        },
+        {
+            "title": "Shape Of My Heart",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/df67d2a06e374934bdef5b92fffe7a3f.mp3",
+        },
+        {
+            "title": "Get Down (You're The One For Me)",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/5dbf71357f604e2f82f93d53e201e050.mp3",
+        },
+        {
+            "title": "Anywhere For You",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/29eea139f9b04e9dbff38cd1288ebc9c.mp3",
+        },
+        {
+            "title": "The One ",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/63d0e2be4eb54a41a1e990ca7de7ed27.mp3",
+        },
+        {
+            "title": "More Than That",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/8400f96505664526a40f41ddad0eddec.mp3",
+        },
+        {
+            "title": "Drowning",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/d7e4f433f05a4ee9b1be0424c4ca4add.mp3",
+        },
+        {
+            "title": "The Perfect Plan",
+            "album_id": 1,
+            "genre": "Pop",
+            "artist_id": 4,
+            "mp3": "http://mango-music.s3.amazonaws.com/7a8a8e33bae14dd29111d36c90f0b782.mp3",
+        },
+        {
+            "title": "Pink Venom",
+            "album_id": 3,
+            "genre": "K-Pop",
+            "artist_id": 5,
+            "mp3": "http://mango-music.s3.amazonaws.com/f9aad8314ead4a1e8ebce10a367ddab8.mp3",
+        },
+        {
+            "title": "Shut Down",
+            "album_id": 3,
+            "genre": "K-Pop",
+            "artist_id": 5,
+            "mp3": "http://mango-music.s3.amazonaws.com/97c7fed18ab64360816f60d9e837764f.mp3",
+        },
+        {
+            "title": "Typa Girl",
+            "album_id": 3,
+            "genre": "K-Pop",
+            "artist_id": 5,
+            "mp3": "http://mango-music.s3.amazonaws.com/e8d82010e96a43ccb689ca81f33c2f78.mp3",
+        },
+        {
+            "title": "Yeah Yeah Yeah",
+            "album_id": 3,
+            "genre": "K-Pop",
+            "artist_id": 5,
+            "mp3": "http://mango-music.s3.amazonaws.com/6704b7a3081a408a83975fb4fb1678f3.mp3",
+        },
+        {
+            "title": "Hard to Love",
+            "album_id": 3,
+            "genre": "K-Pop",
+            "artist_id": 5,
+            "mp3": "http://mango-music.s3.amazonaws.com/82912dbb7663409e862d3ba1d9cdf935.mp3",
+        },
+        {
+            "title": "The Happiest Girl",
+            "album_id": 3,
+            "genre": "K-Pop",
+            "artist_id": 5,
+            "mp3": "http://mango-music.s3.amazonaws.com/6ef1fa64ec87464a98d56fc747698fcf.mp3",
+        },
+        {
+            "title": "Tally",
+            "album_id": 3,
+            "genre": "K-Pop",
+            "artist_id": 5,
+            "mp3": "http://mango-music.s3.amazonaws.com/a3ba4e069fdf4f2a97339a69bbcfae87.mp3",
+        },
+        {
+            "title": "Ready For Love",
+            "album_id": 3,
+            "genre": "K-Pop",
+            "artist_id": 5,
+            "mp3": "http://mango-music.s3.amazonaws.com/5e8413f7fe2645c6b748753916090a2c.mp3",
+        },
+        {
+            "title": "VILLAIN'S THEME",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/ed538bf3e03040fa989317531fc90aac.mp3",
+        },
+        {
+            "title": "LOOSE CHANGE",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/3fa6461623274d1983c93f5cf91a577b.mp3",
+        },
+        {
+            "title": "GRAVITY (FEAT. TYLER, THE CREATOR)",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/eb74af047f5d4442889791d08df23687.mp3",
+        },
+        {
+            "title": "HEAL YOUR HEART (INTERLUDE)",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/ab7d131303334b7cb37d2321e348db95.mp3",
+        },
+        {
+            "title": "SKIT_EGOMANIAC",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/7c88c3b5f2dd47c9af449bd33dcb5810.mp3",
+        },
+        {
+            "title": "ALL MINE",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/90cb52790b4d47bb85fe9759d81fb843.mp3",
+        },
+        {
+            "title": "PRICE OF FAME",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/b151caf7843946e78c3e3c71c26ff08f.mp3",
+        },
+        {
+            "title": "GHETTO GATSBY (FEAT. ALICIA KEYS)",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/269f2e05c15c43a9811e0e82bd613993.mp3",
+        },
+        {
+            "title": "WASTING TIME (FEAT. DRAKE & THE NEPTUNES)",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/f26d6e2f2caf42e4905f03f0db34515d.mp3",
+        },
+        {
+            "title": "ROLLING STONE",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/d83d0ddd966e40198fe97bf1cb9ef7f1.mp3",
+        },
+        {
+            "title": "FYTB (FEAT. JOONY)",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/833b8d0ccd59440d9dd521627bf6a5a1.mp3",
+        },
+        {
+            "title": "SKIT_OBLIVION",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/4d9fbd796ad947fea1209a4fe9470720.mp3",
+        },
+        {
+            "title": "DEAD MAN WALKING",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/aed9bc58a4894b77bce418b52949f5c9.mp3",
+        },
+        {
+            "title": "ADDICTIONS",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/1c39d6588abb4f1d8c866e116bc940cf.mp3",
+        },
+        {
+            "title": "ROLE MODEL",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/9bf92c34e6a4482d9e7716d54b0afdcd.mp3",
+        },
+        {
+            "title": "JACKIE BROWN",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/744eadd977e54a9e96866872acc29fac.mp3",
+        },
+        {
+            "title": "BAD LUCK",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/ad8d7670aa5846bf8819a512fa178e27.mp3",
+        },
+        {
+            "title": "SKIT_WAKE UP CALL",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/ee6c4b419be24947b274a47cc672d472.mp3",
+        },
+        {
+            "title": "ANGEL",
+            "album_id": 4,
+            "genre": "R&B",
+            "artist_id": 6,
+            "mp3": "http://mango-music.s3.amazonaws.com/ed4f9d3bc1b747f7830e6cf5c08b6e7c.mp3",
+        },
+        {
+            "title": "Intro",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/842f5154d2e64f58b2a7b4b207b0c3cf.mp3",
+        },
+        {
+            "title": "Alive",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/6f4f8b0d1fd24b5fa8b3696fee76d45e.mp3",
+        },
+        {
+            "title": "Forever",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/d986433cc4504f89a320784037f07c66.mp3",
+        },
+        {
+            "title": "Lose Your Love",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/30eb3368f5b140a69474113ff08d9635.mp3",
+        },
+        {
+            "title": "Safe With Me",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/27a9540b76174b429bf109d43cbd6f1c.mp3",
+        },
+        {
+            "title": "Woke Up in Love",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/036724d439e340efa76dd5d3ec8e76ec.mp3",
+        },
+        {
+            "title": "Reckless",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/18ec9c2bba074906b4e2813644510f48.mp3",
+        },
+        {
+            "title": "Glitch In The Simulation",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/b65e52c64b004d5ea779f29e76e5b77a.mp3",
+        },
+        {
+            "title": "Evergreen",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/a58722456b1c43c29ea466cd56b345dc.mp3",
+        },
+        {
+            "title": "Scandalous",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/a43a1435169c4b8fb130daf8d8f2ed77.mp3",
+        },
+        {
+            "title": "Interlude",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/2b66c8344588406687f39ea9086b52db.mp3",
+        },
+        {
+            "title": "Colors",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/c0eeae281e654ff29bb834d93c81b904.mp3",
+        },
+        {
+            "title": "After You",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/52c7b222c1244cf089e2ea7fadd4b221.mp3",
+        },
+        {
+            "title": "Best Is Yet To Come",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/23fbb45027a4489bb399dde81b413640.mp3",
+        },
+        {
+            "title": "Sometimes You Know",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/7213bc09928248149c52ea97c64314db.mp3",
+        },
+        {
+            "title": "Caught Up",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/67a54a67a2fc455ba902ff3f690bdcb8.mp3",
+        },
+        {
+            "title": "You Were Loved",
+            "album_id": 5,
+            "genre": "EDM",
+            "artist_id": 3,
+            "mp3": "http://mango-music.s3.amazonaws.com/4b69418bc4854ff98ed8f9567c0261b6.mp3",
+        },
+        {
+            "title": "I Don't Know Why",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/28af5cc9492745028395c3d61301d921.mp3",
+        },
+        {
+            "title": "Whatever It Takes",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/739fa57e941445d3ab7739c1d0ffe336.mp3",
+        },
+        {
+            "title": "Believer",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/da4857beebcd4c0e964010190c21c9fc.mp3",
+        },
+        {
+            "title": "Walking The Wire",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/aed050c823444772a9967c7652f6b16f.mp3",
+        },
+        {
+            "title": "Rise Up",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/dace42716caa47bb88091b61e6622622.mp3",
+        },
+        {
+            "title": "I'll Make It Up To You",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/5cc2caef2218475eb3508ac5290dc6e8.mp3",
+        },
+        {
+            "title": "Yesterday",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/fd24c7fa20ed495397147036eddb9757.mp3",
+        },
+        {
+            "title": "Mouth Of The River",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/533e4c701b944b7c97b4cc3b90bb114a.mp3",
+        },
+        {
+            "title": "Thunder",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/c06cc0093acd4aebbe7ff6282af71997.mp3",
+        },
+        {
+            "title": "Start Over",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/b0844c0c75df475895b70e0ea85f9e68.mp3",
+        },
+        {
+            "title": "Dancing In The Dark",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/e816a71430624675896dac961d811809.mp3",
+        },
+        {
+            "title": "Levitate",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/60ccf618555141d8a3f16bd1987b15fc.mp3",
+        },
+        {
+            "title": "Not Tpday",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/ac357faf5e974749a448e290c88489b4.mp3",
+        },
+        {
+            "title": "Believer (Kaskade Remix)",
+            "album_id": 6,
+            "genre": "Rock",
+            "artist_id": 7,
+            "mp3": "http://mango-music.s3.amazonaws.com/d4090fc410c844a89cbdaef0fa17e442.mp3",
+        },
+        {
+            "title": "Good Morning",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/44bf0daa9bc94100adab91a7ffa59ab3.mp3",
+        },
+        {
+            "title": "Champion",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/f578885bd9f84de29525de5059494fcc.mp3",
+        },
+        {
+            "title": "Stronger",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/9d6d9b7599c64b46b3f7452773fb1606.mp3",
+        },
+        {
+            "title": "I Wonder",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/e238f525be9e471793d63372550dbd05.mp3",
+        },
+        {
+            "title": "Good Life (feat T-Pain)",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/2b6cfb8830d9489b992edd1056fa4f6e.mp3",
+        },
+        {
+            "title": "Can't Tell Me Nothing",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/b9ceca2e40cc4d25baa41e33f5e07d5f.mp3",
+        },
+        {
+            "title": "Barry Bonds (feat Lil' Wayne)",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/c17022e715844e9aa69b63009709d334.mp3",
+        },
+        {
+            "title": "Drunk and Hot Girls (feat Mos Def)",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/5a7041f5d71e46f9b4577b422af90817.mp3",
+        },
+        {
+            "title": "Flashing Lights (feat Dwele)",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/be2551053b2849949abf06897227b0d9.mp3",
+        },
+        {
+            "title": "Everything I Am (feat DJ Premier)",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/069b0373ce994b83b7f1256a45d58f12.mp3",
+        },
+        {
+            "title": "The Glory",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/3d0bfd8fc8b94493ab4c8b5bf03f0eb3.mp3",
+        },
+        {
+            "title": "Homecoming",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/91cc4b9cb7814bae92807d5b33a3784e.mp3",
+        },
+        {
+            "title": "Big Brother",
+            "album_id": 7,
+            "genre": "Hip Hop",
+            "artist_id": 8,
+            "mp3": "http://mango-music.s3.amazonaws.com/3797f0a5f5da4bd5b2bfe10506fde89e.mp3",
+        },
+        {
+            "title": "Champagne Poetry",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/0dff20561c6744efbf65149c7a7ce7d1.mp3",
+        },
+        {
+            "title": "Papi's Home",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/b36ba2a116244866aed95604adb71081.mp3",
+        },
+        {
+            "title": "Girls Want Girls",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/4cadfa8da3114a90999690ec66986991.mp3",
+        },
+        {
+            "title": "In The Bible",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/38aa39d3886b4ca1af8f063f075085f8.mp3",
+        },
+        {
+            "title": "Love All",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/753f3480fa8d4cb28a0d5ae463b1e170.mp3",
+        },
+        {
+            "title": "Fair Trade",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/32238b7dae6441f8b8040b3e915c7f02.mp3",
+        },
+        {
+            "title": "Way 2 Sexy",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/f342f82ae783470fb674c74a165dfa86.mp3",
+        },
+        {
+            "title": "TSU",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/16dce7c45fb84dd197f42f532821dca6.mp3",
+        },
+        {
+            "title": "N 2 Deep",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/24dc75fe97274e44beff6075a3295538.mp3",
+        },
+        {
+            "title": "Pipe Down",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/4c9326dc7fc24189aa1913c75bfccf47.mp3",
+        },
+        {
+            "title": "Yebba's Hearbreak",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/6900de2d75954315b0c4765f38d68d79.mp3",
+        },
+        {
+            "title": "No Friends In The Industry",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/74dcaa49ecd644569d5de2337d0a317b.mp3",
+        },
+        {
+            "title": "Knife Talk",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/a9076da3422a488f8584ef78b710c295.mp3",
+        },
+        {
+            "title": "7am On Bridle Path",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/a54a18b407f446b59692eca61c635437.mp3",
+        },
+        {
+            "title": "Race My Mind",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/843dedcda2bc4fe8847bf3d3d87b10af.mp3",
+        },
+        {
+            "title": "Fountains",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/07becb22685848bb88d2f2a67026c479.mp3",
+        },
+        {
+            "title": "Get Along Better",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/a023ccd6335f46f18aa8a61728c93669.mp3",
+        },
+        {
+            "title": "You Only Live Twice",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/005c733ccadd450584094aa2637cc201.mp3",
+        },
+        {
+            "title": "IMY2",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/40a7143093284148bde7527e71d03fdb.mp3",
+        },
+        {
+            "title": "Fans",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/71a7560fb2a14644952b41888ca998ab.mp3",
+        },
+        {
+            "title": "The Remorse",
+            "album_id": 8,
+            "genre": "Hip Hop",
+            "artist_id": 10,
+            "mp3": "http://mango-music.s3.amazonaws.com/41a679959c3047628608a94f51da9523.mp3",
+        },
+    ]
 
-    {
-        "title": "Lose Your Love",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 3.31,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/04. Lose Your Love.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Safe With Me",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 3.25,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/05. Safe With Me.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Woke Up in Love",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 3.36,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/06. Woke Up in Love.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Reckless",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 2.36,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/07. Reckless.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Glitch In The Simulation",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 2.31,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/08. Glitch In The Simulation.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Evergreen",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 4.07,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/09. Evergreen.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Scandalous",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 2.39,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/10. Scandalous.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Interlude",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 1.40,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/11. Interlude.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Colors",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 3.51,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/12. Colors.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "After You",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 3.44,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/13. After You.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Best Is Yet To Come",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 3.35,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/14. Best Is Yet To Come.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Sometimes You Know",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 2.15,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/15. Sometimes You Know.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Caught Up",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 2.53,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/16. Caught Up.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "17. You Were Loved",
-        "genre": "EDM",
-        "album_id": Album.query.filter(Album.title == 'Alive').first().id,
-        "duration": 3.42,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Gryffin').first().id,
-        "mp3": "/Music/Gryffin - Alive/17. You Were Loved.mp3",
-        "lyrics": "Lyrics",
-    },
-
-                                    # IMAGINE DRAGONS ALBUM
-    {
-        "title": "I Don't Know Why",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.10,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/01 I Dont Know Why.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Whatever It Takes",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.21,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/02 Whatever It Takes.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Believer",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.24,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/03 Believer.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Walking The Wire",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.52,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/04 Walking The Wire.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Rise Up",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.51,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/05 Rise Up.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "I'll Make It Up To You",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 4.22,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/06 Ill Make It Up To You.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Yesterday",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.25,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/07 Yesterday.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Mouth Of The River",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.41,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/08 Mouth Of The River.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Thunder",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.07,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/09 Thunder.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "10 Start Over",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.06,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/10 Start Over.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Dancing In The Dark",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.55,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/11 Dancing In The Dark.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Levitate",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.18,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/12 Levitate.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Not Today",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 4.20,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/13 Not Today.mp3",
-        "lyrics": "Lyrics",
-    },
-
-    {
-        "title": "Believer (Kaskade Remix)",
-        "album_id": Album.query.filter(Album.title == 'Evolve').first().id,
-        "genre": "Rock",
-        "duration": 3.10,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Imagine Dragons').first().id,
-        "mp3": "/Music/Imagine Dragons - Evolve (Deluxe Edition)/14 Believer (Kaskade Remix).mp3",
-        "lyrics": "Lyrics",
-    },
-
-                                    # YE ALBUM
-
-    {
-        "title": "Good Morning",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 3.15,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/01 Good Morning.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Champion",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 2.47,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/02 Champion.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Stronger",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 5.11,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/03 Stronger.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "I Wonder",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 4.03,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/04 I Wonder.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Good Life (feat T-Pain)",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 3.27,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/05 Good Life (feat T-Pain).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Can't Tell Me Nothing",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 4.31,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/06 Can't Tell Me Nothing.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Barry Bonds (feat Lil' Wayne)",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 3.24,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/07 Barry Bonds (feat Lil' Wayne).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Drunk and Hot Girls (feat Mos Def)",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 5.13,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/08 Drunk and Hot Girls (feat Mos Def).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Flashing Lights (feat Dwele)",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 3.57,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/09 Flashing Lights (feat Dwele).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Everything I Am (feat DJ Premier)",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 3.47,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/10 Everything I Am (feat DJ Premier).mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "The Glory",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 3.32,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/11 The Glory.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Homecoming",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 3.23,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/12 Homecoming.mp3",
-        "lyrics": "Lyrics",
-    },
-    {
-        "title": "Big Brother",
-        "album_id": Album.query.filter(Album.title == 'Graduation').first().id,
-        "genre": "Hip-Hop",
-        "duration": 4.47,  # Replace with the actual duration of the song
-        "artist_id": Artist.query.filter(Artist.name == 'Kanye West').first().id,
-        "mp3": "/Music/Kanye West - Graduation (2007)/13 Big Brother.mp3",
-        "lyrics": "Lyrics",
-    },
-
-]
 
 # @with_appcontext
 def seed_songs(app):
@@ -1047,13 +937,13 @@ def seed_songs(app):
         db.session.commit()
 
 
-
-
 # @with_appcontext
 def undo_songs(app):
     with app.app_context():
-        if environment == 'production':
-            db.session.execute(f"TRUNCATE table {SCHEMA}.songs RESTART IDENTITY CASCADE;")
+        if environment == "production":
+            db.session.execute(
+                f"TRUNCATE table {SCHEMA}.songs RESTART IDENTITY CASCADE;"
+            )
         else:
             db.session.execute(text("DELETE FROM songs"))
 

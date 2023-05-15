@@ -11,7 +11,7 @@ const AlbumsIndex = () =>  {
     const getAlbums = useSelector(state => state.albums)
     const albums = Object.values(getAlbums)
 
-    console.log('these are all the albums', albums)
+    // console.log('these are all the albums', albums)
     useEffect(() => {
         
         if(location.pathname === "/albums") dispatch(loadAlbumsThunk()) 

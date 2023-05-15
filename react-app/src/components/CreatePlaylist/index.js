@@ -22,7 +22,7 @@ function NewPlaylistForm() {
     e.preventDefault();
     const err = {};
     const playlist = { title, description, cover };
-    console.log("playlist 👉", playlist)
+    // console.log("playlist 👉", playlist)
     if (title === null || title === "") err.title = "Title is required";
     if (cover === null || cover === "") err.cover = "Cover is required";
 
@@ -30,7 +30,7 @@ function NewPlaylistForm() {
       setErrors(err);
     } else {
       const newPlaylist = await dispatch(createPlaylistThunk(playlist));
-      console.log("newPlaylist 👉", newPlaylist)
+      // console.log("newPlaylist 👉", newPlaylist)
       dispatch(authenticate())
       history.push(`/playlists/${newPlaylist.id}`);
     }
@@ -49,7 +49,7 @@ function NewPlaylistForm() {
           <div>
             <h1>Create a new Playlist</h1>
           </div>
-          {console.log(cover)}
+          {/* {console.log(cover)} */}
           <label className="titleLabel">
             {/* Title */}
             <input
