@@ -68,7 +68,7 @@ def seed_albums():
     album8 = Album(
         title = 'Certified Lover Boy',
         description = 'Certified Lover Boy is the sixth studio album by Canadian rapper and singer Drake, released on September 3, 2021, by OVO Sound and Republic Records.',
-        cover = 'https://cdn.shopify.com/s/files/1/0570/3640/6943/products/drake-certified-lover-boy-alternative-cover-poster-v2-481577_720x.jpg',
+        cover = 'https://i.pinimg.com/originals/52/6b/b2/526bb241f962fe8ca1f965ce86984296.jpg',
         genre ='Hip Hop',
         year = 2021,
         artist_id=Artist.query.filter(Artist.name == 'Drake').first().id

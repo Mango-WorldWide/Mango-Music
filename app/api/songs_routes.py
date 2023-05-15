@@ -73,16 +73,16 @@ def add_song():
 
         ## Leave this commented out unless adding songs to the songs_seeds.txt
         #-------------------------------------------------------------------#
-        if "id" in new_song.to_dict():
-            song_to_fs = {
-                "title": form.data["title"],
-                "album_id": form.data["album_id"],
-                "genre": form.data["genre"],
-                "artist_id": artist["artist_id"],
-                "mp3": upload["url"],
-            }
+        # if "id" in new_song.to_dict():
+        #     song_to_fs = {
+        #         "title": form.data["title"],
+        #         "album_id": form.data["album_id"],
+        #         "genre": form.data["genre"],
+        #         "artist_id": artist["artist_id"],
+        #         "mp3": upload["url"],
+        #     }
 
-            write_file(song_to_fs)
+        #     write_file(song_to_fs)
         #-------------------------------------------------------------------#
         return new_song.to_dict()
     else:
