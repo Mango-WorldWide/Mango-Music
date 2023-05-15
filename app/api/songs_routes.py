@@ -3,25 +3,28 @@ from flask_login import login_required, current_user
 from app.models import Song, User, db, Playlist_Song
 from app.forms.song_form import SongForm
 from ..api.aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
+import os
 
 song_routes = Blueprint('songs', __name__)
+#---------------------------------------------------------------------#
+def write_file(data):
+    file_path = "app/seeds/songs_seeds.txt"
+    try:
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "a") as file:
+            file.write(str(data) + ",\n")
+        print("😺😺😺, File written successfully")
+        return "File written successfully"
+    except Exception as e:
+        print("😿😿😿", str(e))
+        return f"Error writing file: {str(e)}"
+#---------------------------------------------------------------------#
 
 @song_routes.route('/')
 def get_songs():
     songs = Song.query.all()
     return {'Songs': [song.to_dict() for song in songs]}
 
-def filter_song_data(song):
-        return {
-        "id": song.id,
-        "title": song.title,
-        "artist_id": song.artist_id,
-        "album_id": song.album_id,
-        "duration": song.duration,
-        "genre": song.genre,
-        "lyrics": song.lyrics,
-        "mp3": song.mp3,
-    }
 
 @song_routes.route('/<int:songId>')
 def get_song_by_id(songId):
@@ -33,24 +36,23 @@ def get_song_by_id(songId):
     return song.to_dict_no_item(includeMP3 = True)
 
 
-@song_routes.route('/new', methods=["POST"])
+@song_routes.route("/new", methods=["POST"])
 @login_required
 def add_song():
     # only artist can add music
     artist = current_user.to_dict()
     # curr = User.query.get(artist)
 
-
-    if not artist['artist']:
-        res =  make_response({"error": "Only artists can add songs"})
+    if not artist["artist"]:
+        res = make_response({"error": "Only artists can add songs"})
         res.status_code = 403
         return res
-    print('WHEREERERE ADD SONG BACKEND')
+    print("WHEREERERE ADD SONG BACKEND")
     form = SongForm()
-    print('this is after form')
+    print("this is after form")
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        print('form validated?')
+        print("form validated?")
         song = form.data["mp3"]
         song.filename = get_unique_filename(song.filename)
         upload = upload_file_to_s3(song)
@@ -59,15 +61,29 @@ def add_song():
             return upload["errors"]
 
         new_song = Song(
-            title = form.data["title"],
-            genre = form.data["genre"],
-            mp3 = upload["url"],
-            album_id = form.data['album_id'],
-            artist_id = artist['artist_id']
+            title=form.data["title"],
+            genre=form.data["genre"],
+            mp3=upload["url"],
+            album_id=form.data["album_id"],
+            artist_id=artist["artist_id"],
         )
 
         db.session.add(new_song)
         db.session.commit()
+
+        ## Leave this commented out unless adding songs to the songs_seeds.txt
+        #-------------------------------------------------------------------#
+        if "id" in new_song.to_dict():
+            song_to_fs = {
+                "title": form.data["title"],
+                "album_id": form.data["album_id"],
+                "genre": form.data["genre"],
+                "artist_id": artist["artist_id"],
+                "mp3": upload["url"],
+            }
+
+            write_file(song_to_fs)
+        #-------------------------------------------------------------------#
         return new_song.to_dict()
     else:
         form_errors = {key: val[0] for (key, val) in form.errors.items()}

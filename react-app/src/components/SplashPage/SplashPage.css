@@ -1,0 +1,138 @@
+.splash-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: auto;
+  }
+
+  .genre-carousel, .splash-song-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .splash-song-list {
+    min-height: 500px;
+
+}
+
+.splash-genre-right{
+    margin-top: 500px;
+}
+.splash-genre-left{
+    margin-top: 500px;
+}
+
+
+  .splash-genre-title {
+    margin-top: 50px;
+}
+
+.splash-song-list-title {
+    margin-top: -10px;
+    margin-bottom: 30px;
+}
+
+  .genre-carousel {
+    margin-bottom: 200px;
+    margin-top: 60px;
+  }
+
+  .song-container {
+    min-height: 10px;
+
+}
+
+  .splash-song {
+    display: flex;
+    flex: 1 1 calc(33.33% - 20px);
+    margin: 10px;
+  }
+  .splash-song-info h2,
+  .splash-song-info p {
+    margin-left: 50px ;
+  }
+
+  .splash-song-cover {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    max-width: 100%; 
+    height: auto;
+  }
+
+  .splash-song-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+  }
+
+  .song-navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+
+@media only screen and (max-width: 890px) {
+    .carouselPre {
+        grid-auto-columns: calc((100% - 2 * var(--grid-column-gap))/ 3);
+        height: 23rem;
+    }
+  }
+
+@media only screen and (max-width: 660px) {
+    .carouselPre {
+        grid-auto-columns: calc((100% - 1 * var(--grid-column-gap))/ 2);
+        height: 25rem;
+    }
+  }
+
+@media only screen and (max-width: 440px) {
+    .carouselPre {
+        grid-auto-columns: 100%;
+        height: 25rem;
+    }
+  }
+
+
+::-webkit-scrollbar {
+  width: 15px;
+height: 15px;
+border-left: #ededed solid 1px;
+background-color: #fcfcfc;
+border-top: #ededed solid 1px;
+    }
+
+::-webkit-scrollbar-thumb:hover{
+cursor: pointer;
+background: #c7c7c7;
+width: 15px;
+    background-clip: content-box;
+    border: 4px solid transparent;
+border-radius: 10px;
+}
+
+    ::-webkit-scrollbar-button {
+ display: none;
+    }
+
+    ::-webkit-scrollbar-thumb {
+background: #dbdbdb;
+    background-clip: content-box;
+    border: 4px solid transparent;
+border-radius: 10px;
+
+    }

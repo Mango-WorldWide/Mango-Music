@@ -52,6 +52,7 @@ export const singleSongThunk = (songId) => async(dispatch) => {
     const res = await fetch(`/api/songs/${songId}`)
     if (res.ok){
         const data = await res.json()
+        return data
         dispatch(singleSong(songId, data))
     } else {
         console.log("singleSongThunk Failed", songId)

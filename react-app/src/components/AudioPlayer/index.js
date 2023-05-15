@@ -1,6 +1,7 @@
 import ProgressBar from "../ProgressBar";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { usePlayer } from "../../context/PlayerContext";
+import { singleSongThunk } from "../../store/song";
 import "./AudioPlayerIndex.css"
 const new_song = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
 const new_song1 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
