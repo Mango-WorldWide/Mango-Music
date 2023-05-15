@@ -7,7 +7,7 @@ Please visit our website at:
 For more info about this project please check out our [wiki]!
 
 ## Home Page
-<img width="1680" alt="Mango Music Home Page" src="https://github.com/Mango-WorldWide/Mango-Music/assets/118857412/c670a382-d318-4170-94ee-f80a0ef8ec74">
+![image](https://github.com/Mango-WorldWide/Mango-Music/assets/98733614/e6508b44-bfa4-4cb0-b831-a5274586d089)
 
 ## Albums
 <img width="1680" alt="Screen Shot 2023-05-13 at 1 00 04 PM" src="https://github.com/Mango-WorldWide/Mango-Music/assets/118857412/47b5e053-4f4b-4bf9-868a-388ded305dea">
