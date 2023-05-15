@@ -122,7 +122,7 @@ const AudioPlayer = () => {
     progressBarRef.current.max = seconds;
   };
 
-  if (!currentSong || !currentSongIndex) return null;
+  // if (!currentSong || !currentSongIndex) return null;
   return (
     <div className="audio-player">
       <div className="audio-player-track-controls">

@@ -28,6 +28,7 @@ const AlbumById = () => {
   const album = useSelector((state) => state.albums);
   const likes = useSelector((state) => Object.values(state.likes));
   const albumSongs = album["Songs"];
+  console.log("albumSongs 👉", albumSongs)
   const user = useSelector((state) => state.session.user);
   const { albumId } = useParams();
   // console.log(Object.values(album), "album state checking");
@@ -97,6 +98,7 @@ const AlbumById = () => {
             <p className="albumDesc">{album["Album"].description}</p>
           </div>
           <div class="orangeButtons">
+            {console.log("reeeeee", albumSongs[1].id)}
             {albumSongs && albumSongs.length > 0 && (
               <PlayButton songId={albumSongs[0].id} songs={albumSongs} isButton={true} />
             )}
