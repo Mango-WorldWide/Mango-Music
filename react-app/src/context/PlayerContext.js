@@ -7,7 +7,7 @@ export default function PlayerProvider({ children }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState("");
   const [songsInfo, setSongsInfo] = useState("")
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [currentSongIndex, setCurrentSongIndex] = useState("");
   const [songsArr, setSongsArr] = useState([]);
   return (
     <PlayerContext.Provider

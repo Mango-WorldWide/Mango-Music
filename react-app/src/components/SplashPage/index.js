@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 // import {rock}from '../../images'
 const SplashPage = () => {
     const dispatch = useDispatch();
-    const songs = useSelector((state) => Object.values(state.songs || {}));
+    const songs = useSelector((state) => Object.values(state.songs));
     console.log('SONGS', songs);
     const [index, setIndex] = useState(0);
     const [genreIndex, setGenreIndex] = useState(0);
@@ -71,6 +71,7 @@ const SplashPage = () => {
         alert('Coming Soon!');
     };
     const shuffledSongs = shuffleArray([...songs].slice(0, 150));
+    if(!songs) return null
     return (
         <div className="splash-page">
             <h2 className='splash-genre-title'>Browse Genres</h2>
