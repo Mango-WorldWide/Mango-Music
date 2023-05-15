@@ -45,7 +45,7 @@ function NewPlaylistForm() {
           <img className="musicCover audio-player-img"
       src={cover ? cover : process.env.PUBLIC_URL + '/mango-holder.gif' }
       alt={cover} />
-        <form onSubmit={handleSubmit}>
+        <form classname='create-playlist-form' onSubmit={handleSubmit}>
           <div>
             <h1>Create a new Playlist</h1>
           </div>

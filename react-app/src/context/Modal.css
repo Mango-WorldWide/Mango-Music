@@ -22,3 +22,11 @@
   position: absolute;
   /* background-color:rgb(70, 23, 23); */
 }
+
+.no-button {
+  cursor: pointer;
+}
+
+.songTable {
+  padding: 5px;
+}

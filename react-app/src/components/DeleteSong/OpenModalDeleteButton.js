@@ -10,13 +10,13 @@ const OpenModalDeleteButton = ({ modalComponent, itemText, onItemClick, onModalC
   return (
     <>
       {itemText === "Delete" ? (
-        <button className="no-button" onClick={onClick}>
+        <p className="no-button" onClick={onClick}>
           {itemText}
-        </button>
+        </p>
       ) : (
-        <button className="no-button" onClick={onClick}>
+        <p className="no-button" onClick={onClick}>
           {itemText}
-        </button>
+        </p>
       )}
     </>
   );
