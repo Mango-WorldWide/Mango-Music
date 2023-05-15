@@ -28,9 +28,8 @@
   row-gap: 25px;
   list-style: none;
   align-items: center;
-  /* margin-left: -40px; */
+  margin-left: 40px;
   width: 80%;
-  align-items: center;
 }
 .nav-list-top-wrapper, .nav-list-bottom-wrapper, .nav-list-middle-wrapper, .nav-list-playlist-wrapper{
   display: flex;

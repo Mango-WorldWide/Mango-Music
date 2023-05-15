@@ -89,9 +89,9 @@ h1,h2,h3,h4{
     margin: 0;
 }
 
-button {
+/* button {
     cursor: pointer;
-}
+} */
 
 .site-wrapper {
     display: flex;

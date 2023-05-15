@@ -2,6 +2,8 @@ import ProgressBar from "../ProgressBar";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { usePlayer } from "../../context/PlayerContext";
 import "./AudioPlayerIndex.css"
+import { useSelector, useDispatch } from "react-redux";
+import { loadSongsThunk, singleSongThunk } from "../../store/song";
 const new_song = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
 const new_song1 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
 const new_song2 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
@@ -12,12 +14,14 @@ const all_songs = [new_song, new_song1, new_song2]
 
 const AudioPlayer = () => {
   const [currentTime, setCurrentTime] = useState(0);
+  const dispatch = useDispatch()
   const [duration, setDuration] = useState(0);
   const {isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr} = usePlayer();
   const [isLooping, setIsLooping] = useState(false);
   const [unmuteVolume, setUnmuteVolume] = useState(false);
   const [volume, setVolume] = useState(50);
   const [prevVolume, setPrevVolume] = useState(50);
+  const [songData, setSongData] = useState(null);
 
   const audioPlayer = useRef();
   const progressBarRef = useRef();
@@ -34,6 +38,27 @@ const AudioPlayer = () => {
 
     playAnimationRef.current = requestAnimationFrame(repeat);
   }, []);
+
+  useEffect(() => {
+    if (currentSong != null) {
+      dispatch(singleSongThunk(songsArr[currentSong].id))
+        .then((song) => {
+          if (song) {
+            setSongData(song);
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+}, [currentSong, dispatch]);
+
+useEffect(() => {
+  if (audioPlayer.current && songData) {
+      audioPlayer.current.src = songData.mp3;
+      audioPlayer.current.load();
+  }
+}, [songData]);
+
+
 
   useEffect(() => {
     if (audioPlayer && audioPlayer.current) {
@@ -151,7 +176,8 @@ const AudioPlayer = () => {
           onChange={volumeControl}
         />
       </div>
-      <audio src={all_songs[currentSong]} ref={audioPlayer} loop={isLooping} onEnded={goForward} style={{ display: "hidden" }} onLoadedMetadata={onLoadedMetadata}></audio>
+      {console.log('SONGS', songData)}
+      <audio src={songData ? songData.mp3 : ''} ref={audioPlayer} loop={isLooping} onEnded={goForward} style={{ display: "hidden" }} onLoadedMetadata={onLoadedMetadata}></audio>
     </div>
   );
 };
