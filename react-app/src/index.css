@@ -72,6 +72,15 @@ button {
 */
 /* other css */
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
+Link {
+    text-decoration: none;
+}
+
 
 html{
     font-family: 'Source Sans Pro', sans-serif;
