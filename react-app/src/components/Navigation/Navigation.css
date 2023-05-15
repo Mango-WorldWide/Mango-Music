@@ -23,12 +23,13 @@
 }
 
 .nav-list{
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   row-gap: 25px;
   list-style: none;
   align-items: center;
-  /* margin-left: -40px; */
+  margin-left: 20px;
   width: 80%;
   align-items: center;
 }
@@ -38,6 +39,10 @@
   row-gap: 10px;
   /* width: fit-content; */
   align-self: flex-start;
+}
+
+.nav-list > ul {
+  margin-top: 10px;
 }
 
 .nav-list-top-wrapper{

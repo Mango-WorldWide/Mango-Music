@@ -149,7 +149,7 @@ const AlbumById = () => {
                 {user.playlists.length > 0 && (
                   <td>
                     <OpenModalAddButton
-                      itemText="Add Song to Playlist"
+                      itemText="+"
                       modalComponent={<AddSongModal song={song} />}
                     />
                   </td>
