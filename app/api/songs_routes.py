@@ -75,6 +75,8 @@ def add_song():
         db.session.add(new_song)
         db.session.commit()
 
+        ## Leave this commented out unless adding songs to the songs_seeds.txt
+        #-------------------------------------------------------------------#
         if "id" in new_song.to_dict():
             song_to_fs = {
                 "title": form.data["title"],
@@ -85,7 +87,7 @@ def add_song():
             }
 
             write_file(song_to_fs)
-
+        #-------------------------------------------------------------------#
         return new_song.to_dict()
     else:
         form_errors = {key: val[0] for (key, val) in form.errors.items()}
