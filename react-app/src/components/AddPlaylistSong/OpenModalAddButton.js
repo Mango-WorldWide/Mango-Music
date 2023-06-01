@@ -8,7 +8,7 @@ const OpenModalAddButton = ({modalComponent, itemText, onItemClick, onModalClose
         if(onItemClick) onItemClick()
     }
     return (
-        <button className="no-button" onClick={onClick}>{itemText}</button>
+        <p className="no-button" onClick={onClick}>{itemText}</p>
     )
 }
  export default OpenModalAddButton
