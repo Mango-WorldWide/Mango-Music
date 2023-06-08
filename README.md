@@ -1,6 +1,6 @@
 # Mango Music
 
-Please visit our website at:
+Check Out our website at:
 
 [mango-music.onrender.com]
 
