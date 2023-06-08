@@ -23,21 +23,21 @@ export const deleteLike = (like) => {
     }
 }
 export const loadLikesThunk = () => async(dispatch) => {
-    console.log('inside load likes thunk')
+    // console.log('inside load likes thunk')
     const response = await fetch('/api/likes/current')
-    console.log('response inside load likes thunk', response)
+    // console.log('response inside load likes thunk', response)
     if (response.ok){
-        console.log('load likes thunk response is ok')
+        // console.log('load likes thunk response is ok')
         const data = await response.json()
         dispatch(loadLikes(data))
     } else {
-        console.log('load likes thunk response not ok')
+        // console.log('load likes thunk response not ok')
         return false
     }
 }
 
 export const createLikeThunk = (like) => async(dispatch) => {
-    console.log('inside the thunk', like)
+    // console.log('inside the thunk', like)
     const response = await fetch(`/api/likes/create`, {
         method: 'POST',
         headers: {

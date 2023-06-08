@@ -34,7 +34,7 @@ const ArtistById = () => {
             <h2 className="albumArtistById">{album.title}</h2>
             </Link>
           ))}
-          {console.log('ARTIST', album)}
+          {/* {console.log('ARTIST', album)} */}
         </div>
       </div>
     </div>

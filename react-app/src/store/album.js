@@ -31,15 +31,15 @@ export const deleteAlbum = (album) => {
   };
 };
 export const loadAlbumsThunk = () => async (dispatch) => {
-  console.log("inside load albums thunk");
+  // console.log("inside load albums thunk");
   const response = await fetch("/api/albums");
-  console.log("response inside load albums thunk", response);
+  // console.log("response inside load albums thunk", response);
   if (response.ok) {
-    console.log("load albums thunk response is ok");
+    // console.log("load albums thunk response is ok");
     const data = await response.json();
     dispatch(loadAlbums(data));
   } else {
-    console.log("load albums thunk response not ok");
+    // console.log("load albums thunk response not ok");
     return false;
   }
 };
@@ -49,26 +49,26 @@ export const loadArtistAlbumsThunk = () => async (dispatch) => {
   const res = await fetch("/api/artist/albums");
   if (res.ok) {
     const data = await res.json();
-    console.log("data 👉👉👉", data)
+    // console.log("data 👉👉👉", data)
     dispatch(loadAlbums({Albums: data}));
     return data
   }
 };
 
 export const loadOneAlbumThunk = (albumId) => async (dispatch) => {
-  console.log("LOADING SINGLE ALBUM", albumId);
+  // console.log("LOADING SINGLE ALBUM", albumId);
   const response = await fetch(`/api/albums/${albumId}`);
   if (response.ok) {
     const data = await response.json();
     dispatch(loadOneAlbum(data));
   } else {
-    console.log(response, "thunk fail");
+    // console.log(response, "thunk fail");
     return false;
   }
 };
 
 export const createAlbumThunk = (album) => async (dispatch) => {
-  console.log("inside the thunk", album);
+  // console.log("inside the thunk", album);
   const response = await fetch(`/api/albums`, {
     method: "POST",
     headers: {
@@ -81,13 +81,13 @@ export const createAlbumThunk = (album) => async (dispatch) => {
     dispatch(createAlbum(data));
     return data;
   } else {
-    console.log(response, "thunk fail");
+    // console.log(response, "thunk fail");
     return false;
   }
 };
 
 export const updateAlbumThunk = (album, albumId) => async (dispatch) => {
-  console.log("inside update thunk", album);
+  // console.log("inside update thunk", album);
   const response = await fetch(`/api/albums/${albumId}/edit`, {
     method: "PUT",
     headers: {
@@ -95,13 +95,13 @@ export const updateAlbumThunk = (album, albumId) => async (dispatch) => {
     },
     body: JSON.stringify(album),
   });
-  console.log(" after fetch")
+  // console.log(" after fetch")
   if (response.ok) {
     const data = await response.json();
-    console.log("thunk passed 👉", data)
+    // console.log("thunk passed 👉", data)
     return data;
   } else {
-    console.log(response, "thunk fail");
+    // console.log(response, "thunk fail");
     return false;
   }
 };
@@ -121,11 +121,11 @@ const albumsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_ALBUMS:
       newState = {};
-      console.log("action.albums 👾👾👾👉", action.albums)
+      // console.log("action.albums 👾👾👾👉", action.albums)
       action.albums.Albums.forEach((album) => {
         newState[album.id] = album;
       });
-      console.log("newState 👉👾👾👾", newState)
+      // console.log("newState 👉👾👾👾", newState)
       return newState;
     case LOAD_ONE_ALBUM:
       newState = {};

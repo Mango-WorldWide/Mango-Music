@@ -116,4 +116,4 @@ def add_song_playlist(playlistId):
     )
     db.session.add(new_playlist_song)
     db.session.commit()
-    return {'message': 'suceess'}
+    return {'message': 'success'}

@@ -95,8 +95,17 @@ def seed_users():
         last_name='Faiyaz',
         artist_id=Artist.query.filter(Artist.name == 'Brent Faiyaz').first().id
     )
+    drake = User(
+        username='loverboy',
+        email='drake@user.io',
+        password='password',
+        artist=True,
+        first_name='Drake',
+        last_name='Graham',
+        artist_id=Artist.query.filter(Artist.name == 'Drake').first().id
+    )
 
-    all_users = [demo_user, demo_artist, gryffin, backstreet_boys, blackpink1, blackpink2, brent_faiyaz, imagine_dragon, kanye_west, bad_bunny]
+    all_users = [demo_user, demo_artist, gryffin, backstreet_boys, blackpink1, blackpink2, brent_faiyaz, imagine_dragon, kanye_west, bad_bunny, drake]
     for user in all_users:
         existing_user = User.query.filter_by(username=user.username).first()
         if not existing_user:
