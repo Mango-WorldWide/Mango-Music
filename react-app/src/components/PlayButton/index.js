@@ -33,9 +33,10 @@ const PlayButton = ({ songId, songs, isButton = false }) => {
       setCurrentSongIndex(songIndex);
       console.log("songs added to song arrray 👉", songs)
       setSongsArr(songs);
+      console.log("SONGS ARRAY --->", songsArr)
       setIsPlaying(true);
-      setCurrentSong(theSong.mp3);
-      // setCurrentSong(songIndex);
+      setCurrentSong(theSong);
+      console.log("CURRENT SONG FROM PLAY BUTTON ===>", currentSong)
     }
   };
 

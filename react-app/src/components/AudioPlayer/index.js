@@ -1,14 +1,13 @@
 import ProgressBar from "../ProgressBar";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { usePlayer } from "../../context/PlayerContext";
+import { useDispatch } from "react-redux";
+import { singleSongThunk } from "../../store/song";
 
 import "./AudioPlayerIndex.css";
-// const new_song = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
-// const new_song1 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-// const new_song2 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-// const all_songs = [new_song, new_song1, new_song2]
 
 const AudioPlayer = () => {
+  const dispatch = useDispatch();
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const {
@@ -17,12 +16,10 @@ const AudioPlayer = () => {
     currentSong,
     setCurrentSong,
     currentSongIndex,
-    setSongIndex,
+    setCurrentSongIndex,
     songsArr,
   } = usePlayer();
-  // console.log("currentSongIndex from audio player👉", currentSongIndex)
-  // console.log("currentSong  from audio player 👉👉👉👉👉", currentSong)
-  // console.log("songsArr from audio player👉👉👉", songsArr)
+
   const [isLooping, setIsLooping] = useState(false);
   const [unmuteVolume, setUnmuteVolume] = useState(false);
   const [volume, setVolume] = useState(50);
@@ -72,19 +69,33 @@ const AudioPlayer = () => {
 
   if (!songsArr.length) return null;
 
-  const goForward = () => {
-    if (currentSong < songsArr.length - 1) {
-      setCurrentSong((prev) => prev + 1);
+  const goForward = async () => {
+    if (currentSongIndex < songsArr.length - 1) {
+      console.log("currentSongIndex  👉", currentSongIndex )
+      setCurrentSongIndex((prev) => prev + 1);
+      console.log("BEFORE SET CURRENT SONG!! -->", currentSong)
+
+      console.log("songsArr 👉", songsArr)
+      setCurrentSong(songsArr[currentSongIndex + 1]);
+      console.log("CURRENT SONG!! -->", currentSong)
+      await dispatch(singleSongThunk(currentSong.id));
     } else {
-      setCurrentSong((prev) => prev);
+      setCurrentSongIndex((prev) => prev);
+      setCurrentSong(songsArr[currentSongIndex]);
     }
   };
 
-  const goBack = () => {
-    if (currentSong > 0) {
-      setCurrentSong((prev) => prev - 1);
+  const goBack = async () => {
+    if (currentSongIndex > 0) {
+      console.log("currentSongIndex  👉", currentSongIndex )
+      setCurrentSongIndex((prev) => prev - 1);
+      console.log("BEFORE SET CURRENT SONG!! -->", currentSong)
+      setCurrentSong(songsArr[currentSongIndex - 1]);
+      console.log("CURRENT SONG!! -->", currentSong)
+      await dispatch(singleSongThunk(currentSong.id));
     } else {
-      setCurrentSong(songsArr.length - 1);
+      setCurrentSongIndex(songsArr.length - 1);
+      setCurrentSong(songsArr[currentSongIndex]);
     }
   };
 
@@ -181,7 +192,7 @@ const AudioPlayer = () => {
       </div>
       {/* <audio src={all_songs[songIndex]} ref={audioPlayer} loop={isLooping} onEnded={goForward} style={{ display: "hidden" }} onLoadedMetadata={onLoadedMetadata}/> */}
       <audio
-        src={currentSong}
+        src={currentSong.mp3}
         ref={audioPlayer}
         loop={isLooping}
         onEnded={goForward}
