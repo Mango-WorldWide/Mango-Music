@@ -1,8 +1,12 @@
 input[type="range"] {
-    --range-progress: 0;
-  }
+  --range-progress: 0;
+}
 
-  input[type="range"]::before {
-    background: #f50;
-    width: var(--range-progress);
-  }
+input[type="range"]:hover {
+  cursor: pointer;
+}
+
+input[type="range"]::before {
+  background: #f50;
+  width: var(--range-progress);
+}

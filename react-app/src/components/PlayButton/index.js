@@ -4,11 +4,6 @@ import { useDispatch } from 'react-redux'
 import { useRef } from "react";
 
 const PlayButton = ({ songId, songs, isButton = false }) => {
-  // const audioPlayer = useRef();
-  // console.log("audioPlayer 👉 👉 👉 👉 👉", audioPlayer)
-  // console.log("isButton from PlayButton 👉👉👉👉👉", isButton);
-  // console.log("songId from PlayButton 👉👉👉👉👉", songId);
-  // console.log("songs from PlayButton  👉👉👉👉", songs);
   const dispatch = useDispatch();
   const {
     isPlaying,

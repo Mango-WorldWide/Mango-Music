@@ -71,31 +71,17 @@ const AudioPlayer = () => {
 
   const goForward = async () => {
     if (currentSongIndex < songsArr.length - 1) {
-      console.log("currentSongIndex  👉", currentSongIndex )
       setCurrentSongIndex((prev) => prev + 1);
-      console.log("BEFORE SET CURRENT SONG!! -->", currentSong)
-
-      console.log("songsArr 👉", songsArr)
-      setCurrentSong(songsArr[currentSongIndex + 1]);
-      console.log("CURRENT SONG!! -->", currentSong)
-      await dispatch(singleSongThunk(currentSong.id));
-    } else {
-      setCurrentSongIndex((prev) => prev);
-      setCurrentSong(songsArr[currentSongIndex]);
+      let newSong = await dispatch(singleSongThunk(songsArr[currentSongIndex + 1].id));
+      setCurrentSong(newSong);
     }
   };
 
   const goBack = async () => {
     if (currentSongIndex > 0) {
-      console.log("currentSongIndex  👉", currentSongIndex )
       setCurrentSongIndex((prev) => prev - 1);
-      console.log("BEFORE SET CURRENT SONG!! -->", currentSong)
-      setCurrentSong(songsArr[currentSongIndex - 1]);
-      console.log("CURRENT SONG!! -->", currentSong)
-      await dispatch(singleSongThunk(currentSong.id));
-    } else {
-      setCurrentSongIndex(songsArr.length - 1);
-      setCurrentSong(songsArr[currentSongIndex]);
+      let newSong = await dispatch(singleSongThunk(songsArr[currentSongIndex - 1].id));
+      setCurrentSong(newSong);
     }
   };
 

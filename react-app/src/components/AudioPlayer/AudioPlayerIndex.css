@@ -18,11 +18,9 @@
   }
 
 
-.audio-player-track-controls,
-.audio-player-track-center,
-.audio-player-volume-controls {
-  display: flex;
-  align-items: center;
+.audio-player-track-controls i:hover,
+.audio-player-volume-controls i:hover {
+  cursor: pointer;
 }
 
 .audio-player-track-controls p,
