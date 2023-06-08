@@ -20,7 +20,7 @@ def write_file(data):
         return f"Error writing file: {str(e)}"
 #---------------------------------------------------------------------#
 
-@song_routes.route('/')
+@song_routes.route('')
 def get_songs():
     songs = Song.query.all()
     return {'Songs': [song.to_dict() for song in songs]}
