@@ -26,17 +26,12 @@ const PlayButton = ({ songId, songs, isButton = false }) => {
   const songIndex = songArrId.indexOf(songId);
   // console.log(songId, " song id inside play button");
   const handleClick = async () => {
-    // console.log("songId from play button 👺👺👺👺👺", songId)
-    // console.log("currentSongIndex from play button👺👺👺👺👺", currentSongIndex)
-    // console.log("isPlaying from play button 👉", isPlaying);
-    console.log("currentSong from play button 👉", currentSong);
-    // console.log("songIndexx from play button 👉👉👉", songIndex);
     if (isPlaying && currentSongIndex === songIndex) {
       setIsPlaying(false);
     } else {
       const theSong = await dispatch(singleSongThunk(songId));
-      console.log("theSong MP3 from play button 👉👉👉", theSong);
       setCurrentSongIndex(songIndex);
+      console.log("songs added to song arrray 👉", songs)
       setSongsArr(songs);
       setIsPlaying(true);
       setCurrentSong(theSong.mp3);

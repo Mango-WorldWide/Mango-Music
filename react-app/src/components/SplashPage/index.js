@@ -71,7 +71,8 @@ const SplashPage = () => {
         alert('Coming Soon!');
     };
     const shuffledSongs = shuffleArray([...songs].slice(0, 150));
-    if(!songs) return null
+
+    if(!songs.length || !songs[0].album ) return null
     return (
         <div className="splash-page">
             <h2 className='splash-genre-title'>Browse Genres</h2>
