@@ -262,78 +262,6 @@ Successful Response Body:
 ________________
 ## \~Playlists~
 
-### GET api/playlist/current
-Returns all the play from the database.
-
-Successful Response Body:
-```json
-{
-    "Albums": [
-        {
-        "id": 1,
-        "title": "Greatest Hit" ,
-        "description": "The first greatest hits album released by American boy band, the Backstreet Boys. The album   features 15 songs by the group, as well as a new song, 'Drowning'" ,
-        "cover": "https://lastfm.freetls.fastly.net/i/u/ar0/9ad371267e3a4889a7cf9b436ba17297.jpg" ,
-        "genre": "Pop",
-        "year": 2001,
-        "artist_id": 1,
-        "artist": "Backstreet Boys",
-        },
-        {
-        "id": 2,
-        "title": "Un Verano Sin Ti" ,
-        "description": "The fourth solo studio album, and fifth overall, by Puerto Rican rapper and singer Bad Bunny." ,
-        "cover": "https://media.pitchfork.com/photos/627425dbc85171592b8a6e6a/1:1/w_600/Bad-Bunny-Un-Verano-Sin-Ti.jpg" ,
-        "genre": "Reggaeton",
-        "year": 2022,
-        "artist_id": 2,
-        "artist": "Bad Bunny",
-        }
-    ]
-}
-```
-
-________________
-### GET api/albums/:albumId
-Returns one album and all of its songs from the database.
-
-Successful Response Body:
-```json
-{
-    "Album": {
-        "artist": "Backstreet Boys",
-        "artist_id": 4,
-        "cover": "https://lastfm.freetls.fastly.net/i/u/ar0/9ad371267e3a4889a7cf9b436ba17297.jpg",
-        "description": "The first greatest hits album released by American boy band, the Backstreet Boys. The album features 15 songs by the group, as well as a new song, \"Drowning\".",
-        "genre": "Pop",
-        "id": 1,
-        "title": "Greatest Hit",
-        "year": 2001
-    },
-    "Songs": [
-        {
-            "album_id": 1,
-            "artist_id": 4,
-            "duration": null,
-            "genre": "Pop",
-            "id": 24,
-            "lyrics": null,
-            "mp3": "",
-            "title": "I Want It That Way"
-        },
-        {
-            "album_id": 1,
-            "artist_id": 4,
-            "duration": null,
-            "genre": "Pop",
-            "id": 25,
-            "lyrics": null,
-            "mp3": "",
-            "title": "Everybody (Backstreet's Back)"
-        }
-    ]
-}
-```
 
 ________________
 ### GET api/playlists/current
@@ -381,129 +309,156 @@ Error Response 403: Unauthorized
 ```
 
 ________________
-### POST api/albums
-Create an album*
-
-\* Login REQUIRED and User MUST be artist
-
-Request:
-* Headers:
-    * Content-Type: application/json
-* Body (all fields required):
-
-    ```json
-    {
-        "cover": "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
-        "description": "Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.",
-        "genre": "Hip Hop",
-        "title": "Graduation",
-        "year": 2007,
-        "artist_id": 1
-    }
-    ```
-
-Successful Response Body:
-```json
-    {
-        "cover": "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
-        "description": "Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.",
-        "genre": "Hip Hop",
-        "id": 7,
-        "title": "Graduation",
-        "year": 2007,
-        "artist_id": 1
-    }
-```
-Error Response 403: Unauthorized
-
-```json
-{
-    "message": "Must be an artist"
-}
-```
-
-________________
-### PUT api/albums/:albumId/edit
-Update an album*
-
-\* Login REQUIRED and User MUST be artist who owns the album
-
-Request:
-* Headers:
-    * Content-Type: application/json
-* Body (all fields required):
-
-    ```json
-    {
-        "cover": "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
-        "description": "Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.",
-        "genre": "Hip Hop",
-        "title": "Graduation",
-        "year": 2007
-    }
-    ```
-
-Successful Response Body:
-```json
-    {
-        "cover": "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
-        "description": "Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.",
-        "genre": "Hip Hop",
-        "id": 7,
-        "title": "Graduation",
-        "year": 2007
-    }
-```
-Error Response 403: Unauthorized
-
-```json
-{
-    "message": "Must be an artist and own album to access this page"
-}
-```
-
-________________
-### DELETE api/albums/:albumId
-Deletes an album*
-
-\* Login REQUIRED and User MUST be artist who owns the album
+### GET api/playlist/:playlistId
+Returns a single playlist from the database.
 
 Successful Response Body:
 ```json
 {
-    "Album": {
-        "artist": "Backstreet Boys",
-        "artist_id": 4,
-        "cover": "https://lastfm.freetls.fastly.net/i/u/ar0/9ad371267e3a4889a7cf9b436ba17297.jpg",
-        "description": "The first greatest hits album released by American boy band, the Backstreet Boys. The album features 15 songs by the group, as well as a new song, \"Drowning\".",
-        "genre": "Pop",
+        "cover": "https://filmdaily.co/wp-content/uploads/2020/08/fitness-2.jpg",
+        "description": "Gym Music",
         "id": 1,
-        "title": "Greatest Hit",
-        "year": 2001
-    },
-    "Songs": [
-        {
-            "album_id": 1,
-            "artist_id": 4,
-            "duration": null,
-            "genre": "Pop",
-            "id": 24,
-            "lyrics": null,
-            "mp3": "",
-            "title": "I Want It That Way"
-        },
-        {
-            "album_id": 1,
-            "artist_id": 4,
-            "duration": null,
-            "genre": "Pop",
-            "id": 25,
-            "lyrics": null,
-            "mp3": "",
-            "title": "Everybody (Backstreet's Back)"
-        }
-    ]
+        "num_songs": 1,
+        "songs": [
+            {
+                "id": 1,
+                "songs": {
+                    "album_id": 2,
+                    "album_title": "Un Verano Sin Ti",
+                    "artist_id": 9,
+                    "artist_name": "Bad Bunny",
+                    "cover": "https://media.pitchfork.com/photos/627425dbc85171592b8a6e6a/1:1/w_600/Bad-Bunny-Un-Verano-Sin-Ti.jpg",
+                    "duration": null,
+                    "genre": "Reggaeton",
+                    "id": 1,
+                    "lyrics": null,
+                    "mp3": "",
+                    "title": "Moscow Mule"
+                }
+            }
+        ],
+        "title": "DemoUser Jammy Jams",
+        "user_id": 1
 }
+```
+
+________________
+### POST api/playlists
+Create a playlist*
+
+\* Login REQUIRED
+
+Request:
+* Headers:
+    * Content-Type: application/json
+* Body (all fields required):
+
+    ```json
+    {
+        "cover": "https://filmdaily.co/wp-content/uploads/2020/08/fitness-2.jpg",
+        "description": "Coding Music",
+        "title": "DemoUser Jammy Jams 2",
+    }
+    ```
+
+Successful Response Body:
+```json
+    {
+        "cover": "https://filmdaily.co/wp-content/uploads/2020/08/fitness-2.jpg",
+        "description": "Coding Music",
+        "title": "DemoUser Jammy Jams 2",
+        "id": 2
+    }
+```
+Error Response 403: Unauthorized
+
+```json
+{
+    "message": "Must be logged in to access this page"
+}
+```
+
+________________
+### PUT api/playlist/:playlistId/edit
+Update a playlist*
+
+\* Login REQUIRED and User MUST own the playlist
+
+Request:
+* Headers:
+    * Content-Type: application/json
+* Body (all fields required):
+
+    ```json
+    {
+        "cover": "https://filmdaily.co/wp-content/uploads/2020/08/fitness-2.jpg",
+        "description": "Coding Music",
+        "title": "DemoUser Jammy Jams 2",
+    }
+    ```
+
+Successful Response Body:
+```json
+    {
+        "cover": "https://filmdaily.co/wp-content/uploads/2020/08/fitness-2.jpg",
+        "description": "Coding Music",
+        "title": "DemoUser Jammy Jams 2",
+        "id": 2
+    }
+```
+Error Response 403: Unauthorized
+
+```json
+{
+    "message": "Must own playlist to access this page"
+}
+```
+
+________________
+### POST api/playlist/:playlistId/song
+Add song to a playlist*
+
+\* Login REQUIRED and User MUST own the playlist
+
+Request:
+* Headers:
+    * Content-Type: application/json
+* Body (all fields required):
+
+    ```json
+    {
+        "song_id": 1
+    }
+    ```
+
+Successful Response Body:
+```json
+    {
+        "message": "success"
+    }
+```
+Error Response 403: Unauthorized
+
+```json
+{
+    "message": "Must own playlist to access this page"
+}
+```
+
+________________
+### DELETE api/playlists/:playlistId
+Deletes a playlist*
+
+\* Login REQUIRED and User MUST own the playlist
+
+Successful Response Body:
+```json
+    {
+        "cover": "https://filmdaily.co/wp-content/uploads/2020/08/fitness-2.jpg",
+        "description": "Coding Music",
+        "title": "DemoUser Jammy Jams 2",
+        "id": 2
+    }
 ```
 
 
