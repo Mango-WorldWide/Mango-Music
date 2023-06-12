@@ -36,7 +36,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(()=> {
-    console.log(user)
+    // console.log(user)
     if (user){
       dispatch(loadLikesThunk())
     }

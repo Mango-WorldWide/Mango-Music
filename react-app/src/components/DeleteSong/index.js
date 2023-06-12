@@ -10,15 +10,15 @@ const DeleteSongModal = ({ song, categoryId, category, method }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  console.log(song, "what is my song in my modal to delete");
+  // console.log(song, "what is my song in my modal to delete");
   const deleteOnClick = (e) => {
     e.preventDefault();
     if (category === "playlist") {
-      console.log("delete on click modal for songs playlist song", song);
+      // console.log("delete on click modal for songs playlist song", song);
       dispatch(deletePlaylistSongThunk(song, categoryId)).then(closeModal);
     }
     if (category === "album") {
-      console.log("delete song for album");
+      // console.log("delete song for album");
       dispatch(deleteSongThunk(song.id, categoryId)).then(closeModal);
     }
   };

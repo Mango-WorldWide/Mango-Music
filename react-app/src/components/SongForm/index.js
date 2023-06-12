@@ -34,7 +34,7 @@ const SongForm = ({ albumId }) => {
     }
     setIsSending(true);
     setErrors(validate())
-    console.log("HANDLING SUBMIT OF SONG");
+    // console.log("HANDLING SUBMIT OF SONG");
     const formData = new FormData();
     formData.append("mp3", mp3);
     formData.append("title", title);

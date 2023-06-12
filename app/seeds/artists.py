@@ -31,7 +31,10 @@ def seed_artists():
     bad_bunny = Artist(
         name = 'Bad Bunny'
     )
-    all_artists = [no_artist, artist, gryffin, backstreet_boys, blackpink, brent_faiyaz, imagine_dragons, kanye_west, bad_bunny]
+    drake = Artist(
+        name = "Drake"
+    )
+    all_artists = [no_artist, artist, gryffin, backstreet_boys, blackpink, brent_faiyaz, imagine_dragons, kanye_west, bad_bunny, drake]
     for artist in all_artists:
         existing_artist = Artist.query.filter_by(name=artist.name).first()
         if not existing_artist:

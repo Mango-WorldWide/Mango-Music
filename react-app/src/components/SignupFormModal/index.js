@@ -44,7 +44,7 @@ function SignupFormModal() {
         artistName = null; // Use the id of 'No Artist'
         // artist = false
     }
-    console.log('ARTIST------', artist, 'ARTISTNAME------', newArtistName);
+    // console.log('ARTIST------', artist, 'ARTISTNAME------', newArtistName);
     const data = await dispatch(signUp(username, email, password, fName, lName, artist, artistName));
     if (data) {
         setErrors([...newErrors, ...data]);
