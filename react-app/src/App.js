@@ -82,7 +82,6 @@ function App() {
                 <Route path='/songs/new' component={SongForm} />
                 <Route path='/search' component={SearchIndex} />
                 <Route path='/' component={SplashPage}>
-                  {/* <h1>Welcome to Mango Music</h1> */}
                 </Route>
               </Switch>
             )}
