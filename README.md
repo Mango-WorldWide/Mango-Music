@@ -2,7 +2,7 @@
 
 Please visit our website at:
 
-[mango-music.onrender.com]
+[mango-music-4c4k.onrender.com]
 
 For more info about this project please check out our [wiki]!
 
@@ -31,8 +31,9 @@ For more info about this project please check out our [wiki]!
 
 # Routes
 
-## Album Routes
-___________________
+## ~Albums~
+
+
 ### GET api/albums
 Returns all the albums from the database.
 
@@ -63,6 +64,7 @@ Successful Response Body:
     ]
 }
 ```
+
 ________________
 ### GET api/albums/:albumId
 Returns one album and all of its songs from the database.
@@ -105,6 +107,7 @@ Successful Response Body:
 }
 ```
 
+________________
 ### GET api/albums/artist
 Returns all the albums for the logged in artist*
 
@@ -131,29 +134,68 @@ Error Response 403: Unauthorized
 }
 ```
 
-### PUT api/albums/:albumId/edit
-Returns all the albums for the logged in artist*
+________________
+### POST api/albums
+Create an album*
 
 \* Login REQUIRED and User MUST be artist
 
 Request:
 * Headers:
     * Content-Type: application/json
-* Body:
+* Body (all fields required):
 
     ```json
     {
         "cover": "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
         "description": "Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.",
         "genre": "Hip Hop",
+        "title": "Graduation",
+        "year": 2007,
+        "artist_id": 1
+    }
+    ```
+
+Successful Response Body:
+```json
+    {
+        "cover": "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
+        "description": "Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.",
+        "genre": "Hip Hop",
         "id": 7,
+        "title": "Graduation",
+        "year": 2007,
+        "artist_id": 1
+    }
+```
+Error Response 403: Unauthorized
+
+```json
+{
+    "message": "Must be an artist"
+}
+```
+
+________________
+### PUT api/albums/:albumId/edit
+Update an album*
+
+\* Login REQUIRED and User MUST be artist who owns the album
+
+Request:
+* Headers:
+    * Content-Type: application/json
+* Body (all fields required):
+
+    ```json
+    {
+        "cover": "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
+        "description": "Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.",
+        "genre": "Hip Hop",
         "title": "Graduation",
         "year": 2007
     }
     ```
-
-Request Body:
-
 
 Successful Response Body:
 ```json
@@ -173,6 +215,52 @@ Error Response 403: Unauthorized
     "message": "Must be an artist and own album to access this page"
 }
 ```
+
+________________
+### DELETE api/albums/:albumId
+Deletes an album*
+
+\* Login REQUIRED and User MUST be artist who owns the album
+
+Successful Response Body:
+```json
+{
+    "Album": {
+        "artist": "Backstreet Boys",
+        "artist_id": 4,
+        "cover": "https://lastfm.freetls.fastly.net/i/u/ar0/9ad371267e3a4889a7cf9b436ba17297.jpg",
+        "description": "The first greatest hits album released by American boy band, the Backstreet Boys. The album features 15 songs by the group, as well as a new song, \"Drowning\".",
+        "genre": "Pop",
+        "id": 1,
+        "title": "Greatest Hit",
+        "year": 2001
+    },
+    "Songs": [
+        {
+            "album_id": 1,
+            "artist_id": 4,
+            "duration": null,
+            "genre": "Pop",
+            "id": 24,
+            "lyrics": null,
+            "mp3": "",
+            "title": "I Want It That Way"
+        },
+        {
+            "album_id": 1,
+            "artist_id": 4,
+            "duration": null,
+            "genre": "Pop",
+            "id": 25,
+            "lyrics": null,
+            "mp3": "",
+            "title": "Everybody (Backstreet's Back)"
+        }
+    ]
+}
+```
+________________
+## ~Playlists~
 
 ### api/playlist/current
    ```
@@ -261,4 +349,4 @@ Error Response 403: Unauthorized
 
 
 [wiki]: https://github.com/Mango-WorldWide/Mango-Music/wiki
-[mango-music.onrender.com]: https://mango-music.onrender.com/
+[mango-music-4c4k.onrender.com]: https://mango-music-4c4k.onrender.com/
