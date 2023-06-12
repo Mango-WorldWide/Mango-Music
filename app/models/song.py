@@ -46,6 +46,7 @@ class Song(db.Model):
             "lyrics": self.lyrics,
             "artist_id": self.artist_id,
             "album_id": self.album_id,
+            "album_title": self.songs_albums_relationship.to_dict_relationship()["title"],
             "artist_name":self.songs_artists_relationship.to_dict_relationship()["name"],
             "cover": self.songs_albums_relationship.to_dict_relationship()["cover"]
         }

@@ -4,7 +4,7 @@ from app.models import db, Playlist, Playlist_Song
 from app.forms import PlaylistForm
 
 
-playlist_routes = Blueprint("playlist", __name__)
+playlist_routes = Blueprint("playlists", __name__)
 
 
 @playlist_routes.route("/current")

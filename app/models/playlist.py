@@ -28,7 +28,7 @@ class Playlist(db.Model):
             "title": self.title,
             "description": self.description,
             "cover": self.cover,
-            "songs": [song.to_dict() for song in self.playlists_playlistsongs_relationship],
+            "songs": [song.to_dict_no_item() for song in self.playlists_playlistsongs_relationship],
             "num_songs": len(self.playlists_playlistsongs_relationship),
             "user_id": self.user_id,
         }
