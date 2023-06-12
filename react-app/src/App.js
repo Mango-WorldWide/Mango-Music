@@ -22,6 +22,7 @@ import SplashPage from "./components/SplashPage";
 import "./index.css";
 import ArtistById from "./components/ArtistById";
 import SearchIndex from "./components/SearchIndex";
+import MobileViewMessage from "./components/MobileMessage";
 import { usePlayer } from "./context/PlayerContext";
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
 
   return (
     <>
+    <MobileViewMessage/>
       <div className="site-wrapper">
         <div className="nav-list-wrapper">
           <Navigation isLoaded={isLoaded} />
