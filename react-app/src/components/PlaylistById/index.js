@@ -139,8 +139,8 @@ function PlaylistById() {
               )}
             </tr>
           ))}
-          <button onClick={handleEdit}>Edit Playlist</button>
-          <button onClick={handleDelete}>Delete Playlist</button>
+          <button className="playlistId-edit-playlist" onClick={handleEdit}>Edit Playlist</button>
+          <button className="playlistId-delete-playlist" onClick={handleDelete}>Delete Playlist </button>
         </table>
       </div>
     </div>

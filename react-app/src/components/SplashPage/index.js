@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadSongsThunk } from '../../store/song';
 import './SplashPage.css';
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 // import {rock}from '../../images'
 const SplashPage = () => {
     const dispatch = useDispatch();
     const songs = useSelector((state) => Object.values(state.songs));
     console.log('SONGS', songs);
     const [index, setIndex] = useState(0);
+    const history = useHistory()
     const [genreIndex, setGenreIndex] = useState(0);
     const [songIndex, setSongIndex] = useState(0);
 
@@ -68,7 +69,7 @@ const SplashPage = () => {
     };
 
     const handleGenreClick = () => {
-        alert('Coming Soon!');
+        history.push('/search');
     };
     const shuffledSongs = shuffleArray([...songs].slice(0, 150));
 
@@ -77,7 +78,7 @@ const SplashPage = () => {
         <div className="splash-page">
             <h2 className='splash-genre-title'>Browse Genres</h2>
             <div className="genre-carousel">
-                <button classname='splash-genre-left' onClick={prevGenre}><i class="fa-solid fa-angles-left"></i></button>
+                <button classname='splash-genre-left'  onClick={prevGenre}><i class="fa-solid fa-angles-left"></i></button>
                 {genres.slice(genreIndex, genreIndex + 3).map((genre) => (
                     <div className="genre-tile" key={genre.name} onClick={handleGenreClick}>
                         <img classname='splash-genre-cover' src={genre.image} alt={genre.name} />

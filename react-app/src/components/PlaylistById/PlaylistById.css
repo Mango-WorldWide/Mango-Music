@@ -186,3 +186,27 @@
   .update-button:hover {
     background-color: green;
   }
+
+  .playlistId-edit-playlist {
+    /* border: red 12px solid; */
+    /* background-color: transparent; */
+    margin-top:15px;
+    margin-right: 15px;
+    padding: 6px;
+    background-color: rgb(187, 125, 11);
+    border-radius: 5px;
+    color: white;
+    border: none;
+  }
+
+  .playlistId-delete-playlist {
+    /* border: red 12px solid; */
+    /* background-color: transparent; */
+    margin-top:15px;
+    margin-right: 15px;
+    padding: 6px;
+    border-radius: 5px;
+    background-color: rgb(187, 125, 11);
+    color: white;
+    border: none;
+  }

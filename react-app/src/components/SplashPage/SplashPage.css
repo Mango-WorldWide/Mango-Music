@@ -23,8 +23,11 @@
 .splash-genre-right{
   margin-top: 500px;
 }
-.splash-genre-left{
-  margin-top: 500px;
+.genre-carousel button{
+  border: none;
+  margin: 15px;
+  background-color: transparent;
+  color: rgb(187, 125, 11);
 }
 
 
