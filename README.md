@@ -29,87 +29,149 @@ For more info about this project please check out our [wiki]!
 <img width="1680" alt="Screen Shot 2023-05-13 at 1 01 14 PM" src="https://github.com/Mango-WorldWide/Mango-Music/assets/118857412/3154da0d-4d2e-4aca-952d-944ef58a51a4">
 
 
-# Routes 
+# Routes
 
 ## Album Routes
-### api/albums/
-    * GET method
-    * Returns all the albums from the Db
-    * Body:
-         {
-            "id": 1,
-            "title": "Greatest Hit" ,
-            "description": "The first greatest hits album released by American boy band, the Backstreet Boys. The album   features 15 songs by the group, as well as a new song, "Drowning" ,
-            "cover": "https://lastfm.freetls.fastly.net/i/u/ar0/9ad371267e3a4889a7cf9b436ba17297.jpg" ,
+<p style="color:#ffb13b">GET api/albums</p>
+Returns all the albums from the database.
+
+Successful Response Body:
+```json
+{
+    "Albums": [
+        {
+        "id": 1,
+        "title": "Greatest Hit" ,
+        "description": "The first greatest hits album released by American boy band, the Backstreet Boys. The album   features 15 songs by the group, as well as a new song, 'Drowning'" ,
+        "cover": "https://lastfm.freetls.fastly.net/i/u/ar0/9ad371267e3a4889a7cf9b436ba17297.jpg" ,
+        "genre": "Pop",
+        "year": 2001,
+        "artist_id": 1,
+        "artist": "Backstreet Boys",
+        },
+        {
+        "id": 2,
+        "title": "Un Verano Sin Ti" ,
+        "description": "The fourth solo studio album, and fifth overall, by Puerto Rican rapper and singer Bad Bunny." ,
+        "cover": "https://media.pitchfork.com/photos/627425dbc85171592b8a6e6a/1:1/w_600/Bad-Bunny-Un-Verano-Sin-Ti.jpg" ,
+        "genre": "Reggaeton",
+        "year": 2022,
+        "artist_id": 2,
+        "artist": "Bad Bunny",
+        }
+    ]
+}
+```
+
+<p style="color:#ffb13b">GET api/albums/:albumId</p>
+Returns one album and all of its songs from the database.
+
+Successful Response Body:
+```json
+{
+    "Album": {
+        "artist": "Backstreet Boys",
+        "artist_id": 4,
+        "cover": "https://lastfm.freetls.fastly.net/i/u/ar0/9ad371267e3a4889a7cf9b436ba17297.jpg",
+        "description": "The first greatest hits album released by American boy band, the Backstreet Boys. The album features 15 songs by the group, as well as a new song, \"Drowning\".",
+        "genre": "Pop",
+        "id": 1,
+        "title": "Greatest Hit",
+        "year": 2001
+    },
+    "Songs": [
+        {
+            "album_id": 1,
+            "artist_id": 4,
+            "duration": null,
             "genre": "Pop",
-            "year": 2001,
-            "artist_id": 1,
-            "artist": "Backstreet Boys",
-         },
-                  {
-            "id": 2,
-            "title": "Un Verano Sin Ti" ,
-            "description": "The fourth solo studio album, and fifth overall, by Puerto Rican rapper and singer Bad Bunny." ,
-            "cover": "https://media.pitchfork.com/photos/627425dbc85171592b8a6e6a/1:1/w_600/Bad-Bunny-Un-Verano-Sin-Ti.jpg" ,
-            "genre": "Reggaeton",
-            "year": 2022,
-            "artist_id": 2,
-            "artist": "Bad Bunny",
-         }
+            "id": 24,
+            "lyrics": null,
+            "mp3": "",
+            "title": "I Want It That Way"
+        },
+        {
+            "album_id": 1,
+            "artist_id": 4,
+            "duration": null,
+            "genre": "Pop",
+            "id": 25,
+            "lyrics": null,
+            "mp3": "",
+            "title": "Everybody (Backstreet's Back)"
+        }
+    ]
+}
+```
 
-### api/albums/artist
-    * GET methods
-    * Returns all the artists for the albums
-    * Body: 
-         {
-            "id": 1,
-            "name": Backstreet Boys,
-            "albums": "Greatest Hit",
-            songs: 
-                {
-                  "title": "I Want It That Way",
-                  "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-                  "genre": "Pop",
-                  "duration": 3.35,
-                  "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-                  "mp3": "/Music/Backstreet Boys- Greatest Hits/01 Backstreet Boys - I Want It That Way.mp3",
-                  "lyrics": "Lyrics",
-                },
-                {
-                  "title": "Everybody (Backstreet's Back)",
-                  "album_id": Album.query.filter(Album.title == 'Greatest Hit').first().id,
-                  "genre": "Pop",
-                  "duration": 3.35,  # Replace with the actual duration of the song
-                  "artist_id": Artist.query.filter(Artist.name == 'Backstreet Boys').first().id,
-                  "mp3": "/Music/Backstreet Boys- Greatest Hits/02 Backstreet Boys - Everybody (Backstreet's Back).mp3",
-                  "lyrics": "Lyrics",
-                }
-         },
-         {
-            "id": 2,
-            "name": Bad Bunny,
-            "albums": "Un Verano Sin Ti",
-            songs: 
-                {
-                   "title": "Moscow Mule",
-                  "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,  # Assuming Un Verano Sin Ti is the first album in the albums table
-                  "genre": "Reggaeton",
-                  "duration": 4.05,  # Replace
-                  "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,  # Assuming Bad Bunny is the first artist in the artists table
-                  "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                  "lyrics": "Lyrics",
-                },
-                {
-                  "title": "Después de la Playa",
-                  "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
-                  "genre": "Reggaeton",
-                  "duration": 3.50,  # Replace with the actual duration of the song
-                  "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
-                  "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-                  "lyrics": "Lyrics",
-                }
-         }
+<p style="color:#ffb13b">GET api/albums/artist</p>
+Returns all the albums for the logged in artist*
 
+\* Login REQUIRED and User MUST be artist
+
+Successful Response Body:
+```json
+[
+    {
+        "cover": "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
+        "description": "Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.",
+        "genre": "Hip Hop",
+        "id": 7,
+        "title": "Graduation",
+        "year": 2007
+    }
+]
+```
+Error Response 403: Unauthorized
+
+```json
+{
+    "message": "Must be an artist to access this page"
+}
+```
+
+<p style="color:#ffb13b">PUT api/albums/:albumId/edit</p>
+Returns all the albums for the logged in artist*
+
+\* Login REQUIRED and User MUST be artist
+
+Request:
+* Headers:
+    * Content-Type: application/json
+* Body:
+
+    ```json
+    {
+        "cover": "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
+        "description": "Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.",
+        "genre": "Hip Hop",
+        "id": 7,
+        "title": "Graduation",
+        "year": 2007
+    }
+    ```
+
+Request Body:
+
+
+Successful Response Body:
+```json
+    {
+        "cover": "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
+        "description": "Graduation is the third studio album by American rapper and producer Kanye West, released on September 11, 2007, through Def Jam Recordings and Roc-A-Fella Records.",
+        "genre": "Hip Hop",
+        "id": 7,
+        "title": "Graduation",
+        "year": 2007
+    }
+```
+Error Response 403: Unauthorized
+
+```json
+{
+    "message": "Must be an artist and own album to access this page"
+}
+```
 
 
 

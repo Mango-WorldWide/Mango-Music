@@ -151,12 +151,12 @@ const AudioPlayer = () => {
         <div className="audio-player-track-info">
           <img
             className="musicCover audio-player-img"
-            src={songsArr[currentSongIndex].album.cover}
+            src={songsArr[currentSongIndex].cover}
             alt={songsArr[currentSongIndex].title}
           />
           <div className="audio-player-text">
             <h3 className="title">{songsArr[currentSongIndex].title}</h3>
-            <p className="subTitle">{songsArr[currentSongIndex].artist.name}</p>
+            <p className="subTitle">{songsArr[currentSongIndex].artist_name}</p>
           </div>
         </div>
         <ProgressBar

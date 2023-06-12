@@ -19,3 +19,8 @@ class Playlist_Song(db.Model):
             'id': self.id,
             "songs": self.playlistsongs_songs_relationship.to_dict()
         }
+    def to_dict_no_item(self):
+        return {
+            'id': self.id,
+            "songs": self.playlistsongs_songs_relationship.to_dict_no_item()
+        }
