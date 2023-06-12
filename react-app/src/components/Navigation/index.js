@@ -70,7 +70,10 @@ function Navigation() {
       <div className="nav-list-creators">
         <div className="nav-list-mangoes">
           <div className="nav-list-mango-member">
-            <p id="mango-member-name">Alan Echenique</p>
+            <div className="mango-member-name">
+              <p>Alan</p>
+              <p>Echenique</p>
+            </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Alancittoo" target="_blank">
                 <i class="fa-brands fa-github" />
@@ -85,7 +88,10 @@ function Navigation() {
           </div>
           <div className="vertical-rule" />
           <div className="nav-list-mango-member">
-            <p id="mango-member-name">Alan Nguyen</p>
+            <div className="mango-member-name">
+              <p>Alan</p>
+              <p>Nguyen</p>
+            </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Alan-Ngn" target="_blank">
                 <i class="fa-brands fa-github" />
@@ -100,7 +106,10 @@ function Navigation() {
           </div>
           <div className="vertical-rule" />
           <div className="nav-list-mango-member">
-            <p id="mango-member-name">Dorian Macias</p>
+            <div className="mango-member-name">
+              <p>Dorian</p>
+              <p>Macias</p>
+            </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/dorianinc" target="_blank">
                 <i class="fa-brands fa-github" />
@@ -115,7 +124,10 @@ function Navigation() {
           </div>
           <div className="vertical-rule" />
           <div className="nav-list-mango-member">
-            <p id="mango-member-name">Kevin Mejia</p>
+            <div className="mango-member-name">
+              <p>Kevin</p>
+              <p>Mejia</p>
+            </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Nemurs" target="_blank">
                 <i class="fa-brands fa-github" />
