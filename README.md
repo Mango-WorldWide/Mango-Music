@@ -173,9 +173,78 @@ Error Response 403: Unauthorized
 }
 ```
 
+### api/playlist/current
+   ```
+   * GET method
+   * Returns all the playlists in the db for that user
+   * Body:
+      [
+       {
+         "id": 1,
+         "title": 'DemoUser Jammy Jams',
+         "description": 'Gym Music',
+         "cover": 'https://filmdaily.co/wp-content/uploads/2020/08/fitness-2.jpg',
+         "songs": [
+         {
+              "title": "Moscow Mule",
+              "album_id": 2,
+              "genre": "Reggaeton",
+              "duration": 4.05,
+              "artist_id": 9
+              "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+              "lyrics": "Lyrics",
+          },
+          {
+              "title": "Después de la Playa",
+              "album_id": 2,
+              "genre": "Reggaeton",
+              "duration": 3.50,  # Replace with the actual duration of the song
+              "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
+              "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+              "lyrics": "Lyrics",
+          },
+         ],
+         “num_songs”: 2
+         "user_id": 1
+        },
+      ]
+    
+   ```
+  # api/playlist/<int:playlistId>
+   ```
+   * GET method
+   * returns one playlists in the db for that user
+   * Body:
+       {
+         "id": 1,
+         "title": 'DemoUser Jammy Jams',
+         "description": 'Gym Music',
+         "cover": 'https://filmdaily.co/wp-content/uploads/2020/08/fitness-2.jpg',
+         "songs": [
+         {
+              "title": "Moscow Mule",
+              "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,  # Assuming Un Verano Sin Ti is the first album in the albums table
+              "genre": "Reggaeton",
+              "duration": 4.05,  # Replace
+              "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,  # Assuming Bad Bunny is the first artist in the artists table
+              "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+              "lyrics": "Lyrics",
+          },
+          {
+              "title": "Después de la Playa",
+              "album_id": Album.query.filter(Album.title == 'Un Verano Sin Ti').first().id,
+              "genre": "Reggaeton",
+              "duration": 3.50,  # Replace with the actual duration of the song
+              "artist_id": Artist.query.filter(Artist.name == 'Bad Bunny').first().id,
+              "mp3": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+              "lyrics": "Lyrics",
+          },
+         ],
+         “num_songs”: 2
+         "user_id": 1
+        }
 
-
-
+   ```
 
 
 
