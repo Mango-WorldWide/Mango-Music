@@ -205,7 +205,7 @@
   width: auto;
 }
 
-#mango-member-name {
+.mango-member-name {
   font-size: 1.3vh;
   margin: 8px 0;
 }
