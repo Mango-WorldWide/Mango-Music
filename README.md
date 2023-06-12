@@ -31,7 +31,7 @@ For more info about this project please check out our [wiki]!
 
 # Routes
 
-## ~Albums~
+## \~Albums~
 
 
 ### GET api/albums
@@ -260,7 +260,7 @@ Successful Response Body:
 }
 ```
 ________________
-## ~Playlists~
+## \~Playlists~
 
 ### api/playlist/current
    ```
