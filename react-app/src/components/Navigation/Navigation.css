@@ -190,23 +190,23 @@
 }
 
 .nav-list-creators {
-  width: 95%;
+  width: 98%;
   margin: 0 auto;
   margin-top: auto;
 }
 
 .nav-list-mangoes {
   display: flex;
-  margin: 0 auto;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .nav-list-mango-member {
   text-align: center;
+  width: auto;
 }
 
 #mango-member-name {
-  font-size: 0.9rem;
+  font-size: 1.3vh;
   margin: 8px 0;
 }
 
@@ -218,4 +218,5 @@
 
 .vertical-rule {
   border: 1px solid #fff;
+  margin: 0 10px;
 }
