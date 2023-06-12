@@ -32,7 +32,8 @@ For more info about this project please check out our [wiki]!
 # Routes
 
 ## Album Routes
-<p style="color:#ffb13b">GET api/albums</p>
+___________________
+### GET api/albums
 Returns all the albums from the database.
 
 Successful Response Body:
@@ -62,8 +63,8 @@ Successful Response Body:
     ]
 }
 ```
-
-<p style="color:#ffb13b">GET api/albums/:albumId</p>
+________________
+### GET api/albums/:albumId
 Returns one album and all of its songs from the database.
 
 Successful Response Body:
@@ -104,7 +105,7 @@ Successful Response Body:
 }
 ```
 
-<p style="color:#ffb13b">GET api/albums/artist</p>
+### GET api/albums/artist
 Returns all the albums for the logged in artist*
 
 \* Login REQUIRED and User MUST be artist
@@ -130,7 +131,7 @@ Error Response 403: Unauthorized
 }
 ```
 
-<p style="color:#ffb13b">PUT api/albums/:albumId/edit</p>
+### PUT api/albums/:albumId/edit
 Returns all the albums for the logged in artist*
 
 \* Login REQUIRED and User MUST be artist
@@ -208,7 +209,7 @@ Error Response 403: Unauthorized
          "user_id": 1
         },
       ]
-    
+
    ```
   # api/playlist/<int:playlistId>
    ```
