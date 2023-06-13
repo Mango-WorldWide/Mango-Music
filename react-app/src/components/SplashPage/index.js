@@ -96,11 +96,11 @@ const SplashPage = () => {
     {songs.map((song) => (
 
       <div className="splash-song" key={song.id}>
-        <Link to={`/albums/${song.album.id}`}>
-        <img className="splash-song-cover" src={song.album.cover} alt={song.title} /></Link>
+        <Link to={`/albums/${song.album_id}`}>
+        <img className="splash-song-cover" src={song.album_cover} alt={song.title} /></Link>
         <div className="splash-song-info">
           <h4 >{song.title}</h4>
-          <Link to={`/artist/${song.artist.id}`}><h5>{song.artist.name}</h5></Link>
+          <Link to={`/artist/${song.artist_id}`}><h5>{song.artist_name}</h5></Link>
           <h5>{song.genre}</h5>
         </div>
 
