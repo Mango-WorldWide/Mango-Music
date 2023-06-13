@@ -10,15 +10,8 @@ const AudioPlayer = () => {
   const dispatch = useDispatch();
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const {
-    isPlaying,
-    setIsPlaying,
-    currentSong,
-    setCurrentSong,
-    queueIndex,
-    setQueueIndex,
-    queue,
-  } = usePlayer();
+  const { isPlaying, setIsPlaying, currentSong, setCurrentSong, queueIndex, setQueueIndex, queue } =
+    usePlayer();
 
   const [isLooping, setIsLooping] = useState(false);
   const [unmuteVolume, setUnmuteVolume] = useState(false);
@@ -30,15 +23,18 @@ const AudioPlayer = () => {
   const playAnimationRef = useRef();
 
   const repeat = useCallback(() => {
-    const newCurrentTime = audioPlayer.current.currentTime;
-    setCurrentTime(newCurrentTime);
-    progressBarRef.current.value = newCurrentTime;
-    progressBarRef.current.style.setProperty(
-      "--range-progress",
-      `${(progressBarRef.current.value / duration) * 100}%`
-    );
+    if (audioPlayer.current) {
+      const newCurrentTime = audioPlayer.current.currentTime;
+      console.log("newCurrentTime 👉", newCurrentTime);
+      setCurrentTime(newCurrentTime);
+      progressBarRef.current.value = newCurrentTime;
+      progressBarRef.current.style.setProperty(
+        "--range-progress",
+        `${(progressBarRef.current.value / duration) * 100}%`
+      );
 
-    playAnimationRef.current = requestAnimationFrame(repeat);
+      playAnimationRef.current = requestAnimationFrame(repeat);
+    }
   }, []);
 
   useEffect(() => {
@@ -74,6 +70,8 @@ const AudioPlayer = () => {
       setQueueIndex((prev) => prev + 1);
       let newSong = await dispatch(singleSongThunk(queue[queueIndex + 1].id));
       setCurrentSong(newSong);
+    }else{
+      setIsPlaying(false)
     }
   };
 
@@ -151,12 +149,12 @@ const AudioPlayer = () => {
         <div className="audio-player-track-info">
           <img
             className="musicCover audio-player-img"
-            src={queue[queueIndex].album_cover}
-            alt={queue[queueIndex].title}
+            src={queue[queueIndex]?.album_cover}
+            alt={queue[queueIndex]?.title}
           />
           <div className="audio-player-text">
-            <h3 className="title">{queue[queueIndex].title}</h3>
-            <p className="subTitle">{queue[queueIndex].artist_name}</p>
+            <h3 className="title">{queue[queueIndex]?.title}</h3>
+            <p className="subTitle">{queue[queueIndex]?.artist_name}</p>
           </div>
         </div>
         <ProgressBar

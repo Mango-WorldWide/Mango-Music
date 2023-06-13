@@ -149,7 +149,7 @@ const AlbumById = () => {
               </p> */}
                   <PlayButton
                     buttonContent={
-                      isPlaying && song.id === queue[queueIndex].id ? (
+                      isPlaying && song.id === queue[queueIndex]?.id ? (
                         <i className="fa fa-pause" aria-hidden="true"></i>
                       ) : (
                         <i class="fa fa-play" aria-hidden="true"></i>
