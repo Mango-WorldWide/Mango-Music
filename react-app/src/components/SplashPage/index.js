@@ -3,14 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadRandomSongThunk } from "../../store/song";
 import "./SplashPage.css";
 import { Link, useHistory } from "react-router-dom";
-// import {rock}from '../../images'
+import PlayButton from "../PlayButton";
+import { usePlayer } from "../../context/PlayerContext";
+
 const SplashPage = () => {
   const dispatch = useDispatch();
   const songs = useSelector((state) => Object.values(state.songs));
   console.log("SONGS", songs);
   const history = useHistory();
   const [genreIndex, setGenreIndex] = useState(0);
-  const [setSongIndex] = useState(0);
+  const [hoveredSong, setHoveredSong] = useState("");
+  // const [setSongIndex] = useState(0);
+  const { isPlaying, currentSong, queue, queueIndex } = usePlayer();
 
   // function shuffleArray(array) {
   //   let currentIndex = array.length;
@@ -69,13 +73,15 @@ const SplashPage = () => {
   };
 
   // next and prev for songs
-  const nextSong = () => {
-    setSongIndex((prevIndex) => Math.min(prevIndex + 15, songs.length - 1));
-  };
+  // const nextSong = () => {
+  //   setSongIndex((prevIndex) => Math.min(prevIndex + 15, songs.length - 1));
+  // };
 
   // const prevSong = () => {
   //   setSongIndex((prevIndex) => Math.max(prevIndex - 15, 0));
   // };
+
+  const handlePlaySong = (songId) => {};
 
   const handleGenreClick = () => {
     history.push("/search");
@@ -104,11 +110,51 @@ const SplashPage = () => {
         <h2 className="splash-song-list-title">Random Songs You Might Like</h2>
 
         <div className="splash-song-list">
-          {songs.map((song) => (
+          {songs.map((song, i) => (
             <div className="splash-song" key={song.id}>
-              <Link to={`/albums/${song.album_id}`}>
-                <img className="splash-song-cover" src={song.album_cover} alt={song.title} />
-              </Link>
+              <div onClick={() => handlePlaySong(song.id)}>
+                <PlayButton songId={song.id} songs={[song]} isButton={true} />
+                <div
+                  className="splash-song-cover-container"
+                  onMouseEnter={() => setHoveredSong(i)}
+                  onMouseLeave={() => setHoveredSong("")}
+                >
+                  <img className="splash-song-cover" src={song.album_cover} alt={song.title} />
+                  {song.id === currentSong.id ? (
+                    <div>
+                      <div className="splash-song-overlay" />
+                      <PlayButton
+                        nameOfClass="splash-play-button"
+                        buttonContent={
+                          isPlaying && song.id === queue[queueIndex].id ? (
+                            <i className="fa fa-pause" aria-hidden="true"></i>
+                          ) : (
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                          )
+                        }
+                        songId={song.id}
+                        songs={[song]}
+                      />
+                    </div>
+                  ) : i === hoveredSong ? (
+                    <div>
+                      <div className="splash-song-overlay" />
+                      <PlayButton
+                        nameOfClass="splash-play-button"
+                        buttonContent={
+                          isPlaying && song.id === queue[queueIndex].id ? (
+                            <i className="fa fa-pause" aria-hidden="true"></i>
+                          ) : (
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                          )
+                        }
+                        songId={song.id}
+                        songs={[song]}
+                      />
+                    </div>
+                  ) : null}
+                </div>
+              </div>
               <div className="splash-song-info">
                 <h4>{song.title}</h4>
                 <Link to={`/artist/${song.artist_id}`}>
@@ -119,9 +165,9 @@ const SplashPage = () => {
             </div>
           ))}
         </div>
-        <p classname="splash-song-right" onClick={nextSong}>
-          <i class="fa-solid fa-angles-right"></i>
-        </p>
+        {/* <p classname="splash-song-right" onClick={nextSong}> */}
+        {/* <i class="fa-solid fa-angles-right"></i>
+        </p> */}
       </div>
     </div>
   );

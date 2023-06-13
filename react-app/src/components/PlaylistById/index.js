@@ -8,16 +8,18 @@ import "./PlaylistById.css";
 import { authenticate } from "../../store/session";
 import OpenModalDeleteButton from "../DeleteSong/OpenModalDeleteButton";
 import DeleteSongModal from "../DeleteSong";
+import { usePlayer } from "../../context/PlayerContext";
 
 function PlaylistById() {
   const { playlistId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const [hoveredSong, setHoveredSong] = useState("");
+  const { isPlaying, queue, queueIndex } = usePlayer();
 
   const playlist = useSelector((state) => state.playlists);
   const likes = useSelector((state) => Object.values(state.likes));
-  const user = useSelector((state)=> state.session.user)
+  const user = useSelector((state) => state.session.user);
 
   useEffect(() => {
     console.log("dispatching get single playlist");
@@ -44,7 +46,7 @@ function PlaylistById() {
 
   const handleDelete = async () => {
     await dispatch(deletePlaylistThunk(playlistId));
-    dispatch(authenticate())
+    dispatch(authenticate());
     history.push("/playlists");
   };
 
@@ -53,7 +55,7 @@ function PlaylistById() {
   };
   if (!playlist || !playlist.id) return null;
   const playlistSongs = playlist.songs.map((x) => x.songs);
-  const playlistOwner = playlist.user_id
+  const playlistOwner = playlist.user_id;
 
   return (
     <div className="outerPlaylistContainer">
@@ -77,8 +79,27 @@ function PlaylistById() {
           </div>
           <div class="playlistButtons">
             {playlistSongs.length > 0 ? (
-            <PlayButton songId={playlistSongs[0].id} songs={playlistSongs} isButton={true} />
-            ): <button disabled={true}>Play</button>}
+              <PlayButton
+                nameOfClass="playlistButton"
+                buttonContent={
+                  isPlaying ? (
+                    <>
+                      <i className="fa fa-pause" aria-hidden="true" />
+                      Pause
+                    </>
+                  ) : (
+                    <>
+                      <i class="fa fa-play" aria-hidden="true" />
+                      Play
+                    </>
+                  )
+                }
+                songId={playlistSongs[0].id}
+                songs={playlistSongs}
+              />
+            ) : (
+              <button disabled={true}>Play</button>
+            )}
             <button className="playlistButton" onClick={handleShuffle}>
               <i class="fa-sharp fa-solid fa-shuffle" />
               Shuffle
@@ -98,7 +119,7 @@ function PlaylistById() {
               onMouseEnter={() => setHoveredSong(i)}
             >
               <td className="songTitle">
-              {/* <p>
+                {/* <p>
                 {playlist.songs.id === selectedSong ? (
                   <i class="fa-sharp fa-solid fa-pause orange" />
                 ) : i === hoveredSong ? (
@@ -107,7 +128,17 @@ function PlaylistById() {
                   i + 1
                 )}
               </p> */}
-                <PlayButton songId={playlist.songs.id} songs={playlistSongs} isButton={false} />
+                <PlayButton
+                  buttonContent={
+                    isPlaying && playlist.songs.id === queue[queueIndex].id ? (
+                      <i className="fa fa-pause" aria-hidden="true"></i>
+                    ) : (
+                      <i class="fa fa-play" aria-hidden="true"></i>
+                    )
+                  }
+                  songId={playlist.songs.id}
+                  songs={playlistSongs}
+                />
                 <p>{playlist.songs.title}</p>
               </td>
               <td className="songArtist">{playlist.songs.artist_name}</td>
@@ -123,13 +154,27 @@ function PlaylistById() {
               </td>
               {user.id === playlistOwner && (
                 <td>
-                    <OpenModalDeleteButton itemText="Delete" modalComponent={<DeleteSongModal song={playlist.id} categoryId={playlistId} category={'playlist'} method={"Delete"} />} />
+                  <OpenModalDeleteButton
+                    itemText="Delete"
+                    modalComponent={
+                      <DeleteSongModal
+                        song={playlist.id}
+                        categoryId={playlistId}
+                        category={"playlist"}
+                        method={"Delete"}
+                      />
+                    }
+                  />
                 </td>
               )}
             </tr>
           ))}
-          <button className="playlistId-edit-playlist" onClick={handleEdit}>Edit Playlist</button>
-          <button className="playlistId-delete-playlist" onClick={handleDelete}>Delete Playlist </button>
+          <button className="playlistId-edit-playlist" onClick={handleEdit}>
+            Edit Playlist
+          </button>
+          <button className="playlistId-delete-playlist" onClick={handleDelete}>
+            Delete Playlist{" "}
+          </button>
         </table>
       </div>
     </div>

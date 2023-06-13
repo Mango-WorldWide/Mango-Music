@@ -29,7 +29,7 @@ const PlaylistIndex = () =>  {
           ))}
           <Link to={"/playlists/new"}>
             <button className="createMoreButton">
-            <img className="plus-sign new" src="/plus.png" />
+            <img className="plus-sign new" alt="plus" src="/plus.png" />
             </button>
           </Link>
         </div>

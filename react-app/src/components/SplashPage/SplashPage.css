@@ -60,12 +60,40 @@
   margin-left: 50px ;
 }
 
-.splash-song-cover {
+.splash-song-cover-container {
   flex-shrink: 0;
   width: 80px;
   height: 80px;
   max-width: 100%;
   height: auto;
+  position: relative;
+}
+
+.splash-song-cover{
+ height: 100%;
+ width: 100%;
+}
+
+.splash-song-overlay{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.splash-play-button {
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  top: 40%;
+  right: 45%;
+  z-index: 1;
 }
 
 .splash-song-info {

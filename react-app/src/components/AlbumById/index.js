@@ -12,6 +12,7 @@ import "./AlbumById.css";
 import AuthModal from "../AuthModal";
 import OpenModalAddButton from "../AddPlaylistSong/OpenModalAddButton";
 import AddSongModal from "../AddPlaylistSong";
+import { usePlayer } from "../../context/PlayerContext";
 
 const AlbumById = () => {
   const [hoveredSong, setHoveredSong] = useState("");
@@ -23,7 +24,7 @@ const AlbumById = () => {
   const albumSongs = album["Songs"];
   const user = useSelector((state) => state.session.user);
   const { albumId } = useParams();
-  // console.log(Object.values(album), "album state checking");
+  const { isPlaying, queue, queueIndex } = usePlayer();
 
   useEffect(() => {
     // console.log("inside album by id", albumId);
@@ -93,7 +94,24 @@ const AlbumById = () => {
           </div>
           <div class="orangeButtons">
             {albumSongs && albumSongs.length > 0 && (
-              <PlayButton songId={albumSongs[0].id} songs={albumSongs} isButton={true} />
+              <PlayButton
+                nameOfClass="playlistButton"
+                buttonContent={
+                  isPlaying ? (
+                    <>
+                      <i className="fa fa-pause" aria-hidden="true" />
+                      Pause
+                    </>
+                  ) : (
+                    <>
+                      <i class="fa fa-play" aria-hidden="true" />
+                      Play
+                    </>
+                  )
+                }
+                songId={albumSongs[0].id}
+                songs={albumSongs}
+              />
             )}
             <button className="orangeButton" onClick={handleShuffle}>
               <i class="fa-sharp fa-solid fa-shuffle" />
@@ -129,7 +147,17 @@ const AlbumById = () => {
                   i + 1
                 )}
               </p> */}
-                  <PlayButton songId={song.id} songs={albumSongs} isButton={false} />
+                  <PlayButton
+                    buttonContent={
+                      isPlaying && song.id === queue[queueIndex].id ? (
+                        <i className="fa fa-pause" aria-hidden="true"></i>
+                      ) : (
+                        <i class="fa fa-play" aria-hidden="true"></i>
+                      )
+                    }
+                    songId={song.id}
+                    songs={albumSongs}
+                  />
                   <p>{song.title}</p>
                 </td>
                 <td onClick={(e) => handleLikeButton(e, song.id)}>
@@ -144,7 +172,7 @@ const AlbumById = () => {
                 {user.playlists.length > 0 && (
                   <td>
                     <OpenModalAddButton
-                      itemText={<img className="plus-sign album" src="/plus.png" />}
+                      itemText={<img alt="plus" className="plus-sign album" src="/plus.png" />}
                       modalComponent={<AddSongModal song={song} />}
                     />
                   </td>
