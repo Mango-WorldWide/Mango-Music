@@ -6,7 +6,7 @@ function SongFormModal({ isSending }) {
         <div className="modal">
           <div className="modal-content">
             <h2>File is Sending</h2>
-            <img src={process.env.PUBLIC_URL + '/loading.gif'}></img>
+            <img alt="loading" src={process.env.PUBLIC_URL + '/loading.gif'}></img>
           </div>
         </div>
         </div>

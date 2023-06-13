@@ -36,6 +36,7 @@ function ProfileButton() {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    setShowMenu(false)
     history.push("/");
   };
 
@@ -76,14 +77,14 @@ function ProfileButton() {
             <OpenModalButton
               className='dropdown-login'
               buttonText="Log In"
-              onItemClick={closeMenu}
+              onButtonClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
 
             <OpenModalButton
               className='dropdown-signup'
               buttonText="Sign Up"
-              onItemClick={closeMenu}
+              onButtonClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
           </>

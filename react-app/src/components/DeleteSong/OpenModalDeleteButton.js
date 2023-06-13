@@ -1,9 +1,8 @@
 import { useModal } from "../../context/Modal";
 
 const OpenModalDeleteButton = ({ modalComponent, itemText, onItemClick, onModalClose }) => {
-  const { setModalContent, setOnModalClose } = useModal();
+  const { setModalContent } = useModal();
   const onClick = () => {
-    // if (onModalClose) setOnModalClose(onModalClose);
     setModalContent(modalComponent);
     if (onItemClick) onItemClick();
   };

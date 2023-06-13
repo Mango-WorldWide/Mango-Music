@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { loadOneAlbumThunk } from "../../store/album";
-import { deletePlaylistSongThunk, deleteSongThunk, updateSongThunk } from "../../store/song";
+import { deletePlaylistSongThunk, deleteSongThunk } from "../../store/song";
 
 const DeleteSongModal = ({ song, categoryId, category, method }) => {
   const [title, setTitle] = useState(song.title);
@@ -10,23 +9,17 @@ const DeleteSongModal = ({ song, categoryId, category, method }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  // console.log(song, "what is my song in my modal to delete");
   const deleteOnClick = (e) => {
     e.preventDefault();
     if (category === "playlist") {
-      // console.log("delete on click modal for songs playlist song", song);
       dispatch(deletePlaylistSongThunk(song, categoryId)).then(closeModal);
     }
     if (category === "album") {
-      // console.log("delete song for album");
       dispatch(deleteSongThunk(song.id, categoryId)).then(closeModal);
     }
   };
   const handleEdit = async (e) => {
     e.preventDefault()
-    const songPayload = {title, genre}
-    const phaseOne = await dispatch(updateSongThunk(songPayload, song.id))
-    const phaseTwo = await (dispatch(loadOneAlbumThunk(song.album_id)))
     closeModal();
   }
 

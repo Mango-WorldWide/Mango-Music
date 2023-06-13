@@ -30,8 +30,13 @@ class Song(db.Model):
             'lyrics': self.lyrics,
             'artist_id': self.artist_id,
             'album_id': self.album_id,
+            "artist_name":self.songs_artists_relationship.to_dict_relationship()["name"],
+            "cover": self.songs_albums_relationship.to_dict_relationship()["cover"],
             'artist': self.songs_artists_relationship.to_dict(),
             'album': self.songs_albums_relationship.to_dict(),
+            'artist_name': self.songs_artists_relationship.to_dict()["name"],
+            'album_name': self.songs_albums_relationship.to_dict()["title"],
+            'album_cover': self.songs_albums_relationship.to_dict()["cover"],
         }
 
     def to_dict_no_item(self, includeMP3=False):
@@ -43,7 +48,10 @@ class Song(db.Model):
             'mp3': self.mp3 if includeMP3 else '',
             "lyrics": self.lyrics,
             "artist_id": self.artist_id,
-            "album_id": self.album_id
+            "album_id": self.album_id,
+            "album_title": self.songs_albums_relationship.to_dict_relationship()["title"],
+            "artist_name":self.songs_artists_relationship.to_dict_relationship()["name"],
+            "cover": self.songs_albums_relationship.to_dict_relationship()["cover"]
         }
 
     def to_like(self, includeMP3=False):

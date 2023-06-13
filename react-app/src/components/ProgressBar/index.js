@@ -16,7 +16,6 @@ const formatTime = (timeInSecs) => {
 const ProgressBar = ({ progressBarRef, audioPlayerRef, currentTime, duration}) => {
     const handleProgressChange = () => {
         audioPlayerRef.current.currentTime = progressBarRef.current.value;
-        // console.log(progressBarRef.current.value)
     };
 
     return (

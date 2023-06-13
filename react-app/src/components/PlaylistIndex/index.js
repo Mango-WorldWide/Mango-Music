@@ -28,7 +28,9 @@ const PlaylistIndex = () =>  {
             <PlaylistsIndexItem key={playlist.id} playlist={playlist}/>
           ))}
           <Link to={"/playlists/new"}>
-            <button className="createMoreButton">+</button>
+            <button className="createMoreButton">
+            <img className="plus-sign new" alt="plus" src="/plus.png" />
+            </button>
           </Link>
         </div>
 

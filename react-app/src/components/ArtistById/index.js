@@ -8,11 +8,10 @@ const ArtistById = () => {
   const dispatch = useDispatch();
   const { artistId } = useParams();
   const artist = useSelector((state) => state.artist);
-  const album = useSelector((state) => state.albums);
 
   useEffect(() => {
     dispatch(loadArtistThunk(artistId));
-  }, [dispatch]);
+  }, [dispatch, artistId]);
 
   if (!artist.albums) return null;
 
@@ -34,7 +33,6 @@ const ArtistById = () => {
             <h2 className="albumArtistById">{album.title}</h2>
             </Link>
           ))}
-          {/* {console.log('ARTIST', album)} */}
         </div>
       </div>
     </div>

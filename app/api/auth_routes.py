@@ -61,7 +61,7 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('FORM.DATA111--------', form.data)  # Debug line
+
     if form.validate_on_submit():
         artist_id = None
         if not form.data['artist']:
@@ -85,8 +85,6 @@ def sign_up():
         db.session.commit()
         login_user(user)
         return user.to_dict()
-    else:
-        print('FORM.ERRORS',form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

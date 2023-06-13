@@ -10,15 +10,8 @@ const AudioPlayer = () => {
   const dispatch = useDispatch();
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const {
-    isPlaying,
-    setIsPlaying,
-    currentSong,
-    setCurrentSong,
-    currentSongIndex,
-    setCurrentSongIndex,
-    songsArr,
-  } = usePlayer();
+  const { isPlaying, setIsPlaying, currentSong, setCurrentSong, queueIndex, setQueueIndex, queue } =
+    usePlayer();
 
   const [isLooping, setIsLooping] = useState(false);
   const [unmuteVolume, setUnmuteVolume] = useState(false);
@@ -30,19 +23,20 @@ const AudioPlayer = () => {
   const playAnimationRef = useRef();
 
   const repeat = useCallback(() => {
-    const newCurrentTime = audioPlayer.current.currentTime;
-    setCurrentTime(newCurrentTime);
-    progressBarRef.current.value = newCurrentTime;
-    progressBarRef.current.style.setProperty(
-      "--range-progress",
-      `${(progressBarRef.current.value / duration) * 100}%`
-    );
+    if (audioPlayer.current) {
+      const newCurrentTime = audioPlayer.current.currentTime;
+      setCurrentTime(newCurrentTime);
+      progressBarRef.current.value = newCurrentTime;
+      progressBarRef.current.style.setProperty(
+        "--range-progress",
+        `${(progressBarRef.current.value / duration) * 100}%`
+      );
 
-    playAnimationRef.current = requestAnimationFrame(repeat);
+      playAnimationRef.current = requestAnimationFrame(repeat);
+    }
   }, []);
 
   useEffect(() => {
-    // console.log("audioPlayer.current 👉", audioPlayer.current)
     if (audioPlayer && audioPlayer.current) {
       if (isPlaying) {
         audioPlayer.current.play();
@@ -67,20 +61,22 @@ const AudioPlayer = () => {
     }
   }, [volume, audioPlayer, unmuteVolume]);
 
-  if (!songsArr.length) return null;
+  if (!queue.length) return null;
 
   const goForward = async () => {
-    if (currentSongIndex < songsArr.length - 1) {
-      setCurrentSongIndex((prev) => prev + 1);
-      let newSong = await dispatch(singleSongThunk(songsArr[currentSongIndex + 1].id));
+    if (queueIndex < queue.length - 1) {
+      setQueueIndex((prev) => prev + 1);
+      let newSong = await dispatch(singleSongThunk(queue[queueIndex + 1].id));
       setCurrentSong(newSong);
+    }else{
+      setIsPlaying(false)
     }
   };
 
   const goBack = async () => {
-    if (currentSongIndex > 0) {
-      setCurrentSongIndex((prev) => prev - 1);
-      let newSong = await dispatch(singleSongThunk(songsArr[currentSongIndex - 1].id));
+    if (queueIndex > 0) {
+      setQueueIndex((prev) => prev - 1);
+      let newSong = await dispatch(singleSongThunk(queue[queueIndex - 1].id));
       setCurrentSong(newSong);
     }
   };
@@ -119,12 +115,12 @@ const AudioPlayer = () => {
     progressBarRef.current.max = seconds;
   };
 
-  // if (!currentSong || !currentSongIndex) return null;
+  // if (!currentSong || !queueIndex) return null;
   return (
     <div className="audio-player">
       <div className="audio-player-track-controls">
         <p className="audio-player-shuffle" onClick={(e) => alert("Feature Coming Soon!")}>
-          <i class="fa-solid fa-shuffle"></i>
+          <i class="fa-solid fa-shuffle" style={{ cursor: "not-allowed" }}></i>
         </p>
         <p className="audio-playeer-back" onClick={goBack}>
           <i class="fa-solid fa-backward"></i>
@@ -151,12 +147,12 @@ const AudioPlayer = () => {
         <div className="audio-player-track-info">
           <img
             className="musicCover audio-player-img"
-            src={songsArr[currentSongIndex].album.cover}
-            alt={songsArr[currentSongIndex].title}
+            src={queue[queueIndex]?.cover}
+            alt={queue[queueIndex]?.title}
           />
           <div className="audio-player-text">
-            <h3 className="title">{songsArr[currentSongIndex].title}</h3>
-            <p className="subTitle">{songsArr[currentSongIndex].artist.name}</p>
+            <h3 className="title">{queue[queueIndex]?.title}</h3>
+            <p className="subTitle">{queue[queueIndex]?.artist_name}</p>
           </div>
         </div>
         <ProgressBar
@@ -176,7 +172,7 @@ const AudioPlayer = () => {
         </p>
         <input type="range" min={0} max={100} value={volume} onChange={volumeControl} />
       </div>
-      {/* <audio src={all_songs[songIndex]} ref={audioPlayer} loop={isLooping} onEnded={goForward} style={{ display: "hidden" }} onLoadedMetadata={onLoadedMetadata}/> */}
+      {/* <audio src={all_songs[selectedSongIndex]} ref={audioPlayer} loop={isLooping} onEnded={goForward} style={{ display: "hidden" }} onLoadedMetadata={onLoadedMetadata}/> */}
       <audio
         src={currentSong.mp3}
         ref={audioPlayer}

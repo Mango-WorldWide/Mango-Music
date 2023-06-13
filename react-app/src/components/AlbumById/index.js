@@ -1,41 +1,34 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAlbumThunk } from "../../store/album";
-import { useEffect, useState, useRef } from "react";
-import AlbumsIndexItem from "../AlbumsIndexItem";
+import { useEffect, useState } from "react";
 import PlayButton from "../PlayButton";
 import { useHistory, useParams } from "react-router-dom";
 import { loadOneAlbumThunk } from "../../store/album";
-import { singleSongThunk } from "../../store/song";
 import { deleteLikeThunk, createLikeThunk } from "../../store/like";
-import LikeButton from "../LikeButton";
 import SongForm from "../SongForm";
-import { deleteSongThunk } from "../../store/song";
 import OpenModalDeleteButton from "../DeleteSong/OpenModalDeleteButton";
 import DeleteSongModal from "../DeleteSong";
-import { usePlayer } from "../../context/PlayerContext";
 import "./AlbumById.css";
 import AuthModal from "../AuthModal";
 import OpenModalAddButton from "../AddPlaylistSong/OpenModalAddButton";
 import AddSongModal from "../AddPlaylistSong";
+import { usePlayer } from "../../context/PlayerContext";
 
 const AlbumById = () => {
   const [hoveredSong, setHoveredSong] = useState("");
   const dispatch = useDispatch();
-  const { isPlaying, setIsPlaying } = usePlayer();
-  const audioPlayer = useRef();
-  const song = useSelector((state) => Object.values(state.songs));
+  // const audioPlayer = useRef();
   const history = useHistory();
   const album = useSelector((state) => state.albums);
   const likes = useSelector((state) => Object.values(state.likes));
   const albumSongs = album["Songs"];
   const user = useSelector((state) => state.session.user);
   const { albumId } = useParams();
-  // console.log(Object.values(album), "album state checking");
+  const { isPlaying, queue, queueIndex } = usePlayer();
 
   useEffect(() => {
-    // console.log("inside album by id", albumId);
     dispatch(loadOneAlbumThunk(albumId));
-  }, [dispatch]);
+  }, [dispatch, albumId]);
 
   if (!album["Songs"]) return null;
 
@@ -43,16 +36,12 @@ const AlbumById = () => {
     return <AuthModal />;
   }
 
-  const handleShuffle = (e) => {
-    e.preventDefault();
-    alert("Feature Coming Soon");
-  };
 
   const handleLikeButton = async (e, songId) => {
     e.preventDefault();
-    if (likes.filter((like) => like["song_id"] == songId).length > 0) {
+    if (likes.filter((like) => like["song_id"] === songId).length > 0) {
       let like = likes.filter((like) => {
-        return like["song_id"] == songId;
+        return like["song_id"] === songId;
       });
       like = like[0];
       await dispatch(deleteLikeThunk(like.id));
@@ -83,7 +72,9 @@ const AlbumById = () => {
         </div>
         <div className="albumMenu">
           <h1 className="albumTitle">{album["Album"].title}</h1>
-          <h2 className="albumArtist"><a href={`/artist/${album["Album"].artist_id}`}>{album["Album"].artist}</a></h2>
+          <h2 className="albumArtist">
+            <a href={`/artist/${album["Album"].artist_id}`}>{album["Album"].artist}</a>
+          </h2>
           <div className="albumGenreYear">
             <p className="albumGenre">{album["Album"].genre}</p>
             <p id="dot">·</p>
@@ -98,9 +89,26 @@ const AlbumById = () => {
           </div>
           <div class="orangeButtons">
             {albumSongs && albumSongs.length > 0 && (
-              <PlayButton songId={albumSongs[0].id} songs={albumSongs} isButton={true} />
+              <PlayButton
+                nameOfClass="playlistButton"
+                buttonContent={
+                  isPlaying ? (
+                    <>
+                      <i className="fa fa-pause" aria-hidden="true" />
+                      Pause
+                    </>
+                  ) : (
+                    <>
+                      <i class="fa fa-play" aria-hidden="true" />
+                      Play
+                    </>
+                  )
+                }
+                songId={albumSongs[0].id}
+                songs={albumSongs}
+              />
             )}
-            <button className="orangeButton" onClick={handleShuffle}>
+            <button className="orangeButton" disabled style={{cursor: "not-allowed"}}>
               <i class="fa-sharp fa-solid fa-shuffle" />
               Shuffle
             </button>
@@ -134,11 +142,21 @@ const AlbumById = () => {
                   i + 1
                 )}
               </p> */}
-                  <PlayButton songId={song.id} songs={albumSongs} isButton={false} />
+                  <PlayButton
+                    buttonContent={
+                      isPlaying && song.id === queue[queueIndex]?.id ? (
+                        <i className="fa fa-pause" aria-hidden="true"></i>
+                      ) : (
+                        <i class="fa fa-play" aria-hidden="true"></i>
+                      )
+                    }
+                    songId={song.id}
+                    songs={albumSongs}
+                  />
                   <p>{song.title}</p>
                 </td>
                 <td onClick={(e) => handleLikeButton(e, song.id)}>
-                  {likes.filter((like) => like["song_id"] == song.id).length > 0 ? (
+                  {likes.filter((like) => like["song_id"] === song.id).length > 0 ? (
                     <i class="fa-solid fa-thumbs-up" />
                   ) : i === hoveredSong ? (
                     <i class="fa-regular fa-thumbs-up" />
@@ -149,7 +167,7 @@ const AlbumById = () => {
                 {user.playlists.length > 0 && (
                   <td>
                     <OpenModalAddButton
-                      itemText="+"
+                      itemText={<img alt="plus" className="plus-sign album" src="/plus.png" />}
                       modalComponent={<AddSongModal song={song} />}
                     />
                   </td>

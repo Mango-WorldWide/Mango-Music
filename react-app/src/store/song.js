@@ -38,7 +38,6 @@ export const deleteSong = (songId) => {
 // }
 
 export const loadSongsThunk = () => async(dispatch) => {
-    // console.log('inside songs thunk')
     const res = await fetch('/api/songs')
     if(res.ok){
         const data = await res.json()
@@ -47,21 +46,27 @@ export const loadSongsThunk = () => async(dispatch) => {
         return false
     }
 }
-
+export const loadRandomSongThunk = () => async(dispatch) => {
+    const res = await fetch('/api/songs/random')
+    if(res.ok){
+        const data = await res.json()
+        dispatch(loadSongs(data))
+    } else {
+        return false
+    }
+}
 export const singleSongThunk = (songId) => async(dispatch) => {
     const res = await fetch(`/api/songs/${songId}`)
     if (res.ok){
         const data = await res.json()
-        dispatch(singleSong(songId, data))
+        // dispatch(singleSong(songId, data))
         return data
     } else {
-        console.log("singleSongThunk Failed", songId)
         return false
     }
 }
 
 export const addSongThunk = (song) => async(dispatch) => {
-    // console.log("song from thunk 👉", song)
 
     const res = await fetch("/api/songs/new", {
         method : "POST",
@@ -69,20 +74,16 @@ export const addSongThunk = (song) => async(dispatch) => {
     })
     if(res.ok){
         const data = await res.json()
-        // console.log("data 👉", data)
         dispatch(loadOneAlbumThunk(data["album_id"]))
         return data
     }
     else{
         const data = await res.json()
-        console.log(data)
         return data
     }
 }
 
 export const updateSongThunk = (song, songId) => async(dispatch) => {
-    // console.log("songId 👉", songId)
-    // console.log("song 👉", song)
     const res = await fetch(`/api/songs/${songId}`, {
         method : "PUT",
         headers : {
@@ -92,18 +93,15 @@ export const updateSongThunk = (song, songId) => async(dispatch) => {
     })
     if (res.ok) {
         const data = res.json()
-        // console.log("data 👉", data)
         return data
     }
 }
 
 export const deleteSongThunk = (songId, categoryId) => async (dispatch) => {
-    console.log('inside delete song thunk',songId, categoryId)
     const res = await fetch(`/api/songs/${songId}`, {
         method: 'DELETE'
     })
     if (res.ok) {
-        // console.log('delete song thunk work?', categoryId)
         await dispatch(loadOneAlbumThunk(categoryId))
     } else {
         return false
@@ -111,12 +109,10 @@ export const deleteSongThunk = (songId, categoryId) => async (dispatch) => {
 }
 
 export const deletePlaylistSongThunk = (songId, categoryId) => async (dispatch) => {
-    // console.log('inside delete playlist song thunk',songId, categoryId)
     const res = await fetch(`/api/songs/${songId}/playlist`, {
         method: 'DELETE'
     })
     if (res.ok) {
-        // console.log('delete playlist song thunk work?', categoryId)
         await dispatch(getSinglePlaylistThunk(categoryId))
     } else {
         return false
