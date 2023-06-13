@@ -2,12 +2,9 @@ from flask import Blueprint, request, jsonify, make_response
 from flask_login import login_required, current_user
 from app.models import Song, User, Album, db, Playlist_Song
 from app.forms.song_form import SongForm
-from ..api.aws_helpers import (
-    get_unique_filename,
-    upload_file_to_s3,
-    remove_file_from_s3,
-)
+from ..api.aws_helpers import (get_unique_filename,upload_file_to_s3,remove_file_from_s3)
 import os
+import random
 
 song_routes = Blueprint("songs", __name__)
 
