@@ -6,7 +6,7 @@ const MobileViewMessage = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 900);
+      setIsMobileView(window.innerWidth <= 900); // Change this width so the meesage aooears whenever width is reached or lower, just put 900 cuz tablet was closest to size anything smaller is phone, Can be changed
     };
 
     window.addEventListener('resize', handleResize);
