@@ -11,7 +11,7 @@ const ArtistById = () => {
 
   useEffect(() => {
     dispatch(loadArtistThunk(artistId));
-  }, [dispatch]);
+  }, [dispatch, artistId]);
 
   if (!artist.albums) return null;
 

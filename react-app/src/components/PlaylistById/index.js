@@ -1,12 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getSinglePlaylistThunk, deletePlaylistThunk } from "../../store/playlist";
 import { deleteLikeThunk, createLikeThunk } from "../../store/like";
-import { singleSongThunk } from "../../store/song";
 import PlayButton from "../PlayButton";
-import LikeButton from "../LikeButton";
-import { usePlayer } from "../../context/PlayerContext";
 import "./PlaylistById.css";
 import { authenticate } from "../../store/session";
 import OpenModalDeleteButton from "../DeleteSong/OpenModalDeleteButton";
@@ -17,9 +14,6 @@ function PlaylistById() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [hoveredSong, setHoveredSong] = useState("");
-  const [selectedSong, setSelectedSong] = useState("");
-  const { isPlaying, setIsPlaying } = usePlayer();
-  const audioPlayer = useRef();
 
   const playlist = useSelector((state) => state.playlists);
   const likes = useSelector((state) => Object.values(state.likes));
@@ -32,9 +26,9 @@ function PlaylistById() {
 
   const handleLikeButton = async (e, songId) => {
     e.preventDefault();
-    if (likes.filter((like) => like["song_id"] == songId).length > 0) {
+    if (likes.filter((like) => like["song_id"] === songId).length > 0) {
       let like = likes.filter((like) => {
-        return like["song_id"] == songId;
+        return like["song_id"] === songId;
       });
       like = like[0];
       await dispatch(deleteLikeThunk(like.id));
@@ -60,11 +54,6 @@ function PlaylistById() {
   if (!playlist || !playlist.id) return null;
   const playlistSongs = playlist.songs.map((x) => x.songs);
   const playlistOwner = playlist.user_id
-
-  // console.log("playlistSongs [0] from PlaylistById 👉", playlistSongs[0]);
-  // console.log("id from PlaylistById 👉", playlistSongs[0].id);
-  // console.log(playlist.user_id,'which user?', user.id, 'is it the same?', playlistSongs)
-  // console.log(playlistSongs, "whats my playlist");
 
   return (
     <div className="outerPlaylistContainer">
@@ -109,22 +98,13 @@ function PlaylistById() {
               onMouseEnter={() => setHoveredSong(i)}
             >
               <td className="songTitle">
-                {/* <p>
-                  {playlist.songs.id === selectedSong ? (
-                    <i class="fa-sharp fa-solid fa-pause orange" />
-                  ) : i === hoveredSong ? (
-                    <i class="fa-solid fa-play orange" />
-                  ) : (
-                    i + 1
-                  )}
-                </p> */}
                 <PlayButton songId={playlist.songs.id} songs={playlistSongs} isButton={false} />
                 <p>{playlist.songs.title}</p>
               </td>
               <td className="songArtist">{playlist.songs.artist_name}</td>
               <td className="songAlbum">{playlist.songs.album_name}</td>
               <td onClick={(e) => handleLikeButton(e, playlist.songs.id)}>
-                {likes.filter((like) => like["song_id"] == playlist.songs.id).length > 0 ? (
+                {likes.filter((like) => like["song_id"] === playlist.songs.id).length > 0 ? (
                   <i class="fa-solid fa-thumbs-up" />
                 ) : i === hoveredSong ? (
                   <i class="fa-regular fa-thumbs-up" />

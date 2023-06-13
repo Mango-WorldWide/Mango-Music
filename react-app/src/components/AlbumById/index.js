@@ -28,7 +28,7 @@ const AlbumById = () => {
   useEffect(() => {
     // console.log("inside album by id", albumId);
     dispatch(loadOneAlbumThunk(albumId));
-  }, [dispatch]);
+  }, [dispatch, albumId]);
 
   if (!album["Songs"]) return null;
 
@@ -43,9 +43,9 @@ const AlbumById = () => {
 
   const handleLikeButton = async (e, songId) => {
     e.preventDefault();
-    if (likes.filter((like) => Number(like["song_id"]) === songId).length > 0) {
+    if (likes.filter((like) => like["song_id"] === songId).length > 0) {
       let like = likes.filter((like) => {
-        return Number(like["song_id"]) === songId;
+        return like["song_id"] === songId;
       });
       like = like[0];
       await dispatch(deleteLikeThunk(like.id));
@@ -131,7 +131,7 @@ const AlbumById = () => {
                   <p>{song.title}</p>
                 </td>
                 <td onClick={(e) => handleLikeButton(e, song.id)}>
-                  {likes.filter((like) => Number(like["song_id"]) === song.id).length > 0 ? (
+                  {likes.filter((like) =>like["song_id"] === song.id).length > 0 ? (
                     <i class="fa-solid fa-thumbs-up" />
                   ) : i === hoveredSong ? (
                     <i class="fa-regular fa-thumbs-up" />

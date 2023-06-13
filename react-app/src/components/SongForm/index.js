@@ -41,7 +41,7 @@ const SongForm = ({ albumId }) => {
     formData.append("genre", genre);
     formData.append("album_id", albumId);
 
-    const newSong = await dispatch(addSongThunk(formData));
+    await dispatch(addSongThunk(formData));
     e.target[2].value = null;
     setTitle("");
     setGenre("");

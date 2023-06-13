@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink  } from "react-router-dom";
 import "./Navigation.css";
 import Search from "../Search";
 import { useSelector } from "react-redux";

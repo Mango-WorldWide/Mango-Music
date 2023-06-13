@@ -2,15 +2,19 @@ import { useDispatch, useSelector } from "react-redux";
 import AlbumForm from "../AlbumForm";
 import { useEffect } from "react";
 import { loadOneAlbumThunk } from "../../store/album";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 const UpdateAlbum = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const album = useSelector((state) => state.albums);
   const { albumId } = useParams();
-  useEffect(async () => {
-    dispatch(loadOneAlbumThunk(albumId));
-  }, [dispatch]);
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(loadOneAlbumThunk(albumId));
+    })();
+  }, [dispatch, albumId]);
+
   if (!album["Songs"]) return null;
   const input = {
     title: album["Album"].title,
@@ -21,4 +25,5 @@ const UpdateAlbum = () => {
   };
   return <AlbumForm input={input} formType="Update" />;
 };
+
 export default UpdateAlbum;

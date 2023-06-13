@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './DummyAudioPlayerIndex.css';
 
 const DummyAudioPlayer = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying ] = useState(false);
 
   return (
     <div className="audio-player">

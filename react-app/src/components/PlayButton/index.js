@@ -1,7 +1,6 @@
 import { usePlayer } from "../../context/PlayerContext";
 import { singleSongThunk } from "../../store/song";
 import { useDispatch } from "react-redux";
-import { useRef } from "react";
 
 const PlayButton = ({ songId, songs, isButton = false }) => {
   const dispatch = useDispatch();
