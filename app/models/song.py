@@ -31,7 +31,7 @@ class Song(db.Model):
             'artist_id': self.artist_id,
             'album_id': self.album_id,
             'artist_name': self.songs_artists_relationship.to_dict()["name"],
-            'album': self.songs_albums_relationship.to_dict()["title"],
+            'album_name': self.songs_albums_relationship.to_dict()["title"],
             'album_cover': self.songs_albums_relationship.to_dict()["cover"],
         }
 
