@@ -36,10 +36,6 @@ const AlbumById = () => {
     return <AuthModal />;
   }
 
-  const handleShuffle = (e) => {
-    e.preventDefault();
-    alert("Feature Coming Soon");
-  };
 
   const handleLikeButton = async (e, songId) => {
     e.preventDefault();
@@ -112,7 +108,7 @@ const AlbumById = () => {
                 songs={albumSongs}
               />
             )}
-            <button className="orangeButton" onClick={handleShuffle}>
+            <button className="orangeButton" disabled style={{cursor: "not-allowed"}}>
               <i class="fa-sharp fa-solid fa-shuffle" />
               Shuffle
             </button>

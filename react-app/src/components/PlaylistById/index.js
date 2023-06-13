@@ -38,10 +38,6 @@ function PlaylistById() {
     }
   };
 
-  const handleShuffle = (e) => {
-    e.preventDefault();
-    alert("Feature Coming Soon!");
-  };
 
   const handleDelete = async () => {
     await dispatch(deletePlaylistThunk(playlistId));
@@ -99,7 +95,7 @@ function PlaylistById() {
             ) : (
               <button disabled={true}>Play</button>
             )}
-            <button className="playlistButton" onClick={handleShuffle}>
+            <button className="playlistButton" disabled style={{cursor: "not-allowed"}}>
               <i class="fa-sharp fa-solid fa-shuffle" />
               Shuffle
             </button>
