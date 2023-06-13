@@ -98,6 +98,15 @@ function PlaylistById() {
               onMouseEnter={() => setHoveredSong(i)}
             >
               <td className="songTitle">
+              {/* <p>
+                {playlist.songs.id === selectedSong ? (
+                  <i class="fa-sharp fa-solid fa-pause orange" />
+                ) : i === hoveredSong ? (
+                  <i class="fa-solid fa-play orange" />
+                ) : (
+                  i + 1
+                )}
+              </p> */}
                 <PlayButton songId={playlist.songs.id} songs={playlistSongs} isButton={false} />
                 <p>{playlist.songs.title}</p>
               </td>

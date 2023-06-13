@@ -190,3 +190,9 @@
 .update-button:hover {
   background-color: green;
 }
+
+.plus-sign.album{
+  height: 15px;
+  width: 15px;
+  filter: invert(1);
+}

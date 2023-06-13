@@ -76,7 +76,9 @@ const AlbumById = () => {
         </div>
         <div className="albumMenu">
           <h1 className="albumTitle">{album["Album"].title}</h1>
-          <h2 className="albumArtist"><a href={`/artist/${album["Album"].artist_id}`}>{album["Album"].artist}</a></h2>
+          <h2 className="albumArtist">
+            <a href={`/artist/${album["Album"].artist_id}`}>{album["Album"].artist}</a>
+          </h2>
           <div className="albumGenreYear">
             <p className="albumGenre">{album["Album"].genre}</p>
             <p id="dot">·</p>
@@ -131,7 +133,7 @@ const AlbumById = () => {
                   <p>{song.title}</p>
                 </td>
                 <td onClick={(e) => handleLikeButton(e, song.id)}>
-                  {likes.filter((like) =>like["song_id"] === song.id).length > 0 ? (
+                  {likes.filter((like) => like["song_id"] === song.id).length > 0 ? (
                     <i class="fa-solid fa-thumbs-up" />
                   ) : i === hoveredSong ? (
                     <i class="fa-regular fa-thumbs-up" />
@@ -142,7 +144,7 @@ const AlbumById = () => {
                 {user.playlists.length > 0 && (
                   <td>
                     <OpenModalAddButton
-                      itemText="+"
+                      itemText={<img className="plus-sign album" src="/plus.png" />}
                       modalComponent={<AddSongModal song={song} />}
                     />
                   </td>
