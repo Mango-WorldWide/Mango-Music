@@ -1,18 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAlbumThunk } from "../../store/album";
-import { useEffect, useState, useRef } from "react";
-import AlbumsIndexItem from "../AlbumsIndexItem";
+import { useEffect, useState } from "react";
 import PlayButton from "../PlayButton";
 import { useHistory, useParams } from "react-router-dom";
 import { loadOneAlbumThunk } from "../../store/album";
-import { singleSongThunk } from "../../store/song";
 import { deleteLikeThunk, createLikeThunk } from "../../store/like";
-import LikeButton from "../LikeButton";
 import SongForm from "../SongForm";
-import { deleteSongThunk } from "../../store/song";
 import OpenModalDeleteButton from "../DeleteSong/OpenModalDeleteButton";
 import DeleteSongModal from "../DeleteSong";
-import { usePlayer } from "../../context/PlayerContext";
 import "./AlbumById.css";
 import AuthModal from "../AuthModal";
 import OpenModalAddButton from "../AddPlaylistSong/OpenModalAddButton";
@@ -21,9 +16,7 @@ import AddSongModal from "../AddPlaylistSong";
 const AlbumById = () => {
   const [hoveredSong, setHoveredSong] = useState("");
   const dispatch = useDispatch();
-  const { isPlaying, setIsPlaying } = usePlayer();
-  const audioPlayer = useRef();
-  const song = useSelector((state) => Object.values(state.songs));
+  // const audioPlayer = useRef();
   const history = useHistory();
   const album = useSelector((state) => state.albums);
   const likes = useSelector((state) => Object.values(state.likes));
@@ -50,9 +43,9 @@ const AlbumById = () => {
 
   const handleLikeButton = async (e, songId) => {
     e.preventDefault();
-    if (likes.filter((like) => like["song_id"] == songId).length > 0) {
+    if (likes.filter((like) => Number(like["song_id"]) === songId).length > 0) {
       let like = likes.filter((like) => {
-        return like["song_id"] == songId;
+        return Number(like["song_id"]) === songId;
       });
       like = like[0];
       await dispatch(deleteLikeThunk(like.id));
@@ -138,7 +131,7 @@ const AlbumById = () => {
                   <p>{song.title}</p>
                 </td>
                 <td onClick={(e) => handleLikeButton(e, song.id)}>
-                  {likes.filter((like) => like["song_id"] == song.id).length > 0 ? (
+                  {likes.filter((like) => Number(like["song_id"]) === song.id).length > 0 ? (
                     <i class="fa-solid fa-thumbs-up" />
                   ) : i === hoveredSong ? (
                     <i class="fa-regular fa-thumbs-up" />

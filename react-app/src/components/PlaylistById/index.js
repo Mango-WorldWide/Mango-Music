@@ -121,8 +121,8 @@ function PlaylistById() {
                 <PlayButton songId={playlist.songs.id} songs={playlistSongs} isButton={false} />
                 <p>{playlist.songs.title}</p>
               </td>
-              <td className="songArtist">{playlist.songs.artist.name}</td>
-              <td className="songAlbum">{playlist.songs.album.title}</td>
+              <td className="songArtist">{playlist.songs.artist_name}</td>
+              <td className="songAlbum">{playlist.songs.album_name}</td>
               <td onClick={(e) => handleLikeButton(e, playlist.songs.id)}>
                 {likes.filter((like) => like["song_id"] == playlist.songs.id).length > 0 ? (
                   <i class="fa-solid fa-thumbs-up" />

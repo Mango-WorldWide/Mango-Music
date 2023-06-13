@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useModal } from "../../context/Modal"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { addSongPlaylist } from "../../store/playlist"
 
 

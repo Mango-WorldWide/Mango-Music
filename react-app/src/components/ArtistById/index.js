@@ -8,7 +8,6 @@ const ArtistById = () => {
   const dispatch = useDispatch();
   const { artistId } = useParams();
   const artist = useSelector((state) => state.artist);
-  const album = useSelector((state) => state.albums);
 
   useEffect(() => {
     dispatch(loadArtistThunk(artistId));

@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { loadOneAlbumThunk } from "../../store/album";
-import { deletePlaylistSongThunk, deleteSongThunk, updateSongThunk } from "../../store/song";
+import { deletePlaylistSongThunk, deleteSongThunk } from "../../store/song";
 
 const DeleteSongModal = ({ song, categoryId, category, method }) => {
   const [title, setTitle] = useState(song.title);
@@ -24,9 +23,6 @@ const DeleteSongModal = ({ song, categoryId, category, method }) => {
   };
   const handleEdit = async (e) => {
     e.preventDefault()
-    const songPayload = {title, genre}
-    const phaseOne = await dispatch(updateSongThunk(songPayload, song.id))
-    const phaseTwo = await (dispatch(loadOneAlbumThunk(song.album_id)))
     closeModal();
   }
 

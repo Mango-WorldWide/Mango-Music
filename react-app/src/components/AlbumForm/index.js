@@ -2,18 +2,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createAlbumThunk, updateAlbumThunk } from "../../store/album";
 import { loadArtistThunk } from "../../store/artist";
-import { usePlayer } from "../../context/PlayerContext";
 import { useParams, useHistory } from "react-router-dom";
 import "./AlbumForm.css";
 
 const AlbumForm = ({ input, formType }) => {
-  // console.log("formType 👉👉👉👉👉👉👉👉", formType)
   const dispatch = useDispatch();
   const { albumId } = useParams();
   const [errors, setErrors] = useState({});
   const history = useHistory();
-  const { isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr } =
-    usePlayer();
   const user = useSelector((state) => state.session.user);
   const artist = useSelector((state) => state.artist);
   // console.log(user.artist_id)

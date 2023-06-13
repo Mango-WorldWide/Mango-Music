@@ -11,7 +11,7 @@ const SplashPage = () => {
     const [index, setIndex] = useState(0);
     const history = useHistory()
     const [genreIndex, setGenreIndex] = useState(0);
-    const [songIndex, setSongIndex] = useState(0);
+    const [selectedSongIndex, setSongIndex] = useState(0);
 
 
     function shuffleArray(array) {
@@ -73,7 +73,7 @@ const SplashPage = () => {
     };
     const shuffledSongs = shuffleArray([...songs].slice(0, 150));
 
-    if(!songs.length || !songs[0].album ) return null
+    if(!songs.length || !songs[0].album_name) return null
     return (
         <div className="splash-page">
             <h2 className='splash-genre-title'>Browse Genres</h2>

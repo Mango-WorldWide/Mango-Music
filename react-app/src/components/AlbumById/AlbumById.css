@@ -8,14 +8,14 @@
 
 .innerAlbumContainer.top {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   gap: 2.5rem;
   margin-bottom: 2rem;
 }
 .albumMenu {
   display: flex;
   flex-direction: column;
-  align-content: end;
+  align-content: flex-end;
   width: 30%;
 }
 .albumImage {

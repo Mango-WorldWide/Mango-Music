@@ -22,7 +22,7 @@ function Navigation() {
         <div className="nav-list-top-wrapper">
           <div className="nav-list-item">
             <NavLink exact to="/" className="nav-list-item-nav-link">
-              <img src={process.env.PUBLIC_URL + "/download.png"} /> <div>Music</div>{" "}
+              <img alt="download" src={process.env.PUBLIC_URL + "/download.png"} /> <div>Music</div>{" "}
             </NavLink>
           </div>
         </div>
@@ -82,13 +82,13 @@ function Navigation() {
               <p>Alan {windowWidth > 2000 ? "Echenique" : "E."}</p>
             </div>
             <div className="nav-list-profile-links">
-              <a href="https://github.com/Alancittoo" target="_blank">
+              <a href="https://github.com/Alancittoo" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-github" />
               </a>
-              <a href="https://www.linkedin.com/in/alan-echenique" target="_blank">
+              <a href="https://www.linkedin.com/in/alan-echenique" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-linkedin" />
               </a>
-              <a href="https://wellfound.com/u/alan-echenique-1" target="_blank">
+              <a href="https://wellfound.com/u/alan-echenique-1" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-angellist" />
               </a>
             </div>
@@ -99,13 +99,13 @@ function Navigation() {
               <p>Alan {windowWidth > 2000 ? "Nguyen" : "N."}</p>
             </div>
             <div className="nav-list-profile-links">
-              <a href="https://github.com/Alan-Ngn" target="_blank">
+              <a href="https://github.com/Alan-Ngn" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-github" />
               </a>
-              <a href="https://www.linkedin.com/in/alannguyen21" target="_blank">
+              <a href="https://www.linkedin.com/in/alannguyen21" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-linkedin" />
               </a>
-              <a href="https://wellfound.com/u/alan-nguyen-31" target="_blank">
+              <a href="https://wellfound.com/u/alan-nguyen-31" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-angellist" />
               </a>
             </div>
@@ -116,13 +116,13 @@ function Navigation() {
               <p>Dorian {windowWidth > 2000 ? "Macias" : "M."}</p>
             </div>
             <div className="nav-list-profile-links">
-              <a href="https://github.com/dorianinc" target="_blank">
+              <a href="https://github.com/dorianinc" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-github" />
               </a>
-              <a href="https://www.linkedin.com/in/dorian-macias" target="_blank">
+              <a href="https://www.linkedin.com/in/dorian-macias" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-linkedin" />
               </a>
-              <a href="https://wellfound.com/u/dorian-macias" target="_blank">
+              <a href="https://wellfound.com/u/dorian-macias" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-angellist" />
               </a>
             </div>
@@ -133,13 +133,13 @@ function Navigation() {
               <p>Kevin {windowWidth > 2000 ? "Mejia" : "M."}</p>
             </div>
             <div className="nav-list-profile-links">
-              <a href="https://github.com/Nemurs" target="_blank">
+              <a href="https://github.com/Nemurs" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-github" />
               </a>
-              <a href="https://www.linkedin.com/in/kevin-octavio-mejia" target="_blank">
+              <a href="https://www.linkedin.com/in/kevin-octavio-mejia" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-linkedin" />
               </a>
-              <a href="https://wellfound.com/u/kevin-mejia-13" target="_blank">
+              <a href="https://wellfound.com/u/kevin-mejia-13" rel="noreferrer" target="_blank">
                 <i class="fa-brands fa-angellist" />
               </a>
             </div>

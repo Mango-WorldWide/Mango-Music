@@ -15,9 +15,9 @@ const AudioPlayer = () => {
     setIsPlaying,
     currentSong,
     setCurrentSong,
-    currentSongIndex,
-    setCurrentSongIndex,
-    songsArr,
+    queueIndex,
+    setQueueIndex,
+    queue,
   } = usePlayer();
 
   const [isLooping, setIsLooping] = useState(false);
@@ -67,20 +67,20 @@ const AudioPlayer = () => {
     }
   }, [volume, audioPlayer, unmuteVolume]);
 
-  if (!songsArr.length) return null;
+  if (!queue.length) return null;
 
   const goForward = async () => {
-    if (currentSongIndex < songsArr.length - 1) {
-      setCurrentSongIndex((prev) => prev + 1);
-      let newSong = await dispatch(singleSongThunk(songsArr[currentSongIndex + 1].id));
+    if (queueIndex < queue.length - 1) {
+      setQueueIndex((prev) => prev + 1);
+      let newSong = await dispatch(singleSongThunk(queue[queueIndex + 1].id));
       setCurrentSong(newSong);
     }
   };
 
   const goBack = async () => {
-    if (currentSongIndex > 0) {
-      setCurrentSongIndex((prev) => prev - 1);
-      let newSong = await dispatch(singleSongThunk(songsArr[currentSongIndex - 1].id));
+    if (queueIndex > 0) {
+      setQueueIndex((prev) => prev - 1);
+      let newSong = await dispatch(singleSongThunk(queue[queueIndex - 1].id));
       setCurrentSong(newSong);
     }
   };
@@ -119,7 +119,7 @@ const AudioPlayer = () => {
     progressBarRef.current.max = seconds;
   };
 
-  // if (!currentSong || !currentSongIndex) return null;
+  // if (!currentSong || !queueIndex) return null;
   return (
     <div className="audio-player">
       <div className="audio-player-track-controls">
@@ -151,12 +151,12 @@ const AudioPlayer = () => {
         <div className="audio-player-track-info">
           <img
             className="musicCover audio-player-img"
-            src={songsArr[currentSongIndex].album.cover}
-            alt={songsArr[currentSongIndex].title}
+            src={queue[queueIndex].album_cover}
+            alt={queue[queueIndex].title}
           />
           <div className="audio-player-text">
-            <h3 className="title">{songsArr[currentSongIndex].title}</h3>
-            <p className="subTitle">{songsArr[currentSongIndex].artist.name}</p>
+            <h3 className="title">{queue[queueIndex].title}</h3>
+            <p className="subTitle">{queue[queueIndex].artist_name}</p>
           </div>
         </div>
         <ProgressBar
@@ -176,7 +176,7 @@ const AudioPlayer = () => {
         </p>
         <input type="range" min={0} max={100} value={volume} onChange={volumeControl} />
       </div>
-      {/* <audio src={all_songs[songIndex]} ref={audioPlayer} loop={isLooping} onEnded={goForward} style={{ display: "hidden" }} onLoadedMetadata={onLoadedMetadata}/> */}
+      {/* <audio src={all_songs[selectedSongIndex]} ref={audioPlayer} loop={isLooping} onEnded={goForward} style={{ display: "hidden" }} onLoadedMetadata={onLoadedMetadata}/> */}
       <audio
         src={currentSong.mp3}
         ref={audioPlayer}
