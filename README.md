@@ -31,6 +31,88 @@ For more info about this project please check out our [wiki]!
 
 # Routes
 
+## \~Users~
+
+### POST api/auth/signup
+Sign up and automatically log in user.
+
+Request:
+* Headers:
+    * Content-Type: application/json
+* Body ("artist" field not required):
+
+    ```json
+    {
+        "email": "mango1@music.io",
+        "password": "password",
+        "username": "DemoUser1",
+        "first_name": "Demo",
+        "last_name": "User",
+        "artist": true
+    }
+    ```
+
+Successful Response Body:
+```json
+{
+    "artist": true,
+    "artist_id": 1,
+    "email": "mango1@music.io",
+    "first_name": "Demo",
+    "id": 1,
+    "last_name": "User",
+    "playlists": [],
+    "username": "DemoUser1"
+}
+```
+________________
+### POST api/auth/login
+Log in a user.
+
+Request:
+* Headers:
+    * Content-Type: application/json
+* Body (all fields required):
+
+    ```json
+    {
+        "email": "mango1@music.io",
+        "password": "password"
+    }
+    ```
+
+Successful Response Body:
+```json
+{
+    "artist": true,
+    "artist_id": 1,
+    "email": "mango1@music.io",
+    "first_name": "Demo",
+    "id": 1,
+    "last_name": "User",
+    "playlists": [
+        {
+            "cover": "https://filmdaily.co/wp-content/uploads/2020/08/fitness-2.jpg",
+            "description": "Gym Music",
+            "id": 1,
+            "title": "DemoUser1 Jammy Jams",
+            "user_id": 1
+        }
+    ],
+    "username": "DemoUser1"
+}
+```
+________________
+### GET api/auth/logout
+Log out user.
+
+Successful Response Body:
+```json
+{
+    "message": "User logged out",
+}
+```
+________________
 ## \~Albums~
 
 
