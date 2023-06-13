@@ -102,8 +102,8 @@ function SignupFormModal() {
             required
           />
         </label>
-		<label className="signup-form-label">
-          Are you an Artist {fName}?
+		<label className="signup-form-label" style={{flexDirection: "row", columnGap: "10px"}}>
+          <p>Are you an Artist {fName}?</p>
           <input
             type="checkbox"
             value={artist}
