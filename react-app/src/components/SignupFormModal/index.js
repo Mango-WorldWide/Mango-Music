@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
@@ -44,7 +44,7 @@ function SignupFormModal() {
         artistName = null; // Use the id of 'No Artist'
         // artist = false
     }
-    // console.log('ARTIST------', artist, 'ARTISTNAME------', newArtistName);
+    
     const data = await dispatch(signUp(username, email, password, fName, lName, artist, artistName));
     if (data) {
         setErrors([...newErrors, ...data]);

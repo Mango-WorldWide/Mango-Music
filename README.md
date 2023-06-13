@@ -342,6 +342,180 @@ Successful Response Body:
 }
 ```
 ________________
+## \~Songs~
+
+
+### GET api/songs
+Returns all the songs from the database.
+
+Successful Response Body:
+```json
+{
+"Songs":  [
+		{
+		"album":  "Un Verano Sin Ti",
+		"album_cover":  "https://media.pitchfork.com/photos/627425dbc85171592b8a6e6a/1:1/w_600/Bad-Bunny-		Un-Verano-Sin-Ti.jpg",
+		"album_id":  2,
+		"artist_id":  9,
+		"artist_name":  "Bad Bunny",
+		"duration":  null,
+		"genre":  "Reggaeton",
+		"id":  1,
+		"lyrics":  null,
+		"mp3":  "",
+		"title":  "Moscow Mule"
+		},
+		{
+		"album":  "WASTELAND",
+		"album_cover":  "https://upload.wikimedia.org/wikipedia/en/5/51/Brent_Faiyaz_-_Wasteland.jpeg",
+		"album_id":  4,
+		"artist_id":  6,
+		"artist_name":  "Brent Faiyaz",
+		"duration":  null,
+		"genre":  "R&B",
+		"id":  60,
+		"lyrics":  null,
+		"mp3":  "",
+		"title":  "DEAD MAN WALKING"
+		},
+		...
+	]
+}
+```
+
+________________
+### GET api/songs/:songId
+Returns one song with a valid mp3 file from the database.
+
+Successful Response Body:
+```json
+{
+	"album_id":  4,
+	"artist_id":  6,
+	"duration":  null,
+	"genre":  "R&B",
+	"id":  50,
+	"lyrics":  null,
+	"mp3":  "http://mango-music.s3.amazonaws.com/eb74af047f5d4442889791d08df23687.mp3",
+	"title":  "GRAVITY (FEAT. TYLER, THE CREATOR)"
+}
+```
+________________
+### POST api/songs/new
+Create a song for a specific album*
+
+\* Login REQUIRED and User MUST be artist
+
+Request:
+* Headers:
+    * Content-Type: application/json
+* Body (all fields required):
+
+    ```json
+    {
+        "title": "I Wonder",
+        "genre": "Hip Hop",
+        "mp3": ".../my-music/songs/I Wonder.mp3",
+        "album_id": 7
+    }
+    ```
+
+Successful Response Body:
+```json
+{
+	"album":  "Graduation",
+	"album_cover":  "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
+	"album_id":  7,
+	"artist_id":  8,
+	"artist_name":  "Kanye West",
+	"duration":  null,
+	"genre":  "Hip Hop",
+	"id":  132,
+	"lyrics":  null,
+	"mp3":  "",
+	"title":  "I Wonder"
+}
+```
+Error Response 403: Unauthorized
+
+```json
+{
+    "message": "Must be an artist"
+}
+```
+
+________________
+### PUT api/songs/:songId
+Update a song
+
+\* Login REQUIRED and User MUST be artist who owns the song
+
+Request:
+* Headers:
+    * Content-Type: application/json
+* Body (all fields required):
+
+```json
+{
+	"title":  "new Title",
+	"genre":  "new Genre",
+}
+```
+
+Successful Response Body:
+```json
+{
+	"album":  "Graduation",
+	"album_cover":  "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
+	"album_id":  7,
+	"artist_id":  8,
+	"artist_name":  "Kanye West",
+	"duration":  null,
+	"genre":  "new Genre",
+	"id":  132,
+	"lyrics":  null,
+	"mp3":  "",
+	"title":  "new Title"
+}
+```
+Error Response 403: Unauthorized
+
+```json
+{
+    "message": "You are not the artist"
+}
+```
+
+________________
+### DELETE api/songs/:songId
+Delete a song
+
+\* Login REQUIRED and User MUST be artist who owns the song
+
+Successful Response Body:
+```json
+{
+	"album":  "Graduation",
+	"album_cover":  "https://i.pinimg.com/originals/f6/28/59/f6285960dafff1ff62f24515459cdabe.jpg",
+	"album_id":  7,
+	"artist_id":  8,
+	"artist_name":  "Kanye West",
+	"duration":  null,
+	"genre":  "Hip Hop",
+	"id":  98,
+	"lyrics":  null,
+	"mp3":  "",
+	"title":  "Good Morning"
+}
+```
+Error Response 403: Unauthorized
+
+```json
+{
+    "message": "You are not the artist"
+}
+```
+________________
 ## \~Playlists~
 
 

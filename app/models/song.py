@@ -34,6 +34,9 @@ class Song(db.Model):
             "cover": self.songs_albums_relationship.to_dict_relationship()["cover"],
             'artist': self.songs_artists_relationship.to_dict(),
             'album': self.songs_albums_relationship.to_dict(),
+            'artist_name': self.songs_artists_relationship.to_dict()["name"],
+            'album_name': self.songs_albums_relationship.to_dict()["title"],
+            'album_cover': self.songs_albums_relationship.to_dict()["cover"],
         }
 
     def to_dict_no_item(self, includeMP3=False):

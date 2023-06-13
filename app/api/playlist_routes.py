@@ -40,7 +40,6 @@ def get_single_playlist(playlistId):
 @login_required
 def create_playlist():
     """create a playlist"""
-    print("IN CREATE A PLAYLIST")
     user_id = current_user.get_id()
     form = PlaylistForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
@@ -54,7 +53,6 @@ def create_playlist():
         )
         db.session.add(new_playlist)
         db.session.commit()
-        print("in backend =>", new_playlist.to_dict())
         return new_playlist.to_dict()
     else:
         form_errors = {key: val[0] for (key, val) in form.errors.items()}
@@ -94,7 +92,6 @@ def edit_playlist(playlistId):
 @playlist_routes.route("/<int:playlistId>", methods=["DELETE"])
 @login_required
 def delete_playlist(playlistId):
-    print("WE UP IN HERE!!!!")
     user_id = current_user.get_id()
     playlist = Playlist.query.get(playlistId)
     if playlist:
@@ -109,7 +106,6 @@ def delete_playlist(playlistId):
 @playlist_routes.route('/<int:playlistId>/song', methods=['POST'])
 @login_required
 def add_song_playlist(playlistId):
-    print("WE ARE IN ADD SONG PLAYLIST")
     new_playlist_song = Playlist_Song(
         playlist_id = playlistId,
         song_id = request.json.get('song_id')

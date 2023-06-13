@@ -23,8 +23,11 @@
 .splash-genre-right{
   margin-top: 500px;
 }
-.splash-genre-left{
-  margin-top: 500px;
+.genre-carousel button{
+  border: none;
+  margin: 15px;
+  background-color: transparent;
+  color: rgb(187, 125, 11);
 }
 
 
@@ -57,12 +60,44 @@
   margin-left: 50px ;
 }
 
-.splash-song-cover {
+.splash-song-cover-container {
   flex-shrink: 0;
   width: 80px;
   height: 80px;
   max-width: 100%;
   height: auto;
+  position: relative;
+}
+
+.splash-song-cover{
+ height: 100%;
+ width: 100%;
+}
+
+.splash-song-overlay{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+.splash-play-button {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.song-player-logo{
+  height: 100%;
+  width: 100%;
 }
 
 .splash-song-info {

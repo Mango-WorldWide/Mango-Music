@@ -14,7 +14,6 @@ const SongForm = ({ albumId }) => {
 
   const validate = () => {
     const errorMessages = {};
-    // console.log('MP3',  mp3.name.endsWith('.mp3'))
     if (!title) errorMessages.title = "Title is required.";
     if (!genre) errorMessages.genre = "Genre is required.";
     if (!mp3 || !mp3.name.endsWith('.mp3')) errorMessages.mp3 = "Mp3 file is required.";
@@ -34,14 +33,13 @@ const SongForm = ({ albumId }) => {
     }
     setIsSending(true);
     setErrors(validate())
-    // console.log("HANDLING SUBMIT OF SONG");
     const formData = new FormData();
     formData.append("mp3", mp3);
     formData.append("title", title);
     formData.append("genre", genre);
     formData.append("album_id", albumId);
 
-    const newSong = await dispatch(addSongThunk(formData));
+    await dispatch(addSongThunk(formData));
     e.target[2].value = null;
     setTitle("");
     setGenre("");

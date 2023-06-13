@@ -23,7 +23,6 @@ const artistReducer = (state = {}, action) => {
         case LOAD_ARTIST:
             newState = {}
             newState = {...action.artist}
-            // console.log(action.artist,'inside the reducer')
             return newState
         default:
             return state

@@ -2,21 +2,16 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createAlbumThunk, updateAlbumThunk } from "../../store/album";
 import { loadArtistThunk } from "../../store/artist";
-import { usePlayer } from "../../context/PlayerContext";
 import { useParams, useHistory } from "react-router-dom";
 import "./AlbumForm.css";
 
 const AlbumForm = ({ input, formType }) => {
-  // console.log("formType 👉👉👉👉👉👉👉👉", formType)
   const dispatch = useDispatch();
   const { albumId } = useParams();
   const [errors, setErrors] = useState({});
   const history = useHistory();
-  const { isPlaying, setIsPlaying, currentSong, setCurrentSong, songsArr, setSongsArr } =
-    usePlayer();
   const user = useSelector((state) => state.session.user);
   const artist = useSelector((state) => state.artist);
-  // console.log(user.artist_id)
   const [title, setTitle] = useState(input.title);
   const [description, setDescription] = useState(input.description);
   const [cover, setCover] = useState(input.cover);
@@ -47,14 +42,11 @@ const AlbumForm = ({ input, formType }) => {
     albumObj.artist_id = user.artist_id;
 
     setAlbumPayload(albumObj);
-    console.log("ALBUMOBJ", albumObj);
   }, [title, description, cover, genre, year, user.artist_id]);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     const err = {};
-    // const playlistEdits = { title, description, cover };
-    // console.log("playlist 👉", playlistEdits)
     if (title === null || title === "") err.title = "Title is required";
     if (cover === null || cover === "") err.cover = "Cover is required";
     if (genre === null || genre === "") err.genre = "Genre is required";
@@ -65,21 +57,17 @@ const AlbumForm = ({ input, formType }) => {
       err.title = "An album with this title already exists";
     }
     if (!!Object.values(err).length) {
-      // console.log("👉 found errors while updating playlist 👈");
       setErrors(err);
       return;
     }
     if (formType === "Create") {
-      // console.log("!!!!! CREATING ALBUM !!!!!!!!");
       const newAlbum = await dispatch(createAlbumThunk(albumPayload));
       if (newAlbum) {
         history.push(`/albums/${newAlbum.id}`);
       }
     }
     if (formType === "Update") {
-      // console.log("!!!!! UPDATING ALBUM !!!!!!!!");
       const updatedAlbum = await dispatch(updateAlbumThunk(albumPayload, albumId));
-      // console.log("updatedAlbum ==>", updatedAlbum)
       if(updatedAlbum) history.push(`/albums/${updatedAlbum.id}`);
     }
   };
