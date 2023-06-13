@@ -122,36 +122,37 @@ const SplashPage = () => {
                   <img className="splash-song-cover" src={song.album_cover} alt={song.title} />
                   {song.id === currentSong.id ? (
                     <div>
-                      <div className="splash-song-overlay" />
-                      <PlayButton
-                        nameOfClass="splash-play-button"
-                        buttonContent={
-                          isPlaying && song.id === queue[queueIndex].id ? (
-                            <i class="fa fa-pause" aria-hidden="true"></i>
-                            // <img className="song-playing-logo" src="song-playing.gif"/>
-                          ) : (
-                            <i class="fa fa-play" aria-hidden="true"></i>
-                          )
-                        }
-                        songId={song.id}
-                        songs={[song]}
-                      />
+                      <div className="splash-song-overlay">
+                        <PlayButton
+                          nameOfClass="splash-play-button"
+                          buttonContent={
+                            isPlaying && song.id === queue[queueIndex].id ? (
+                              <img className="song-playing-logo" src="soundwave2.gif" />
+                            ) : (
+                              <i class="fa fa-pause" aria-hidden="true" />
+                            )
+                          }
+                          songId={song.id}
+                          songs={[song]}
+                        />
+                      </div>
                     </div>
                   ) : i === hoveredSong ? (
                     <div>
-                      <div className="splash-song-overlay" />
-                      <PlayButton
-                        nameOfClass="splash-play-button"
-                        buttonContent={
-                          isPlaying && song.id === queue[queueIndex].id ? (
-                            <i className="fa fa-pause" aria-hidden="true"></i>
-                          ) : (
-                            <i class="fa fa-play" aria-hidden="true"></i>
-                          )
-                        }
-                        songId={song.id}
-                        songs={[song]}
-                      />
+                      <div className="splash-song-overlay">
+                        <PlayButton
+                          nameOfClass="splash-play-button"
+                          buttonContent={
+                            isPlaying && song.id === queue[queueIndex].id ? (
+                              <i className="fa fa-pause" aria-hidden="true" />
+                            ) : (
+                              <i class="fa fa-play" aria-hidden="true" />
+                            )
+                          }
+                          songId={song.id}
+                          songs={[song]}
+                        />
+                      </div>
                     </div>
                   ) : null}
                 </div>
