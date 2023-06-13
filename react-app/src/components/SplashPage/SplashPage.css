@@ -86,6 +86,11 @@
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+.song-playing-logo{
+  height: 100%;
+  width: 100%;
+}
+
 .splash-play-button {
   color: white;
   display: flex;
