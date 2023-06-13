@@ -1,12 +1,20 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import "./Navigation.css";
 import Search from "../Search";
 import { useSelector } from "react-redux";
 
 function Navigation() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const user = useSelector((state) => state.session.user);
   const playlists = user?.playlists;
+
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div className="nav-sidebar">
@@ -71,8 +79,7 @@ function Navigation() {
         <div className="nav-list-mangoes">
           <div className="nav-list-mango-member">
             <div className="mango-member-name">
-              <p>Alan</p>
-              <p>Echenique</p>
+              <p>Alan {windowWidth > 2000 ? "Echenique" : "E."}</p>
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Alancittoo" target="_blank">
@@ -89,8 +96,7 @@ function Navigation() {
           <div className="vertical-rule" />
           <div className="nav-list-mango-member">
             <div className="mango-member-name">
-              <p>Alan</p>
-              <p>Nguyen</p>
+              <p>Alan {windowWidth > 2000 ? "Nguyen" : "N."}</p>
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Alan-Ngn" target="_blank">
@@ -107,8 +113,7 @@ function Navigation() {
           <div className="vertical-rule" />
           <div className="nav-list-mango-member">
             <div className="mango-member-name">
-              <p>Dorian</p>
-              <p>Macias</p>
+              <p>Dorian {windowWidth > 2000 ? "Macias" : "M."}</p>
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/dorianinc" target="_blank">
@@ -125,8 +130,7 @@ function Navigation() {
           <div className="vertical-rule" />
           <div className="nav-list-mango-member">
             <div className="mango-member-name">
-              <p>Kevin</p>
-              <p>Mejia</p>
+              <p>Kevin {windowWidth > 2000 ? "Mejia" : "M."}</p>
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Nemurs" target="_blank">
