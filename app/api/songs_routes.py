@@ -4,6 +4,7 @@ from app.models import Song, User, Album, db, Playlist_Song
 from app.forms.song_form import SongForm
 from ..api.aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 import os
+import random
 
 song_routes = Blueprint('songs', __name__)
 #---------------------------------------------------------------------#
@@ -26,6 +27,7 @@ def get_songs():
     return {'Songs': [song.to_dict() for song in songs]}
 
 
+
 @song_routes.route('/<int:songId>')
 def get_song_by_id(songId):
     print("SONGID ----------------", songId)
@@ -35,6 +37,12 @@ def get_song_by_id(songId):
     # return song.to_dict(includeMP3 = True)
     return song.to_dict_no_item(includeMP3 = True)
 
+@song_routes.route('/random')
+def get_random_songs():
+    songs = Song.query.all()
+    randomSongs = random.choices([song.to_dict() for song in songs], k=15)
+    print(randomSongs)
+    return {'Songs': randomSongs}
 
 @song_routes.route("/new", methods=["POST"])
 @login_required
@@ -84,7 +92,7 @@ def add_song():
 
         #     write_file(song_to_fs)
         #-------------------------------------------------------------------#
-        
+
         return new_song.to_dict()
     else:
         form_errors = {key: val[0] for (key, val) in form.errors.items()}

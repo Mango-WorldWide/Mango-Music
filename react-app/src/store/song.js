@@ -38,7 +38,7 @@ export const deleteSong = (songId) => {
 // }
 
 export const loadSongsThunk = () => async(dispatch) => {
-    // console.log('inside songs thunk')
+    console.log('inside songs thunk')
     const res = await fetch('/api/songs')
     if(res.ok){
         const data = await res.json()
@@ -47,12 +47,21 @@ export const loadSongsThunk = () => async(dispatch) => {
         return false
     }
 }
-
+export const loadRandomSongThunk = () => async(dispatch) => {
+    console.log('inside random songs thunk')
+    const res = await fetch('/api/songs/random')
+    if(res.ok){
+        const data = await res.json()
+        dispatch(loadSongs(data))
+    } else {
+        return false
+    }
+}
 export const singleSongThunk = (songId) => async(dispatch) => {
     const res = await fetch(`/api/songs/${songId}`)
     if (res.ok){
         const data = await res.json()
-        dispatch(singleSong(songId, data))
+        // dispatch(singleSong(songId, data))
         return data
     } else {
         console.log("singleSongThunk Failed", songId)

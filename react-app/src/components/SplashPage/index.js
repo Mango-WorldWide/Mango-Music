@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadSongsThunk } from '../../store/song';
+import { loadRandomSongThunk, loadSongsThunk } from '../../store/song';
 import './SplashPage.css';
 import { Link, useHistory } from "react-router-dom"
 // import {rock}from '../../images'
@@ -35,7 +35,7 @@ const SplashPage = () => {
 
 
     useEffect(() => {
-        dispatch(loadSongsThunk());
+        dispatch(loadRandomSongThunk());
     }, [dispatch]);
 
     // genre stuff.. needa find more
@@ -93,7 +93,7 @@ const SplashPage = () => {
 
   <div className="splash-song-list">
 
-    {shuffledSongs.slice(0,15).map((song) => (
+    {songs.map((song) => (
 
       <div className="splash-song" key={song.id}>
         <Link to={`/albums/${song.album.id}`}>
