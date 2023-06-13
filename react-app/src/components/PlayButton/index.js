@@ -17,7 +17,6 @@ const PlayButton = ({
     setCurrentSong,
     queueIndex,
     setQueueIndex,
-    queue,
     setQueue,
   } = usePlayer();
 

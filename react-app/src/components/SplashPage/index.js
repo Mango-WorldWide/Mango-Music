@@ -127,9 +127,9 @@ const SplashPage = () => {
                           nameOfClass="splash-play-button"
                           buttonContent={
                             isPlaying && song.id === queue[queueIndex].id ? (
-                              <img className="song-playing-logo" src="soundwave-playing.gif" />
+                              <img alt="playing "className="song-player-logo" src="soundwave-playing.gif" />
                             ) : (
-                              <img className="song-playing-logo" src="soundwave-paused.png" />
+                              <img alt="paused" className="song-player-logo" src="soundwave-paused.png" />
                             )
                           }
                           songId={song.id}

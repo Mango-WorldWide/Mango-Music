@@ -26,7 +26,7 @@ const AlbumsIndex = () => {
       {location.pathname === "/albums/artist" ? (
         <Link to={"/albums/new"}>
           <button className="createMoreButton">
-            <img className="plus-sign new" src="/plus.png" />
+            <img alt="plus" className="plus-sign new" src="/plus.png" />
           </button>
         </Link>
       ) : null}
