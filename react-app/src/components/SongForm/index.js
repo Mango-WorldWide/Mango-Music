@@ -7,6 +7,10 @@ import FileStatus from "./FileStatus.js";
 import "./SongForm.css";
 
 const SongForm = ({ albumId, currentSong, categoryId, category, formType }) => {
+  console.log("categoryId 👉", categoryId)
+  console.log("categoryId 👉", categoryId)
+  console.log("currentSong 👉", currentSong)
+  console.log("currentSong 👉", currentSong)
   const dispatch = useDispatch(); // so that we can redirect after the image upload is successful
   const { closeModal } = useModal();
   const [mp3, setMp3] = useState("");
@@ -37,7 +41,7 @@ const SongForm = ({ albumId, currentSong, categoryId, category, formType }) => {
   const deleteOnClick = (e) => {
     e.preventDefault();
     if (category === "playlist") {
-      dispatch(deletePlaylistSongThunk(currentSong.id, categoryId)).then(closeModal);
+      dispatch(deletePlaylistSongThunk(currentSong, categoryId)).then(closeModal);
     }
     if (category === "album") {
       dispatch(deleteSongThunk(currentSong.id, categoryId)).then(closeModal);
