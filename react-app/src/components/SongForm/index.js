@@ -46,7 +46,6 @@ const SongForm = ({ albumId, currentSong, categoryId, category, formType }) => {
   };
 
   const handleEdit = async (e) => {
-    console.log("e 👉", albumId)
     e.preventDefault();
     await dispatch(updateSongThunk(currentSong.id, {title, genre}))
     await dispatch(loadOneAlbumThunk(albumId))

@@ -12,9 +12,6 @@ function Navigation() {
   const distpatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const playlists = user?.playlists;
-  console.log("playlists 👉", playlists)
-  console.log("playlists 👉", playlists)
-
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
