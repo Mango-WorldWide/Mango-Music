@@ -2,14 +2,18 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import Search from "../Search";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserPlaylistsThunk } from "../../store/playlist";
 import AlbumForm from "../AlbumForm";
 import ModalButton from "../ModalButton";
 
 function Navigation() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const distpatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const playlists = user?.playlists;
+  console.log("playlists 👉", playlists)
+  console.log("playlists 👉", playlists)
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
@@ -17,7 +21,7 @@ function Navigation() {
   useEffect(() => {
     window.addEventListener("resize", handleResize);
   }, []);
-
+  
   return (
     <div className="nav-sidebar">
       <div className="nav-list">

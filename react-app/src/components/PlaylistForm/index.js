@@ -34,8 +34,9 @@ function PlaylistForm({ currentPlaylist, formType }) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    await dispatch(authenticate());
     await dispatch(deletePlaylistThunk(currentPlaylist.id));
+    await dispatch(getUserPlaylistsThunk());
+    await dispatch(authenticate())
     closeModal();
     history.push("/playlists");
   };
@@ -51,16 +52,17 @@ function PlaylistForm({ currentPlaylist, formType }) {
       setErrors(err);
     } else {
       if (formType === "create") {
-        await dispatch(authenticate());
        const newPlaylist = await dispatch(createPlaylistThunk(playlist));
        if (newPlaylist) {
           await dispatch(getUserPlaylistsThunk());
+          await dispatch(authenticate())
           history.push(`/playlists/${newPlaylist.id}`);
           closeModal();
         }
       } else {
-        await dispatch(authenticate());
         await dispatch(updatePlaylistThunk(currentPlaylist.id, playlist));
+        await dispatch(getUserPlaylistsThunk());
+        await dispatch(authenticate())
         await dispatch(getSinglePlaylistThunk(currentPlaylist.id));
       }
       closeModal();
