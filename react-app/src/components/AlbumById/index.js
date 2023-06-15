@@ -6,12 +6,11 @@ import { useHistory, useParams } from "react-router-dom";
 import { loadOneAlbumThunk } from "../../store/album";
 import { deleteLikeThunk, createLikeThunk } from "../../store/like";
 import SongForm from "../SongForm";
-import OpenModalDeleteButton from "../DeleteSong/OpenModalDeleteButton";
-import DeleteSongModal from "../DeleteSong";
+import EditDeleteSongModal from "../EditDeleteSong";
 import "./AlbumById.css";
 import AuthModal from "../AuthModal";
-import OpenModalAddButton from "../AddPlaylistSong/OpenModalAddButton";
-import AddSongModal from "../AddPlaylistSong";
+import ModalButton from "../ModalButton";
+import AddPlaylistSongModal from "../AddPlaylistSong";
 import { usePlayer } from "../../context/PlayerContext";
 
 const AlbumById = () => {
@@ -35,7 +34,6 @@ const AlbumById = () => {
   if (!user) {
     return <AuthModal />;
   }
-
 
   const handleLikeButton = async (e, songId) => {
     e.preventDefault();
@@ -87,7 +85,7 @@ const AlbumById = () => {
           >
             <p className="albumDesc">{album["Album"].description}</p>
           </div>
-          <div class="orangeButtons">
+          <div className="orangeButtons">
             {albumSongs && albumSongs.length > 0 && (
               <PlayButton
                 nameOfClass="playlistButton"
@@ -99,7 +97,7 @@ const AlbumById = () => {
                     </>
                   ) : (
                     <>
-                      <i class="fa fa-play" aria-hidden="true" />
+                      <i className="fa fa-play" aria-hidden="true" />
                       Play
                     </>
                   )
@@ -108,8 +106,8 @@ const AlbumById = () => {
                 songs={albumSongs}
               />
             )}
-            <button className="orangeButton" disabled style={{cursor: "not-allowed"}}>
-              <i class="fa-sharp fa-solid fa-shuffle" />
+            <button className="orangeButton" disabled style={{ cursor: "not-allowed" }}>
+              <i className="fa-sharp fa-solid fa-shuffle" />
               Shuffle
             </button>
           </div>
@@ -135,9 +133,9 @@ const AlbumById = () => {
                 <td className="songTitle">
                   {/* <p>
                 {playlist.songs.id === selectedSong ? (
-                  <i class="fa-sharp fa-solid fa-pause orange" />
+                  <i className="fa-sharp fa-solid fa-pause orange" />
                 ) : i === hoveredSong ? (
-                  <i class="fa-solid fa-play orange" />
+                  <i className="fa-solid fa-play orange" />
                 ) : (
                   i + 1
                 )}
@@ -147,7 +145,7 @@ const AlbumById = () => {
                       isPlaying && song.id === queue[queueIndex]?.id ? (
                         <i className="fa fa-pause" aria-hidden="true"></i>
                       ) : (
-                        <i class="fa fa-play" aria-hidden="true"></i>
+                        <i className="fa fa-play" aria-hidden="true"></i>
                       )
                     }
                     songId={song.id}
@@ -157,28 +155,28 @@ const AlbumById = () => {
                 </td>
                 <td onClick={(e) => handleLikeButton(e, song.id)}>
                   {likes.filter((like) => like["song_id"] === song.id).length > 0 ? (
-                    <i class="fa-solid fa-thumbs-up" />
+                    <i className="fa-solid fa-thumbs-up" />
                   ) : i === hoveredSong ? (
-                    <i class="fa-regular fa-thumbs-up" />
+                    <i className="fa-regular fa-thumbs-up" />
                   ) : (
                     ""
                   )}
                 </td>
                 {user.playlists.length > 0 && (
                   <td>
-                    <OpenModalAddButton
-                      itemText={<img alt="plus" className="plus-sign album" src="/plus.png" />}
-                      modalComponent={<AddSongModal song={song} />}
+                    <ModalButton
+                      modalContent={<img alt="plus" className="plus-sign album" src="/plus.png" />}
+                      modalComponent={<AddPlaylistSongModal song={song} />}
                     />
                   </td>
                 )}
                 {user.artist_id === album.Album.artist_id && (
                   <>
                     <td>
-                      <OpenModalDeleteButton
-                        itemText="Edit"
+                      <ModalButton
+                        modalContent={<i className="fa-solid fa-pen-to-square"/>}
                         modalComponent={
-                          <DeleteSongModal
+                          <EditDeleteSongModal
                             song={song}
                             categoryId={albumId}
                             category={"album"}
@@ -188,10 +186,10 @@ const AlbumById = () => {
                       />
                     </td>
                     <td>
-                      <OpenModalDeleteButton
-                        itemText="Delete"
+                      <ModalButton
+                    modalContent={<i className="fa-solid fa-trash-can"/>}
                         modalComponent={
-                          <DeleteSongModal
+                          <EditDeleteSongModal
                             song={song}
                             categoryId={albumId}
                             category={"album"}

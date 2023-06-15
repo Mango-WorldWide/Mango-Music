@@ -29,22 +29,6 @@ input::file-selector-button {
     font-size: 18px;
 }
 
-.modal{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 25px;
-    border-radius: 10px;
-    width: 500px;
-    height: 400px;
-    left: 50%;
-    right: 50%;
-    bottom:50%;
-    transform: translate(-50%, 50%);
-    background-color: #252526;
-    position: fixed;
-}
 
 
 .overlay{

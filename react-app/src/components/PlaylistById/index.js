@@ -6,20 +6,21 @@ import { deleteLikeThunk, createLikeThunk } from "../../store/like";
 import PlayButton from "../PlayButton";
 import "./PlaylistById.css";
 import { authenticate } from "../../store/session";
-import OpenModalDeleteButton from "../DeleteSong/OpenModalDeleteButton";
-import DeleteSongModal from "../DeleteSong";
+import ModalButton from "../ModalButton";
+import PlaylistForm from "../PlaylistForm";
+import EditDeleteSongModal from "../EditDeleteSong";
 import { usePlayer } from "../../context/PlayerContext";
 
 function PlaylistById() {
   const { playlistId } = useParams();
-  const dispatch = useDispatch();
-  const history = useHistory();
   const [hoveredSong, setHoveredSong] = useState("");
   const { isPlaying, queue, queueIndex } = usePlayer();
-
   const playlist = useSelector((state) => state.playlists);
   const likes = useSelector((state) => Object.values(state.likes));
   const user = useSelector((state) => state.session.user);
+  
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getSinglePlaylistThunk(playlistId));
@@ -38,16 +39,13 @@ function PlaylistById() {
     }
   };
 
-
   const handleDelete = async () => {
     await dispatch(deletePlaylistThunk(playlistId));
     dispatch(authenticate());
     history.push("/playlists");
   };
 
-  const handleEdit = () => {
-    history.push(`/playlists/${playlistId}/edit`);
-  };
+
   if (!playlist || !playlist.id) return null;
   const playlistSongs = playlist.songs.map((x) => x.songs);
   const playlistOwner = playlist.user_id;
@@ -72,7 +70,7 @@ function PlaylistById() {
           >
             <p className="playlistDesc">{playlist.description}</p>
           </div>
-          <div class="playlistButtons">
+          <div className="playlistButtons">
             {playlistSongs.length > 0 ? (
               <PlayButton
                 nameOfClass="playlistButton"
@@ -84,7 +82,7 @@ function PlaylistById() {
                     </>
                   ) : (
                     <>
-                      <i class="fa fa-play" aria-hidden="true" />
+                      <i className="fa fa-play" aria-hidden="true" />
                       Play
                     </>
                   )
@@ -95,8 +93,8 @@ function PlaylistById() {
             ) : (
               <button disabled={true}>Play</button>
             )}
-            <button className="playlistButton" disabled style={{cursor: "not-allowed"}}>
-              <i class="fa-sharp fa-solid fa-shuffle" />
+            <button className="playlistButton" disabled style={{ cursor: "not-allowed" }}>
+              <i className="fa-sharp fa-solid fa-shuffle" />
               Shuffle
             </button>
           </div>
@@ -116,9 +114,9 @@ function PlaylistById() {
               <td className="songTitle">
                 {/* <p>
                 {playlist.songs.id === selectedSong ? (
-                  <i class="fa-sharp fa-solid fa-pause orange" />
+                  <i className="fa-sharp fa-solid fa-pause orange" />
                 ) : i === hoveredSong ? (
-                  <i class="fa-solid fa-play orange" />
+                  <i className="fa-solid fa-play orange" />
                 ) : (
                   i + 1
                 )}
@@ -128,7 +126,7 @@ function PlaylistById() {
                     isPlaying && playlist.songs.id === queue[queueIndex].id ? (
                       <i className="fa fa-pause" aria-hidden="true"></i>
                     ) : (
-                      <i class="fa fa-play" aria-hidden="true"></i>
+                      <i className="fa fa-play" aria-hidden="true"></i>
                     )
                   }
                   songId={playlist.songs.id}
@@ -140,23 +138,23 @@ function PlaylistById() {
               <td className="songAlbum">{playlist.songs.album_name}</td>
               <td onClick={(e) => handleLikeButton(e, playlist.songs.id)}>
                 {likes.filter((like) => like["song_id"] === playlist.songs.id).length > 0 ? (
-                  <i class="fa-solid fa-thumbs-up" />
+                  <i className="fa-solid fa-thumbs-up" />
                 ) : i === hoveredSong ? (
-                  <i class="fa-regular fa-thumbs-up" />
+                  <i className="fa-regular fa-thumbs-up" />
                 ) : (
                   ""
                 )}
               </td>
               {user.id === playlistOwner && (
                 <td>
-                  <OpenModalDeleteButton
-                    itemText="Delete"
+                  <ModalButton
+                    modalContent={<i className="fa-solid fa-trash-can" />}
                     modalComponent={
-                      <DeleteSongModal
+                      <EditDeleteSongModal
                         song={playlist.id}
                         categoryId={playlistId}
                         category={"playlist"}
-                        method={"Delete"}
+                        method={"delete"}
                       />
                     }
                   />
@@ -164,12 +162,22 @@ function PlaylistById() {
               )}
             </tr>
           ))}
-          <button className="playlistId-edit-playlist" onClick={handleEdit}>
-            Edit Playlist
-          </button>
-          <button className="playlistId-delete-playlist" onClick={handleDelete}>
-            Delete Playlist{" "}
-          </button>
+          <ModalButton
+            modalComponent={<PlaylistForm method="edit" currentPlaylist={playlist}/>}
+            modalContent={
+              <button className="playlistId-edit-playlist">
+                Edit Playlist
+              </button>
+            }
+          />
+          <ModalButton
+            modalComponent={<PlaylistForm method="delete" currentPlaylist={playlist}/>}
+            modalContent={
+              <button className="playlistId-edit-playlist">
+                Delete Playlist
+              </button>
+            }
+          />
         </table>
       </div>
     </div>

@@ -83,13 +83,13 @@ function Navigation() {
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Alancittoo" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-github" />
+                <i className="fa-brands fa-github" />
               </a>
               <a href="https://www.linkedin.com/in/alan-echenique" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-linkedin" />
+                <i className="fa-brands fa-linkedin" />
               </a>
               <a href="https://wellfound.com/u/alan-echenique-1" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-angellist" />
+                <i className="fa-brands fa-angellist" />
               </a>
             </div>
           </div>
@@ -100,13 +100,13 @@ function Navigation() {
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Alan-Ngn" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-github" />
+                <i className="fa-brands fa-github" />
               </a>
               <a href="https://www.linkedin.com/in/alannguyen21" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-linkedin" />
+                <i className="fa-brands fa-linkedin" />
               </a>
               <a href="https://wellfound.com/u/alan-nguyen-31" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-angellist" />
+                <i className="fa-brands fa-angellist" />
               </a>
             </div>
           </div>
@@ -117,13 +117,13 @@ function Navigation() {
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/dorianinc" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-github" />
+                <i className="fa-brands fa-github" />
               </a>
               <a href="https://www.linkedin.com/in/dorian-macias" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-linkedin" />
+                <i className="fa-brands fa-linkedin" />
               </a>
               <a href="https://wellfound.com/u/dorian-macias" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-angellist" />
+                <i className="fa-brands fa-angellist" />
               </a>
             </div>
           </div>
@@ -134,13 +134,13 @@ function Navigation() {
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Nemurs" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-github" />
+                <i className="fa-brands fa-github" />
               </a>
               <a href="https://www.linkedin.com/in/kevin-octavio-mejia" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-linkedin" />
+                <i className="fa-brands fa-linkedin" />
               </a>
               <a href="https://wellfound.com/u/kevin-mejia-13" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-angellist" />
+                <i className="fa-brands fa-angellist" />
               </a>
             </div>
           </div>

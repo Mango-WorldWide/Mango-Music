@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addSongThunk } from "../../store/song";
-import SongFormModal from "./SongFormModal.js";
+import FileStatus from "./FileStatus.js";
 import "./SongForm.css";
 
-const SongForm = ({ albumId }) => {
+const SongForm = ({ albumId, method }) => {
   const dispatch = useDispatch(); // so that we can redirect after the image upload is successful
   const [mp3, setMp3] = useState("");
   const [genre, setGenre] = useState("");
@@ -47,7 +47,7 @@ const SongForm = ({ albumId }) => {
 
   return (
     <>
-      <SongFormModal isSending={isSending} />
+      <FileStatus isSending={isSending} />
       <form onSubmit={handleSubmit} className="songForm" encType="multipart/form-data">
         <label>
           title

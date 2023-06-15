@@ -92,17 +92,17 @@ const SplashPage = () => {
     <div className="splash-page">
       <h2 className="splash-genre-title">Browse Genres</h2>
       <div className="genre-carousel">
-        <button classname="splash-genre-left" onClick={prevGenre}>
-          <i class="fa-solid fa-angles-left"></i>
+        <button className="splash-genre-left" onClick={prevGenre}>
+          <i className="fa-solid fa-angles-left"></i>
         </button>
         {genres.slice(genreIndex, genreIndex + 3).map((genre) => (
           <div className="genre-tile" key={genre.name} onClick={handleGenreClick}>
-            <img classname="splash-genre-cover" src={genre.image} alt={genre.name} />
+            <img className="splash-genre-cover" src={genre.image} alt={genre.name} />
             <h2>{genre.name}</h2>
           </div>
         ))}
-        <button classname="splash-genre-right" onClick={nextGenre}>
-          <i class="fa-solid fa-angles-right"></i>
+        <button className="splash-genre-right" onClick={nextGenre}>
+          <i className="fa-solid fa-angles-right"></i>
         </button>
       </div>
       <div className="song-container">
@@ -145,7 +145,7 @@ const SplashPage = () => {
                             isPlaying && song.id === queue[queueIndex].id ? (
                               <i className="fa fa-pause" aria-hidden="true" />
                             ) : (
-                              <i class="fa fa-play" aria-hidden="true" />
+                              <i className="fa fa-play" aria-hidden="true" />
                             )
                           }
                           songId={song.id}
@@ -166,8 +166,8 @@ const SplashPage = () => {
             </div>
           ))}
         </div>
-        {/* <p classname="splash-song-right" onClick={nextSong}> */}
-        {/* <i class="fa-solid fa-angles-right"></i>
+        {/* <p className="splash-song-right" onClick={nextSong}> */}
+        {/* <i className="fa-solid fa-angles-right"></i>
         </p> */}
       </div>
     </div>

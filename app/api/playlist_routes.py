@@ -22,7 +22,6 @@ def get_users_playlists():
     return all_playlists
 
 
-
 @playlist_routes.route("/<int:playlistId>")
 def get_single_playlist(playlistId):
     """get specific playlist by playlist id"""
@@ -88,10 +87,11 @@ def edit_playlist(playlistId):
         error.status_code = 404
         return error
 
-## delete a playlist
+
 @playlist_routes.route("/<int:playlistId>", methods=["DELETE"])
 @login_required
 def delete_playlist(playlistId):
+    """delete a playlist"""
     user_id = current_user.get_id()
     playlist = Playlist.query.get(playlistId)
     if playlist:
@@ -103,13 +103,18 @@ def delete_playlist(playlistId):
         error.status_code = 404
         return error
 
-@playlist_routes.route('/<int:playlistId>/song', methods=['POST'])
+
+@playlist_routes.route("/<int:playlistId>/song", methods=["POST"])
 @login_required
 def add_song_playlist(playlistId):
-    new_playlist_song = Playlist_Song(
-        playlist_id = playlistId,
-        song_id = request.json.get('song_id')
-    )
+    """add song to playlist"""
+    data = Playlist.query.get(playlistId)
+    song_id = request.json.get("songId")
+    playlist_songs = data.to_dict()["songs"]
+    for song in playlist_songs:
+        if int(song["songs"]["id"]) == song_id:
+            return {"errors": "Song already exists in this playlist"}, 400
+    new_playlist_song = Playlist_Song(playlist_id=playlistId, song_id=song_id)
     db.session.add(new_playlist_song)
     db.session.commit()
-    return {'message': 'success'}
+    return {"message": "success"}

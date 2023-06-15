@@ -1,0 +1,30 @@
+.delete-song-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  height: 200px;
+  width: 350px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.delete-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.edit-song-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  height: 225px;
+  width: 350px;
+  padding: 15px;
+  border-radius: 10px;
+}
+

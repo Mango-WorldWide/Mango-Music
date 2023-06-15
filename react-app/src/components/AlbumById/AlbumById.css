@@ -195,5 +195,6 @@
 .plus-sign.album{
   height: 15px;
   width: 15px;
+  border-radius: 30px;
   filter: invert(1);
 }
