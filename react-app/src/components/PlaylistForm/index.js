@@ -53,8 +53,8 @@ function PlaylistForm({ currentPlaylist, formType }) {
       if (formType === "create") {
         await dispatch(authenticate());
        const newPlaylist = await dispatch(createPlaylistThunk(playlist));
-        await dispatch(getUserPlaylistsThunk());
-        if (newPlaylist) {
+       if (newPlaylist) {
+          await dispatch(getUserPlaylistsThunk());
           history.push(`/playlists/${newPlaylist.id}`);
           closeModal();
         }

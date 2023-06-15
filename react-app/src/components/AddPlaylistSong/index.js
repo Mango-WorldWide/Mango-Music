@@ -8,6 +8,7 @@ const AddPlaylistSongModal = ({ song }) => {
   const { closeModal } = useModal();
   const [error, setError] = useState(null);
   const userPlaylists = useSelector((state) => state.session.user.playlists);
+  console.log("userPlaylists  👉", userPlaylists )
 
 
   return (
@@ -16,16 +17,6 @@ const AddPlaylistSongModal = ({ song }) => {
       <h1 className="header">Add to Playlist</h1>
       <h3 className="sub-header">{song.title}</h3>
       <hr className="header-divider" />
-      {/* <ModalButton
-        modalComponent={<NewList trail={trail} />}
-        buttonContent={
-          <div className="create-list">
-            <img className="plus-sign" alt="add" src="/images/icons/plus.png" />
-            <p>Create New List</p>
-          </div>
-        }
-      /> */}
-      {/* <hr className="item-divider" /> */}
       <div className="playlist-container">
         {userPlaylists.map((playlist) => (
           <div>

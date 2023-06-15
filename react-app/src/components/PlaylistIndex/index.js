@@ -31,7 +31,7 @@ const PlaylistIndex = () => {
             <img className="plus-sign new" alt="plus" src="/plus.png" />
           </button> */}
       <ModalButton
-        modalComponent={<PlaylistForm method="create"/>}
+        modalComponent={<PlaylistForm formType="create"/>}
         modalContent={
           <button className="createMoreButton">
             <img className="plus-sign new" alt="plus" src="/plus.png" />
