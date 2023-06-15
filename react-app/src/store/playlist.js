@@ -84,8 +84,6 @@ export const createPlaylistThunk = (playlist) => async (dispatch) => {
 
 // update a playlist
 export const updatePlaylistThunk = (playlistId, playlist) => async (dispatch) => {
-  console.log("playlistId in thunk 👉", playlistId)
-  console.log("playlistEdits in thunk 👉", playlist)
   const res = await fetch(`/api/playlists/${playlistId}`, {
     method: "PUT",
     headers: {

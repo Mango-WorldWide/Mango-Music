@@ -13,7 +13,7 @@ import AuthModal from "../AuthModal";
 import { authenticate } from "../../store/session";
 import "./PlaylistForm.css";
 
-function PlaylistForm({ currentPlaylist, method }) {
+function PlaylistForm({ currentPlaylist, formType }) {
   const { closeModal } = useModal();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -34,8 +34,8 @@ function PlaylistForm({ currentPlaylist, method }) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    await dispatch(deletePlaylistThunk(currentPlaylist.id));
     await dispatch(authenticate());
+    await dispatch(deletePlaylistThunk(currentPlaylist.id));
     closeModal();
     history.push("/playlists");
   };
@@ -50,13 +50,17 @@ function PlaylistForm({ currentPlaylist, method }) {
     if (!!Object.values(err).length) {
       setErrors(err);
     } else {
-      if (method === "create") {
-        await dispatch(createPlaylistThunk(playlist));
+      if (formType === "create") {
         await dispatch(authenticate());
+       const newPlaylist = await dispatch(createPlaylistThunk(playlist));
         await dispatch(getUserPlaylistsThunk());
+        if (newPlaylist) {
+          history.push(`/playlists/${newPlaylist.id}`);
+          closeModal();
+        }
       } else {
-        await dispatch(updatePlaylistThunk(currentPlaylist.id, playlist));
         await dispatch(authenticate());
+        await dispatch(updatePlaylistThunk(currentPlaylist.id, playlist));
         await dispatch(getSinglePlaylistThunk(currentPlaylist.id));
       }
       closeModal();
@@ -69,8 +73,8 @@ function PlaylistForm({ currentPlaylist, method }) {
 
   return (
     <>
-      {method === "delete" ? (
-        <div className="delete-song-modal modal">
+      {formType === "delete" ? (
+        <div className="delete-modal modal">
           <h1>Comfirm Delete</h1>
           <p>Are you sure you want to delete this playlist?</p>
           <div className="delete-buttons">
@@ -94,7 +98,7 @@ function PlaylistForm({ currentPlaylist, method }) {
           <div>
             <form className="create-playlist-form" onSubmit={handleSubmit}>
               <div>
-                <h1>{method === "create" ? "Create a New Playlist" : "Edit a Playlist"}</h1>
+                <h1>{formType === "create" ? "Create a New Playlist" : "Edit a Playlist"}</h1>
               </div>
               <label className="titleLabel">
                 {/* Title */}
@@ -132,7 +136,7 @@ function PlaylistForm({ currentPlaylist, method }) {
               <hr className="lines form" />
               <div className="buttonContainer">
                 <button className="orangeButton">
-                  {method === "create" ? "Create Playlist" : "Submit"}
+                  {formType === "create" ? "Create Playlist" : "Submit"}
                 </button>
               </div>
             </form>

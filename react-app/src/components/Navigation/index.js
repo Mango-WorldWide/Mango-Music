@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { NavLink  } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import Search from "../Search";
 import { useSelector } from "react-redux";
+import AlbumForm from "../AlbumForm";
+import ModalButton from "../ModalButton";
 
 function Navigation() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -42,9 +44,10 @@ function Navigation() {
             <>
               <div className="nav-list-item">
                 <i className="fas fa-plus-square" style={{ color: "rgba(238, 238, 238, 1)" }}></i>
-                <NavLink exact to="/albums/new">
-                  Create Album
-                </NavLink>
+                <ModalButton
+                  modalComponent={<AlbumForm formType="create" />}
+                  modalContent="Create Album"
+                />
               </div>
               <div className="nav-list-item">
                 <i className="fas fa-th" style={{ color: "rgba(238, 238, 238, 1)" }}></i>
@@ -136,7 +139,11 @@ function Navigation() {
               <a href="https://github.com/Nemurs" rel="noreferrer" target="_blank">
                 <i className="fa-brands fa-github" />
               </a>
-              <a href="https://www.linkedin.com/in/kevin-octavio-mejia" rel="noreferrer" target="_blank">
+              <a
+                href="https://www.linkedin.com/in/kevin-octavio-mejia"
+                rel="noreferrer"
+                target="_blank"
+              >
                 <i className="fa-brands fa-linkedin" />
               </a>
               <a href="https://wellfound.com/u/kevin-mejia-13" rel="noreferrer" target="_blank">

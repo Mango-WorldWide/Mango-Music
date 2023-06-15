@@ -6,12 +6,12 @@ import { useHistory, useParams } from "react-router-dom";
 import { loadOneAlbumThunk } from "../../store/album";
 import { deleteLikeThunk, createLikeThunk } from "../../store/like";
 import SongForm from "../SongForm";
-import EditDeleteSongModal from "../EditDeleteSong";
-import "./AlbumById.css";
 import AuthModal from "../AuthModal";
 import ModalButton from "../ModalButton";
+import AlbumForm from "../AlbumForm";
 import AddPlaylistSongModal from "../AddPlaylistSong";
 import { usePlayer } from "../../context/PlayerContext";
+import "./AlbumById.css";
 
 const AlbumById = () => {
   const [hoveredSong, setHoveredSong] = useState("");
@@ -54,7 +54,7 @@ const AlbumById = () => {
   };
   const handleDelete = async () => {
     await dispatch(deleteAlbumThunk(albumId));
-    history.push(`/albums`);
+    history.push(`/albums/artist`);
   };
 
   return (
@@ -174,26 +174,26 @@ const AlbumById = () => {
                   <>
                     <td>
                       <ModalButton
-                        modalContent={<i className="fa-solid fa-pen-to-square"/>}
+                        modalContent={<i className="fa-solid fa-pen-to-square" />}
                         modalComponent={
-                          <EditDeleteSongModal
+                          <SongForm
                             song={song}
                             categoryId={albumId}
                             category={"album"}
-                            method={"Edit"}
+                            formType="edit"
                           />
                         }
                       />
                     </td>
                     <td>
                       <ModalButton
-                    modalContent={<i className="fa-solid fa-trash-can"/>}
+                        modalContent={<i className="fa-solid fa-trash-can" />}
                         modalComponent={
-                          <EditDeleteSongModal
+                          <SongForm
                             song={song}
                             categoryId={albumId}
                             category={"album"}
-                            method={"Delete"}
+                            formType="delete"
                           />
                         }
                       />
@@ -206,14 +206,16 @@ const AlbumById = () => {
         </table>
       </div>
       {user.artist_id === album["Album"].artist_id && (
-        <>
-          <button className="update-button" onClick={handleUpdate}>
-            UPDATE ME
-          </button>
-          <button className="delete-button" onClick={handleDelete}>
-            DELETE ME
-          </button>
-        </>
+        <div style={{display: "flex"}}>
+          <ModalButton
+            modalContent={<button className="update-button">Update Album</button>}
+            modalComponent={<AlbumForm currentAlbum={album.Album} formType="update" />}
+          />
+          <ModalButton
+            modalContent={<button className="update-button">Delete Album</button>}
+            modalComponent={<AlbumForm currentAlbum={album.Album} formType="delete" />}
+          />
+        </div>
       )}
     </div>
   );

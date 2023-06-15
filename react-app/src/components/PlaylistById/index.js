@@ -8,7 +8,7 @@ import "./PlaylistById.css";
 import { authenticate } from "../../store/session";
 import ModalButton from "../ModalButton";
 import PlaylistForm from "../PlaylistForm";
-import EditDeleteSongModal from "../EditDeleteSong";
+import SongForm from "../SongForm";
 import { usePlayer } from "../../context/PlayerContext";
 
 function PlaylistById() {
@@ -150,11 +150,11 @@ function PlaylistById() {
                   <ModalButton
                     modalContent={<i className="fa-solid fa-trash-can" />}
                     modalComponent={
-                      <EditDeleteSongModal
+                      <SongForm
                         song={playlist.id}
                         categoryId={playlistId}
                         category={"playlist"}
-                        method={"delete"}
+                        formType="delete"
                       />
                     }
                   />
@@ -163,7 +163,7 @@ function PlaylistById() {
             </tr>
           ))}
           <ModalButton
-            modalComponent={<PlaylistForm method="edit" currentPlaylist={playlist}/>}
+            modalComponent={<PlaylistForm formType="edit" currentPlaylist={playlist}/>}
             modalContent={
               <button className="playlistId-edit-playlist">
                 Edit Playlist
@@ -171,7 +171,7 @@ function PlaylistById() {
             }
           />
           <ModalButton
-            modalComponent={<PlaylistForm method="delete" currentPlaylist={playlist}/>}
+            modalComponent={<PlaylistForm formType="delete" currentPlaylist={playlist}/>}
             modalContent={
               <button className="playlistId-edit-playlist">
                 Delete Playlist

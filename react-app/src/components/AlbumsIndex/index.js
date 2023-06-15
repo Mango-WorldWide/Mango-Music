@@ -3,6 +3,8 @@ import { loadAlbumsThunk, loadArtistAlbumsThunk } from "../../store/album";
 import { useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import AlbumsIndexItem from "../AlbumsIndexItem";
+import AlbumForm from "../AlbumForm";
+import ModalButton from "../ModalButton"
 import "./AlbumIndex.css";
 
 const AlbumsIndex = () => {
@@ -23,11 +25,15 @@ const AlbumsIndex = () => {
         <AlbumsIndexItem key={album.id} album={album} />
       ))}
       {location.pathname === "/albums/artist" ? (
-        <Link to={"/albums/new"}>
-          <button className="createMoreButton">
-            <img alt="plus" className="plus-sign new" src="/plus.png" />
-          </button>
-        </Link>
+      <ModalButton
+      modalComponent={<AlbumForm formType="create"/>}
+      modalContent={
+        <button className="createMoreButton">
+        <img alt="plus" className="plus-sign new" src="/plus.png" />
+      </button>
+      }
+    />
+
       ) : null}
     </section>
   );
