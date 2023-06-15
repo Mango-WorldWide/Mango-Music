@@ -58,8 +58,8 @@ const AlbumForm = ({ currentAlbum, formType }) => {
 
   const handleDelete = async (e) => {
     e.preventDefault();
+    await dispatch(deleteAlbumThunk(currentAlbum.id));
     await dispatch(authenticate());
-    await dispatch(deleteAlbumThunk(albumId));
     closeModal();
     history.push(`/albums`);
   };
