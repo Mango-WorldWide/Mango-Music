@@ -151,7 +151,7 @@ function PlaylistById() {
                     modalContent={<i className="fa-solid fa-trash-can" />}
                     modalComponent={
                       <SongForm
-                        song={playlist.id}
+                        currentSong={playlist.songs}
                         categoryId={playlistId}
                         category={"playlist"}
                         formType="delete"

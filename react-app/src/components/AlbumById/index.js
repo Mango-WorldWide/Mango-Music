@@ -177,7 +177,7 @@ const AlbumById = () => {
                         modalContent={<i className="fa-solid fa-pen-to-square" />}
                         modalComponent={
                           <SongForm
-                            song={song}
+                            currentSong={song}
                             categoryId={albumId}
                             category={"album"}
                             formType="edit"
@@ -190,7 +190,7 @@ const AlbumById = () => {
                         modalContent={<i className="fa-solid fa-trash-can" />}
                         modalComponent={
                           <SongForm
-                            song={song}
+                            currentSong={song}
                             categoryId={albumId}
                             category={"album"}
                             formType="delete"

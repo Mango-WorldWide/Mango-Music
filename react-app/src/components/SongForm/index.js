@@ -6,7 +6,7 @@ import { addSongThunk } from "../../store/song";
 import FileStatus from "./FileStatus.js";
 import "./SongForm.css";
 
-const SongForm = ({ albumId, song, categoryId, category, formType }) => {
+const SongForm = ({ albumId, currentSong, categoryId, category, formType }) => {
   const dispatch = useDispatch(); // so that we can redirect after the image upload is successful
   const { closeModal } = useModal();
   const [mp3, setMp3] = useState("");
@@ -23,6 +23,13 @@ const SongForm = ({ albumId, song, categoryId, category, formType }) => {
     return errorMessages;
   };
 
+  useState(() => {
+    if(currentSong){
+      setTitle(currentSong.title)
+      setGenre(currentSong.genre)
+    }
+  })
+
   useEffect(() => {
     setIsSending(false);
   }, [title, genre, mp3]);
@@ -30,10 +37,10 @@ const SongForm = ({ albumId, song, categoryId, category, formType }) => {
   const deleteOnClick = (e) => {
     e.preventDefault();
     if (category === "playlist") {
-      dispatch(deletePlaylistSongThunk(song, categoryId)).then(closeModal);
+      dispatch(deletePlaylistSongThunk(currentSong.id, categoryId)).then(closeModal);
     }
     if (category === "album") {
-      dispatch(deleteSongThunk(song.id, categoryId)).then(closeModal);
+      dispatch(deleteSongThunk(currentSong.id, categoryId)).then(closeModal);
     }
   };
 
