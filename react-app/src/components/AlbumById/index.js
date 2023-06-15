@@ -178,7 +178,7 @@ const AlbumById = () => {
                         modalComponent={
                           <SongForm
                             currentSong={song}
-                            categoryId={albumId}
+                            albumId={albumId}
                             category={"album"}
                             formType="edit"
                           />

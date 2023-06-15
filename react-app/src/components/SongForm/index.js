@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { deletePlaylistSongThunk, deleteSongThunk } from "../../store/song";
+import { deletePlaylistSongThunk, deleteSongThunk, updateSongThunk } from "../../store/song";
+import { loadOneAlbumThunk } from "../../store/album";
 import { addSongThunk } from "../../store/song";
 import FileStatus from "./FileStatus.js";
 import "./SongForm.css";
 
 const SongForm = ({ albumId, currentSong, categoryId, category, formType }) => {
-  console.log("categoryId 👉", categoryId)
-  console.log("categoryId 👉", categoryId)
-  console.log("currentSong 👉", currentSong)
-  console.log("currentSong 👉", currentSong)
   const dispatch = useDispatch(); // so that we can redirect after the image upload is successful
   const { closeModal } = useModal();
   const [mp3, setMp3] = useState("");
@@ -49,7 +46,10 @@ const SongForm = ({ albumId, currentSong, categoryId, category, formType }) => {
   };
 
   const handleEdit = async (e) => {
+    console.log("e 👉", albumId)
     e.preventDefault();
+    await dispatch(updateSongThunk(currentSong.id, {title, genre}))
+    await dispatch(loadOneAlbumThunk(albumId))
     closeModal();
   };
 

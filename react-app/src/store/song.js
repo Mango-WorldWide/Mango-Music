@@ -82,7 +82,7 @@ export const addSongThunk = (song) => async(dispatch) => {
     }
 }
 
-export const updateSongThunk = (song, songId) => async(dispatch) => {
+export const updateSongThunk = (songId, song) => async(dispatch) => {
     const res = await fetch(`/api/songs/${songId}`, {
         method : "PUT",
         headers : {
