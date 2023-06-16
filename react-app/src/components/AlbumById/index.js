@@ -87,6 +87,7 @@ const AlbumById = () => {
           </div>
           <div className="orangeButtons">
             {albumSongs && albumSongs.length > 0 && (
+              <>
               <PlayButton
                 nameOfClass="playlistButton"
                 buttonContent={
@@ -105,19 +106,22 @@ const AlbumById = () => {
                 songId={albumSongs[0].id}
                 songs={albumSongs}
               />
-            )}
-            <button className="orangeButton" disabled style={{ cursor: "not-allowed" }}>
+              <button className="orangeButton" disabled style={{ cursor: "not-allowed" }}>
               <i className="fa-sharp fa-solid fa-shuffle" />
               Shuffle
             </button>
+              </>
+            )}
           </div>
         </div>
       </div>
       {user.artist_id === album.Album.artist_id && (
         <div>
+          <h3>Add a Song</h3>
           <SongForm albumId={albumId} />
         </div>
       )}
+      {albumSongs && albumSongs.length > 0 && (
       <div className="song-list" onMouseLeave={() => setHoveredSong("")}>
         <table className="songTable">
           <th id="songColumn">Song</th>
@@ -131,15 +135,6 @@ const AlbumById = () => {
                 onMouseEnter={() => setHoveredSong(i)}
               >
                 <td className="songTitle">
-                  {/* <p>
-                {playlist.songs.id === selectedSong ? (
-                  <i className="fa-sharp fa-solid fa-pause orange" />
-                ) : i === hoveredSong ? (
-                  <i className="fa-solid fa-play orange" />
-                ) : (
-                  i + 1
-                )}
-              </p> */}
                   <PlayButton
                     buttonContent={
                       isPlaying && song.id === queue[queueIndex]?.id ? (
@@ -205,14 +200,15 @@ const AlbumById = () => {
           ))}
         </table>
       </div>
+      )}
       {user.artist_id === album["Album"].artist_id && (
         <div style={{display: "flex"}}>
           <ModalButton
-            modalContent={<button className="update-button">Update Album</button>}
+            modalContent={<button className="update-button green-hover">Update Album</button>}
             modalComponent={<AlbumForm currentAlbum={album.Album} formType="update" />}
           />
           <ModalButton
-            modalContent={<button className="update-button">Delete Album</button>}
+            modalContent={<button className="delete-button red-hover">Delete Album</button>}
             modalComponent={<AlbumForm currentAlbum={album.Album} formType="delete" />}
           />
         </div>

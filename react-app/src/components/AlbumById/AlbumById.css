@@ -173,7 +173,7 @@
 
 .update-button,
 .delete-button {
-  background-color: #0070f3;
+  background-color: rgb(187, 125, 11);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -182,14 +182,6 @@
   margin: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-
-.delete-button:hover {
-  background-color: red;
-}
-
-.update-button:hover {
-  background-color: green;
 }
 
 .plus-sign.album{

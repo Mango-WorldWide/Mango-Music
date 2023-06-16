@@ -78,7 +78,7 @@ const SongForm = ({ albumId, currentSong, categoryId, category, formType }) => {
       {formType === "delete" ? (
         <div className="delete-modal modal">
           <h1>Comfirm Delete</h1>
-          <p>Are you sure you want to remove this song from the album?</p>
+          <p>{`Are you sure you want to remove this song from the ${category}?`}</p>
           <div className="delete-buttons">
             <button className="orangeButton" onClick={deleteOnClick}>
               Yes (Delete Song)

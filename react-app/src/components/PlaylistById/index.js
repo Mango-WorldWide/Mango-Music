@@ -10,6 +10,7 @@ import ModalButton from "../ModalButton";
 import PlaylistForm from "../PlaylistForm";
 import SongForm from "../SongForm";
 import { usePlayer } from "../../context/PlayerContext";
+import { Link } from "react-router-dom";
 
 function PlaylistById() {
   const { playlistId } = useParams();
@@ -18,7 +19,7 @@ function PlaylistById() {
   const playlist = useSelector((state) => state.playlists);
   const likes = useSelector((state) => Object.values(state.likes));
   const user = useSelector((state) => state.session.user);
-  
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -63,122 +64,121 @@ function PlaylistById() {
         </div>
         <div className="albumMenu">
           <h1 className="singlePlaylistTitle">{playlist.title}</h1>
-          {/* <h2 className="playListOwner">{album["Album"].artist}</h2> */}
           <div
             className="descContainer playlist"
             data-tooltip={playlist.description.length > 217 ? "MORE" : ""}
           >
             <p className="playlistDesc">{playlist.description}</p>
           </div>
-          <div className="playlistButtons">
-            {playlistSongs.length > 0 ? (
-              <PlayButton
-                nameOfClass="playlistButton"
-                buttonContent={
-                  isPlaying ? (
-                    <>
-                      <i className="fa fa-pause" aria-hidden="true" />
-                      Pause
-                    </>
-                  ) : (
-                    <>
-                      <i className="fa fa-play" aria-hidden="true" />
-                      Play
-                    </>
-                  )
-                }
-                songId={playlistSongs[0].id}
-                songs={playlistSongs}
-              />
-            ) : (
-              <button disabled={true}>Play</button>
-            )}
-            <button className="playlistButton" disabled style={{ cursor: "not-allowed" }}>
-              <i className="fa-sharp fa-solid fa-shuffle" />
-              Shuffle
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="song-list" onMouseLeave={() => setHoveredSong("")}>
-        <table className="songTable">
-          <th id="songColumn">Song</th>
-          <th id="artistColumn">Artist</th>
-          <th id="albumColumn">Album</th>
-          <th id="likesColumn"></th>
-          {playlist.songs.map((playlist, i) => (
-            <tr
-              className={`songData ${i % 2 === 0 ? "grey" : ""}`}
-              onMouseEnter={() => setHoveredSong(i)}
-            >
-              <td className="songTitle">
-                {/* <p>
-                {playlist.songs.id === selectedSong ? (
-                  <i className="fa-sharp fa-solid fa-pause orange" />
-                ) : i === hoveredSong ? (
-                  <i className="fa-solid fa-play orange" />
-                ) : (
-                  i + 1
-                )}
-              </p> */}
+          {playlistSongs && playlistSongs.length > 0 && (
+            <div className="playlistButtons">
+              {playlistSongs.length > 0 ? (
                 <PlayButton
+                  nameOfClass="playlistButton green-hover"
                   buttonContent={
-                    isPlaying && playlist.songs.id === queue[queueIndex].id ? (
-                      <i className="fa fa-pause" aria-hidden="true"></i>
+                    isPlaying ? (
+                      <>
+                        <i className="fa fa-pause" aria-hidden="true" />
+                        Pause
+                      </>
                     ) : (
-                      <i className="fa fa-play" aria-hidden="true"></i>
+                      <>
+                        <i className="fa fa-play" aria-hidden="true" />
+                        Play
+                      </>
                     )
                   }
-                  songId={playlist.songs.id}
+                  songId={playlistSongs[0].id}
                   songs={playlistSongs}
                 />
-                <p>{playlist.songs.title}</p>
-              </td>
-              <td className="songArtist">{playlist.songs.artist_name}</td>
-              <td className="songAlbum">{playlist.songs.album_name}</td>
-              <td onClick={(e) => handleLikeButton(e, playlist.songs.id)}>
-                {likes.filter((like) => like["song_id"] === playlist.songs.id).length > 0 ? (
-                  <i className="fa-solid fa-thumbs-up" />
-                ) : i === hoveredSong ? (
-                  <i className="fa-regular fa-thumbs-up" />
-                ) : (
-                  ""
-                )}
-              </td>
-              {user.id === playlistOwner && (
-                <td>
-                  <ModalButton
-                    modalContent={<i className="fa-solid fa-trash-can" />}
-                    modalComponent={
-                      <SongForm
-                        currentSong={playlist.id}
-                        categoryId={playlistId}
-                        category={"playlist"}
-                        formType="delete"
-                      />
-                    }
-                  />
-                </td>
+              ) : (
+                <button disabled={true}>Play</button>
               )}
-            </tr>
-          ))}
-          <ModalButton
-            modalComponent={<PlaylistForm formType="edit" currentPlaylist={playlist}/>}
-            modalContent={
-              <button className="playlistId-edit-playlist">
-                Edit Playlist
+              <button className="playlistButton" disabled style={{ cursor: "not-allowed" }}>
+                <i className="fa-sharp fa-solid fa-shuffle" />
+                Shuffle
               </button>
-            }
-          />
-          <ModalButton
-            modalComponent={<PlaylistForm formType="delete" currentPlaylist={playlist}/>}
-            modalContent={
-              <button className="playlistId-edit-playlist">
-                Delete Playlist
-              </button>
-            }
-          />
-        </table>
+            </div>
+
+        )}
+        </div>
+      </div>
+
+      <div className="song-list" onMouseLeave={() => setHoveredSong("")}>
+      {playlistSongs && playlistSongs.length > 0 ? (
+        <>
+        <table className="songTable">
+        <th id="songColumn">Song</th>
+        <th id="artistColumn">Artist</th>
+        <th id="albumColumn">Album</th>
+        <th id="likesColumn"></th>
+        {playlist.songs.map((playlist, i) => (
+          <tr
+            className={`songData ${i % 2 === 0 ? "grey" : ""}`}
+            onMouseEnter={() => setHoveredSong(i)}
+          >
+            <td className="songTitle">
+              <PlayButton
+                buttonContent={
+                  isPlaying && playlist.songs.id === queue[queueIndex].id ? (
+                    <i className="fa fa-pause" aria-hidden="true"></i>
+                  ) : (
+                    <i className="fa fa-play" aria-hidden="true"></i>
+                  )
+                }
+                songId={playlist.songs.id}
+                songs={playlistSongs}
+              />
+              <p>{playlist.songs.title}</p>
+            </td>
+            <td className="songArtist">{playlist.songs.artist_name}</td>
+            <td className="songAlbum">{playlist.songs.album_name}</td>
+            <td onClick={(e) => handleLikeButton(e, playlist.songs.id)}>
+              {likes.filter((like) => like["song_id"] === playlist.songs.id).length > 0 ? (
+                <i className="fa-solid fa-thumbs-up" />
+              ) : i === hoveredSong ? (
+                <i className="fa-regular fa-thumbs-up" />
+              ) : (
+                ""
+              )}
+            </td>
+            {user.id === playlistOwner && (
+              <td>
+                <ModalButton
+                  modalContent={<i className="fa-solid fa-trash-can" />}
+                  modalComponent={
+                    <SongForm
+                      currentSong={playlist.id}
+                      categoryId={playlistId}
+                      category={"playlist"}
+                      formType="delete"
+                    />
+                  }
+                />
+              </td>
+            )}
+          </tr>
+        ))}
+      </table>
+        </>
+      ) : (<button className="blue-button-square"><Link to="/albums">Add a Song</Link></button>)}
+
+        <ModalButton
+          modalComponent={<PlaylistForm formType="edit" currentPlaylist={playlist}/>}
+          modalContent={
+            <button className="playlistId-button-edit green-hover">
+              Edit Playlist
+            </button>
+          }
+        />
+        <ModalButton
+          modalComponent={<PlaylistForm formType="delete" currentPlaylist={playlist}/>}
+          modalContent={
+            <button className="playlistId-button-delete red-hover">
+              Delete Playlist
+            </button>
+          }
+        />
       </div>
     </div>
   );
