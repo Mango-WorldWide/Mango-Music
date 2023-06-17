@@ -36,7 +36,7 @@
   text-decoration: none;
 }
 
-.albumArtistById  {
+.albumArtistById {
   color: rgb(187, 125, 11);
   font-size: 1.5rem;
   font-weight: 400;
@@ -100,7 +100,7 @@
   background-color: rgb(187, 125, 11);
 }
 
-.fa-play.orange{
+.fa-play.orange {
   color: rgb(187, 125, 11);
 }
 
@@ -114,16 +114,16 @@
 }
 .song-title {
   display: flex;
-  font-size: .9rem;
+  font-size: 0.9rem;
   gap: 2rem;
   color: white;
 }
-.song-data{
+.song-data {
   display: flex;
   justify-content: space-between;
 }
 
-.pepper{
+.pepper {
   flex-shrink: 0;
   flex-grow: 1;
 }
@@ -139,11 +139,11 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-#pink{
+#pink {
   color: pink;
 }
 
-#blue{
+#blue {
   color: blue;
 }
 
@@ -164,10 +164,10 @@
   cursor: pointer;
 }
 
-.thumbButtonContainer{
+.thumbButtonContainer {
   flex-grow: 0;
-  margin:.8rem;
-  height:100%;
+  margin: 0.8rem;
+  height: 100%;
   box-sizing: border-box;
 }
 
@@ -184,17 +184,36 @@
   transition: background-color 0.3s;
 }
 
-.plus-sign.album{
-  height: 15px;
-  width: 15px;
+.plus-sign.album {
+  height: 10px;
+  width: 10px;
   border-radius: 30px;
   filter: invert(1);
 }
 
-
-.play-button-td{
+.play-button-td {
   width: 30px;
-  padding-left:10px;
+  padding-left: 10px;
   padding-right: 15px;
   text-align: center;
+}
+
+.likes-td {
+  text-align: center;
+  width: 25px;
+}
+
+.add-to-list-td {
+  text-align: center;
+  width: 25px;
+}
+
+.options-td {
+  text-align: center;
+  width: 25px;
+}
+
+.remove-song-td {
+  text-align: center;
+  width: 35px;
 }

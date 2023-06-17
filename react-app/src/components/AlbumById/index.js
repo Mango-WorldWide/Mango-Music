@@ -14,8 +14,10 @@ import "./AlbumById.css";
 
 const AlbumById = () => {
   const ulRef = useRef();
+  const songRef = useRef();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState();
+  const [songMenu, setSongMenu] = useState("");
   const [hoveredSong, setHoveredSong] = useState("");
   const album = useSelector((state) => state.albums);
   const likes = useSelector((state) => Object.values(state.likes));
@@ -29,6 +31,7 @@ const AlbumById = () => {
     setShowMenu(true);
   };
 
+  // listener for album menu
   useEffect(() => {
     if (!showMenu) return;
 
@@ -37,11 +40,26 @@ const AlbumById = () => {
         setShowMenu(false);
       }
     };
-
     document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
+
+  // listener for song menu
+  useEffect(() => {
+    console.log("songMenu type 👉", typeof songMenu);
+    console.log("songMenu value 👉", songMenu);
+    if (!songMenu) return;
+
+    const closeMenu = (e) => {
+      if (songRef.current && !songRef.current.contains(e.target)) {
+        setSongMenu("");
+      }
+    };
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [songMenu]);
 
   useEffect(() => {
     dispatch(loadOneAlbumThunk(albumId));
@@ -65,8 +83,6 @@ const AlbumById = () => {
       await dispatch(createLikeThunk({ song_id: songId }));
     }
   };
-
-  const closeMenu = () => setShowMenu(false);
 
   return (
     <div className="outerAlbumContainer">
@@ -135,20 +151,19 @@ const AlbumById = () => {
                 modalComponent={<AlbumForm currentAlbum={album.Album} formType="update" />}
                 modalContent={
                   <div className="edit-delete-container">
-                    <div className="edit-delete" onClick={closeMenu}>
+                    <div className="edit-delete" onClick={() => setShowMenu(false)}>
                       <p>Edit</p>
                       <i className="fa-solid fa-pen-to-square" />
                     </div>
                   </div>
                 }
               />
-
               <hr className="item-divider options" />
               <ModalButton
                 modalComponent={<AlbumForm currentAlbum={album.Album} formType="delete" />}
                 modalContent={
                   <div className="edit-delete-container">
-                    <div className="edit-delete" onClick={closeMenu}>
+                    <div className="edit-delete" onClick={() => setShowMenu(false)}>
                       <p>Delete</p>
                       <i className="fa-solid fa-trash-can" />
                     </div>
@@ -168,11 +183,11 @@ const AlbumById = () => {
       {albumSongs && albumSongs.length > 0 && (
         <div className="song-list" onMouseLeave={() => setHoveredSong("")}>
           <table className="songTable">
-            <th id="playColumn"></th>
-            <th id="songColumn">Song</th>
-            <th id="likesColumn" />
-            <th id="likesColumn" />
-            <th id="likesColumn" />
+            <th id="play-column"></th>
+            <th id="song-column">Song</th>
+            <th id="likes-column" />
+            <th id="add-column" />
+            <th id="options-column" />
             {album["Songs"].map((song, i) => (
               <>
                 <tr
@@ -192,10 +207,10 @@ const AlbumById = () => {
                       songs={albumSongs}
                     />
                   </td>
-                  <td className="songTitle">
+                  <td className="song-title-td">
                     <p>{song.title}</p>
                   </td>
-                  <td onClick={(e) => handleLikeButton(e, song.id)}>
+                  <td className="likes-td" onClick={(e) => handleLikeButton(e, song.id)}>
                     {likes.filter((like) => like["song_id"] === song.id).length > 0 ? (
                       <i className="fa-solid fa-thumbs-up" />
                     ) : i === hoveredSong ? (
@@ -205,7 +220,7 @@ const AlbumById = () => {
                     )}
                   </td>
                   {user.playlists.length > 0 && (
-                    <td>
+                    <td className="add-to-list-td">
                       <ModalButton
                         modalContent={
                           <img alt="plus" className="plus-sign album" src="/plus.png" />
@@ -214,35 +229,63 @@ const AlbumById = () => {
                       />
                     </td>
                   )}
+                  {/*--------------------------------------------------------------------------------------------------------------------------------------------------- */}
                   {user.artist_id === album.Album.artist_id && (
-                    <>
-                      <td>
-                        <ModalButton
-                          modalContent={<i className="fa-solid fa-pen-to-square" />}
-                          modalComponent={
-                            <SongForm
-                              currentSong={song}
-                              albumId={albumId}
-                              category={"album"}
-                              formType="update"
+                    <td className="options-td">
+                      <div className="more-options-container">
+                        <button
+                          className="more-options"
+                          style={{ backgroundColor: "transparent" }}
+                          onClick={() => setSongMenu(i + 1)}
+                        >
+                          <i className="fa-solid fa-ellipsis" />
+                        </button>
+                        <div
+                          className={`more-options-dropdown ${songMenu === i + 1 ? "" : "hidden"}`}
+                          ref={songRef}
+                        >
+                          <>
+                            <ModalButton
+                              modalComponent={
+                                <SongForm
+                                  currentSong={song}
+                                  albumId={albumId}
+                                  category={"album"}
+                                  formType="update"
+                                />
+                              }
+                              modalContent={
+                                <div className="edit-delete-container">
+                                  <div className="edit-delete" onClick={() => setSongMenu("")}>
+                                    <p>Edit</p>
+                                    <i className="fa-solid fa-pen-to-square" />
+                                  </div>
+                                </div>
+                              }
                             />
-                          }
-                        />
-                      </td>
-                      <td>
-                        <ModalButton
-                          modalContent={<i className="fa-solid fa-trash-can" />}
-                          modalComponent={
-                            <SongForm
-                              currentSong={song}
-                              categoryId={albumId}
-                              category={"album"}
-                              formType="delete"
+                            <hr className="item-divider options" />
+                            <ModalButton
+                              modalComponent={
+                                <SongForm
+                                  currentSong={song}
+                                  categoryId={albumId}
+                                  category={"album"}
+                                  formType="delete"
+                                />
+                              }
+                              modalContent={
+                                <div className="edit-delete-container">
+                                  <div className="edit-delete" onClick={() => setSongMenu("")}>
+                                    <p>Delete</p>
+                                    <i className="fa-solid fa-trash-can" />
+                                  </div>
+                                </div>
+                              }
                             />
-                          }
-                        />
-                      </td>
-                    </>
+                          </>
+                        </div>
+                      </div>
+                    </td>
                   )}
                 </tr>
               </>

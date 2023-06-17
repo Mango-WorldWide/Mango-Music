@@ -41,26 +41,26 @@ table {
   border-collapse: collapse;
 }
 
-#songColumn,
-#artistColumn,
-#albumColumn {
+#song-column,
+#artist-column,
+#album-column {
   font-size: 1.1rem;
   text-align: left;
 }
 
-#artistColumn,
-#albumColumn {
+#artist-column,
+#album-column {
   font-size: 1.1rem;
   padding-left: 0.5rem;
   text-align: left;
 }
 
-#artistColumn {
+#artist-column {
   border-left: 1px solid grey;
   border-right: 1px solid grey;
 }
 
-#likesColumn {
+#likes-column {
   width: 4%;
 }
 
@@ -70,7 +70,7 @@ td {
   border-style: hidden !important;
 }
 
-.songTitle {
+.song-title-td {
   margin-top: 15px;
   margin-bottom: 15px;
   display: flex;
@@ -201,6 +201,15 @@ td {
   border-radius: 25px;
 }
 
+.song-options {
+  color: white;
+  
+  height: 30px;
+  width: 30px;
+  border: none;
+  border-radius: 25px;
+}
+
 .more-options-dropdown {
   display: flex;
   flex-direction: column;
@@ -208,17 +217,17 @@ td {
   background-color: #252526;
   position: absolute;
   top: 125%;
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 500px;
   border-radius: 10px;
-  height: 80px;
+  height: auto;
   width: 80px;
   overflow: hidden;
+  z-index: 1;
 }
 
-.edit-delete-container:hover{
+.edit-delete-container:hover {
   background-color: #2e2e2f;
-
 }
 
 .edit-delete {
@@ -231,13 +240,11 @@ td {
   cursor: pointer;
 }
 
-
-
-.hidden{
+.hidden {
   display: none;
 }
 
-.add-button{
+.add-button {
   display: flex;
   justify-content: center;
 }

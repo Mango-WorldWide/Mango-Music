@@ -151,16 +151,17 @@ function PlaylistById() {
         {playlistSongs && playlistSongs.length > 0 ? (
           <>
             <table className="songTable">
-              <th id="songColumn">Song</th>
-              <th id="artistColumn">Artist</th>
-              <th id="albumColumn">Album</th>
-              <th id="likesColumn"></th>
+              <th id="play-column"></th>
+              <th id="song-column">Song</th>
+              <th id="artist-column">Artist</th>
+              <th id="album-column">Album</th>
+              <th id="likes-column"></th>
               {playlist.songs.map((playlist, i) => (
                 <tr
                   className={`songData ${i % 2 === 0 ? "grey" : ""}`}
                   onMouseEnter={() => setHoveredSong(i)}
                 >
-                  <td className="songTitle">
+                  <td className="play-button-td">
                     <PlayButton
                       buttonContent={
                         isPlaying && playlist.songs.id === queue[queueIndex].id ? (
@@ -172,10 +173,13 @@ function PlaylistById() {
                       songId={playlist.songs.id}
                       songs={playlistSongs}
                     />
-                    <p>{playlist.songs.title}</p>
                   </td>
-                  <td className="songArtist">{playlist.songs.artist_name}</td>
-                  <td className="songAlbum">{playlist.songs.album_name}</td>
+                  <td className="song-title-td">
+                    <p>{playlist.songs.title}</p>
+                    {console.log("album name ===>", playlist.songs)}
+                  </td>
+                  <td className="song-artist-td">{playlist.songs.artist_name}</td>
+                  <td className="song-album-td">{playlist.songs.album_title}</td>
                   <td onClick={(e) => handleLikeButton(e, playlist.songs.id)}>
                     {likes.filter((like) => like["song_id"] === playlist.songs.id).length > 0 ? (
                       <i className="fa-solid fa-thumbs-up" />
@@ -186,7 +190,7 @@ function PlaylistById() {
                     )}
                   </td>
                   {user.id === playlistOwner && (
-                    <td>
+                    <td className="remove-song-td">
                       <ModalButton
                         modalContent={<i className="fa-solid fa-trash-can" />}
                         modalComponent={
