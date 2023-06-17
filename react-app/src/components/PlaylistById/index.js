@@ -150,62 +150,62 @@ function PlaylistById() {
       <div className="song-list" onMouseLeave={() => setHoveredSong("")}>
         {playlistSongs && playlistSongs.length > 0 ? (
           <>
-            <table className="songTable">
+            <table className="song-table">
               <th id="play-column"></th>
               <th id="song-column">Song</th>
               <th id="artist-column">Artist</th>
               <th id="album-column">Album</th>
               <th id="likes-column"></th>
-              {playlist.songs.map((playlist, i) => (
-                <tr
-                  className={`songData ${i % 2 === 0 ? "grey" : ""}`}
-                  onMouseEnter={() => setHoveredSong(i)}
-                >
-                  <td className="play-button-td">
-                    <PlayButton
-                      buttonContent={
-                        isPlaying && playlist.songs.id === queue[queueIndex].id ? (
-                          <i className="fa fa-pause" aria-hidden="true"></i>
-                        ) : (
-                          <i className="fa fa-play" aria-hidden="true"></i>
-                        )
-                      }
-                      songId={playlist.songs.id}
-                      songs={playlistSongs}
-                    />
-                  </td>
-                  <td className="song-title-td">
-                    <p>{playlist.songs.title}</p>
-                    {console.log("album name ===>", playlist.songs)}
-                  </td>
-                  <td className="song-artist-td">{playlist.songs.artist_name}</td>
-                  <td className="song-album-td">{playlist.songs.album_title}</td>
-                  <td onClick={(e) => handleLikeButton(e, playlist.songs.id)}>
-                    {likes.filter((like) => like["song_id"] === playlist.songs.id).length > 0 ? (
-                      <i className="fa-solid fa-thumbs-up" />
-                    ) : i === hoveredSong ? (
-                      <i className="fa-regular fa-thumbs-up" />
-                    ) : (
-                      ""
-                    )}
-                  </td>
-                  {user.id === playlistOwner && (
-                    <td className="remove-song-td">
-                      <ModalButton
-                        modalContent={<i className="fa-solid fa-trash-can" />}
-                        modalComponent={
-                          <SongForm
-                            currentSong={playlist.id}
-                            categoryId={playlistId}
-                            category={"playlist"}
-                            formType="delete"
-                          />
+                {playlist.songs.map((playlist, i) => (
+                  <tr
+                    className={`song-data-tr ${i % 2 === 0 ? "grey" : ""}`}
+                    onMouseEnter={() => setHoveredSong(i)}
+                  >
+                    <td className="play-button-td">
+                      <PlayButton
+                        buttonContent={
+                          isPlaying && playlist.songs.id === queue[queueIndex].id ? (
+                            <i className="fa fa-pause" aria-hidden="true"></i>
+                          ) : (
+                            <i className="fa fa-play" aria-hidden="true"></i>
+                          )
                         }
+                        songId={playlist.songs.id}
+                        songs={playlistSongs}
                       />
                     </td>
-                  )}
-                </tr>
-              ))}
+                    <td className="song-title-td">
+                      <p>{playlist.songs.title}</p>
+                      {console.log("album name ===>", playlist.songs)}
+                    </td>
+                    <td className="song-artist-td">{playlist.songs.artist_name}</td>
+                    <td className="song-album-td">{playlist.songs.album_title}</td>
+                    <td onClick={(e) => handleLikeButton(e, playlist.songs.id)}>
+                      {likes.filter((like) => like["song_id"] === playlist.songs.id).length > 0 ? (
+                        <i className="fa-solid fa-thumbs-up" />
+                      ) : i === hoveredSong ? (
+                        <i className="fa-regular fa-thumbs-up" />
+                      ) : (
+                        ""
+                      )}
+                    </td>
+                    {user.id === playlistOwner && (
+                      <td className="remove-song-td">
+                        <ModalButton
+                          modalContent={<i className="fa-solid fa-trash-can" />}
+                          modalComponent={
+                            <SongForm
+                              currentSong={playlist.id}
+                              categoryId={playlistId}
+                              category={"playlist"}
+                              formType="delete"
+                            />
+                          }
+                        />
+                      </td>
+                    )}
+                  </tr>
+                ))}
             </table>
           </>
         ) : (

@@ -182,7 +182,7 @@ const AlbumById = () => {
       )}
       {albumSongs && albumSongs.length > 0 && (
         <div className="song-list" onMouseLeave={() => setHoveredSong("")}>
-          <table className="songTable">
+          <table className="song-table">
             <th id="play-column"></th>
             <th id="song-column">Song</th>
             <th id="likes-column" />
@@ -191,7 +191,7 @@ const AlbumById = () => {
             {album["Songs"].map((song, i) => (
               <>
                 <tr
-                  className={`songData ${i % 2 === 0 ? "grey" : ""}`}
+                  className={`song-data-tr ${i % 2 === 0 ? "grey" : ""}`}
                   onMouseEnter={() => setHoveredSong(i)}
                 >
                   <td className="play-button-td">

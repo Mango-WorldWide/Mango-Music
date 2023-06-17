@@ -200,20 +200,21 @@
 
 .likes-td {
   text-align: center;
-  width: 25px;
+  width: 35px;
 }
 
 .add-to-list-td {
   text-align: center;
-  width: 25px;
+  width: 35px;
 }
 
 .options-td {
   text-align: center;
-  width: 25px;
+  width: 35px;
 }
 
 .remove-song-td {
   text-align: center;
   width: 35px;
 }
+
