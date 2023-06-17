@@ -190,3 +190,11 @@
   border-radius: 30px;
   filter: invert(1);
 }
+
+
+.play-button-td{
+  width: 30px;
+  padding-left:10px;
+  padding-right: 15px;
+  text-align: center;
+}

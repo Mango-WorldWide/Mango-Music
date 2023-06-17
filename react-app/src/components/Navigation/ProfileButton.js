@@ -8,11 +8,11 @@ import { useHistory } from "react-router-dom";
 import "./Navigation.css";
 
 function ProfileButton() {
+  const ulRef = useRef();
+  const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [showMenu, setShowMenu] = useState(false);
-  const ulRef = useRef();
 
   const openMenu = () => {
     if (showMenu) return;

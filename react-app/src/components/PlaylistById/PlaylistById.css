@@ -67,7 +67,6 @@ table {
 td {
   font-size: 1rem;
   padding: 0.1rem;
-  padding-left: 1rem;
   border-style: hidden !important;
 }
 
@@ -75,7 +74,6 @@ td {
   margin-top: 15px;
   margin-bottom: 15px;
   display: flex;
-  gap: 2rem;
 }
 
 .playlistButtons {
@@ -97,7 +95,7 @@ td {
   border-radius: 5px;
   background-color: rgb(187, 125, 11);
 }
-.playlistButton:hover{
+.playlistButton:hover {
   cursor: pointer;
 }
 
@@ -187,4 +185,59 @@ td {
   color: white;
   border: none;
   width: 150px;
+}
+
+.more-options-container {
+  position: relative;
+  margin-left: auto;
+}
+
+.more-options {
+  color: white;
+  background-color: #2e2e2f;
+  height: 30px;
+  width: 30px;
+  border: none;
+  border-radius: 25px;
+}
+
+.more-options-dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #252526;
+  position: absolute;
+  top: 125%;
+  font-size: .8rem;
+  font-weight: 500px;
+  border-radius: 10px;
+  height: 80px;
+  width: 80px;
+  overflow: hidden;
+}
+
+.edit-delete-container:hover{
+  background-color: #2e2e2f;
+
+}
+
+.edit-delete {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10px;
+  box-sizing: border-box;
+  align-items: center;
+  height: 40px;
+  cursor: pointer;
+}
+
+
+
+.hidden{
+  display: none;
+}
+
+.add-button{
+  display: flex;
+  justify-content: center;
 }

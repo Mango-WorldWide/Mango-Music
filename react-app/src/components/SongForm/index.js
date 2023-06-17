@@ -88,7 +88,7 @@ const SongForm = ({ albumId, currentSong, categoryId, category, formType }) => {
             </button>
           </div>
         </div>
-      ) : formType === "edit" ? (
+      ) : formType === "update" ? (
         <div className="edit-modal modal">
           <div className="edit-song-content">
             <h1>Edit Song</h1>
