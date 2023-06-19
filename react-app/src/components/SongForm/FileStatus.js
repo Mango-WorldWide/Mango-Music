@@ -1,4 +1,4 @@
-function SongFormModal({ isSending }) {
+function FileStatus({ isSending }) {
   return (
     <>
       {isSending && (
@@ -15,4 +15,4 @@ function SongFormModal({ isSending }) {
   );
 }
 
-export default SongFormModal;
+export default FileStatus;

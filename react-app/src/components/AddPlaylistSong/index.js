@@ -1,51 +1,40 @@
-import { useDispatch, useSelector } from "react-redux"
-import { useModal } from "../../context/Modal"
-import { useState } from "react"
-import { addSongPlaylist } from "../../store/playlist"
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserPlaylistsThunk } from "../../store/playlist";
+import { useModal } from "../../context/Modal";
+import ListItem from "./ListItem";
+import "./AddPlaylistSong.css";
+
+const AddPlaylistSongModal = ({ song }) => {
+  const { closeModal } = useModal();
+  const dispatch = useDispatch();
+  const [error, setError] = useState(null);
+  const getPlaylists = useSelector((state) => state.playlists);
+  const userPlaylists = Object.values(getPlaylists)
 
 
-const AddSongModal = ({song}) => {
-    const dispatch = useDispatch()
-    const { closeModal } = useModal()
-    const [playlist, setPlaylist] = useState(0)
-    const [err, setErr] = useState(null)
-    const userPlaylists = useSelector((state)=>state.session.user.playlists)
-    const payload = {}
-    const handleSubmit = (e) =>{
-        e.preventDefault()
-        payload.playlist_id = playlist
-        payload.song_id = song.id
-        if (playlist > 0){
-            dispatch(addSongPlaylist(payload)).then(closeModal)
-        } else {
-            setErr('Please Select a Playlist')
-        }
-    }
+  useEffect(() => {
+    dispatch(getUserPlaylistsThunk());
+  }, [dispatch]);
+  if(!userPlaylists.length) return null
+  return (
+    <div className="playlist-modal modal">
+      <img className="x-mark" alt="close" onClick={closeModal} src="/mark.png" />
+      <h1 className="header">Add to Playlist</h1>
+      <h3 className="sub-header">{song.title}</h3>
+      <hr className="header-divider" />
+      <div className="playlist-container">
+        {userPlaylists.map((playlist) => (
+          <div>
+            <ListItem playlist={playlist} songId={song.id} error={setError}/>
+          </div>
+        ))}
+      </div>
+      {error && <p className="error-message">{error}</p>}
+    </div>
+  );
+};
 
-    const cancelOnClick = (e) => {
-        e.preventDefault()
-        closeModal()
-    }
 
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                {err && (
-                    <p>{err}</p>
-                )}
-                <select name='playlist' onChange={(e) => setPlaylist(e.target.value)} value={playlist}>
-                    <option value="">
-                        Select a Playlist...
-                    </option>
-                    {userPlaylists.map((playlistList) => (
-                        <option value={playlistList.id} key={playlistList.id}>{playlistList.title}</option>
-                    ))}
-                </select>
-                <button className="orangeButton songSubmit" type="submit">Submit</button>
-                <button className="no-button" onClick={cancelOnClick}>Nevermind</button>
-            </form>
-        </div>
-    )
-}
 
-export default AddSongModal
+export default AddPlaylistSongModal;

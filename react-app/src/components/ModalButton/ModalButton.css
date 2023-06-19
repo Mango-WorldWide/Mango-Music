@@ -1,0 +1,53 @@
+.modal {
+  position: fixed;
+  left: 50%;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  background-color: #252526;
+  border-radius: 10px;
+}
+
+.delete-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  height: 200px;
+  width: 350px;
+  padding: 15px;
+}
+
+.delete-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.edit-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  height: 225px;
+  width: 350px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* 
+
+
+
+
+padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 500px;
+    height: 400px;
+*/

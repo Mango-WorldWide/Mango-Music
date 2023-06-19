@@ -120,20 +120,20 @@ const AudioPlayer = () => {
     <div className="audio-player">
       <div className="audio-player-track-controls">
         <p className="audio-player-shuffle" onClick={(e) => alert("Feature Coming Soon!")}>
-          <i class="fa-solid fa-shuffle" style={{ cursor: "not-allowed" }}></i>
+          <i className="fa-solid fa-shuffle" style={{ cursor: "not-allowed" }}></i>
         </p>
         <p className="audio-playeer-back" onClick={goBack}>
-          <i class="fa-solid fa-backward"></i>
+          <i className="fa-solid fa-backward"></i>
         </p>
         <p className="audio-player-play-pause" onClick={playPause}>
           {isPlaying ? (
             <i className="fa fa-pause" aria-hidden="true"></i>
           ) : (
-            <i class="fa fa-play" aria-hidden="true"></i>
+            <i className="fa fa-play" aria-hidden="true"></i>
           )}
         </p>
         <p className="audio-player-forward" onClick={goForward}>
-          <i class="fa-solid fa-forward"></i>
+          <i className="fa-solid fa-forward"></i>
         </p>
         <p className={`audio-player-loop ${isLooping ? "active" : ""}`} onClick={loopControl}>
           {isLooping ? (
@@ -165,9 +165,9 @@ const AudioPlayer = () => {
       <div className="audio-player-volume-controls">
         <p onClick={muteControl} className="audio-player-mute-button">
           {unmuteVolume ? (
-            <i class="fa-solid fa-volume-xmark fa-fade"></i>
+            <i className="fa-solid fa-volume-xmark fa-fade"></i>
           ) : (
-            <i class="fa-solid fa-volume-high"></i>
+            <i className="fa-solid fa-volume-high"></i>
           )}
         </p>
         <input type="range" min={0} max={100} value={volume} onChange={volumeControl} />

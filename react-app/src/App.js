@@ -15,7 +15,7 @@ import UpdateAlbum from "./components/UpdateAlbum";
 import AudioPlayer from "./components/AudioPlayer";
 import DummyAudioPlayer from "./components/DummyAudioPlayer";
 import SongForm from "./components/SongForm";
-import NewPlaylistForm from "./components/CreatePlaylist";
+import PlaylistForm from "./components/PlaylistForm";
 import UpdatePlaylistForm from "./components/UpdatePlaylist/UpdatePlaylistForm";
 import ProfileButton from "./components/Navigation/ProfileButton.js";
 import SplashPage from "./components/SplashPage";
@@ -71,7 +71,7 @@ function App() {
                 <Route path="/albums/artist" component={AlbumsIndex} />
                 <Route path="/albums/:albumId" component={AlbumById} />
                 <Route path="/albums" component={AlbumsIndex} />
-                <Route path="/playlists/new" component={NewPlaylistForm} />
+                <Route path="/playlists/new" component={PlaylistForm} />
                 <Route path="/playlists/:playlistId/edit" component={UpdatePlaylistForm} />
                 <Route path="/playlists/:playlistId" component={PlaylistById} />
                 <Route path="/playlists" component={PlaylistIndex} />

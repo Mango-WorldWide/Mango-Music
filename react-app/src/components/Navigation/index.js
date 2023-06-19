@@ -1,21 +1,24 @@
 import { useState, useEffect } from "react";
-import { NavLink  } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import Search from "../Search";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserPlaylistsThunk } from "../../store/playlist";
+import AlbumForm from "../AlbumForm";
+import ModalButton from "../ModalButton";
 
 function Navigation() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const distpatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const playlists = user?.playlists;
-
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
   useEffect(() => {
     window.addEventListener("resize", handleResize);
   }, []);
-
+  
   return (
     <div className="nav-sidebar">
       <div className="nav-list">
@@ -42,9 +45,10 @@ function Navigation() {
             <>
               <div className="nav-list-item">
                 <i className="fas fa-plus-square" style={{ color: "rgba(238, 238, 238, 1)" }}></i>
-                <NavLink exact to="/albums/new">
-                  Create Album
-                </NavLink>
+                <ModalButton
+                  modalComponent={<AlbumForm formType="create" />}
+                  modalContent="Create Album"
+                />
               </div>
               <div className="nav-list-item">
                 <i className="fas fa-th" style={{ color: "rgba(238, 238, 238, 1)" }}></i>
@@ -83,13 +87,13 @@ function Navigation() {
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Alancittoo" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-github" />
+                <i className="fa-brands fa-github" />
               </a>
               <a href="https://www.linkedin.com/in/alan-echenique" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-linkedin" />
+                <i className="fa-brands fa-linkedin" />
               </a>
               <a href="https://wellfound.com/u/alan-echenique-1" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-angellist" />
+                <i className="fa-brands fa-angellist" />
               </a>
             </div>
           </div>
@@ -100,13 +104,13 @@ function Navigation() {
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Alan-Ngn" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-github" />
+                <i className="fa-brands fa-github" />
               </a>
               <a href="https://www.linkedin.com/in/alannguyen21" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-linkedin" />
+                <i className="fa-brands fa-linkedin" />
               </a>
               <a href="https://wellfound.com/u/alan-nguyen-31" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-angellist" />
+                <i className="fa-brands fa-angellist" />
               </a>
             </div>
           </div>
@@ -117,13 +121,13 @@ function Navigation() {
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/dorianinc" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-github" />
+                <i className="fa-brands fa-github" />
               </a>
               <a href="https://www.linkedin.com/in/dorian-macias" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-linkedin" />
+                <i className="fa-brands fa-linkedin" />
               </a>
               <a href="https://wellfound.com/u/dorian-macias" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-angellist" />
+                <i className="fa-brands fa-angellist" />
               </a>
             </div>
           </div>
@@ -134,13 +138,17 @@ function Navigation() {
             </div>
             <div className="nav-list-profile-links">
               <a href="https://github.com/Nemurs" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-github" />
+                <i className="fa-brands fa-github" />
               </a>
-              <a href="https://www.linkedin.com/in/kevin-octavio-mejia" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-linkedin" />
+              <a
+                href="https://www.linkedin.com/in/kevin-octavio-mejia"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <i className="fa-brands fa-linkedin" />
               </a>
               <a href="https://wellfound.com/u/kevin-mejia-13" rel="noreferrer" target="_blank">
-                <i class="fa-brands fa-angellist" />
+                <i className="fa-brands fa-angellist" />
               </a>
             </div>
           </div>

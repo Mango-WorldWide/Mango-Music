@@ -16,6 +16,7 @@ html{
 }
 
 body {
+    font-family: 'Source Sans Pro', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -94,4 +95,25 @@ button {
 
 .disabled-mouse:hover{
     cursor: not-allowed;
+}
+
+.blue-button-square{
+    background-color: #0070f3;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 10px 20px;
+    width: 150px;
+}
+
+.blue-button-square:hover{
+    background-color: #06660bfd;
+}
+
+.green-hover:hover{
+    background-color: #06660bfd;
+}
+
+.red-hover:hover{
+    background-color: red;
 }

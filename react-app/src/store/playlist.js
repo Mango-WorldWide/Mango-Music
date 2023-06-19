@@ -1,4 +1,3 @@
-
 ////////////// Action Creators ///////////////
 export const GET_PLAYLISTS = "playlists/GET_PLAYLISTS";
 export const GET_SINGLE_PLAYLIST = "playlists/GET_SINGLE_PLAYLIST";
@@ -54,7 +53,7 @@ export const getUserPlaylistsThunk = () => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(getPlaylists(data));
-    return data
+    return data;
   }
 };
 
@@ -84,13 +83,13 @@ export const createPlaylistThunk = (playlist) => async (dispatch) => {
 };
 
 // update a playlist
-export const updatePlaylistThunk = (playlist, playlistEdits) => async (dispatch) => {
-  const res = await fetch(`/api/playlists/${playlist.id}`, {
+export const updatePlaylistThunk = (playlistId, playlist) => async (dispatch) => {
+  const res = await fetch(`/api/playlists/${playlistId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(playlistEdits),
+    body: JSON.stringify(playlist),
   });
   if (res.ok) {
     const data = await res.json();
@@ -108,16 +107,24 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
   }
 };
 
-export const addSongPlaylist = (playlist) => async(dispatch) => {
-  const playlistId = playlist.playlist_id
-  const response = await fetch(`/api/playlists/${playlistId}/song`,{
-      method:"POST",
-      headers: {
-        "Content-Type": 'application/json'
-      },
-    body: JSON.stringify(playlist)
-  })
-}
+export const addSongPlaylist = (songId, playlistId) => async (dispatch) => {
+  const response = await fetch(`/api/playlists/${playlistId}/song`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ songId, playlistId }),
+  });
+  if (response.ok) {
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
+  }
+};
+
 const playlistsReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
@@ -128,9 +135,9 @@ const playlistsReducer = (state = {}, action) => {
       });
       return newState;
     case GET_SINGLE_PLAYLIST:
-      newState = {}
-      newState = {...action.playlist}
-      return newState
+      newState = {};
+      newState = { ...action.playlist };
+      return newState;
     case CLEAR_PLAYLISTS:
       return {};
     default:

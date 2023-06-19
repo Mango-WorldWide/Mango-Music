@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-import OpenModalButton from "../OpenModalButton";
+import ModalButton from '../ModalButton';
 // import './AuthModal.css';
 
 const AuthModal = () => {
@@ -31,15 +31,13 @@ const AuthModal = () => {
   return (
     <div className="auth-modal">
       <h2>Please Login or Signup to Continue</h2>
-      <OpenModalButton
-              className='dropdown-login'
-              buttonText="Log In"
+      <ModalButton
+              modalContent={<button className='dropdown-login'>Log In</button>}
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
-      <OpenModalButton
-              className='dropdown-signup'
-              buttonText="Sign Up"
+      <ModalButton
+              modalContent={<button className='dropdown-signup'>Sign Up</button>}
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
