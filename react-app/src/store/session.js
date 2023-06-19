@@ -50,8 +50,6 @@ export const login = (email, password) => async (dispatch) => {
     if (data.errors) {
       return data.errors;
     }
-  } else {
-    return { login: "Login failed. Please check your email and password." };
   }
 };
 
