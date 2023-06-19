@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms.validators import DataRequired, Email, Length, ValidationError
 from app.models import User
 
 
@@ -17,16 +17,39 @@ def username_exists(form, field):
     username = field.data
     user = User.query.filter(User.username == username).first()
     if user:
-        raise ValidationError('Think of a more unique UserName.')
-
-
+        raise ValidationError("Username is already in use.")
 
 
 class SignUpForm(FlaskForm):
     username = StringField(
-    'username', validators=[DataRequired(), username_exists])
-    email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password', validators=[DataRequired()])
+        "username",
+        validators=[
+            DataRequired(),
+            Length(
+                min=5, max=15, message="Username must between 5 and 15 characters long"
+            ),
+            username_exists,
+        ],
+    )
+    email = StringField(
+        "email",
+        validators=[
+            DataRequired(),
+            Email(message="Please provide a valid email."),
+            user_exists,
+        ],
+    )
+    password = StringField(
+        "password",
+        validators=[
+            DataRequired(),
+            Length(
+                min=8,
+                max=16,
+                message="Password must be between 8 and 16 characters long.",
+            ),
+        ],
+    )
     first_name = StringField('first name', validators=[DataRequired()])
     last_name = StringField('last name', validators=[DataRequired()])
     artist = BooleanField('artist', default=False )
