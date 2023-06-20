@@ -18,6 +18,12 @@
   color: rgba(238, 238, 238, 1);
 }
 
+.dropdown-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .hidden {
   display: none;
 }
@@ -174,7 +180,6 @@
   align-items: center;
   padding: 10px 20px;
   border: none;
-  margin-top: 10px;
   margin-left: 5px;
   margin-right: 5px;
   /* left: 10px; */
