@@ -27,7 +27,7 @@ const AuthModal = () => {
 
   return (
     <div className="auth-modal">
-      <h2>Please Login or Signup to Continue</h2>
+      <h2>Please Login or Sign-up to Continue</h2>
       <div className="auth-buttons">
         <ModalButton
           modalContent={<button className="dropdown-login">Log In</button>}
