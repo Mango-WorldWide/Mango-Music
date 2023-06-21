@@ -4,6 +4,7 @@ import { loadRandomSongThunk } from "../../store/song";
 import { Link, useHistory } from "react-router-dom";
 import { usePlayer } from "../../context/PlayerContext";
 import { loadAlbumsThunk } from "../../store/album";
+import { shuffleArr } from "../../util.js"
 import PlayButton from "../PlayButton";
 import AlbumsIndexItem from "../AlbumsIndexItem";
 import "./SplashPage.css";
@@ -13,7 +14,7 @@ const SplashPage = () => {
   const history = useHistory();
   const songs = useSelector((state) => Object.values(state.songs));
   const getAlbums = useSelector((state) => state.albums);
-  const albums = Object.values(getAlbums);
+  const [albums, setAlbums] = useState(null)
   const [genreIndex, setGenreIndex] = useState(0);
   const [hoveredSong, setHoveredSong] = useState("");
   // const [setSongIndex] = useState(0);
@@ -42,6 +43,11 @@ const SplashPage = () => {
     dispatch(loadRandomSongThunk());
     dispatch(loadAlbumsThunk())
   }, [dispatch]);
+
+  useEffect(()=>{
+    const storeAlbums = Object.values(getAlbums);
+    setAlbums(storeAlbums.length ? shuffleArr(storeAlbums).slice(0, 6) : null)
+  },[getAlbums])
 
   // genre stuff..
   // const genres = [
@@ -85,7 +91,7 @@ const SplashPage = () => {
   //   setSongIndex((prevIndex) => Math.max(prevIndex - 15, 0));
   // };
 
-  const handlePlaySong = (songId) => {};
+  const handlePlaySong = (songId) => { };
 
   // const handleGenreClick = () => {
   //   history.push("/search");
@@ -97,21 +103,23 @@ const SplashPage = () => {
     <div className="splash-page">
       <h2 className="splash-genre-title">Browse Albums</h2>
       <div className="genre-carousel">
-        <button className="splash-genre-left" onClick={prevGenre}>
-          <i className="fa-solid fa-angles-left"></i>
-        </button>
-        {/* {genres.slice(genreIndex, genreIndex + 3).map((genre) => (
-          <div className="genre-tile" key={genre.name} onClick={handleGenreClick}>
-            <img className="splash-genre-cover" src={genre.image} alt={genre.name} />
-            <h2>{genre.name}</h2>
-          </div>
-        ))} */}
-        {albums.slice(genreIndex, genreIndex + 3).map((album) => (
-        <AlbumsIndexItem key={album.id} album={album} />
-      ))}
-        <button className="splash-genre-right" onClick={nextGenre}>
-          <i className="fa-solid fa-angles-right"></i>
-        </button>
+        {albums ?
+          (<><button className="splash-genre-left" onClick={prevGenre}>
+            <i className="fa-solid fa-angles-left"></i>
+          </button>
+          {/* {genres.slice(genreIndex, genreIndex + 3).map((genre) => (
+            <div className="genre-tile" key={genre.name} onClick={handleGenreClick}>
+              <img className="splash-genre-cover" src={genre.image} alt={genre.name} />
+              <h2>{genre.name}</h2>
+            </div>
+          ))} */}
+          {albums.slice(genreIndex, genreIndex + 3).map((album) => (
+            <AlbumsIndexItem key={album.id} album={album} />
+          ))}
+          <button className="splash-genre-right" onClick={nextGenre}>
+            <i className="fa-solid fa-angles-right"></i>
+          </button></>)
+        : <></>}
       </div>
       <div className="song-container">
         <h2 className="splash-song-list-title">Random Songs You Might Like</h2>
@@ -134,7 +142,7 @@ const SplashPage = () => {
                           nameOfClass="splash-play-button"
                           buttonContent={
                             isPlaying && song.id === queue[queueIndex].id ? (
-                              <img alt="playing "className="song-player-logo" src="soundwave-playing.gif" />
+                              <img alt="playing " className="song-player-logo" src="soundwave-playing.gif" />
                             ) : (
                               <img alt="paused" className="song-player-logo" src="soundwave-paused.png" />
                             )
