@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadRandomSongThunk } from "../../store/song";
-import "./SplashPage.css";
 import { Link, useHistory } from "react-router-dom";
-import PlayButton from "../PlayButton";
 import { usePlayer } from "../../context/PlayerContext";
+import { loadAlbumsThunk } from "../../store/album";
+import PlayButton from "../PlayButton";
+import AlbumsIndexItem from "../AlbumsIndexItem";
+import "./SplashPage.css";
 
 const SplashPage = () => {
   const dispatch = useDispatch();
-  const songs = useSelector((state) => Object.values(state.songs));
   const history = useHistory();
+  const songs = useSelector((state) => Object.values(state.songs));
+  const getAlbums = useSelector((state) => state.albums);
+  const albums = Object.values(getAlbums);
   const [genreIndex, setGenreIndex] = useState(0);
   const [hoveredSong, setHoveredSong] = useState("");
   // const [setSongIndex] = useState(0);
@@ -36,39 +40,40 @@ const SplashPage = () => {
 
   useEffect(() => {
     dispatch(loadRandomSongThunk());
+    dispatch(loadAlbumsThunk())
   }, [dispatch]);
 
-  // genre stuff.. needa find more
-  const genres = [
-    {
-      name: "Reggaeton",
-      image:
-        "https://is4-ssl.mzstatic.com/image/thumb/Features125/v4/a7/2a/d6/a72ad6ff-1366-2979-4b9d-80030e7f6190/U0MtTVMtV1ctRXNzZW50aWFsX1JlZ2dhZXRvbi1BREFNX0lEPTEzNDc0MTE3ODgucG5n.png/305x305SC.CAESS02.webp?l=en-US",
-    },
-    { name: "Rock", image: "/Rock.png" },
-    {
-      name: "Country",
-      image:
-        "https://is1-ssl.mzstatic.com/image/thumb/Features126/v4/9a/72/8c/9a728cdb-cb26-5176-e594-dcefba6a82cd/9df5f4a3-d980-4fe7-963b-c35f8cc13d70.png/305x305SC.DN01.webp?l=en-US",
-    },
-    { name: "R&B", image: "/R&B.jpg" },
-    { name: "Hip-Hop", image: "/HipHop.png" },
-    { name: "Pop", image: "/Pop.png" },
-    { name: "K-Pop", image: "/KPop.jpg" },
-    { name: "EDM", image: "/EDM.png" },
-    {
-      name: "Classical",
-      image:
-        "https://is2-ssl.mzstatic.com/image/thumb/Features114/v4/91/24/1d/91241d46-7606-11ae-bcac-1039d8a90911/QkwtTVMtV1ctQ2xhc3NpY2FsLUFEQU1fSUQ9MTE0MjY1MjYxOCAoMTgpLnBuZw.png/110x110bb.webp",
-    },
-  ];
+  // genre stuff..
+  // const genres = [
+  //   {
+  //     name: "Reggaeton",
+  //     image:
+  //       "https://is4-ssl.mzstatic.com/image/thumb/Features125/v4/a7/2a/d6/a72ad6ff-1366-2979-4b9d-80030e7f6190/U0MtTVMtV1ctRXNzZW50aWFsX1JlZ2dhZXRvbi1BREFNX0lEPTEzNDc0MTE3ODgucG5n.png/305x305SC.CAESS02.webp?l=en-US",
+  //   },
+  //   { name: "Rock", image: "/Rock.png" },
+  //   {
+  //     name: "Country",
+  //     image:
+  //       "https://is1-ssl.mzstatic.com/image/thumb/Features126/v4/9a/72/8c/9a728cdb-cb26-5176-e594-dcefba6a82cd/9df5f4a3-d980-4fe7-963b-c35f8cc13d70.png/305x305SC.DN01.webp?l=en-US",
+  //   },
+  //   { name: "R&B", image: "/R&B.jpg" },
+  //   { name: "Hip-Hop", image: "/HipHop.png" },
+  //   { name: "Pop", image: "/Pop.png" },
+  //   { name: "K-Pop", image: "/KPop.jpg" },
+  //   { name: "EDM", image: "/EDM.png" },
+  //   {
+  //     name: "Classical",
+  //     image:
+  //       "https://is2-ssl.mzstatic.com/image/thumb/Features114/v4/91/24/1d/91241d46-7606-11ae-bcac-1039d8a90911/QkwtTVMtV1ctQ2xhc3NpY2FsLUFEQU1fSUQ9MTE0MjY1MjYxOCAoMTgpLnBuZw.png/110x110bb.webp",
+  //   },
+  // ];
 
   const nextGenre = () => {
-    setGenreIndex((prevIndex) => (prevIndex + 3) % genres.length);
+    setGenreIndex((prevIndex) => (prevIndex + 3) % albums.length);
   };
 
   const prevGenre = () => {
-    setGenreIndex((prevIndex) => (prevIndex - 3 + genres.length) % genres.length);
+    setGenreIndex((prevIndex) => (prevIndex - 3 + albums.length) % albums.length);
   };
 
   // next and prev for songs
@@ -82,25 +87,28 @@ const SplashPage = () => {
 
   const handlePlaySong = (songId) => {};
 
-  const handleGenreClick = () => {
-    history.push("/search");
-  };
+  // const handleGenreClick = () => {
+  //   history.push("/search");
+  // };
   // const shuffledSongs = shuffleArray([...songs].slice(0, 150));
 
   if (!songs.length || !songs[0].album_name) return null;
   return (
     <div className="splash-page">
-      <h2 className="splash-genre-title">Browse Genres</h2>
+      <h2 className="splash-genre-title">Browse Albums</h2>
       <div className="genre-carousel">
         <button className="splash-genre-left" onClick={prevGenre}>
           <i className="fa-solid fa-angles-left"></i>
         </button>
-        {genres.slice(genreIndex, genreIndex + 3).map((genre) => (
+        {/* {genres.slice(genreIndex, genreIndex + 3).map((genre) => (
           <div className="genre-tile" key={genre.name} onClick={handleGenreClick}>
             <img className="splash-genre-cover" src={genre.image} alt={genre.name} />
             <h2>{genre.name}</h2>
           </div>
-        ))}
+        ))} */}
+        {albums.slice(genreIndex, genreIndex + 3).map((album) => (
+        <AlbumsIndexItem key={album.id} album={album} />
+      ))}
         <button className="splash-genre-right" onClick={nextGenre}>
           <i className="fa-solid fa-angles-right"></i>
         </button>

@@ -28,3 +28,4 @@ sqlalchemy==1.4.46
 werkzeug==2.2.2
 wtforms==3.0.1
 boto3==1.26.130
+email-validator==2.0.0.post2
