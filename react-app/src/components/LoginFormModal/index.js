@@ -30,9 +30,10 @@ function LoginFormModal() {
       setEmail("demo@aa.io");
     }
     setPassword("password");
-    const data = await dispatch(login(email, password))
+    const data = await dispatch(login(email, password));
     await dispatch(loadLikesThunk());
     if (data) {
+      console.log("data 👉", data)
       setErrors(data);
     } else {
       closeModal();
@@ -43,11 +44,7 @@ function LoginFormModal() {
     <div className="login-form">
       <h1 className="login-form-header">Welcome Back To 🥭 Music</h1>
       <form className="login-form-form" onSubmit={handleSubmit}>
-        <ul className="login-form-errors">
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
+      <p className="errors">{errors.login}</p>
         <label className="login-form-email">
           Email
           <input
@@ -55,8 +52,8 @@ function LoginFormModal() {
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
+          <p className="errors">{errors.email}</p>
         </label>
         <label className="login-form-password">
           Password
@@ -65,18 +62,18 @@ function LoginFormModal() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
+          <p className="errors">{errors.password}</p>
         </label>
         <button className="login-form-button" type="submit">
           Log In
         </button>
-      <button className="login-form-button" type="submit" onClick={() => loginDemo(false)}>
-        Login as demoUser
-      </button>
-      <button className="login-form-button" type="submit" onClick={() => loginDemo(true)}>
-        Login as demoArtist
-      </button>
+        <button className="login-form-button" type="submit" onClick={() => loginDemo(false)}>
+          Login as demoUser
+        </button>
+        <button className="login-form-button" type="submit" onClick={() => loginDemo(true)}>
+          Login as demoArtist
+        </button>
       </form>
     </div>
   );

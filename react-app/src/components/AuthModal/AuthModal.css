@@ -1,0 +1,14 @@
+.auth-modal{
+    position: absolute;
+    width: 400px;
+    text-align: center;
+    top: 40%;
+    left: 50%;
+}
+
+.auth-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}

@@ -41,7 +41,7 @@ function ProfileButton() {
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-  const closeMenu = () => setShowMenu(false);
+  // const closeMenu = () => setShowMenu(false);
 
   return (
     <>
@@ -67,19 +67,17 @@ function ProfileButton() {
             </li>
           </>
         ) : (
-          <>
+          <div className="dropdown-buttons">
             <ModalButton
-              modalContent={<button className="dropdown-login">Log In</button>}
-              onItemClick={closeMenu}
+              modalContent={<button className="dropdown-login" onClick={e=>setShowMenu(false)}>Log In</button>}
               modalComponent={<LoginFormModal />}
             />
 
             <ModalButton
-              modalContent={<button className="dropdown-signup">Sign Up</button>}
-              onItemClick={closeMenu}
+              modalContent={<button className="dropdown-signup" onClick={e=>setShowMenu(false)}>Sign Up</button>}
               modalComponent={<SignupFormModal />}
             />
-          </>
+          </div>
         )}
       </ul>
     </>
